@@ -22,7 +22,7 @@ ISBN - A module for working with 10- and 13-digit ISBNs
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
 #
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __date__ = "2007-05-18"
 __author__ = "James Rowe <jnrowe@ukfsn.org>"
 __copyright__ = "Copyright (C) 2007 James Rowe"
@@ -111,7 +111,6 @@ def __isbn_cleanse(isbn, checksum=True):
     """
     Check ISBN is a string, and passes basic sanity checks
 
-    SBN checks
     >>> for isbn in __test_isbns.values():
     ...     if isbn.startswith("0"):
     ...         if not __isbn_cleanse(isbn[1:]) == isbn:
@@ -119,14 +118,12 @@ def __isbn_cleanse(isbn, checksum=True):
     ...         if not __isbn_cleanse(isbn[1:-1], False) == isbn[:-1]:
     ...             print "SBN without checksum failure `%s'" % isbn
 
-    ISBN checks
     >>> for isbn in __test_isbns.values():
     ...     if not __isbn_cleanse(isbn) == isbn:
     ...         print "ISBN with checksum failure `%s'" % isbn
     ...     if not __isbn_cleanse(isbn[:-1], False) == isbn[:-1]:
     ...         print "ISBN without checksum failure `%s'" % isbn
 
-    Error states
     >>> __isbn_cleanse(2)
     Traceback (most recent call last):
       ...
@@ -155,7 +152,7 @@ def __isbn_cleanse(isbn, checksum=True):
     else:
         raise TypeError("ISBN must be a string `%s'" % isbn)
     if not isbn[:-1].isdigit():
-            raise ValueError("Invalid ISBN string(non-digit parts)")
+        raise ValueError("Invalid ISBN string(non-digit parts)")
     if checksum:
         if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
             raise ValueError("Invalid ISBN string(non-digit or X checksum)")
@@ -195,14 +192,13 @@ def calculate_checksum(isbn):
             check = "X"
         elif check == 11:
             check = 0
-        return str(check)
     else:
         products = [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in xrange(12)]
         remainder = sum(products) % 10
         check = 10 - remainder
         if check == 10:
             check = 0
-        return str(check)
+    return str(check)
 
 def convert(isbn, code="978"):
     """
