@@ -7,9 +7,10 @@ A module for working with 10- and 13-digit ISBNs
 Introduction
 ------------
 
-``pyisbn`` is a GPL v2 licensed module for working with various book
+``pyisbn`` is a `GPL v3`_ licensed module for working with various book
 identification numbers.  It includes functions for conversion,
-verification and generation of checksums
+verification and generation of checksums.  It also includes basic
+classes for representing ISBNs as objects.
 
 Requirements
 ------------
@@ -39,7 +40,15 @@ goes::
     >>> ISBN.validate(Permutation_City)
     True
     >>> ISBN.convert(Permutation_City)
-    9781857982183
+    '9781857982183'
+
+or to process ISBNs using the object pattern use::
+
+    >>> Permutation_City = ISBN.ISBN10("1-85798-218-5")
+    >>> Permutation_City.validate()
+    True
+    >>> Permutation_City.convert()
+    '9781857982183'
 
 All independent functions contain hopefully useful docstrings with
 ``doctest``-based examples.  The ``html/`` directory contains the
@@ -51,9 +60,11 @@ Bugs
 If you find a bug don't hesitate to drop me a mail_ preferably including
 a minimal testcase, or even better a patch!
 
+.. _GPL v3: http://www.gnu.org/licenses/
 .. _Python: http://www.python.org/
 .. _epydoc: http://epydoc.sourceforge.net/
 .. _mail: jnrowe@ukfsn.org
 
-.. :vim: set ft=rst set ts=2 sw=2 et:
+..
+    :vim: set ft=rst set ts=2 sw=2 et:
 
