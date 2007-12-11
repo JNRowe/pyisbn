@@ -1,0 +1,319 @@
+@charset "UTF-8";
+
+/*
+ * docutils.css
+ * (C) 2004-2007 James Rowe.
+ *
+ * This style sheet is based, in part, on David Goodger's public domain
+ * html4css1.css style sheet for docutils.
+ *
+ * This style sheet is licensed under the Creative Commons
+ * Attribution-ShareAlike 2.5, for more information check the Creative
+ * Commons website(http://creativecommons.org/licenses/by-sa/2.5/).
+ */
+
+html, body {
+  background-color: rgb(77, 104, 132);
+  color: rgb(0, 0, 0);
+  font-family: "Verdana", "Arial", sans-serif;
+}
+
+div.document, div.footer {
+  background-color: rgb(250, 250, 250);
+  border-bottom: 0.2em solid rgb(0, 0, 0);
+  border-right: 0.2em solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  margin: 1em 2em;
+  padding: 1em 2em;
+  width: 90%;
+}
+
+blockquote.epigraph {
+  margin: 2em 5em;
+}
+
+dl.docutils dd {
+  margin-bottom: 0.5em;
+}
+
+dl.docutils dt {
+  font-weight: bold;
+}
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning, div.sidebar {
+  border: 0.2em solid;
+  margin: 1em;
+  padding: 0.3em;
+}
+
+p.admonition-title {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+div.hint, div.note, div.tip {
+  background-color: rgb(187, 255, 187);
+  color: rgb(0, 0, 0);
+}
+
+div.important, div.sidebar {
+  background-color: rgb(255, 255, 187);
+  color: rgb(0, 0, 0);
+}
+
+div.attention, div.caution, div.danger, div.error, div.warning {
+  background-color: rgb(255, 187, 187);
+  color: rgb(0, 0, 0);
+}
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  background-color: inherit;
+  color: rgb(255, 0, 0);
+}
+
+div.figure {
+  background-color: rgb(241, 241, 241);
+  color: inherit;
+  float: right;
+  padding: 1em;
+}
+
+div.sidebar {
+  clear: right;
+  float: right;
+  width: 20em;
+}
+
+ol.simple, ul.simple {
+  margin-bottom: 1em;
+}
+ol.arabic {
+  list-style: decimal;
+}
+ol.loweralpha {
+  list-style: lower-alpha;
+}
+ol.upperalpha {
+  list-style: upper-alpha;
+}
+ol.lowerroman {
+  list-style: lower-roman;
+}
+ol.upperroman {
+  list-style: upper-roman;
+}
+
+p.attribution {
+  margin-left: 25em;
+  text-align: right;
+}
+
+p.rubric {
+  background-color: inherit;
+  color: rgb(128, 0, 0);
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+}
+
+p.sidebar-title {
+  font-family: sans-serif;
+  font-size: larger;
+  font-weight: bold;
+}
+
+p.sidebar-subtitle {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+pre.literal-block {
+  background-color: rgb(238, 238, 238);
+  color: rgb(0, 0, 0);
+  margin-left: 2em;
+  margin-right: 2em;
+  overflow: auto;
+}
+
+span.pre {
+  white-space: pre;
+}
+
+acro:hover, abbr:hover {
+  cursor: help;
+}
+
+ins {
+  background-color: rgb(187, 255, 187);
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+del {
+  background-color: rgb(255, 187, 187);
+  color: rgb(0, 0, 0);
+}
+
+q {
+  quotes: '\201C' '\201D' '\2018' '\2019';
+}
+q:before {
+  content: "\201C";
+}
+q:after {
+  content: "\201D";
+}
+
+/*
+ * codecolour.css
+ *
+ * The following style sheet content is basically a reformatted version of the
+ * output from the Pygments <http://pygments.org/> expression:
+ *
+ *      HtmlFormatter(style="manni").get_style_defs('.highlight')
+ */
+
+.highlight {
+  background-color: rgb(238, 238, 238);
+  color: rgb(127, 111, 95);
+  font-family: "Courier New", "Lucida Sans", monospace;
+  margin-left: 2em;
+  margin-right: 2em;
+  overflow: auto;
+}
+
+.highlight .ow {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.highlight .gp {
+  color: rgb(0, 0, 153);
+  font-weight: bold;
+}
+.highlight .gh, .highlight .gu {
+  color: rgb(0, 51, 0);
+  font-weight: bold;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: rgb(0, 51, 51);
+}
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kr {
+  color: rgb(0, 102, 153);
+  font-weight: bold;
+}
+.highlight .kp {
+  color: rgb(0, 102, 153);
+}
+.highlight .kt {
+  color: rgb(0, 119, 136);
+  font-weight: bold;
+}
+.highlight .cp {
+  color: rgb(0, 153, 153);
+}
+.highlight .c, .highlight .cm, .highlight .c1 {
+  color: rgb(0, 153, 255);
+  font-style: italic;
+}
+.highlight .cs {
+  color: rgb(0, 153, 255);
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .nc {
+  color: rgb(0, 170, 136);
+  font-weight: bold;
+}
+.highlight .nn {
+  color: rgb(0, 204, 255);
+  font-weight: bold;
+}
+.highlight .nt {
+  color: rgb(51, 0, 153);
+  font-weight: bold;
+}
+.highlight .na {
+  color: rgb(51, 0, 153);
+}
+.highlight .no {
+  color: rgb(51, 102, 0);
+}
+.highlight .nb, .highlight .bp {
+  color: rgb(51, 102, 102);
+}
+.highlight .sr {
+  color: rgb(51, 170, 170);
+}
+.highlight .o {
+  color: rgb(85, 85, 85);
+}
+.highlight .ni {
+  color: rgb(153, 153, 153);
+  font-weight: bold;
+}
+.highlight .nd, .highlight .nl {
+  color: rgb(153, 153, 255);
+}
+.highlight .gt {
+  color: rgb(153, 204, 102);
+}
+.highlight .err {
+  color: rgb(170, 0, 0);
+  background-color: rgb(255, 170, 170);
+}
+.highlight .si {
+  color: rgb(170, 0, 0);
+}
+.highlight .go {
+  color: rgb(48, 48, 48);
+}
+.highlight .ne {
+  color: rgb(204, 0, 0);
+  font-weight: bold;
+}
+.highlight .nf {
+  color: rgb(204, 0, 255);
+}
+.highlight .sd {
+  color: rgb(204, 51, 0);
+  font-style: italic;
+}
+.highlight .se {
+  color: rgb(204, 51, 0);
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .s2, .highlight .sh,
+.highlight .sx, .highlight .s1 {
+  color: rgb(204, 51, 0);
+}
+.highlight .gi {
+  background-color: rgb(204, 255, 204);
+  border: 0.1em solid rgb(0, 204, 0);
+}
+.highlight .gr {
+  color: rgb(255, 0, 0);
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il,
+.highlight .mo {
+  color: rgb(255, 102, 0);
+}
+.highlight .ss {
+  color: rgb(255, 204, 51);
+}
+.highlight .gd {
+  background-color: rgb(255, 204, 204);
+  border: 0.1em solid rgb(204, 0, 0);
+}
+.highlight .w {
+  color: rgb(187, 187, 187);
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .ge {
+  font-style: italic;
+}
+

@@ -1,0 +1,31 @@
+``pyisbn``
+==========
+
+User-visible changes
+--------------------
+
+0.3.0 - 2007-12-11
+------------------
+
+  * Data for tests is now external, which significantly reduces the
+    import footprint
+  * ``make`` is no longer required to build and install the package
+
+0.2.0 - 2007-11-16
+------------------
+
+  * Relicensed under the `GPL v3`_
+  * Introduced classes ``ISBN``, ``ISBN10`` and ``ISBN13`` for easier
+    use within OO code
+  * Larger, more thorough, test suite
+
+.. _GPL v3: http://www.gnu.org/licenses/
+
+0.1.0 - 2007-05-21
+------------------
+
+  * Initial release
+
+..
+    :vim: set ft=rst ts=2 sw=2 et:
+
