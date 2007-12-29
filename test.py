@@ -1,9 +1,7 @@
 #! /usr/bin/python -tt
 # vim: set sw=4 sts=4 et tw=80 fileencoding=utf-8:
 #
-"""
-test_isbns - ISBNs for use in tests
-"""
+"""test_isbns - ISBNs for use in tests"""
 # Copyright (C) 2007  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
@@ -203,6 +201,7 @@ test_isbns = {
     "The HP Way: How Bill Hewlett and I Built Our Company": "0060845791",
     "The Hunt for Red October": "0006172768",
     "The Invisible Man": "0460876287",
+    "The International Standard Book Number System": "3880531013",
     "The Meaning of It All (Allen Lane History S.)": "0140276351",
     "The Mythical Man Month and Other Essays on Software Engineering": "0201835959",
     "The Principia: Mathematical Principles of Natural Philosophy": "0520088174",
@@ -219,7 +218,7 @@ test_isbns = {
     "Thermodynamics of Natural Systems": "0521847729",
     "Time's Alteration: Calendar Reform in Early Modern England": "1857286227",
     "Turbo Codes: Principles and Applications (Kluwer International Series in Engineering & Computer Science)": "0792378687",
-    "Turbulence and Structures: Chaos, Fluctuations and Helical Self-organizaton in Nature and Laboratory (A Volume in the INTERNATIONAL GEOPHYSICS Series)": "0121257401",
+    "Turbulence and Structures: Chaos, Fluctuations and Helical Self-organization in Nature and Laboratory (A Volume in the INTERNATIONAL GEOPHYSICS Series)": "0121257401",
     "Understanding Energy: Energy, Entropy and Thermodynamics for Everyman": "9810206798",
     "Understanding the Linux Kernel": "0596005652",
     "User Interface Design for Programmers": "1893115941",
@@ -228,4 +227,5 @@ test_isbns = {
     "What Are the Chances?: Voodoo Deaths, Office Gossip and Other Adventures in Probability": "0801869412",
     "Without Remorse": "0006476414",
     "Wizard: Life and Times of Nikola Tesla": "0806519606",
-}
+} #: Sample book data for use in tests
+

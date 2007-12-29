@@ -22,9 +22,9 @@ have installed, drop me a mail_ and I'll endeavour to fix it.
 
 The module have been tested on many UNIX-like systems, including Linux,
 Solaris and OS X, but it should work fine on other systems too.  The
-module contains a large collection of ``doctest`` tests that will be run
-if executed directly or with Python's ``-m`` switch.  You can also run
-the testsuite by executing ``make check`` in the source tree.
+module contains a large collection of ``doctest`` tests that can be run
+with ``./setup.py test_code``.  The examples in this file can be tested
+with ``./setup.py test_doc``.
 
 .. [#] The module may work with older Python versions, but it has only
        been tested with v2.5.
@@ -43,20 +43,62 @@ goes:
     True
     >>> ISBN.convert(Permutation_City)
     '9781857982183'
+    >>> print("ISBN %s" % Permutation_City)
+    ISBN 1-85798-218-5
 
 or to process ISBNs using the object pattern use:
 
 .. code-block:: pycon
 
-    >>> Permutation_City = ISBN.ISBN10("1-85798-218-5")
+    >>> Permutation_City = ISBN.Isbn10("1-85798-218-5")
     >>> Permutation_City.validate()
     True
     >>> Permutation_City.convert()
     '9781857982183'
+    >>> print(Permutation_City)
+    ISBN 1-85798-218-5
 
 All independent functions contain hopefully useful docstrings with
 ``doctest``-based examples.  The ``html/`` directory contains the
 preprocessed epydoc_ output for reference.
+
+API Stability
+-------------
+
+API stability isn't guaranteed across versions, although frivolous
+changes won't be made.
+
+When ``pyisbn`` 1.0 is released the API will be frozen, and any
+changes which aren't backwards compatible will force a major version
+bump.
+
+Hacking
+-------
+
+Patches are most welcome, but I'd appreciate it if you could follow the
+guidelines below to make it easier to integrate your changes.  These are
+guidelines however, and as such can be broken if the need arises or you
+just want to convince me that your style is better.
+
+  * `PEP 8`_, the style guide, should be followed where possible.
+  * While support for Python versions prior to v2.5 may be added in the
+    future if such a need were to arise, you are encouraged to use v2.5
+    features now.
+  * All new classes and methods should be accompanied by new
+    ``doctest`` examples, and epydoc_'s epytext formatted descriptions if
+    at all possible.
+  * Tests *must not* span network boundaries, see ``test.mock`` for
+    workarounds.
+  * ``doctest`` tests in modules are only for unit testing in general,
+    and should not rely on any modules that aren't in Python's standard
+    library.
+  * Functional tests should be in the ``doc`` directory in
+    reStructuredText_ formatted files, with actual tests in ``doctest``
+    blocks.  Functional tests can depend on external modules, but they
+    must be Open Source.
+
+New examples for the ``doc`` directory are as appreciated as code
+changes.
 
 Bugs
 ----

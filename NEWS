@@ -4,6 +4,14 @@
 User-visible changes
 --------------------
 
+.. contents::
+
+0.3.1 - 2008-05-20
+------------------
+
+  * Fixed installs with easy_install
+  * SBNs can now be represented with the ``SBN`` object
+
 0.3.0 - 2007-12-11
 ------------------
 
