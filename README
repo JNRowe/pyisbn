@@ -37,11 +37,11 @@ goes:
 
 .. code-block:: pycon
 
-    >>> import ISBN
+    >>> import pyisbn
     >>> Permutation_City = "1-85798-218-5"
-    >>> ISBN.validate(Permutation_City)
+    >>> pyisbn.validate(Permutation_City)
     True
-    >>> ISBN.convert(Permutation_City)
+    >>> pyisbn.convert(Permutation_City)
     '9781857982183'
     >>> print("ISBN %s" % Permutation_City)
     ISBN 1-85798-218-5
@@ -50,7 +50,7 @@ or to process ISBNs using the object pattern use:
 
 .. code-block:: pycon
 
-    >>> Permutation_City = ISBN.Isbn10("1-85798-218-5")
+    >>> Permutation_City = pyisbn.Isbn10("1-85798-218-5")
     >>> Permutation_City.validate()
     True
     >>> Permutation_City.convert()
@@ -110,6 +110,8 @@ a minimal testcase, or even better a patch!
 .. _Python: http://www.python.org/
 .. _epydoc: http://epydoc.sourceforge.net/
 .. _mail: jnrowe@ukfsn.org
+.. _PEP 8: http://www.python.org/dev/peps/pep-0008/
+.. _reStructuredText: http://docutils.sourceforge.net/rst.html
 
 ..
     :vim: set ft=rst set ts=2 sw=2 et:

@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__version__ = "0.3.1"
-__date__ = "2008-05-20"
+__version__ = "0.4.0"
+__date__ = "2008-05-21"
 __author__ = "James Rowe <jnrowe@ukfsn.org>"
 __copyright__ = "Copyright (C) 2007 James Rowe"
 __license__ = "GNU General Public License Version 3"
@@ -477,7 +477,7 @@ def convert(isbn, code="978"):
             EAN Bookland code
     :rtype: `str`
     :return: Converted ISBN-10 or ISBN-13
-    :raise ValueError: When ISBN-13 isn't a Bookland `978' ISBN
+    :raise ValueError: When ISBN-13 isn't a Bookland "978" ISBN
 
     """
     isbn = _isbn_cleanse(isbn)

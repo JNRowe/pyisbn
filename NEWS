@@ -6,11 +6,17 @@ User-visible changes
 
 .. contents::
 
-0.3.1 - 2008-05-20
+0.4.0 - 2008-05-21
 ------------------
 
   * Fixed installs with easy_install
   * SBNs can now be represented with the ``SBN`` object
+  * Python "egg" packages can now be built if setuptools_ is installed
+  * This package has been renamed ``pyisbn`` from ``ISBN`` to be more
+    compliant with PEP-8_'s naming guidelines
+
+.. _PEP-8: http://www.python.org/dev/peps/pep-0008/
+.. _setuptools: http://peak.telecommunity.com/DevCenter/setuptools
 
 0.3.0 - 2007-12-11
 ------------------

@@ -235,9 +235,8 @@ class BuildDoc(NoOptsCommand):
         if not EPYDOC:
             raise DistutilsModuleError("epydoc import failed, "
                                        "skipping API documentation generation")
-        files = [__pkg_data__.MODULE.__name__, ]
-        files.extend([os.path.basename(i.__file__)
-                      for i in __pkg_data__.SCRIPTS])
+        files = glob("%s/*.py" % __pkg_data__.MODULE.__name__)
+        files.extend(["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS])
         if self.force \
             or any(newer(filename, "html/index.html") for filename in files):
             print("Building API documentation")
@@ -431,7 +430,7 @@ class MyTest(NoOptsCommand):
         self.exit_on_fail = False
         self.doctest_opts = doctest.REPORT_UDIFF|doctest.NORMALIZE_WHITESPACE
         self.extraglobs = {
-            "test_isbns": test.test_isbns
+            "test_isbns": test.test_isbns,
         } #: Mock objects to include for test framework
         if hasattr(__pkg_data__, "TEST_EXTRAGLOBS"):
             for value in __pkg_data__.TEST_EXTRAGLOBS:
@@ -475,9 +474,6 @@ class TestCode(MyTest):
 
     def run(self):
         """Run the source's docstring code examples"""
-        files = [__pkg_data__.MODULE.__name__, ]
-        files.extend([os.path.basename(i.__file__)
-                      for i in __pkg_data__.SCRIPTS])
         files = glob("%s/*.py" % __pkg_data__.MODULE.__name__)
         files.extend(["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS])
         tot_fails = 0
@@ -523,7 +519,7 @@ def main():
             % (BASE_URL, __pkg_data__.MODULE.__name__,
                __pkg_data__.MODULE.__version__),
         packages=[__pkg_data__.MODULE.__name__],
-        scripts=[os.path.basename(i.__file__) for i in __pkg_data__.SCRIPTS],
+        scripts=["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS],
         license=__pkg_data__.MODULE.__license__,
         keywords=__pkg_data__.KEYWORDS,
         classifiers=__pkg_data__.CLASSIFIERS,

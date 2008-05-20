@@ -18,13 +18,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import ISBN
-MODULE = ISBN
+import pyisbn
+MODULE = pyisbn
 
 SCRIPTS = []
 
-DESCRIPTION = ISBN.__doc__.splitlines()[0][:-1]
-LONG_DESCRIPTION = "\n\n".join(ISBN.__doc__.split("\n\n")[1:4])
+DESCRIPTION = pyisbn.__doc__.splitlines()[0][:-1]
+LONG_DESCRIPTION = "\n\n".join(pyisbn.__doc__.split("\n\n")[1:4])
 
 KEYWORDS = ['ISBN', 'ISBN-10', 'ISBN-13', 'SBN']
 CLASSIFIERS = [
