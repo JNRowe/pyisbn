@@ -23,8 +23,8 @@ MODULE = pyisbn
 
 SCRIPTS = []
 
-DESCRIPTION = pyisbn.__doc__.splitlines()[0][:-1]
-LONG_DESCRIPTION = "\n\n".join(pyisbn.__doc__.split("\n\n")[1:4])
+DESCRIPTION = MODULE.__doc__.splitlines()[0][:-1]
+LONG_DESCRIPTION = "\n\n".join(MODULE.__doc__.split("\n\n")[1:4])
 
 KEYWORDS = ['ISBN', 'ISBN-10', 'ISBN-13', 'SBN']
 CLASSIFIERS = [
@@ -42,3 +42,6 @@ OBSOLETES = []
 GRAPH_TYPE = None
 
 TEST_EXTRAGLOBS = []
+
+SCM = "git"
+

@@ -6,6 +6,12 @@ User-visible changes
 
 .. contents::
 
+0.5.0 - 2008-12-12
+------------------
+
+  * Python 3 module and install support, however until tools are ported
+    documentation must still be built with Python 2
+
 0.4.0 - 2008-05-21
 ------------------
 

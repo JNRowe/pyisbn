@@ -1,4 +1,4 @@
-#! /usr/bin/python -tt
+#
 # vim: set sw=4 sts=4 et tw=80 fileencoding=utf-8:
 #
 """ISBN - A module for working with 10- and 13-digit ISBNs"""
@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__version__ = "0.4.0"
-__date__ = "2008-05-21"
+__version__ = "0.5.0"
+__date__ = "2008-12-12"
 __author__ = "James Rowe <jnrowe@ukfsn.org>"
 __copyright__ = "Copyright (C) 2007 James Rowe"
 __license__ = "GNU General Public License Version 3"
@@ -117,6 +117,8 @@ class Isbn(object):
         '3'
         >>> Isbn("3540009787").calculate_checksum()
         '7'
+        >>> Isbn("354000978").calculate_checksum()
+        '7'
 
         :rtype: `str`
         :return: ISBN checksum value
@@ -162,11 +164,29 @@ class Isbn(object):
         """
         return validate(self.isbn)
 
-    def to_url(self, site="amazon"):
+    def to_url(self, site="amazon", country="us"):
         """Generate a link to an online book site
 
-        >>> print Isbn("0071148167").to_url()
+        >>> print(Isbn("0071148167").to_url())
         http://amazon.com/dp/0071148167
+        >>> print(Isbn("0071148167").to_url(country="uk"))
+        http://amazon.co.uk/dp/0071148167
+        >>> print(Isbn("0071148167").to_url(country="de"))
+        http://amazon.de/dp/0071148167
+        >>> print(Isbn("0071148167").to_url(country="zh"))
+        Traceback (most recent call last):
+        ...
+        ValueError: Unknown site `zh'.
+        >>> print(Isbn("0071148167").to_url(site="worldcat"))
+        http://worldcat.org/isbn/0071148167
+        >>> print(Isbn("0071148167").to_url(site="waterstones"))
+        http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167
+        >>> print(Isbn("0071148167").to_url(site="whsmith"))
+        http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167
+        >>> print(Isbn("0071148167").to_url(site="nosite"))
+        Traceback (most recent call last):
+        ...
+        ValueError: Unknown site `nosite'.
 
         :Parameters:
             site : `str`
@@ -174,10 +194,27 @@ class Isbn(object):
         :rtype: `str`
         :return: URL on `site` for book
         :raise ValueError: Unknown site value
+        :raise ValueError: Unknown country value
 
         """
         if site == "amazon":
-            return "http://amazon.com/dp/%s" % self.isbn
+            if country in ("de", "fr", "jp"):
+                pass
+            elif country == "uk":
+                country = "co.uk"
+            elif country == "us":
+                country = "com"
+            else:
+                raise ValueError("Unknown site `%s'." % country)
+            return "http://amazon.%s/dp/%s" % (country, self.isbn)
+        elif site == "worldcat":
+            return "http://worldcat.org/isbn/%s" % self.isbn
+        elif site == "waterstones":
+            return "http://www.waterstones.com/waterstonesweb/" \
+                "advancedSearch.do?buttonClicked=2&isbn=%s" % self.isbn
+        elif site == "whsmith":
+            return "http://www.whsmith.co.uk/CatalogAndSearch/" \
+                   "SearchWithinCategory.aspx?as_ISBN=%s" % self.isbn
         else:
             raise ValueError("Unknown site `%s'." % site)
 
@@ -187,7 +224,7 @@ class Isbn(object):
         `RFC 3187 <http://tools.ietf.org/html/rfc3187>`__ is the accepted way to
         use ISBNs as uniform resource names.
 
-        >>> print Isbn("0071148167").to_urn()
+        >>> print(Isbn("0071148167").to_urn())
         URN:ISBN:0071148167
 
         :rtype: `str`
@@ -349,14 +386,14 @@ class Isbn13(Isbn):
 def _isbn_cleanse(isbn, checksum=True):
     """Check ISBN is a string, and passes basic sanity checks
 
-    >>> for isbn in test_isbns.values():
+    >>> for isbn in TEST_ISBNS.values():
     ...     if isbn.startswith("0"):
     ...         if not _isbn_cleanse(isbn[1:]) == isbn:
     ...             print("SBN with checksum failure `%s'" % isbn)
     ...         if not _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]:
     ...             print("SBN without checksum failure `%s'" % isbn)
 
-    >>> for isbn in test_isbns.values():
+    >>> for isbn in TEST_ISBNS.values():
     ...     if not _isbn_cleanse(isbn) == isbn:
     ...         print("ISBN with checksum failure `%s'" % isbn)
     ...     if not _isbn_cleanse(isbn[:-1], False) == isbn[:-1]:
@@ -386,6 +423,10 @@ def _isbn_cleanse(isbn, checksum=True):
     Traceback (most recent call last):
     ...
     ValueError: Invalid ISBN-13 string(non-digit checksum)
+    >>> _isbn_cleanse("xxxxxxxxxxxx1")
+    Traceback (most recent call last):
+    ...
+    ValueError: Invalid ISBN string(non-digit parts)
 
     :Parameters:
         isbn : `str`
@@ -410,7 +451,8 @@ def _isbn_cleanse(isbn, checksum=True):
             isbn = "0" + isbn
         if len(isbn) == 10:
             if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
-                raise ValueError("Invalid ISBN-10 string(non-digit or X checksum)")
+                raise ValueError("Invalid ISBN-10 string(non-digit or X " \
+                                 "checksum)")
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
                 raise ValueError("Invalid ISBN-13 string(non-digit checksum)")
@@ -429,7 +471,7 @@ def _isbn_cleanse(isbn, checksum=True):
 def calculate_checksum(isbn):
     """Calculate ISBN checksum
 
-    >>> for isbn in test_isbns.values():
+    >>> for isbn in TEST_ISBNS.values():
     ...     if not calculate_checksum(isbn[:-1]) == isbn[-1]:
     ...         print("ISBN checksum failure `%s'" % isbn)
 
@@ -442,12 +484,10 @@ def calculate_checksum(isbn):
     """
     isbn = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
     if len(isbn) == 9:
-        products = [isbn[n] * i for n, i in enumerate(range(1, 10))]
+        products = [x*y for x, y in zip(isbn, range(1, 10))]
         check = sum(products) % 11
         if check == 10:
             check = "X"
-        elif check == 11:
-            check = 0
     else:
         products = [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in range(12)]
         check = 10 - sum(products) % 10
@@ -462,7 +502,7 @@ def convert(isbn, code="978"):
     requires that *any* hyphenation must be correct but allows ISBNs without
     hyphenation.
 
-    >>> for isbn in test_isbns.values():
+    >>> for isbn in TEST_ISBNS.values():
     ...     if not convert(convert(isbn)) == isbn.replace("-", ""):
     ...         print("ISBN conversion failure `%s'" % isbn)
     >>> convert("0000000000000")
@@ -504,7 +544,7 @@ def validate(isbn):
 
     Valid ISBNs
 
-    >>> for isbn in test_isbns.values():
+    >>> for isbn in TEST_ISBNS.values():
     ...     if not validate(isbn):
     ...         print("ISBN validation failure `%s'" % isbn)
 

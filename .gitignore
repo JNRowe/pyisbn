@@ -1,0 +1,11 @@
+build/
+dist/
+html/
+pyisbn.egg-info/
+
+.git_version
+*.html
+*.py[co]
+
+ChangeLog
+MANIFEST

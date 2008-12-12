@@ -1,4 +1,4 @@
-#! /usr/bin/python -tt
+#
 # vim: set sw=4 sts=4 et tw=80 fileencoding=utf-8:
 #
 """test_isbns - ISBNs for use in tests"""
@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-test_isbns = {
+TEST_ISBNS = {
     "20, 000 Twenty Thousand Leagues Under the Sea": "0140621180",
     "3D Math Primer for Graphics and Game Development": "1556229119",
     "A Course in Combinatorics": "0521006015",
@@ -50,7 +50,6 @@ test_isbns = {
     "Brunel: The Man Who Built the World": "0297844083",
     "Causality: Models, Reasoning, and Inference": "0521773628",
     "Chaos and Complexity in Astrophysics": "0521855349",
-    "Chaos and Complexity in Astrophysics": "0521855349",
     "Chaos: An Introduction to Dynamical Systems (Textbooks in Mathematical Sciences S.)": "0387946772",
     "Civil Engineering Formulas": "0071356126",
     "Classical Mechanics: An Undergraduate Text": "0521534097",
@@ -79,7 +78,6 @@ test_isbns = {
     "Elements of Photogrammetry with Applications in GIS": "0072924543",
     "Engineering Mathematics 5th ed": "0333919394",
     "Estimation with Applications to Tracking and Navigation": "047141655X",
-    "Evolution of Networks": "0198515901",
     "Evolution of Networks: From Biological Nets to the Internet and WWW": "0198515901",
     "Factory Physics": "0071163786",
     "Forensic Science": "0130432512",
@@ -108,7 +106,6 @@ test_isbns = {
     "High Integrity Software": "0321136160",
     "How to Research": "0335209033",
     "How to Use a Computerized Telescope: Practical Amateur Astronomy Volume 1: v. 1 (Practical Amateur Astronomy)": "0521007909",
-    "IA-64 Linux Kernel": "0130610143",
     "IA-64 Linux Kernel: Design and Implementation": "0130610143",
     "Icon Steve Jobs: The Greatest Second Act in the History of Business": "0471720836",
     "In Search of Dark Matter: The Search for Dark Matter in the Universe (Springer-Praxis Books S.)": "0387276165",
@@ -127,7 +124,6 @@ test_isbns = {
     "LDAP in the Solaris Operating Environment: Deploying Secure Directory Services": "0131456938",
     "Let's Sign Dictionary: Everyday BSL for Learners": "0954238435",
     "Linux Kernel Development": "0672327201",
-    "Linux Kernel Development": "0672327201",
     "Local Search in Combinatorial Optimization": "0691115222",
     "Lunar and Planetary Webcam User's Guide (Patrick Moore's Practical Astronomy S.)": "1846281970",
     "Malicious Cryptography: Exposing Cryptovirology": "0764549758",
@@ -145,14 +141,12 @@ test_isbns = {
     "Numerical Recipes in C++: The Art of Scientific Computing": "0521750334",
     "Paradigms of Artificial Intelligence Programming: Case Studies in Common LISP": "1558601910",
     "Particle Astrophysics (Oxford Master Series in Physics)": "0198509529",
-    "Particle Astrophysics (Oxford Master Series in Physics)": "0198509529",
     "Particle Physics (Manchester Physics S.)": "0471972851",
     "Permutation City": "1857982185",
     "Physical Design Essentials": "0387366423",
     "Power and Invention: Situating Science (Theory Out of Bounds S.)": "0816625174",
     "Practical Statistics for Astronomers": "0521456169",
     "Predicting Motion: The Physical World (The Physical World)": "0750307161",
-    "Probabilistic Robotics (Intelligent Robotics & Autonomous Agents S.)": "0262201623",
     "Probabilistic Robotics (Intelligent Robotics & Autonomous Agents S.)": "0262201623",
     "Probability Theory: The Logic of Science: Principles and Elementary Applications Vol 1": "0521592712",
     "Programming in Haskell": "9780521871723",
@@ -179,7 +173,6 @@ test_isbns = {
     "Statistical Analysis of Circular Data": "0521568900",
     "Statistical Mechanics of Lattice Systems: Exact, Series and Renormalization Group Methods: v. 2 (Texts & Monographs in Physics)": "3540644369",
     "Statistical Mechanics": "9971966077",
-    "Statistical Mechanics: A Survival Guide ": "0198508166",
     "Statistical Mechanics: A Survival Guide": "0198508166",
     "Statistical Mechanics: Entropy, Order Parameters and Complexity": "0198566778",
     "Statistics: An Introduction Using R": "0470022981",
@@ -191,7 +184,6 @@ test_isbns = {
     "The ASIC Handbook": "0130915580",
     "The Art of Intrusion: The Real Stories Behind the Exploits of Hackers, Intruders and Deceivers": "0764569597",
     "The Art of Project Management": "0596007868",
-    "The Computational Beauty of Nature: Computer Explorations of Fractals, Chaos, Complex Systems and Adaptation (Bradford Book S.)": "0262561271",
     "The Computational Beauty of Nature: Computer Explorations of Fractals, Chaos, Complex Systems and Adaptation (Bradford Book S.)": "0262561271",
     "The Concepts and Practice of Mathematical Finance (Mathematic, Finance & Risk S.)": "0521823552",
     "The Difference Engine": "0575047623",
