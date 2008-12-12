@@ -362,8 +362,8 @@ class ScmSdist(sdist):
     def make_distribution(self):
         """Update versioning data and build distribution"""
         news_format = "%s - " % __pkg_data__.MODULE.__version__
-        news_matches = (line for line in open("NEWS")
-                        if line.startswith(news_format))
+        news_matches = [line for line in open("NEWS")
+                        if line.startswith(news_format)]
         if not any(news_matches):
             print("NEWS entry for `%s' missing"
                   % __pkg_data__.MODULE.__version__)
