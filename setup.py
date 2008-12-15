@@ -147,10 +147,10 @@ def call_scm(options, *args, **kwargs):
         raise ValueError("Unknown SCM type `%s'" % __pkg_data__.SCM)
     try:
         process = Popen(options, *args, **kwargs)
-    except OSError as e:
-        print("Error calling `%s`, is %s installed? [%s]"
-              % (options[0], __pkg_data__.SCM, e))
-        sys.exit(1)
+    except OSError:
+        print("Error calling `%s`, is %s installed?"
+              % (options[0], __pkg_data__.SCM))
+        raise
     process.wait()
     if not process.returncode == 0:
         print("`%s' completed with %i return code"
