@@ -549,7 +549,7 @@ def main():
         packages=[__pkg_data__.MODULE.__name__],
         scripts=["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS],
         license=__pkg_data__.MODULE.__license__,
-        keywords=__pkg_data__.KEYWORDS,
+        keywords=" ".join(__pkg_data__.KEYWORDS),
         classifiers=__pkg_data__.CLASSIFIERS,
         obsoletes=__pkg_data__.OBSOLETES,
         options={'sdist': {'formats': 'bztar'}},
