@@ -2,6 +2,7 @@ build/
 dist/
 html/
 pyisbn.egg-info/
+test/data
 
 .git_version
 *.html
