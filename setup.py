@@ -466,11 +466,12 @@ class MyTest(NoOptsCommand):
         self.exit_on_fail = False
         self.doctest_opts = doctest.REPORT_UDIFF|doctest.NORMALIZE_WHITESPACE
         self.extraglobs = {
-            "TEST_ISBNS": test.TEST_ISBNS,
+            "urllib": test.mock.urllib,
         } #: Mock objects to include for test framework
         if hasattr(__pkg_data__, "TEST_EXTRAGLOBS"):
-            for value in __pkg_data__.TEST_EXTRAGLOBS:
-                self.extraglobs[value] = getattr(test.mock, value)
+            for key, value in __pkg_data__.TEST_EXTRAGLOBS.items():
+                self.extraglobs[key] = value if value else getattr(test.mock,
+                                                                   key)
 
     def run(self):
         """Run doctest tests"""

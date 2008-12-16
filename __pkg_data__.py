@@ -45,7 +45,10 @@ OBSOLETES = []
 
 GRAPH_TYPE = None
 
-TEST_EXTRAGLOBS = []
+from test import isbns
+TEST_EXTRAGLOBS = {
+    "TEST_ISBNS": isbns.TEST_ISBNS,
+}
 
 SCM = "git"
 
