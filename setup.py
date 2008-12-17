@@ -42,9 +42,24 @@ from distutils.dep_util import newer
 from distutils.errors import (DistutilsFileError, DistutilsModuleError)
 from distutils.file_util import write_file
 from distutils.util import execute
-from email.utils import parseaddr
+
+try:
+    from email.utils import parseaddr
+except ImportError: # Python2.4
+    from email.Utils import parseaddr
+
 from glob import glob
-from subprocess import (check_call, PIPE, Popen)
+
+try:
+    from subprocess import check_call
+except ImportError: # Python2.4
+    from subprocess import call as sp_call
+    def check_call(*args, **kwargs):
+        retval = sp_call(*args, **kwargs)
+        if retval:
+            raise OSError("Command execution failed!")
+
+from subprocess import (PIPE, Popen)
 
 try:
     from docutils.core import publish_cmdline
@@ -72,8 +87,8 @@ import test
 BASE_URL = "http://www.jnrowe.ukfsn.org/" #: Base URL for links
 PROJECT_URL = "%sprojects/%s.html" % (BASE_URL, __pkg_data__.MODULE.__name__)
 
-if sys.version_info < (2, 5, 0, 'final'):
-    raise SystemError("Requires Python v2.5+")
+if sys.version_info < (2, 4, 0, 'final'):
+    raise SystemError("Requires Python v2.4+")
 
 #{ Generated data file functions
 
@@ -156,7 +171,10 @@ def call_scm(options, *args, **kwargs):
         print("`%s' completed with %i return code"
               % (options[0], process.returncode))
         sys.exit(process.returncode)
-    return True if redirect else process.stdout.read()
+    if redirect:
+        return True
+    else:
+        return process.stdout.read()
 
 def gen_desc(doc):
     """Pull simple description from docstring
@@ -470,8 +488,10 @@ class MyTest(NoOptsCommand):
         } #: Mock objects to include for test framework
         if hasattr(__pkg_data__, "TEST_EXTRAGLOBS"):
             for key, value in __pkg_data__.TEST_EXTRAGLOBS.items():
-                self.extraglobs[key] = value if value else getattr(test.mock,
-                                                                   key)
+                if value:
+                    self.extraglobs[key] = value
+                else:
+                    self.extraglobs[key] = getattr(test.mock, key)
 
     def run(self):
         """Run doctest tests"""

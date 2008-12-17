@@ -26,7 +26,10 @@ __license__ = "GNU General Public License Version 3"
 __credits__ = ""
 __history__ = "See Mercurial repository"
 
-from email.utils import parseaddr
+try:
+    from email.utils import parseaddr
+except ImportError: # Python 2.4
+    from email.Utils import parseaddr
 
 __doc__ += """.
 
@@ -491,7 +494,14 @@ def calculate_checksum(isbn):
         if check == 10:
             check = "X"
     else:
-        products = [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in range(12)]
+        # As soon as Python 2.4 support is dumped
+        # [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in range(12)]
+        products = []
+        for i in range(12):
+            if i % 2 == 0:
+                products.append(isbn[i])
+            else:
+                products.append(isbn[i] * 3)
         check = 10 - sum(products) % 10
         if check == 10:
             check = 0
