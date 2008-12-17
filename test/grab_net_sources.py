@@ -24,8 +24,13 @@ import gzip
 import os
 import sys
 import tempfile
-import urllib
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+    from urllib.request import (urlopen, urlretrieve)
+except ImportError:
+    from urlparse import urlparse
+    from urllib import (urlopen, urlretrieve)
+
 
 SOURCES = [
     "http://www.amazon.com/dp/0071148167",
@@ -74,10 +79,10 @@ def main(argv=None):
             Command line arguments
 
     """
-    print "*WARNING* This script will fetch some data files that can not be " + \
-          "distributed legally!  In some jurisdictions you may not even be " + \
-          "entitled to personal use of the data it fetches without express " + \
-          "consent of the copyright holders."
+    print("*WARNING* This script will fetch some data files that can not be "
+          "distributed legally!  In some jurisdictions you may not even be "
+          "entitled to personal use of the data it fetches without express "
+          "consent of the copyright holders.")
     if not argv:
         argv = sys.argv
     if len(argv) == 2 and argv[1] in ("-f" or "--force"):
@@ -88,25 +93,25 @@ def main(argv=None):
     for resource in SOURCES:
         filename = data_file(resource)
         if not force and os.path.exists(filename):
-            print "`%s' already downloaded." % resource
+            print("`%s' already downloaded." % resource)
             cached += 1
         else:
-            print "Fetching `%s'..." % resource
+            print("Fetching `%s'..." % resource)
             if resource.endswith(".gz"):
                 temp = tempfile.mkstemp()[1]
                 try:
-                    urllib.urlretrieve(resource, temp)
+                    urlretrieve(resource, temp)
                     data = gzip.GzipFile(temp).read()
                 finally:
                     os.unlink(temp)
                 open(filename, "w").write(data)
             elif resource.endswith(".bz2"):
-                data = bz2.decompress(urllib.urlopen(resource).read())
+                data = bz2.decompress(urlopen(resource).read())
                 open(filename, "w").write(data)
             else:
-                urllib.urlretrieve(resource, filename)
+                urlretrieve(resource, filename)
     if cached > 1:
-        print "You can force download with the `-f' option to this script."
+        print("You can force download with the `-f' option to this script.")
 
 if __name__ == '__main__':
     main(sys.argv)

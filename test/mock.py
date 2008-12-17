@@ -19,7 +19,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import __builtin__
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import os
 import urllib
 
