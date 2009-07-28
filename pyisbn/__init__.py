@@ -194,7 +194,7 @@ class Isbn(object):
         :Parameters:
             site : `str`
                 Site to create link to
-            country: `str`
+            country : `str`
                 Country specific version of `site`
         :rtype: `str`
         :return: URL on `site` for book
