@@ -564,7 +564,7 @@ def main():
         author=parseaddr(__pkg_data__.MODULE.__author__)[0],
         author_email=parseaddr(__pkg_data__.MODULE.__author__)[1],
         url=PROJECT_URL,
-        download_url="%sdata/%s-%s.tar.bz2" \
+        download_url="%s_downloads/%s-%s.tar.bz2" \
             % (BASE_URL, __pkg_data__.MODULE.__name__,
                __pkg_data__.MODULE.__version__),
         packages=[__pkg_data__.MODULE.__name__],
