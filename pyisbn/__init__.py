@@ -20,7 +20,7 @@
 
 __version__ = "0.5.1"
 __date__ = "2009-07-28"
-__author__ = "James Rowe <jnrowe@ukfsn.org>"
+__author__ = "James Rowe <jnrowe@gmail.com>"
 __copyright__ = "Copyright (C) 2007 James Rowe"
 __license__ = "GNU General Public License Version 3"
 __credits__ = ""

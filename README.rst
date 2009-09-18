@@ -109,7 +109,7 @@ a minimal testcase, or even better a patch!
 .. _GPL v3: http://www.gnu.org/licenses/
 .. _Python: http://www.python.org/
 .. _epydoc: http://epydoc.sourceforge.net/
-.. _mail: jnrowe@ukfsn.org
+.. _mail: jnrowe@gmail.com
 .. _PEP 8: http://www.python.org/dev/peps/pep-0008/
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
 
