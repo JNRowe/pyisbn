@@ -28,7 +28,7 @@ LONG_DESCRIPTION = "\n\n".join(MODULE.__doc__.split("\n\n")[1:4])
 
 KEYWORDS = ['ISBN', 'ISBN-10', 'ISBN-13', 'SBN']
 CLASSIFIERS = [
-    'Development Status :: 4 - Beta',
+    'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Other Audience',
     'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: OS Independent',
