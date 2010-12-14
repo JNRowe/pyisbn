@@ -84,9 +84,6 @@ except ImportError:
 import __pkg_data__
 import test
 
-BASE_URL = "http://www.jnrowe.ukfsn.org/" #: Base URL for links
-PROJECT_URL = "%sprojects/%s.html" % (BASE_URL, __pkg_data__.MODULE.__name__)
-
 if sys.version_info < (2, 4, 0, 'final'):
     raise SystemError("Requires Python v2.4+")
 
@@ -563,10 +560,10 @@ def main():
         long_description=__pkg_data__.LONG_DESCRIPTION,
         author=parseaddr(__pkg_data__.MODULE.__author__)[0],
         author_email=parseaddr(__pkg_data__.MODULE.__author__)[1],
-        url=PROJECT_URL,
-        download_url="%s_downloads/%s-%s.tar.bz2" \
-            % (BASE_URL, __pkg_data__.MODULE.__name__,
-               __pkg_data__.MODULE.__version__),
+        url="https://github.com/JNRowe/%s/" % __pkg_data__.MODULE.__name__,
+        download_url="http://pypi.python.org/packages/source/%s/%s/%s-%s.tar.gz" \
+            % (__pkg_data__.MODULE.__name__[0], __pkg_data__.MODULE.__name__,
+               __pkg_data__.MODULE.__name__, __pkg_data__.MODULE.__version__),
         packages=[__pkg_data__.MODULE.__name__],
         scripts=["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS],
         license=__pkg_data__.MODULE.__license__,
