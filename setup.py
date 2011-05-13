@@ -427,10 +427,12 @@ class Snapshot(NoOptsCommand):
             call_scm("archive %s" % snapshot_name)
         elif __pkg_data__.SCM == "git":
             basename = os.path.basename(snapshot_name)
-            call_scm("git archive --prefix=%s/ HEAD" % basename,
-                     stdout=open("%s.tar" % basename, "w"))
-            check_call(("tar xfv %s.tar -C %s" % (basename, "dist")).split())
-            os.remove("%s.tar" % basename)
+            if not os.path.isdir("dist"):
+                os.mkdir("dist")
+            call_scm("archive --prefix=%s/ HEAD" % basename,
+                     stdout=open("%s.tar" % snapshot_name, "w"))
+            check_call(("tar xfv %s.tar -C %s" % (snapshot_name, "dist")).split())
+            os.remove("%s.tar" % snapshot_name)
         else:
             raise ValueError("Unknown SCM type `%s'" % __pkg_data__.SCM)
 #}
