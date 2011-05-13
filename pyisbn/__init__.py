@@ -17,8 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__version__ = "0.5.1"
-__date__ = "2009-07-28"
+from pyisbn import _version
+
+
+__version__ = _version.dotted
+__date__ = _version.date
 __author__ = "James Rowe <jnrowe@gmail.com>"
 __copyright__ = "Copyright (C) 2007-2011  James Rowe"
 __license__ = "GNU General Public License Version 3"
