@@ -23,28 +23,49 @@ except ImportError:  # Python2.4
 
 from setuptools import setup
 
+import pyisbn
 
-import __pkg_data__
 
-author, author_email = parseaddr(__pkg_data__.MODULE.__author__)
+author, author_email = parseaddr(pyisbn.__author__)
+
+paras = pyisbn.__doc__.split("\n\n")
+long_description = "\n\n".join([paras[1], paras[3]])
 
 setup(
-    name=__pkg_data__.MODULE.__name__,
-    version=__pkg_data__.MODULE.__version__,
-    description=__pkg_data__.DESCRIPTION,
-    long_description=__pkg_data__.LONG_DESCRIPTION,
+    name='pyisbn',
+    version=pyisbn.__version__,
+    description=pyisbn.__doc__.splitlines()[0][:-1],
+    long_description=long_description,
     author=author,
     author_email=author_email,
     maintainer=author,
     maintainer_email=author_email,
-    url="https://github.com/JNRowe/%s/" % __pkg_data__.MODULE.__name__,
-    download_url="http://pypi.python.org/packages/source/%s/%s/%s-%s.tar.gz" \
-        % (__pkg_data__.MODULE.__name__[0], __pkg_data__.MODULE.__name__,
-            __pkg_data__.MODULE.__name__, __pkg_data__.MODULE.__version__),
-    packages=[__pkg_data__.MODULE.__name__],
-    scripts=["%s.py" % i.__name__ for i in __pkg_data__.SCRIPTS],
-    license=__pkg_data__.MODULE.__license__,
-    keywords=" ".join(__pkg_data__.KEYWORDS),
-    classifiers=__pkg_data__.CLASSIFIERS,
-    obsoletes=__pkg_data__.OBSOLETES,
+    url="https://github.com/JNRowe/pyisbn/",
+    download_url="http://pypi.python.org/packages/source/p/pyisbn/pyisbn-%s.tar.gz" \
+        % pyisbn.__version__,
+    packages=['pyisbn', ],
+    license=pyisbn.__license__,
+    keywords='ISBN ISBN-10 ISBN-13 SBN',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Other Audience',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.4',
+        'Programming Language :: Python :: 2.5',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.0',
+        'Programming Language :: Python :: 3.1',
+        'Programming Language :: Python :: 3.2',
+        'Topic :: Other/Nonlisted Topic',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Text Processing',
+        'Topic :: Text Processing :: Indexing',
+    ],
 )
