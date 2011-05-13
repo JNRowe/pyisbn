@@ -6,6 +6,14 @@ User-visible changes
 
 .. contents::
 
+0.6.0 - 2011-05-13
+------------------
+
+* Massive clean up, this is just a mainenance release
+* Switched to Sphinx_ for documentation
+
+.. _Sphinx: http://sphinx.pocoo.org/
+
 0.5.1 - 2009-07-28
 ------------------
 
