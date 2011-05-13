@@ -28,7 +28,7 @@ try:
     from setuptools.command.sdist import (finders, sdist)
     from setuptools import Command
     from distutils.util import convert_path
-    SETUPTOOLS = True #: True if ``setuptools`` is installed
+    SETUPTOOLS = True  #: True if ``setuptools`` is installed
 except ImportError:
     from distutils.core import setup
     from distutils.command.sdist import sdist
@@ -44,15 +44,16 @@ from distutils.util import execute
 
 try:
     from email.utils import parseaddr
-except ImportError: # Python2.4
+except ImportError:  # Python2.4
     from email.Utils import parseaddr
 
 from glob import glob
 
 try:
     from subprocess import check_call
-except ImportError: # Python2.4
+except ImportError:  # Python2.4
     from subprocess import call as sp_call
+
     def check_call(*args, **kwargs):
         retval = sp_call(*args, **kwargs)
         if retval:
@@ -574,4 +575,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

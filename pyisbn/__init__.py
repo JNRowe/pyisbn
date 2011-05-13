@@ -27,7 +27,7 @@ __history__ = "See git repository"
 
 try:
     from email.utils import parseaddr
-except ImportError: # Python 2.4
+except ImportError:  # Python 2.4
     from email.Utils import parseaddr
 
 __doc__ += """.
@@ -39,9 +39,9 @@ This module supports the calculation of ISBN checksums with
 All the ISBNs must be passed in as ``str`` types, even if it would seem
 reasonable to accept some ``int`` forms.  The reason behind this is English
 speaking countries use ``0`` for their group identifier, and Python would treat
-ISBNs beginning with ``0`` as octal representations producing incorrect results.
-While it may be feasible to allow some cases as non-``str`` types the complexity
-in design and usage isn't worth the minimal benefit.
+ISBNs beginning with ``0`` as octal representations producing incorrect
+results.  While it may be feasible to allow some cases as non-``str`` types the
+complexity in design and usage isn't worth the minimal benefit.
 
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
@@ -472,6 +472,7 @@ def _isbn_cleanse(isbn, checksum=True):
                              "without checksum")
     return isbn
 
+
 def calculate_checksum(isbn):
     """Calculate ISBN checksum
 
@@ -505,6 +506,7 @@ def calculate_checksum(isbn):
         if check == 10:
             check = 0
     return str(check)
+
 
 def convert(isbn, code="978"):
     """Convert ISBNs between ISBN-10 and ISBN-13
@@ -542,6 +544,7 @@ def convert(isbn, code="978"):
             raise ValueError("Only ISBN-13s with 978 Bookland code can be "
                              "converted to ISBN-10.")
 
+
 def validate(isbn):
     """Validate ISBNs
 
@@ -574,4 +577,3 @@ def validate(isbn):
     """
     isbn = _isbn_cleanse(isbn)
     return isbn[-1].upper() == calculate_checksum(isbn[:-1])
-
