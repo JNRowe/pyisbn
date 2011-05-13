@@ -1,12 +1,15 @@
+.tox/
 build/
 dist/
-html/
+doc/.build/
 pyisbn.egg-info/
 test/data
 
-.git_version
 *.html
 *.py[co]
+.coverage
+.git_version
+.noseids
 
 ChangeLog
 MANIFEST
