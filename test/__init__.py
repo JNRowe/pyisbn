@@ -1,7 +1,7 @@
 #
 #
 """test - Support code and data for test suite"""
-# Copyright (C) 2007-2010  James Rowe
+# Copyright (C) 2007-2011  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 __version__ = "0.1.0"
 __date__ = "2007-11-29"
 __author__ = "James Rowe <jnrowe@gmail.com>"
-__copyright__ = "Copyright (C) 2007-2010 James Rowe"
+__copyright__ = "Copyright (C) 2007-2011 James Rowe"
 __license__ = "GNU General Public License Version 3"
 __credits__ = ""
 __history__ = "See git repository"

@@ -1,7 +1,7 @@
 #
 #
 """Per-package configuration data"""
-# Copyright (C) 2008-2010  James Rowe
+# Copyright (C) 2007-2011  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
