@@ -23,7 +23,8 @@ MODULE = pyisbn
 SCRIPTS = []
 
 DESCRIPTION = MODULE.__doc__.splitlines()[0][:-1]
-LONG_DESCRIPTION = "\n\n".join(MODULE.__doc__.split("\n\n")[1:4])
+PARAS = MODULE.__doc__.split("\n\n")
+LONG_DESCRIPTION = "\n\n".join([PARAS[1], PARAS[3]])
 
 KEYWORDS = ['ISBN', 'ISBN-10', 'ISBN-13', 'SBN']
 CLASSIFIERS = [
