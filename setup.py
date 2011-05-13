@@ -172,7 +172,7 @@ def call_scm(options, *args, **kwargs):
     else:
         return process.stdout.read()
 
-def gen_desc(doc):
+def gen_description(doc):
     """Pull simple description from docstring
 
     :Parameters:
@@ -208,7 +208,7 @@ class BuildDoc(NoOptsCommand):
             Force documentation generation
 
     """
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
     user_options = [
         ('force', 'f',
          "force documentation generation"),
@@ -348,7 +348,7 @@ class ScmSdist(sdist):
             SCM repository object
 
     """
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
     user_options = [
         ('force-build', 'b', "force build with stale version number"),
     ] + sdist.user_options #: `ScmSdist`'s option mapping
@@ -407,7 +407,7 @@ class ScmSdist(sdist):
 
 class Snapshot(NoOptsCommand):
     """Build a daily snapshot tarball"""
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
     user_options = [] #: `Snapshot`'s option mapping
 
     def run(self):
@@ -448,7 +448,7 @@ class MyClean(clean):
     :see: `clean`
 
     """
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
 
     def run(self):
         """Remove built and temporary files"""
@@ -530,7 +530,7 @@ class TestDoc(MyTest):
     :see: `MyTest`
 
     """
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
 
 class TestCode(MyTest):
     """Test script and module's ``doctest`` examples
@@ -538,7 +538,7 @@ class TestCode(MyTest):
     :see: `MyTest`
 
     """
-    description = gen_desc(__doc__)
+    description = gen_description(__doc__)
 
 #}
 
