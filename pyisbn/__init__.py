@@ -1,6 +1,6 @@
 #
 #
-"""ISBN - A module for working with 10- and 13-digit ISBNs"""
+"""pyisbn - A module for working with 10- and 13-digit ISBNs"""
 # Copyright (C) 2007-2011  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
