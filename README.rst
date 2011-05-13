@@ -32,9 +32,7 @@ Example
 -------
 
 The simplest way to show how ``pyisbn`` works is by example, and here
-goes:
-
-.. code-block:: pycon
+goes::
 
     >>> import pyisbn
     >>> Permutation_City = "1-85798-218-5"
@@ -45,9 +43,7 @@ goes:
     >>> print("ISBN %s" % Permutation_City)
     ISBN 1-85798-218-5
 
-or to process ISBNs using the object pattern use:
-
-.. code-block:: pycon
+or to process ISBNs using the object pattern use::
 
     >>> Permutation_City = pyisbn.Isbn10("1-85798-218-5")
     >>> Permutation_City.validate()
