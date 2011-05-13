@@ -15,7 +15,8 @@ as objects.
 
 .. _GPL v3: http://www.gnu.org/licenses/
 
-Contents:
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
