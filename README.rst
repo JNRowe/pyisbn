@@ -12,6 +12,9 @@ identification numbers.  It includes functions for conversion, verification and
 generation of checksums.  It also includes basic classes for representing ISBNs
 as objects.
 
+See the ``doc`` directory for installation instructions and usage information,
+you can also `view the content online`_.
+
 Requirements
 ------------
 
@@ -94,6 +97,7 @@ If you find a bug don't hesitate to open an issue, preferably including
 a minimal testcase or even better a patch!
 
 .. _GPL v3: http://www.gnu.org/licenses/
+.. _view the content online: http://packages.python.org/pyisbn
 .. _Python: http://www.python.org/
 .. _issue: http://github.com/JNRowe/pyisbn/issues
 .. _autodoc: http://sphinx.pocoo.org/ext/autodoc.html#module-sphinx.ext.autodoc
