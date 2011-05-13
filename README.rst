@@ -24,9 +24,7 @@ Python 3) [#]_.  If ``pyisbn`` doesn't work with the version of Python you have
 installed, open an issue_ and I'll endeavour to fix it.
 
 The module have been tested on many UNIX-like systems, including Linux and OS X,
-but it should work fine on other systems too.  The module contains a large
-collection of ``doctest`` tests that can be run with ``./setup.py test_code``.
-The examples in this file can be tested with ``./setup.py test_doc``.
+but it should work fine on other systems too.
 
 .. [#] The module may work with older Python versions, but it has only
        been tested with v2.4 and above.
