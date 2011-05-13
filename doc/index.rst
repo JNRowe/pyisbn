@@ -20,6 +20,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install
    api/index
 
 Indices and tables
