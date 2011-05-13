@@ -3,8 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyisbn's documentation!
-==================================
+.. module:: pyisbn
+
+``pyisbn`` - A module for working with 10- and 13-digit ISBNs
+=============================================================
+
+:mod:`pyisbn` is a `GPL v3`_ licensed module for working with various book
+identification numbers.  It includes functions for conversion, verification and
+generation of checksums.  It also includes basic classes for representing ISBNs
+as objects.
+
+.. _GPL v3: http://www.gnu.org/licenses/
 
 Contents:
 
@@ -19,4 +28,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
