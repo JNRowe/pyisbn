@@ -270,7 +270,7 @@ class BuildDoc(NoOptsCommand):
             if not self.dry_run:
                 saved_args = sys.argv[1:]
                 sys.argv[1:] = ["--name", __pkg_data__.MODULE.__name__,
-                                "--url", PROJECT_URL,
+                                "--url", "https://github.com/JNRowe/%s/" % __pkg_data__.MODULE.__name__,
                                 "--docformat", "restructuredtext",
                                 "--no-sourcecode"]
                 if __pkg_data__.GRAPH_TYPE:
