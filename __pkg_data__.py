@@ -1,5 +1,4 @@
 #
-# vim: set sw=4 sts=4 et tw=80 fileencoding=utf-8:
 #
 """Per-package configuration data"""
 # Copyright (C) 2008-2010  James Rowe

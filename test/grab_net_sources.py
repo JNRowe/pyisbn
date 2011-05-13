@@ -1,5 +1,4 @@
 #! /usr/bin/python -tt
-# vim: set sw=4 sts=4 et tw=80 fileencoding=utf-8:
 #
 """grab_net_sources - Fetch sources for tests"""
 # Copyright (C) 2007-2010  James Rowe

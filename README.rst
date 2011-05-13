@@ -112,7 +112,3 @@ a minimal testcase, or even better a patch!
 .. _mail: jnrowe@gmail.com
 .. _PEP 8: http://www.python.org/dev/peps/pep-0008/
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
-
-..
-    :vim: set ft=rst set ts=4 sw=4 et:
-
