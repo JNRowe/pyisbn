@@ -29,6 +29,7 @@ LONG_DESCRIPTION = "\n\n".join([PARAS[1], PARAS[3]])
 KEYWORDS = ['ISBN', 'ISBN-10', 'ISBN-13', 'SBN']
 CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
     'Intended Audience :: Other Audience',
     'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: OS Independent',
@@ -37,8 +38,15 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 2.4',
     'Programming Language :: Python :: 2.5',
     'Programming Language :: Python :: 2.6',
+    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.0',
+    'Programming Language :: Python :: 3.1',
+    'Programming Language :: Python :: 3.2',
     'Topic :: Other/Nonlisted Topic',
+    'Topic :: Software Development :: Libraries',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Text Processing',
     'Topic :: Text Processing :: Indexing',
 ]
 
