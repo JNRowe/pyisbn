@@ -1,8 +1,8 @@
 Installation
 ============
 
-You can download releases from the `downloads page`_ on GitHub or the `PyPI
-page`_.
+You can download releases from the `PyPI page`_ for :mod:`pyisbn` or the
+`downloads page` on GitHub.
 
 :mod:`pyisbn` works with Python_ v2.4 or newer, including Python 3.
 :mod:`pyisbn` has no dependencies outside of Python's standard library.
@@ -16,9 +16,9 @@ To install using ``pip``::
 
 Although it is not recommended you can install using ``easy_install``::
 
-    $ easy_install github2
+    $ easy_install pyisbn
 
-If you downloaded a source tarball, or cloned from ``git`` you can install with
+If you downloaded a source tarball, or cloned from ``git``, you can install with
 the following steps::
 
     $ python setup.py build
