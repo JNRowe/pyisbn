@@ -164,6 +164,8 @@ class Isbn(object):
         Traceback (most recent call last):
         ...
         ValueError: Unknown site `zh'.
+        >>> print(Isbn("0071148167").to_url(site="google"))
+        http://books.google.com/books?vid=isbn:0071148167
         >>> print(Isbn("0071148167").to_url(site="isbndb"))
         http://isbndb.com/search-all.html?kw=0071148167
         >>> print(Isbn("0071148167").to_url(site="worldcat"))
@@ -194,6 +196,8 @@ class Isbn(object):
             else:
                 raise ValueError("Unknown site `%s'." % country)
             return "http://amazon.%s/dp/%s" % (country, self.isbn)
+        elif site == "google":
+            return "http://books.google.com/books?vid=isbn:%s" % self.isbn
         elif site == "isbndb":
             return "http://isbndb.com/search-all.html?kw=%s" % self.isbn
         elif site == "worldcat":
