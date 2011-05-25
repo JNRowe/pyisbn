@@ -18,7 +18,7 @@
 #
 
 #: Sample book data for use in tests
-TEST_ISBNS = {
+TEST_BOOKS = {
     "20, 000 Twenty Thousand Leagues Under the Sea": "0140621180",
     "3D Math Primer for Graphics and Game Development": "1556229119",
     "A Course in Combinatorics": "0521006015",

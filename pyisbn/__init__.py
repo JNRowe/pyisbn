@@ -347,15 +347,15 @@ class Isbn13(Isbn):
 def _isbn_cleanse(isbn, checksum=True):
     """Check ISBN is a string, and passes basic sanity checks
 
-    >>> from pyisbn.test_data import TEST_ISBNS
-    >>> for isbn in TEST_ISBNS.values():
+    >>> from pyisbn.test_data import TEST_BOOKS
+    >>> for isbn in TEST_BOOKS.values():
     ...     if isbn.startswith("0"):
     ...         if not _isbn_cleanse(isbn[1:]) == isbn:
     ...             print("SBN with checksum failure `%s'" % isbn)
     ...         if not _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]:
     ...             print("SBN without checksum failure `%s'" % isbn)
 
-    >>> for isbn in TEST_ISBNS.values():
+    >>> for isbn in TEST_BOOKS.values():
     ...     if not _isbn_cleanse(isbn) == isbn:
     ...         print("ISBN with checksum failure `%s'" % isbn)
     ...     if not _isbn_cleanse(isbn[:-1], False) == isbn[:-1]:
@@ -430,8 +430,8 @@ def _isbn_cleanse(isbn, checksum=True):
 def calculate_checksum(isbn):
     """Calculate ISBN checksum
 
-    >>> from pyisbn.test_data import TEST_ISBNS
-    >>> for isbn in TEST_ISBNS.values():
+    >>> from pyisbn.test_data import TEST_BOOKS
+    >>> for isbn in TEST_BOOKS.values():
     ...     if not calculate_checksum(isbn[:-1]) == isbn[-1]:
     ...         print("ISBN checksum failure `%s'" % isbn)
 
@@ -467,8 +467,8 @@ def convert(isbn, code="978"):
     requires that *any* hyphenation must be correct but allows ISBNs without
     hyphenation.
 
-    >>> from pyisbn.test_data import TEST_ISBNS
-    >>> for isbn in TEST_ISBNS.values():
+    >>> from pyisbn.test_data import TEST_BOOKS
+    >>> for isbn in TEST_BOOKS.values():
     ...     if not convert(convert(isbn)) == isbn.replace("-", ""):
     ...         print("ISBN conversion failure `%s'" % isbn)
     >>> convert("0000000000000")
@@ -507,8 +507,8 @@ def validate(isbn):
 
     Valid ISBNs
 
-    >>> from pyisbn.test_data import TEST_ISBNS
-    >>> for isbn in TEST_ISBNS.values():
+    >>> from pyisbn.test_data import TEST_BOOKS
+    >>> for isbn in TEST_BOOKS.values():
     ...     if not validate(isbn):
     ...         print("ISBN validation failure `%s'" % isbn)
 
