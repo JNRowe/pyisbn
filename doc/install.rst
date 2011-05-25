@@ -28,4 +28,4 @@ the following steps::
 .. _downloads page: https://github.com/JNRowe/pyisbn/downloads
 .. _PyPI page: http://pypi.python.org/pypi/pyisbn/
 .. _Python: http://www.python.org/
-.. _issue: http://github.com/JNRowe/pyisbn/issues
+.. _issue: https://github.com/JNRowe/pyisbn/issues/
