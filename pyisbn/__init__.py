@@ -343,6 +343,7 @@ class Isbn13(Isbn):
 def _isbn_cleanse(isbn, checksum=True):
     """Check ISBN is a string, and passes basic sanity checks
 
+    >>> from pyisbn.test_data import TEST_ISBNS
     >>> for isbn in TEST_ISBNS.values():
     ...     if isbn.startswith("0"):
     ...         if not _isbn_cleanse(isbn[1:]) == isbn:
@@ -425,6 +426,7 @@ def _isbn_cleanse(isbn, checksum=True):
 def calculate_checksum(isbn):
     """Calculate ISBN checksum
 
+    >>> from pyisbn.test_data import TEST_ISBNS
     >>> for isbn in TEST_ISBNS.values():
     ...     if not calculate_checksum(isbn[:-1]) == isbn[-1]:
     ...         print("ISBN checksum failure `%s'" % isbn)
@@ -461,6 +463,7 @@ def convert(isbn, code="978"):
     requires that *any* hyphenation must be correct but allows ISBNs without
     hyphenation.
 
+    >>> from pyisbn.test_data import TEST_ISBNS
     >>> for isbn in TEST_ISBNS.values():
     ...     if not convert(convert(isbn)) == isbn.replace("-", ""):
     ...         print("ISBN conversion failure `%s'" % isbn)
@@ -500,6 +503,7 @@ def validate(isbn):
 
     Valid ISBNs
 
+    >>> from pyisbn.test_data import TEST_ISBNS
     >>> for isbn in TEST_ISBNS.values():
     ...     if not validate(isbn):
     ...         print("ISBN validation failure `%s'" % isbn)

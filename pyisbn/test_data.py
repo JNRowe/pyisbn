@@ -1,6 +1,6 @@
 #
 #
-"""test_isbns - ISBNs for use in tests"""
+"""test_data - ISBNs for use in tests"""
 # Copyright (C) 2007-2011  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+#: Sample book data for use in tests
 TEST_ISBNS = {
     "20, 000 Twenty Thousand Leagues Under the Sea": "0140621180",
     "3D Math Primer for Graphics and Game Development": "1556229119",
@@ -220,5 +221,4 @@ TEST_ISBNS = {
     "What Are the Chances?: Voodoo Deaths, Office Gossip and Other Adventures in Probability": "0801869412",
     "Without Remorse": "0006476414",
     "Wizard: Life and Times of Nikola Tesla": "0806519606",
-} #: Sample book data for use in tests
-
+}
