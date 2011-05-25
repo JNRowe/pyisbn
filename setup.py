@@ -41,8 +41,6 @@ setup(
     maintainer=author,
     maintainer_email=author_email,
     url="https://github.com/JNRowe/pyisbn/",
-    download_url="http://pypi.python.org/packages/source/p/pyisbn/pyisbn-%s.tar.gz" \
-        % pyisbn.__version__,
     packages=['pyisbn', ],
     license=pyisbn.__license__,
     keywords='ISBN ISBN-10 ISBN-13 SBN',
