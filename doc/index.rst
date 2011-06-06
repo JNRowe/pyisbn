@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _pyisbn-label:
+
 .. module:: pyisbn
 
 ``pyisbn`` - A module for working with 10- and 13-digit ISBNs
