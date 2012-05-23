@@ -1,6 +1,9 @@
 ``pyisbn``
 ==========
 
+.. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
+   :target: http://travis-ci.org/JNRowe/pyisbn
+
 A module for working with 10- and 13-digit ISBNs
 ------------------------------------------------
 
