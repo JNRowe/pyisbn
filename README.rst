@@ -1,11 +1,8 @@
-``pyisbn``
-==========
+``pyisbn`` - A module for working with 10- and 13-digit ISBNs
+=============================================================
 
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
    :target: http://travis-ci.org/JNRowe/pyisbn
-
-A module for working with 10- and 13-digit ISBNs
-------------------------------------------------
 
 Introduction
 ------------
@@ -29,14 +26,13 @@ installed, open an issue_ and I'll endeavour to fix it.
 The module have been tested on many UNIX-like systems, including Linux and OS X,
 but it should work fine on other systems too.
 
-.. [#] The module may work with older Python versions, but it has only
-       been tested with v2.4 and above.
+.. [#] The module may work with older Python versions, but it has only been
+       tested with v2.4 and above.
 
 Example
 -------
 
-The simplest way to show how ``pyisbn`` works is by example, and here
-goes::
+The simplest way to show how ``pyisbn`` works is by example, and here goes::
 
     >>> import pyisbn
     >>> Permutation_City = "1-85798-218-5"
@@ -72,10 +68,14 @@ aren't backwards compatible will force a major version bump.
 Bugs
 ----
 
-If you find a bug don't hesitate to open an issue, preferably including
-a minimal testcase or even better a patch!
+If you find any problems, bugs or just have a question about this package either
+file an issue_ or drop me a mail_.
+
+If you've found a bug please attempt to include a minimal testcase so I can
+reproduce the problem, or even better a patch!
 
 .. _GPL v3: http://www.gnu.org/licenses/
-.. _view the content online: http://packages.python.org/pyisbn
+.. _view the content online: http://pyisbn.rtfd.org/
 .. _Python: http://www.python.org/
 .. _issue: http://github.com/JNRowe/pyisbn/issues
+.. _mail: jnrowe@gmail.com
