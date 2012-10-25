@@ -1,6 +1,6 @@
 #! /usr/bin/python -tt
 """setup.py - Setuptools tasks and config for pyisbn"""
-# Copyright (C) 2007-2011  James Rowe
+# Copyright (C) 2007-2012  James Rowe
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
