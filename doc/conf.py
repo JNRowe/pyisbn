@@ -228,9 +228,11 @@ man_pages = [
      [u'James Rowe'], 1)
 ]
 
-
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'http://docs.python.org/': None}
+intersphinx_mapping = {
+    'python': ('http://docs.python.org/',
+               os.getenv('SPHINX_PYTHON_OBJECTS')),
+}
 
 autoclass_content = "init"
 autodoc_default_flags = ['members', 'inherited-members']
