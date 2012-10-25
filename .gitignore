@@ -8,6 +8,7 @@ test/data
 *.html
 *.py[co]
 .git_version
+.noseids
 
 ChangeLog
 MANIFEST
