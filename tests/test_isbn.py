@@ -74,7 +74,7 @@ class TestIsbn(TestCase):
         expect(Isbn('0071148167').to_url(country=country)) == result
 
     def test_to_url_invalid_country(self):
-        with expect.raises(ValueError, "Unknown site `zh'."):
+        with expect.raises(ValueError, "Unknown site 'zh'"):
             Isbn('0071148167').to_url(country='zh')
 
     @params(
@@ -90,7 +90,7 @@ class TestIsbn(TestCase):
         expect(Isbn('0071148167').to_url(site=site)) == result
 
     def test_to_url_invalid_site(self):
-        with expect.raises(ValueError, "Unknown site `nosite'."):
+        with expect.raises(ValueError, "Unknown site 'nosite'"):
             Isbn('0071148167').to_url(site='nosite')
 
     def test_to_urn(self):

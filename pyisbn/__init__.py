@@ -144,7 +144,7 @@ class Isbn(object):
             elif country == 'us':
                 country = 'com'
             else:
-                raise ValueError("Unknown site `%s'." % country)
+                raise ValueError('Unknown site %r' % country)
             return 'http://amazon.%s/dp/%s' % (country, self.isbn)
         elif site == 'google':
             return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
@@ -159,7 +159,7 @@ class Isbn(object):
             return 'http://www.whsmith.co.uk/CatalogAndSearch/' \
                    'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
         else:
-            raise ValueError("Unknown site `%s'." % site)
+            raise ValueError('Unknown site %r' % site)
 
     def to_urn(self):
         """Generate a RFC 3187 URN.
@@ -307,7 +307,7 @@ def _isbn_cleanse(isbn, checksum=True):
     try:
         isbn = isbn.replace('-', '')
     except AttributeError:
-        raise TypeError("ISBN must be a string `%s'" % isbn)
+        raise TypeError('ISBN must be a string, received %r' % isbn)
     if not isbn[:-1].isdigit():
         raise ValueError('Invalid ISBN string(non-digit parts)')
     if checksum:

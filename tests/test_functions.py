@@ -39,7 +39,7 @@ def test__isbn_cleanse_isbn(isbn):
 
 
 def test__isbn_cleanse_invalid_type():
-    with expect.raises(TypeError, "ISBN must be a string `2'"):
+    with expect.raises(TypeError, "ISBN must be a string, received 2"):
         _isbn_cleanse(2)
 
 
