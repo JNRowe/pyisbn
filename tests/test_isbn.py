@@ -20,58 +20,74 @@
 from unittest import TestCase
 
 from expecter import expect
+from nose2.tools import params
 
 from pyisbn import Isbn
 
 
 class TestIsbn(TestCase):
-    def test___repr__(self):
-        expect(repr(Isbn("9780521871723"))) == "Isbn('9780521871723')"
-        expect(repr(Isbn("3540009787"))) == "Isbn('3540009787')"
+    @params(
+        '9780521871723',
+        '3540009787',
+    )
+    def test___repr__(self, isbn):
+        expect(repr(Isbn(isbn))) == "Isbn(%r)" % isbn
 
-    def test___str__(self):
-        expect(str(Isbn("9780521871723"))) == 'ISBN 9780521871723'
-        expect(str(Isbn("978-052-187-1723"))) == 'ISBN 978-052-187-1723'
-        expect(str(Isbn("3540009787"))) == 'ISBN 3540009787'
+    @params(
+        '9780521871723',
+        '978-052-187-1723',
+        '3540009787',
+    )
+    def test___str__(self, isbn):
+        expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
 
-    def test_calculate_checksum(self):
-        expect(Isbn("978-052-187-1723").calculate_checksum()) == '3'
-        expect(Isbn("3540009787").calculate_checksum()) == '7'
-        expect(Isbn("354000978").calculate_checksum()) == '7'
+    @params(
+        ('978-052-187-1723', '3'),
+        ('3540009787', '7'),
+        ('354000978', '7'),
+    )
+    def test_calculate_checksum(self, isbn, result):
+        expect(Isbn(isbn).calculate_checksum()) == result
 
-    def test_convert(self):
-        expect(Isbn("0071148167").convert()) == '9780071148160'
-        expect(Isbn("9780071148160").convert()) == '0071148167'
+    @params(
+        ('0071148167', '9780071148160'),
+        ('9780071148160', '0071148167'),
+    )
+    def test_convert(self, isbn, result):
+        expect(Isbn(isbn).convert()) == result
 
-    def test_validate(self):
-        expect(Isbn("978-052-187-1723").validate()) == True
-        expect(Isbn("978-052-187-1720").validate()) == False
-        expect(Isbn("3540009787").validate()) == True
-        expect(Isbn("354000978x").validate()) == False
+    @params(
+        ('978-052-187-1723', True),
+        ('978-052-187-1720', False),
+        ('3540009787', True),
+        ('354000978x', False),
+    )
+    def test_validate(self, isbn, result):
+        expect(Isbn(isbn).validate()) == result
 
-    def test_to_url(self):
-        expect(Isbn("0071148167").to_url()) == \
-            'http://amazon.com/dp/0071148167'
-        expect(Isbn("0071148167").to_url(country="uk")) == \
-            'http://amazon.co.uk/dp/0071148167'
-        expect(Isbn("0071148167").to_url(country="de")) == \
-            'http://amazon.de/dp/0071148167'
+    @params(
+        ('us', 'http://amazon.com/dp/0071148167'),
+        ('uk', 'http://amazon.co.uk/dp/0071148167'),
+        ('de', 'http://amazon.de/dp/0071148167'),
+    )
+    def test_to_url(self, country, result):
+        expect(Isbn('0071148167').to_url(country=country)) == result
 
     def test_to_url_invalid_country(self):
         with expect.raises(ValueError, "Unknown site `zh'."):
             Isbn("0071148167").to_url(country="zh")
 
-    def test_to_url_site(self):
-        expect(Isbn("0071148167").to_url(site="google")) == \
-            'http://books.google.com/books?vid=isbn:0071148167'
-        expect(Isbn("0071148167").to_url(site="isbndb")) == \
-            'http://isbndb.com/search-all.html?kw=0071148167'
-        expect(Isbn("0071148167").to_url(site="worldcat")) == \
-            'http://worldcat.org/isbn/0071148167'
-        expect(Isbn("0071148167").to_url(site="waterstones")) == \
-            'http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167'
-        expect(Isbn("0071148167").to_url(site="whsmith")) == \
-            'http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167'
+    @params(
+        ('google', 'http://books.google.com/books?vid=isbn:0071148167'),
+        ('isbndb', 'http://isbndb.com/search-all.html?kw=0071148167'),
+        ('worldcat', 'http://worldcat.org/isbn/0071148167'),
+        ('waterstones',
+         'http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167'),
+        ('whsmith',
+         'http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167'),
+    )
+    def test_to_url_site(self, site, result):
+        expect(Isbn('0071148167').to_url(site=site)) == result
 
     def test_to_url_invalid_site(self):
         with expect.raises(ValueError, "Unknown site `nosite'."):

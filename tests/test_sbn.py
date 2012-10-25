@@ -20,6 +20,7 @@
 from unittest import TestCase
 
 from expecter import expect
+from nose2.tools import params
 
 from pyisbn import Sbn
 
@@ -28,9 +29,12 @@ class TestSbn(TestCase):
     def test___repr__(self):
         expect(repr(Sbn("521871723"))) == "Sbn('521871723')"
 
-    def test_calculate_checksum(self):
-        expect(Sbn("07114816").calculate_checksum()) == '7'
-        expect(Sbn("071148167").calculate_checksum()) == '7'
+    @params(
+        ("07114816", '7'),
+        ("071148167", '7'),
+    )
+    def test_calculate_checksum(self, sbn, result):
+        expect(Sbn(sbn).calculate_checksum()) == result
 
     def test_convert(self):
         expect(Sbn("071148167").convert()) == '9780071148160'

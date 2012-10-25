@@ -18,22 +18,24 @@
 #
 
 from expecter import expect
+from nose2.tools import params
+
 
 from pyisbn import (_isbn_cleanse, calculate_checksum, convert, validate)
 from test_data import TEST_BOOKS
 
 
-def test__isbn_cleanse_sbn():
-    for isbn in TEST_BOOKS.values():
-        if isbn.startswith("0"):
-            expect(_isbn_cleanse(isbn[1:])) == isbn
-            expect(_isbn_cleanse(isbn[1:-1], False)) == isbn[:-1]
+@params(*TEST_BOOKS.values())
+def test__isbn_cleanse_sbn(isbn):
+    if isbn.startswith("0"):
+        expect(_isbn_cleanse(isbn[1:])) == isbn
+        expect(_isbn_cleanse(isbn[1:-1], False)) == isbn[:-1]
 
 
-def test__isbn_cleanse_isbn():
-    for isbn in TEST_BOOKS.values():
-        expect(_isbn_cleanse(isbn)) == isbn
-        expect(_isbn_cleanse(isbn[:-1], False)) == isbn[:-1]
+@params(*TEST_BOOKS.values())
+def test__isbn_cleanse_isbn(isbn):
+    expect(_isbn_cleanse(isbn)) == isbn
+    expect(_isbn_cleanse(isbn[:-1], False)) == isbn[:-1]
 
 
 def test__isbn_cleanse_invalid_type():
@@ -41,37 +43,34 @@ def test__isbn_cleanse_invalid_type():
         _isbn_cleanse(2)
 
 
-def test__isbn_cleanse_invalid_length():
-    with expect.raises(ValueError,
-                       'ISBN must be either 10 or 13 characters long'):
-        _isbn_cleanse("0-123")
-    with expect.raises(ValueError,
-                       'ISBN must be either 9 or 12 characters long without '
-                       'checksum'):
-        _isbn_cleanse("0-123", checksum=False)
+@params(
+    (True, 'ISBN must be either 10 or 13 characters long'),
+    (False, 'ISBN must be either 9 or 12 characters long without checksum'),
+)
+def test__isbn_cleanse_invalid_length(checksum, message):
+    with expect.raises(ValueError, message):
+        _isbn_cleanse("0-123", checksum=checksum)
 
 
-def test__isbn_cleanse_invalid():
-    with expect.raises(ValueError, 'Invalid ISBN string(non-digit parts)'):
-        _isbn_cleanse("0-x4343")
-    with expect.raises(ValueError,
-                       'Invalid ISBN-10 string(non-digit or X checksum)'):
-        _isbn_cleanse("012345678-b")
-    with expect.raises(ValueError,
-                       'Invalid ISBN-13 string(non-digit checksum)'):
-        _isbn_cleanse("012345678901b")
-    with expect.raises(ValueError, 'Invalid ISBN string(non-digit parts)'):
-        _isbn_cleanse("xxxxxxxxxxxx1")
+@params(
+    ('0-x4343', 'Invalid ISBN string(non-digit parts)'),
+    ('012345678-b', 'Invalid ISBN-10 string(non-digit or X checksum)'),
+    ('012345678901b', 'Invalid ISBN-13 string(non-digit checksum)'),
+    ('xxxxxxxxxxxx1', 'Invalid ISBN string(non-digit parts)'),
+)
+def test__isbn_cleanse_invalid(isbn, message):
+    with expect.raises(ValueError, message):
+        _isbn_cleanse(isbn)
 
 
-def test_calculate_checksum():
-    for isbn in TEST_BOOKS.values():
-        expect(calculate_checksum(isbn[:-1])) == isbn[-1]
+@params(*TEST_BOOKS.values())
+def test_calculate_checksum(isbn):
+    expect(calculate_checksum(isbn[:-1])) == isbn[-1]
 
 
-def test_convert():
-    for isbn in TEST_BOOKS.values():
-        expect(convert(convert(isbn))) == isbn.replace("-", "")
+@params(*TEST_BOOKS.values())
+def test_convert(isbn):
+    expect(convert(convert(isbn))) == isbn.replace("-", "")
 
 
 def test_convert_invalid():
@@ -81,11 +80,15 @@ def test_convert_invalid():
         convert("0000000000000")
 
 
-def test_validate():
-    for isbn in TEST_BOOKS.values():
-        expect(validate(isbn)) == True
+@params(*TEST_BOOKS.values())
+def test_validate(isbn):
+    expect(validate(isbn)) == True
 
 
-def test_validate_invalid():
-    for isbn in ("1-234-56789-0", "2-345-6789-1", "3-456-7890-X"):
-        expect(validate(isbn)) == False
+@params(
+    ('1-234-56789-0', ),
+    ('2-345-6789-1', ),
+    ('3-456-7890-X', )
+)
+def test_validate_invalid(isbn):
+    expect(validate(isbn)) == False
