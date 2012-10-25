@@ -22,11 +22,11 @@ from pyisbn import _version
 
 __version__ = _version.dotted
 __date__ = _version.date
-__author__ = "James Rowe <jnrowe@gmail.com>"
-__copyright__ = "Copyright (C) 2007-2011  James Rowe"
-__license__ = "GNU General Public License Version 3"
-__credits__ = ""
-__history__ = "See git repository"
+__author__ = 'James Rowe <jnrowe@gmail.com>'
+__copyright__ = 'Copyright (C) 2007-2011  James Rowe'
+__license__ = 'GNU General Public License Version 3'
+__credits__ = ''
+__history__ = 'See git repository'
 
 try:
     from email.utils import parseaddr
@@ -82,7 +82,7 @@ class Isbn(object):
         :return: String to recreate ``Isbn`` object
 
         """
-        return "%s(%r)" % (self.__class__.__name__, self.isbn)
+        return '%s(%r)' % (self.__class__.__name__, self.isbn)
 
     def __str__(self):
         """Pretty printed ISBN string.
@@ -105,7 +105,7 @@ class Isbn(object):
         else:
             return calculate_checksum(self.isbn[:-1])
 
-    def convert(self, code="978"):
+    def convert(self, code='978'):
         """Convert ISBNs between ISBN-10 and ISBN-13.
 
         :param str code: ISBN-13 prefix code
@@ -124,7 +124,7 @@ class Isbn(object):
         """
         return validate(self.isbn)
 
-    def to_url(self, site="amazon", country="us"):
+    def to_url(self, site='amazon', country='us'):
         """Generate a link to an online book site.
 
         :param str site: Site to create link to
@@ -135,28 +135,28 @@ class Isbn(object):
         :raise ValueError: Unknown country value
 
         """
-        if site == "amazon":
-            if country in ("de", "fr", "jp"):
+        if site == 'amazon':
+            if country in ('de', 'fr', 'jp'):
                 pass
-            elif country == "uk":
-                country = "co.uk"
-            elif country == "us":
-                country = "com"
+            elif country == 'uk':
+                country = 'co.uk'
+            elif country == 'us':
+                country = 'com'
             else:
                 raise ValueError("Unknown site `%s'." % country)
-            return "http://amazon.%s/dp/%s" % (country, self.isbn)
-        elif site == "google":
-            return "http://books.google.com/books?vid=isbn:%s" % self.isbn
-        elif site == "isbndb":
-            return "http://isbndb.com/search-all.html?kw=%s" % self.isbn
-        elif site == "worldcat":
-            return "http://worldcat.org/isbn/%s" % self.isbn
-        elif site == "waterstones":
-            return "http://www.waterstones.com/waterstonesweb/" \
-                "advancedSearch.do?buttonClicked=2&isbn=%s" % self.isbn
-        elif site == "whsmith":
-            return "http://www.whsmith.co.uk/CatalogAndSearch/" \
-                   "SearchWithinCategory.aspx?as_ISBN=%s" % self.isbn
+            return 'http://amazon.%s/dp/%s' % (country, self.isbn)
+        elif site == 'google':
+            return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
+        elif site == 'isbndb':
+            return 'http://isbndb.com/search-all.html?kw=%s' % self.isbn
+        elif site == 'worldcat':
+            return 'http://worldcat.org/isbn/%s' % self.isbn
+        elif site == 'waterstones':
+            return 'http://www.waterstones.com/waterstonesweb/' \
+                'advancedSearch.do?buttonClicked=2&isbn=%s' % self.isbn
+        elif site == 'whsmith':
+            return 'http://www.whsmith.co.uk/CatalogAndSearch/' \
+                   'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
         else:
             raise ValueError("Unknown site `%s'." % site)
 
@@ -170,7 +170,7 @@ class Isbn(object):
         :return: RFC 3187 compliant URN
 
         """
-        return "URN:ISBN:%s" % self._isbn
+        return 'URN:ISBN:%s' % self._isbn
 
 
 class Isbn10(Isbn):
@@ -196,7 +196,7 @@ class Isbn10(Isbn):
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code="978"):
+    def convert(self, code='978'):
         """Convert ISBN-10 to ISBN-13.
 
         :param str code: ISBN-13 prefix code
@@ -219,7 +219,7 @@ class Sbn(Isbn10):
         :param str sbn: SBN string
 
         """
-        isbn = "0" + sbn
+        isbn = '0' + sbn
         super(Sbn, self).__init__(isbn)
 
     def __repr__(self):
@@ -229,7 +229,7 @@ class Sbn(Isbn10):
         :return: String to recreate ``Sbn`` object
 
         """
-        return "Sbn(%r)" % self.isbn[1:]
+        return 'Sbn(%r)' % self.isbn[1:]
 
     def calculate_checksum(self):
         """Calculate SBN checksum.
@@ -240,7 +240,7 @@ class Sbn(Isbn10):
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code="978"):
+    def convert(self, code='978'):
         """Convert SBN to ISBN-13.
 
         :param str code: ISBN-13 prefix code
@@ -298,31 +298,31 @@ def _isbn_cleanse(isbn, checksum=True):
 
     """
     try:
-        isbn = isbn.replace("-", "")
+        isbn = isbn.replace('-', '')
     except AttributeError:
         raise TypeError("ISBN must be a string `%s'" % isbn)
     if not isbn[:-1].isdigit():
-        raise ValueError("Invalid ISBN string(non-digit parts)")
+        raise ValueError('Invalid ISBN string(non-digit parts)')
     if checksum:
         if len(isbn) == 9:
             isbn = "0" + isbn
         if len(isbn) == 10:
             if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
-                raise ValueError("Invalid ISBN-10 string(non-digit or X "
-                                 "checksum)")
+                raise ValueError('Invalid ISBN-10 string(non-digit or X '
+                                 'checksum)')
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
-                raise ValueError("Invalid ISBN-13 string(non-digit checksum)")
+                raise ValueError('Invalid ISBN-13 string(non-digit checksum)')
         else:
-            raise ValueError("ISBN must be either 10 or 13 characters long")
+            raise ValueError('ISBN must be either 10 or 13 characters long')
     else:
         if len(isbn) == 8:
-            isbn = "0" + isbn
+            isbn = '0' + isbn
         if not isbn[-1].isdigit():
-            raise ValueError("Invalid ISBN string(non-digit parts)")
+            raise ValueError('Invalid ISBN string(non-digit parts)')
         if not len(isbn) in (9, 12):
-            raise ValueError("ISBN must be either 9 or 12 characters long "
-                             "without checksum")
+            raise ValueError('ISBN must be either 9 or 12 characters long '
+                             'without checksum')
     return isbn
 
 
@@ -339,7 +339,7 @@ def calculate_checksum(isbn):
         products = [x * y for x, y in zip(isbn, range(1, 10))]
         check = sum(products) % 11
         if check == 10:
-            check = "X"
+            check = 'X'
     else:
         # As soon as Python 2.4 support is dumped
         # [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in range(12)]
@@ -355,7 +355,7 @@ def calculate_checksum(isbn):
     return str(check)
 
 
-def convert(isbn, code="978"):
+def convert(isbn, code='978'):
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
     No attempt to hyphenate converted ISBNs is made, because the specification
@@ -374,11 +374,11 @@ def convert(isbn, code="978"):
         isbn = code + isbn[:-1]
         return isbn + calculate_checksum(isbn)
     else:
-        if isbn.startswith("978"):
+        if isbn.startswith('978'):
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
-            raise ValueError("Only ISBN-13s with 978 Bookland code can be "
-                             "converted to ISBN-10.")
+            raise ValueError('Only ISBN-13s with 978 Bookland code can be '
+                             'converted to ISBN-10.')
 
 
 def validate(isbn):

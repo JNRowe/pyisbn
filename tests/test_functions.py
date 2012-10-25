@@ -27,7 +27,7 @@ from test_data import TEST_BOOKS
 
 @params(*TEST_BOOKS.values())
 def test__isbn_cleanse_sbn(isbn):
-    if isbn.startswith("0"):
+    if isbn.startswith('0'):
         expect(_isbn_cleanse(isbn[1:])) == isbn
         expect(_isbn_cleanse(isbn[1:-1], False)) == isbn[:-1]
 
@@ -49,7 +49,7 @@ def test__isbn_cleanse_invalid_type():
 )
 def test__isbn_cleanse_invalid_length(checksum, message):
     with expect.raises(ValueError, message):
-        _isbn_cleanse("0-123", checksum=checksum)
+        _isbn_cleanse('0-123', checksum=checksum)
 
 
 @params(
@@ -70,14 +70,14 @@ def test_calculate_checksum(isbn):
 
 @params(*TEST_BOOKS.values())
 def test_convert(isbn):
-    expect(convert(convert(isbn))) == isbn.replace("-", "")
+    expect(convert(convert(isbn))) == isbn.replace('-', '')
 
 
 def test_convert_invalid():
     with expect.raises(ValueError,
                        'Only ISBN-13s with 978 Bookland code can be converted '
                        'to ISBN-10.'):
-        convert("0000000000000")
+        convert('0000000000000')
 
 
 @params(*TEST_BOOKS.values())

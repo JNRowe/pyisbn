@@ -19,7 +19,7 @@
 try:
     from email.utils import parseaddr
 except ImportError:  # Python2.4
-    from email.Utils import parseaddr
+    from email.Utils import parseaddr  # NOQA
 
 from setuptools import setup
 
@@ -28,7 +28,7 @@ import pyisbn
 
 author, author_email = parseaddr(pyisbn.__author__)
 
-paras = pyisbn.__doc__.split("\n\n")
+paras = pyisbn.__doc__.split('\n\n')
 long_description = "\n\n".join([paras[1], paras[3]])
 
 setup(

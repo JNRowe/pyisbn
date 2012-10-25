@@ -31,7 +31,7 @@ class TestIsbn(TestCase):
         '3540009787',
     )
     def test___repr__(self, isbn):
-        expect(repr(Isbn(isbn))) == "Isbn(%r)" % isbn
+        expect(repr(Isbn(isbn))) == 'Isbn(%r)' % isbn
 
     @params(
         '9780521871723',
@@ -75,7 +75,7 @@ class TestIsbn(TestCase):
 
     def test_to_url_invalid_country(self):
         with expect.raises(ValueError, "Unknown site `zh'."):
-            Isbn("0071148167").to_url(country="zh")
+            Isbn('0071148167').to_url(country='zh')
 
     @params(
         ('google', 'http://books.google.com/books?vid=isbn:0071148167'),
@@ -91,7 +91,7 @@ class TestIsbn(TestCase):
 
     def test_to_url_invalid_site(self):
         with expect.raises(ValueError, "Unknown site `nosite'."):
-            Isbn("0071148167").to_url(site="nosite")
+            Isbn('0071148167').to_url(site='nosite')
 
     def test_to_urn(self):
-        expect(Isbn("0071148167").to_urn()) == 'URN:ISBN:0071148167'
+        expect(Isbn('0071148167').to_urn()) == 'URN:ISBN:0071148167'
