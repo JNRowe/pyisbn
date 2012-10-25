@@ -31,7 +31,7 @@ __history__ = "See git repository"
 try:
     from email.utils import parseaddr
 except ImportError:  # Python 2.4
-    from email.Utils import parseaddr
+    from email.Utils import parseaddr  # NOQA
 
 __doc__ += """.
 
@@ -435,7 +435,7 @@ def _isbn_cleanse(isbn, checksum=True):
             isbn = "0" + isbn
         if len(isbn) == 10:
             if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
-                raise ValueError("Invalid ISBN-10 string(non-digit or X " \
+                raise ValueError("Invalid ISBN-10 string(non-digit or X "
                                  "checksum)")
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
