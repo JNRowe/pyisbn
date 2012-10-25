@@ -58,6 +58,7 @@ books in their collection.
 
 
 class Isbn(object):
+
     """Class for representing ISBN objects."""
 
     __slots__ = ('_isbn', 'isbn')
@@ -174,11 +175,13 @@ class Isbn(object):
 
 
 class Isbn10(Isbn):
+
     """Class for representing ISBN-10 objects.
 
     :seealso: ``Isbn``
 
     """
+
     def __init__(self, isbn):
         """Initialise a new ``Isbn10`` object.
 
@@ -208,11 +211,13 @@ class Isbn10(Isbn):
 
 
 class Sbn(Isbn10):
+
     """Class for representing SBN objects.
 
     :seealso: ``Isbn10``
 
     """
+
     def __init__(self, sbn):
         """Initialise a new ``Sbn`` object.
 
@@ -252,11 +257,13 @@ class Sbn(Isbn10):
 
 
 class Isbn13(Isbn):
+
     """Class for representing ISBN-13 objects.
 
     :seealso: ``Isbn``
 
     """
+
     def __init__(self, isbn):
         """Initialise a new ``Isbn13`` object.
 
