@@ -58,14 +58,15 @@ books in their collection.
 
 
 class Isbn(object):
-    """Class for representing ISBN objects"""
+    """Class for representing ISBN objects."""
 
     __slots__ = ('_isbn', 'isbn')
 
     def __init__(self, isbn):
-        """Initialise a new ``Isbn`` object
+        """Initialise a new ``Isbn`` object.
 
         :param str isbn: ISBN string
+
         """
         super(Isbn, self).__init__()
         self._isbn = isbn
@@ -75,7 +76,7 @@ class Isbn(object):
             self.isbn = _isbn_cleanse(isbn)
 
     def __repr__(self):
-        """Self-documenting string representation
+        """Self-documenting string representation.
 
         >>> Isbn("9780521871723")
         Isbn('9780521871723')
@@ -84,11 +85,12 @@ class Isbn(object):
 
         :rtype: ``str``
         :return: String to recreate ``Isbn`` object
+
         """
         return "%s(%r)" % (self.__class__.__name__, self.isbn)
 
     def __str__(self):
-        """Pretty printed ISBN string
+        """Pretty printed ISBN string.
 
         >>> print(Isbn("9780521871723"))
         ISBN 9780521871723
@@ -99,11 +101,12 @@ class Isbn(object):
 
         :rtype: ``str``
         :return: Human readable string representation of ``Isbn`` object
+
         """
         return "ISBN %s" % self._isbn
 
     def calculate_checksum(self):
-        """Calculate ISBN checksum
+        """Calculate ISBN checksum.
 
         >>> Isbn("978-052-187-1723").calculate_checksum()
         '3'
@@ -114,6 +117,7 @@ class Isbn(object):
 
         :rtype: ``str``
         :return: ISBN checksum value
+
         """
         if len(self.isbn) in (9, 12):
             return calculate_checksum(self.isbn)
@@ -121,7 +125,7 @@ class Isbn(object):
             return calculate_checksum(self.isbn[:-1])
 
     def convert(self, code="978"):
-        """Convert ISBNs between ISBN-10 and ISBN-13
+        """Convert ISBNs between ISBN-10 and ISBN-13.
 
         >>> Isbn("0071148167").convert()
         '9780071148160'
@@ -131,11 +135,12 @@ class Isbn(object):
         :param str code: ISBN-13 prefix code
         :rtype: ``str``
         :return: Converted ISBN
+
         """
         return convert(self.isbn, code)
 
     def validate(self):
-        """Validate an ISBN value
+        """Validate an ISBN value.
 
         >>> Isbn("978-052-187-1723").validate()
         True
@@ -148,11 +153,12 @@ class Isbn(object):
 
         :rtype: ``bool``
         :return: ``True`` if ISBN is valid
+
         """
         return validate(self.isbn)
 
     def to_url(self, site="amazon", country="us"):
-        """Generate a link to an online book site
+        """Generate a link to an online book site.
 
         >>> print(Isbn("0071148167").to_url())
         http://amazon.com/dp/0071148167
@@ -185,6 +191,7 @@ class Isbn(object):
         :return: URL on ``site`` for book
         :raise ValueError: Unknown site value
         :raise ValueError: Unknown country value
+
         """
         if site == "amazon":
             if country in ("de", "fr", "jp"):
@@ -212,7 +219,7 @@ class Isbn(object):
             raise ValueError("Unknown site `%s'." % site)
 
     def to_urn(self):
-        """Generate a RFC 3187 URN
+        """Generate a RFC 3187 URN.
 
         :rfc:`3187` is the commonly accepted way to use ISBNs as uniform
         resource names.
@@ -222,35 +229,39 @@ class Isbn(object):
 
         :rtype: ``str``
         :return: RFC 3187 compliant URN
+
         """
         return "URN:ISBN:%s" % self._isbn
 
 
 class Isbn10(Isbn):
-    """Class for representing ISBN-10 objects
+    """Class for representing ISBN-10 objects.
 
     :seealso: ``Isbn``
+
     """
     def __init__(self, isbn):
-        """Initialise a new ``Isbn10`` object
+        """Initialise a new ``Isbn10`` object.
 
         :param str isbn: ISBN-10 string
+
         """
         super(Isbn10, self).__init__(isbn)
 
     def calculate_checksum(self):
-        """Calculate ISBN-10 checksum
+        """Calculate ISBN-10 checksum.
 
         >>> Isbn10("3540009787").calculate_checksum()
         '7'
 
         :rtype: ``str``
         :return: ISBN-10 checksum value
+
         """
         return calculate_checksum(self.isbn[:9])
 
     def convert(self, code="978"):
-        """Convert ISBN-10 to ISBN-13
+        """Convert ISBN-10 to ISBN-13.
 
         >>> Isbn10("0071148167").convert()
         '9780071148160'
@@ -258,36 +269,40 @@ class Isbn10(Isbn):
         :param str code: ISBN-13 prefix code
         :rtype: ``str``
         :return: ISBN-13 string
+
         """
         return convert(self.isbn, code)
 
 
 class Sbn(Isbn10):
-    """Class for representing SBN objects
+    """Class for representing SBN objects.
 
     :seealso: ``Isbn10``
+
     """
     def __init__(self, sbn):
-        """Initialise a new ``Sbn`` object
+        """Initialise a new ``Sbn`` object.
 
         :param str sbn: SBN string
+
         """
         isbn = "0" + sbn
         super(Sbn, self).__init__(isbn)
 
     def __repr__(self):
-        """Self-documenting string representation
+        """Self-documenting string representation.
 
         >>> Sbn("521871723")
         Sbn('521871723')
 
         :rtype: ``str``
         :return: String to recreate ``Sbn`` object
+
         """
         return "Sbn(%r)" % self.isbn[1:]
 
     def calculate_checksum(self):
-        """Calculate SBN checksum
+        """Calculate SBN checksum.
 
         >>> Sbn("07114816").calculate_checksum()
         '7'
@@ -296,11 +311,12 @@ class Sbn(Isbn10):
 
         :rtype: ``str``
         :return: SBN checksum value
+
         """
         return calculate_checksum(self.isbn[:9])
 
     def convert(self, code="978"):
-        """Convert SBN to ISBN-13
+        """Convert SBN to ISBN-13.
 
         >>> Sbn("071148167").convert()
         '9780071148160'
@@ -308,35 +324,39 @@ class Sbn(Isbn10):
         :param str code: ISBN-13 prefix code
         :rtype: ``str``
         :return: ISBN-13 string
+
         """
         return super(Sbn, self).convert(code)
 
 
 class Isbn13(Isbn):
-    """Class for representing ISBN-13 objects
+    """Class for representing ISBN-13 objects.
 
     :seealso: ``Isbn``
+
     """
     def __init__(self, isbn):
-        """Initialise a new ``Isbn13`` object
+        """Initialise a new ``Isbn13`` object.
 
         :param str isbn: ISBN-13 string
+
         """
         super(Isbn13, self).__init__(isbn)
 
     def calculate_checksum(self):
-        """Calculate ISBN-13 checksum
+        """Calculate ISBN-13 checksum.
 
         >>> Isbn13("978-052-187-1723").calculate_checksum()
         '3'
 
         :rtype: ``str``
         :return: ISBN-13 checksum value
+
         """
         return calculate_checksum(self.isbn[:12])
 
     def convert(self, code=None):
-        """Convert ISBN-13 to ISBN-10
+        """Convert ISBN-13 to ISBN-10.
 
         >>> Isbn13("9780071148160").convert()
         '0071148167'
@@ -344,12 +364,13 @@ class Isbn13(Isbn):
         :param code: Ignored, only for compatibility with ``Isbn``
         :rtype: ``str``
         :return: ISBN-10 string
+
         """
         return convert(self.isbn)
 
 
 def _isbn_cleanse(isbn, checksum=True):
-    """Check ISBN is a string, and passes basic sanity checks
+    """Check ISBN is a string, and passes basic sanity checks.
 
     >>> from pyisbn.test_data import TEST_BOOKS
     >>> for isbn in TEST_BOOKS.values():
@@ -401,6 +422,7 @@ def _isbn_cleanse(isbn, checksum=True):
     :raise TypeError: ``isbn`` is not a ``str`` type
     :raise ValueError: Incorrect length for ``isbn``
     :raise ValueError: Incorrect SBN or ISBN formatting
+
     """
     try:
         isbn = isbn.replace("-", "")
@@ -432,7 +454,7 @@ def _isbn_cleanse(isbn, checksum=True):
 
 
 def calculate_checksum(isbn):
-    """Calculate ISBN checksum
+    """Calculate ISBN checksum.
 
     >>> from pyisbn.test_data import TEST_BOOKS
     >>> for isbn in TEST_BOOKS.values():
@@ -442,6 +464,7 @@ def calculate_checksum(isbn):
     :param str isbn: SBN, ISBN-10 or ISBN-13
     :rtype: ``str``
     :return: Checksum for given ISBN or SBN
+
     """
     isbn = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
     if len(isbn) == 9:
@@ -465,7 +488,7 @@ def calculate_checksum(isbn):
 
 
 def convert(isbn, code="978"):
-    """Convert ISBNs between ISBN-10 and ISBN-13
+    """Convert ISBNs between ISBN-10 and ISBN-13.
 
     No attempt to hyphenate converted ISBNs is made, because the specification
     requires that *any* hyphenation must be correct but allows ISBNs without
@@ -485,6 +508,7 @@ def convert(isbn, code="978"):
     :rtype: ``str``
     :return: Converted ISBN-10 or ISBN-13
     :raise ValueError: When ISBN-13 isn't a Bookland "978" ISBN
+
     """
     isbn = _isbn_cleanse(isbn)
     if len(isbn) == 10:
@@ -499,7 +523,7 @@ def convert(isbn, code="978"):
 
 
 def validate(isbn):
-    """Validate ISBNs
+    """Validate ISBNs.
 
     :warn: Publishers have been known to go to press with broken ISBNs, and
         therefore validation failures do not completely guarantee an ISBN is
@@ -525,6 +549,7 @@ def validate(isbn):
     :param str isbn: SBN, ISBN-10 or ISBN-13
     :rtype: ``bool``
     :return: ``True`` if ISBN is valid
+
     """
     isbn = _isbn_cleanse(isbn)
     return isbn[-1].upper() == calculate_checksum(isbn[:-1])
