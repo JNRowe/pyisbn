@@ -17,22 +17,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from unittest import TestCase
+
+from expecter import expect
+
 from pyisbn import Isbn13
 
 
-class TestIsbn13():
+class TestIsbn13(TestCase):
     def test_calculate_checksum(self):
-        """Calculate ISBN-13 checksum.
-
-        >>> Isbn13("978-052-187-1723").calculate_checksum()
-        '3'
-
-        """
+        expect(Isbn13("978-052-187-1723").calculate_checksum()) == '3'
 
     def test_convert(self):
-        """Convert ISBN-13 to ISBN-10.
-
-        >>> Isbn13("9780071148160").convert()
-        '0071148167'
-
-        """
+        expect(Isbn13("9780071148160").convert()) == '0071148167'

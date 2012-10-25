@@ -17,95 +17,75 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from expecter import expect
+
 from pyisbn import (_isbn_cleanse, calculate_checksum, convert, validate)
 from test_data import TEST_BOOKS
 
 
-def test__isbn_cleanse():
-    """Check ISBN is a string, and passes basic sanity checks.
+def test__isbn_cleanse_sbn():
+    for isbn in TEST_BOOKS.values():
+        if isbn.startswith("0"):
+            expect(_isbn_cleanse(isbn[1:])) == isbn
+            expect(_isbn_cleanse(isbn[1:-1], False)) == isbn[:-1]
 
-    >>> for isbn in TEST_BOOKS.values():
-    ...     if isbn.startswith("0"):
-    ...         if not _isbn_cleanse(isbn[1:]) == isbn:
-    ...             print("SBN with checksum failure `%s'" % isbn)
-    ...         if not _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]:
-    ...             print("SBN without checksum failure `%s'" % isbn)
 
-    >>> for isbn in TEST_BOOKS.values():
-    ...     if not _isbn_cleanse(isbn) == isbn:
-    ...         print("ISBN with checksum failure `%s'" % isbn)
-    ...     if not _isbn_cleanse(isbn[:-1], False) == isbn[:-1]:
-    ...         print("ISBN without checksum failure `%s'" % isbn)
+def test__isbn_cleanse_isbn():
+    for isbn in TEST_BOOKS.values():
+        expect(_isbn_cleanse(isbn)) == isbn
+        expect(_isbn_cleanse(isbn[:-1], False)) == isbn[:-1]
 
-    >>> _isbn_cleanse(2)
-    Traceback (most recent call last):
-      ...
-    TypeError: ISBN must be a string `2'
-    >>> _isbn_cleanse("0-123")
-    Traceback (most recent call last):
-    ...
-    ValueError: ISBN must be either 10 or 13 characters long
-    >>> _isbn_cleanse("0-123", checksum=False)
-    Traceback (most recent call last):
-    ...
-    ValueError: ISBN must be either 9 or 12 characters long without checksum
-    >>> _isbn_cleanse("0-x4343")
-    Traceback (most recent call last):
-    ...
-    ValueError: Invalid ISBN string(non-digit parts)
-    >>> _isbn_cleanse("012345678-b")
-    Traceback (most recent call last):
-    ...
-    ValueError: Invalid ISBN-10 string(non-digit or X checksum)
-    >>> _isbn_cleanse("012345678901b")
-    Traceback (most recent call last):
-    ...
-    ValueError: Invalid ISBN-13 string(non-digit checksum)
-    >>> _isbn_cleanse("xxxxxxxxxxxx1")
-    Traceback (most recent call last):
-    ...
-    ValueError: Invalid ISBN string(non-digit parts)
 
-    """
+def test__isbn_cleanse_invalid_type():
+    with expect.raises(TypeError, "ISBN must be a string `2'"):
+        _isbn_cleanse(2)
+
+
+def test__isbn_cleanse_invalid_length():
+    with expect.raises(ValueError,
+                       'ISBN must be either 10 or 13 characters long'):
+        _isbn_cleanse("0-123")
+    with expect.raises(ValueError,
+                       'ISBN must be either 9 or 12 characters long without '
+                       'checksum'):
+        _isbn_cleanse("0-123", checksum=False)
+
+
+def test__isbn_cleanse_invalid():
+    with expect.raises(ValueError, 'Invalid ISBN string(non-digit parts)'):
+        _isbn_cleanse("0-x4343")
+    with expect.raises(ValueError,
+                       'Invalid ISBN-10 string(non-digit or X checksum)'):
+        _isbn_cleanse("012345678-b")
+    with expect.raises(ValueError,
+                       'Invalid ISBN-13 string(non-digit checksum)'):
+        _isbn_cleanse("012345678901b")
+    with expect.raises(ValueError, 'Invalid ISBN string(non-digit parts)'):
+        _isbn_cleanse("xxxxxxxxxxxx1")
 
 
 def test_calculate_checksum():
-    """Calculate ISBN checksum.
-
-    >>> for isbn in TEST_BOOKS.values():
-    ...     if not calculate_checksum(isbn[:-1]) == isbn[-1]:
-    ...         print("ISBN checksum failure `%s'" % isbn)
-
-    """
+    for isbn in TEST_BOOKS.values():
+        expect(calculate_checksum(isbn[:-1])) == isbn[-1]
 
 
 def test_convert():
-    """Convert ISBNs between ISBN-10 and ISBN-13.
+    for isbn in TEST_BOOKS.values():
+        expect(convert(convert(isbn))) == isbn.replace("-", "")
 
-    >>> for isbn in TEST_BOOKS.values():
-    ...     if not convert(convert(isbn)) == isbn.replace("-", ""):
-    ...         print("ISBN conversion failure `%s'" % isbn)
-    >>> convert("0000000000000")
-    Traceback (most recent call last):
-    ...
-    ValueError: Only ISBN-13s with 978 Bookland code can be converted to ISBN-10.
 
-    """
+def test_convert_invalid():
+    with expect.raises(ValueError,
+                       'Only ISBN-13s with 978 Bookland code can be converted '
+                       'to ISBN-10.'):
+        convert("0000000000000")
 
 
 def test_validate():
-    """Validate ISBNs.
+    for isbn in TEST_BOOKS.values():
+        expect(validate(isbn)) == True
 
-    Valid ISBNs
 
-    >>> for isbn in TEST_BOOKS.values():
-    ...     if not validate(isbn):
-    ...         print("ISBN validation failure `%s'" % isbn)
-
-    Invalid ISBNs
-
-    >>> for isbn in ("1-234-56789-0", "2-345-6789-1", "3-456-7890-X"):
-    ...     if validate(isbn):
-    ...         print("ISBN invalidation failure `%s'" % isbn)
-
-    """
+def test_validate_invalid():
+    for isbn in ("1-234-56789-0", "2-345-6789-1", "3-456-7890-X"):
+        expect(validate(isbn)) == False

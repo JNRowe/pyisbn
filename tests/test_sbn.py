@@ -17,32 +17,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from unittest import TestCase
+
+from expecter import expect
+
 from pyisbn import Sbn
 
 
-class TestSbn():
+class TestSbn(TestCase):
     def test___repr__(self):
-        """Self-documenting string representation.
-
-        >>> Sbn("521871723")
-        Sbn('521871723')
-
-        """
+        expect(repr(Sbn("521871723"))) == "Sbn('521871723')"
 
     def test_calculate_checksum(self):
-        """Calculate SBN checksum.
-
-        >>> Sbn("07114816").calculate_checksum()
-        '7'
-        >>> Sbn("071148167").calculate_checksum()
-        '7'
-
-        """
+        expect(Sbn("07114816").calculate_checksum()) == '7'
+        expect(Sbn("071148167").calculate_checksum()) == '7'
 
     def test_convert(self):
-        """Convert SBN to ISBN-13.
-
-        >>> Sbn("071148167").convert()
-        '9780071148160'
-
-        """
+        expect(Sbn("071148167").convert()) == '9780071148160'
