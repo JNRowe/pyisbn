@@ -1,8 +1,3 @@
-.. pyisbn documentation master file, created by
-   sphinx-quickstart on Fri May 13 14:07:33 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 .. _pyisbn-label:
 
 .. module:: pyisbn
