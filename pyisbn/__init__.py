@@ -379,9 +379,9 @@ def calculate_checksum(isbn):
 def convert(isbn, code='978'):
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
-    No attempt to hyphenate converted ISBNs is made, because the specification
-    requires that *any* hyphenation must be correct but allows ISBNs without
-    hyphenation.
+    :note: No attempt to hyphenate converted ISBNs is made, because the
+        specification requires that *any* hyphenation must be correct but allows
+        ISBNs without hyphenation.
 
     :param str isbn: SBN, ISBN-10 or ISBN-13
     :param str code: EAN Bookland code
