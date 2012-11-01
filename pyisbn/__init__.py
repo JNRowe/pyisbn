@@ -183,7 +183,7 @@ class Isbn(object):
         resource names.
 
         :rtype: ``str``
-        :return: RFC 3187 compliant URN
+        :return: :rfc:`3187` compliant URN
 
         """
         return 'URN:ISBN:%s' % self._isbn
