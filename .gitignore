@@ -1,4 +1,3 @@
-.tox/
 build/
 dist/
 doc/.build/
