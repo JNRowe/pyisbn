@@ -302,6 +302,7 @@ class Isbn13(Isbn):
         :param code: Ignored, only for compatibility with ``Isbn``
         :rtype: ``str``
         :return: ISBN-10 string
+        :raise ValueError: When ISBN-13 isn't a Bookland "978" ISBN
 
         """
         return convert(self.isbn)
