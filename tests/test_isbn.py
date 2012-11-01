@@ -22,7 +22,7 @@ from unittest import TestCase
 from expecter import expect
 from nose2.tools import params
 
-from pyisbn import Isbn
+from pyisbn import (CountryError, Isbn, SiteError)
 
 
 class TestIsbn(TestCase):
@@ -74,7 +74,7 @@ class TestIsbn(TestCase):
         expect(Isbn('0071148167').to_url(country=country)) == result
 
     def test_to_url_invalid_country(self):
-        with expect.raises(ValueError, "Unknown site 'zh'"):
+        with expect.raises(CountryError, "zh"):
             Isbn('0071148167').to_url(country='zh')
 
     @params(
@@ -90,7 +90,7 @@ class TestIsbn(TestCase):
         expect(Isbn('0071148167').to_url(site=site)) == result
 
     def test_to_url_invalid_site(self):
-        with expect.raises(ValueError, "Unknown site 'nosite'"):
+        with expect.raises(SiteError, "nosite"):
             Isbn('0071148167').to_url(site='nosite')
 
     def test_to_urn(self):

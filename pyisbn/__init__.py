@@ -57,6 +57,21 @@ books in their collection.
 """ % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
 
 
+class CountryError(ValueError):
+
+    """Unknown country value."""
+
+
+class IsbnError(ValueError):
+
+    """Invalid ISBN string."""
+
+
+class SiteError(ValueError):
+
+    """Unknown site value."""
+
+
 class Isbn(object):
 
     """Class for representing ISBN objects."""
@@ -132,8 +147,8 @@ class Isbn(object):
         :param str country: Country specific version of `site`
         :rtype: ``str``
         :return: URL on ``site`` for book
-        :raise ValueError: Unknown site value
-        :raise ValueError: Unknown country value
+        :raise SiteError: Unknown site value
+        :raise CountryError: Unknown country value
 
         """
         if site == 'amazon':
@@ -144,7 +159,7 @@ class Isbn(object):
             elif country == 'us':
                 country = 'com'
             else:
-                raise ValueError('Unknown site %r' % country)
+                raise CountryError(country)
             return 'http://amazon.%s/dp/%s' % (country, self.isbn)
         elif site == 'google':
             return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
@@ -159,7 +174,7 @@ class Isbn(object):
             return 'http://www.whsmith.co.uk/CatalogAndSearch/' \
                    'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
         else:
-            raise ValueError('Unknown site %r' % site)
+            raise SiteError(site)
 
     def to_urn(self):
         """Generate a RFC 3187 URN.
@@ -300,8 +315,8 @@ def _isbn_cleanse(isbn, checksum=True):
     :rtype: ``str``
     :return: ISBN with hyphenation removed, including when called with a SBN
     :raise TypeError: ``isbn`` is not a ``str`` type
-    :raise ValueError: Incorrect length for ``isbn``
-    :raise ValueError: Incorrect SBN or ISBN formatting
+    :raise IsbnError: Incorrect length for ``isbn``
+    :raise IsbnError: Incorrect SBN or ISBN formatting
 
     """
     try:
@@ -309,27 +324,26 @@ def _isbn_cleanse(isbn, checksum=True):
     except AttributeError:
         raise TypeError('ISBN must be a string, received %r' % isbn)
     if not isbn[:-1].isdigit():
-        raise ValueError('Invalid ISBN string(non-digit parts)')
+        raise IsbnError('non-digit parts')
     if checksum:
         if len(isbn) == 9:
             isbn = "0" + isbn
         if len(isbn) == 10:
             if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
-                raise ValueError('Invalid ISBN-10 string(non-digit or X '
-                                 'checksum)')
+                raise IsbnError('non-digit or X checksum')
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
-                raise ValueError('Invalid ISBN-13 string(non-digit checksum)')
+                raise IsbnError('non-digit checksum')
         else:
-            raise ValueError('ISBN must be either 10 or 13 characters long')
+            raise IsbnError('ISBN must be either 10 or 13 characters long')
     else:
         if len(isbn) == 8:
             isbn = '0' + isbn
         if not isbn[-1].isdigit():
-            raise ValueError('Invalid ISBN string(non-digit parts)')
+            raise IsbnError('non-digit parts')
         if not len(isbn) in (9, 12):
-            raise ValueError('ISBN must be either 9 or 12 characters long '
-                             'without checksum')
+            raise IsbnError('ISBN must be either 9 or 12 characters long '
+                            'without checksum')
     return isbn
 
 
@@ -373,7 +387,7 @@ def convert(isbn, code='978'):
     :param str code: EAN Bookland code
     :rtype: ``str``
     :return: Converted ISBN-10 or ISBN-13
-    :raise ValueError: When ISBN-13 isn't a Bookland "978" ISBN
+    :raise IsbnError: When ISBN-13 isn't convertible to an ISBN-10
 
     """
     isbn = _isbn_cleanse(isbn)
@@ -384,7 +398,7 @@ def convert(isbn, code='978'):
         if isbn.startswith('978'):
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
-            raise ValueError('Only ISBN-13s with 978 Bookland code can be '
+            raise IsbnError('Only ISBN-13s with 978 Bookland code can be '
                              'converted to ISBN-10.')
 
 

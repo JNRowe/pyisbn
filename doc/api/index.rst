@@ -12,6 +12,16 @@ Class based access
    isbn13
    sbn
 
+Exceptions
+----------
+
+.. autoexception:: pyisbn.CountryError
+
+.. autoexception:: pyisbn.IsbnError
+
+.. autoexception:: pyisbn.SiteError
+
+
 Function based access
 ---------------------
 
