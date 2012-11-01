@@ -29,6 +29,7 @@ Contents
 
    install
    api/index
+   release
 
 Indices and tables
 ==================
