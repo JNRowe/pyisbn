@@ -144,7 +144,7 @@ class Isbn(object):
         """Generate a link to an online book site.
 
         :param str site: Site to create link to
-        :param str country: Country specific version of `site`
+        :param str country: Country specific version of ``site``
         :rtype: ``str``
         :return: URL on ``site`` for book
         :raise SiteError: Unknown site value
