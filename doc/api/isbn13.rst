@@ -1,4 +1,6 @@
+.. currentmodule:: pyisbn
+
 Handling ISBN-13
 ================
 
-.. autoclass:: pyisbn.Isbn13
+.. autoclass:: Isbn13

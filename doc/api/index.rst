@@ -1,3 +1,5 @@
+.. currentmodule:: pyisbn
+
 API documentation
 =================
 
