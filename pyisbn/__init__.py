@@ -76,7 +76,7 @@ class Isbn(object):
 
     """Class for representing ISBN objects."""
 
-    __slots__ = ('_isbn', 'isbn')
+    __slots__ = ('__weakref__', '_isbn', 'isbn')
 
     def __init__(self, isbn):
         """Initialise a new ``Isbn`` object.
