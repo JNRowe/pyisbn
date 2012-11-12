@@ -53,8 +53,7 @@ or to process ISBNs using the object pattern use::
     >>> print(Permutation_City)
     ISBN 1-85798-218-5
 
-All independent functions contain hopefully useful docstrings with
-``doctest``-based examples.
+All independent functions and classes contain (hopefully) useful docstrings.
 
 API Stability
 -------------
