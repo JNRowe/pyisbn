@@ -249,7 +249,7 @@ class Sbn(Isbn10):
         :return: String to recreate ``Sbn`` object
 
         """
-        return 'Sbn(%r)' % self.isbn[1:]
+        return '%s(%r)' % (self.__class__.__name__, self.isbn[1:])
 
     def calculate_checksum(self):
         """Calculate SBN checksum.
