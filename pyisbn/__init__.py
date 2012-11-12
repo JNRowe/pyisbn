@@ -172,7 +172,7 @@ class Isbn(object):
                 'advancedSearch.do?buttonClicked=2&isbn=%s' % self.isbn
         elif site == 'whsmith':
             return 'http://www.whsmith.co.uk/CatalogAndSearch/' \
-                   'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
+                'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
         else:
             raise SiteError(site)
 
@@ -381,8 +381,8 @@ def convert(isbn, code='978'):
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
     :note: No attempt to hyphenate converted ISBNs is made, because the
-        specification requires that *any* hyphenation must be correct but allows
-        ISBNs without hyphenation.
+        specification requires that *any* hyphenation must be correct but
+        allows ISBNs without hyphenation.
 
     :param str isbn: SBN, ISBN-10 or ISBN-13
     :param str code: EAN Bookland code
