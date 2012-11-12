@@ -52,7 +52,7 @@ books in their collection.
 :version: %s
 :author: `%s <mailto:%s>`__
 :copyright: %s
-:status: WIP
+:status: Stable
 :license: %s
 """ % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
 
