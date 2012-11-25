@@ -31,7 +31,7 @@ extensions = \
     ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
                                       'ifconfig', 'intersphinx', 'todo',
                                       'viewcode']] \
-    + ['sphinxcontrib.%s' % ext for ext in []]
+    + ["sphinxcontrib.%s" % ext for ext in ['cheeseshop']]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']

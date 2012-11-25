@@ -1,4 +1,6 @@
+.. currentmodule:: pyisbn
+
 Handling SBNs
 =============
 
-.. autoclass:: pyisbn.Sbn
+.. autoclass:: Sbn

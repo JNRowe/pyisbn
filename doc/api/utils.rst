@@ -1,8 +1,10 @@
+.. currentmodule:: pyisbn
+
 Functions for handling ISBNs
 ============================
 
-.. autofunction:: pyisbn.calculate_checksum
+.. autofunction:: calculate_checksum
 
-.. autofunction:: pyisbn.convert
+.. autofunction:: convert
 
-.. autofunction:: pyisbn.validate
+.. autofunction:: validate

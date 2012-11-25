@@ -21,7 +21,8 @@ from expecter import expect
 from nose2.tools import params
 
 
-from pyisbn import (_isbn_cleanse, calculate_checksum, convert, validate)
+from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
+                    validate)
 from test_data import TEST_BOOKS
 
 
@@ -48,18 +49,18 @@ def test__isbn_cleanse_invalid_type():
     (False, 'ISBN must be either 9 or 12 characters long without checksum'),
 )
 def test__isbn_cleanse_invalid_length(checksum, message):
-    with expect.raises(ValueError, message):
+    with expect.raises(IsbnError, message):
         _isbn_cleanse('0-123', checksum=checksum)
 
 
 @params(
-    ('0-x4343', 'Invalid ISBN string(non-digit parts)'),
-    ('012345678-b', 'Invalid ISBN-10 string(non-digit or X checksum)'),
-    ('012345678901b', 'Invalid ISBN-13 string(non-digit checksum)'),
-    ('xxxxxxxxxxxx1', 'Invalid ISBN string(non-digit parts)'),
+    ('0-x4343', 'non-digit parts'),
+    ('012345678-b', 'non-digit or X checksum'),
+    ('012345678901b', 'non-digit checksum'),
+    ('xxxxxxxxxxxx1', 'non-digit parts'),
 )
 def test__isbn_cleanse_invalid(isbn, message):
-    with expect.raises(ValueError, message):
+    with expect.raises(IsbnError, message):
         _isbn_cleanse(isbn)
 
 
@@ -74,7 +75,7 @@ def test_convert(isbn):
 
 
 def test_convert_invalid():
-    with expect.raises(ValueError,
+    with expect.raises(IsbnError,
                        'Only ISBN-13s with 978 Bookland code can be converted '
                        'to ISBN-10.'):
         convert('0000000000000')

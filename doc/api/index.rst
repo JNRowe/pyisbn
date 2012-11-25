@@ -1,3 +1,5 @@
+.. currentmodule:: pyisbn
+
 API documentation
 =================
 
@@ -11,6 +13,16 @@ Class based access
    isbn10
    isbn13
    sbn
+
+Exceptions
+----------
+
+.. autoexception:: pyisbn.CountryError
+
+.. autoexception:: pyisbn.IsbnError
+
+.. autoexception:: pyisbn.SiteError
+
 
 Function based access
 ---------------------

@@ -1,4 +1,6 @@
+.. currentmodule:: pyisbn
+
 Handling ISBN-10
 ================
 
-.. autoclass:: pyisbn.Isbn10
+.. autoclass:: Isbn10
