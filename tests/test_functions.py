@@ -23,7 +23,7 @@ from nose2.tools import params
 
 from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
                     validate)
-from test_data import TEST_BOOKS
+from tests.test_data import TEST_BOOKS
 
 
 @params(*TEST_BOOKS.values())
