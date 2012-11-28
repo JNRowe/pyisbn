@@ -7,6 +7,6 @@ python:
   - 3.2
   - 3.3
 install:
-  - pip install --use-mirrors expecter nose2
+  - pip install --use-mirrors -r extra/requirements-test.txt
   - pip install --use-mirrors .
 script: nose2 -vv tests
