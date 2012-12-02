@@ -1,7 +1,7 @@
 #
-#
+# coding=utf-8
 """pyisbn - A module for working with 10- and 13-digit ISBNs"""
-# Copyright (C) 2007-2012  James Rowe
+# Copyright © 2008, 2009, 2010, 2011, 2012  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ from pyisbn import _version
 __version__ = _version.dotted
 __date__ = _version.date
 __author__ = 'James Rowe <jnrowe@gmail.com>'
-__copyright__ = 'Copyright (C) 2007-2012  James Rowe'
+__copyright__ = 'Copyright © 2008, 2009, 2010, 2011, 2012  James Rowe'
 __license__ = 'GNU General Public License Version 3'
 __credits__ = ''
 __history__ = 'See git repository'
