@@ -1,3 +1,4 @@
+include COPYING
 include NEWS.rst
 include README.rst
 
@@ -7,4 +8,4 @@ include doc/Makefile
 include doc/.templates/layout.html
 prune doc/.build
 
-include test/*.py
+recursive-include tests *.py
