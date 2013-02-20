@@ -8,4 +8,6 @@ include doc/Makefile
 include doc/.templates/layout.html
 prune doc/.build
 
+include extra/tool.py
+
 recursive-include tests *.py
