@@ -1,0 +1,7 @@
+[run]
+branch = True
+omit =
+    pyisbn/_version.py
+
+[report]
+precision = 2
