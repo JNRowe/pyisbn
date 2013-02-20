@@ -1,7 +1,7 @@
 #! /usr/bin/python -tt
 # coding=utf-8
 """tool - A simple pyisbn interface for the command line"""
-# Copyright © 2013  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007, 2008, 2009, 2010, 2011, 2012, 2013  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
