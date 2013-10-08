@@ -350,6 +350,7 @@ def _isbn_cleanse(isbn, checksum=True):
     :raise IsbnError: Incorrect SBN or ISBN formatting
 
     """
+
     if not isinstance(isbn, string_types):
         raise TypeError('ISBN must be a string, received %r' % isbn)
 
