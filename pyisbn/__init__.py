@@ -321,7 +321,8 @@ def _isbn_cleanse(isbn, checksum=True):
 
     """
     try:
-        isbn = isbn.replace('-', '')
+        for dash in ('-','-','–'):
+            isbn = isbn.replace(dash, '')
     except AttributeError:
         raise TypeError('ISBN must be a string, received %r' % isbn)
     if not isbn[:-1].isdigit():
