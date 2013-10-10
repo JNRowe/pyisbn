@@ -404,7 +404,7 @@ def convert(isbn, code='978'):
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
             raise IsbnError('Only ISBN-13s with 978 Bookland code can be '
-                             'converted to ISBN-10.')
+                            'converted to ISBN-10.')
 
 
 def validate(isbn):
