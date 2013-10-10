@@ -166,7 +166,7 @@ class Isbn(object):
         elif site == 'google':
             return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
         elif site == 'isbndb':
-            return 'http://isbndb.com/search-all.html?kw=%s' % self.isbn
+            return 'http://isbndb.com/search/all?query=%s' % self.isbn
         elif site == 'worldcat':
             return 'http://worldcat.org/isbn/%s' % self.isbn
         elif site == 'waterstones':

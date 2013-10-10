@@ -79,7 +79,7 @@ class TestIsbn(TestCase):
 
     @params(
         ('google', 'http://books.google.com/books?vid=isbn:0071148167'),
-        ('isbndb', 'http://isbndb.com/search-all.html?kw=0071148167'),
+        ('isbndb', 'http://isbndb.com/search/all?query=0071148167'),
         ('worldcat', 'http://worldcat.org/isbn/0071148167'),
         ('waterstones',
          'http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167'),
