@@ -25,6 +25,7 @@ Contents
    install
    api/index
    faq
+   fun
    release
 
 Indices and tables
