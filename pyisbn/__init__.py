@@ -163,6 +163,8 @@ class Isbn(object):
             return ('http://www.amazon.%s/s'
                     '?search-alias=stripbooks&field-isbn=%s'
                     % (country, self.isbn))
+        elif site == 'copac':
+            return 'http://copac.ac.uk/search?isn=%s' % self.isbn
         elif site == 'google':
             return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
         elif site == 'isbndb':

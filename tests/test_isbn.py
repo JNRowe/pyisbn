@@ -78,6 +78,7 @@ class TestIsbn(TestCase):
             Isbn('0071148167').to_url(country='zh')
 
     @params(
+        ('copac', 'http://copac.ac.uk/search?isn=0071148167'),
         ('google', 'http://books.google.com/books?vid=isbn:0071148167'),
         ('isbndb', 'http://isbndb.com/search/all?query=0071148167'),
         ('worldcat', 'http://worldcat.org/isbn/0071148167'),
