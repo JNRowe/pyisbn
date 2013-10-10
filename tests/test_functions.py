@@ -29,14 +29,14 @@ from tests.test_data import TEST_BOOKS
 @params(*TEST_BOOKS.values())
 def test__isbn_cleanse_sbn(isbn):
     if isbn.startswith('0'):
-        expect(_isbn_cleanse(isbn[1:])) == isbn
-        expect(_isbn_cleanse(isbn[1:-1], False)) == isbn[:-1]
+        expect(_isbn_cleanse(isbn[1:])) == isbn.replace('-', '')
+        expect(_isbn_cleanse(isbn[1:-1], False)) == isbn.replace('-', '')[:-1]
 
 
 @params(*TEST_BOOKS.values())
 def test__isbn_cleanse_isbn(isbn):
-    expect(_isbn_cleanse(isbn)) == isbn
-    expect(_isbn_cleanse(isbn[:-1], False)) == isbn[:-1]
+    expect(_isbn_cleanse(isbn)) == isbn.replace('-', '')
+    expect(_isbn_cleanse(isbn[:-1], False)) == isbn.replace('-', '')[:-1]
 
 
 def test__isbn_cleanse_invalid_type():
