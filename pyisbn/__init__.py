@@ -56,6 +56,27 @@ books in their collection.
 :license: %s
 """ % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
 
+URL_MAP = {
+    'amazon': (
+        ('http://www.amazon.%(tld)s/s'
+         '?search-alias=stripbooks&field-isbn=%(isbn)s'),
+        {
+            'de': None,
+            'fr': None,
+            'jp': None,
+            'uk': 'co.uk',
+            'us': 'com',
+        }),
+    'copac': 'http://copac.ac.uk/search?isn=%(isbn)s',
+    'google': 'http://books.google.com/books?vid=isbn:%(isbn)s',
+    'isbndb': 'http://isbndb.com/search/all?query=%(isbn)s',
+    'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
+    'waterstones': ('http://www.waterstones.com/waterstonesweb/'
+                    'advancedSearch.do?buttonClicked=2&isbn=%(isbn)s'),
+    'whsmith': ('http://www.whsmith.co.uk/CatalogAndSearch/'
+                'SearchWithinCategory.aspx?as_ISBN=%(isbn)s')
+}
+
 
 class CountryError(ValueError):
 
@@ -151,34 +172,23 @@ class Isbn(object):
         :raise CountryError: Unknown country value
 
         """
-        if site == 'amazon':
-            if country in ('de', 'fr', 'jp'):
-                pass
-            elif country == 'uk':
-                country = 'co.uk'
-            elif country == 'us':
-                country = 'com'
-            else:
-                raise CountryError(country)
-            return ('http://www.amazon.%s/s'
-                    '?search-alias=stripbooks&field-isbn=%s'
-                    % (country, self.isbn))
-        elif site == 'copac':
-            return 'http://copac.ac.uk/search?isn=%s' % self.isbn
-        elif site == 'google':
-            return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
-        elif site == 'isbndb':
-            return 'http://isbndb.com/search/all?query=%s' % self.isbn
-        elif site == 'worldcat':
-            return 'http://worldcat.org/isbn/%s' % self.isbn
-        elif site == 'waterstones':
-            return 'http://www.waterstones.com/waterstonesweb/' \
-                'advancedSearch.do?buttonClicked=2&isbn=%s' % self.isbn
-        elif site == 'whsmith':
-            return 'http://www.whsmith.co.uk/CatalogAndSearch/' \
-                'SearchWithinCategory.aspx?as_ISBN=%s' % self.isbn
-        else:
+        try:
+            try:
+                url, tlds = URL_MAP[site]
+            except ValueError:
+                tlds = None
+                url = URL_MAP[site]
+        except KeyError:
             raise SiteError(site)
+        inject = {'isbn': self.isbn}
+        if tlds:
+            if not country in tlds:
+                raise CountryError(country)
+            tld = tlds[country]
+            if not tld:
+                tld = country
+            inject['tld'] = tld
+        return url % inject
 
     def to_urn(self):
         """Generate a RFC 3187 URN.
