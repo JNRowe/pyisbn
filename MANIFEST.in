@@ -8,6 +8,7 @@ include doc/Makefile
 include doc/.templates/layout.html
 prune doc/.build
 
+include extra/_pyisbn
 include extra/requirements-*.txt
 include extra/tool.py
 
