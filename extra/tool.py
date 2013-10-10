@@ -23,7 +23,7 @@
 import argparse
 import sys
 
-from pyisbn import (Isbn, _version)
+from pyisbn import (Isbn, URL_MAP, _version)
 
 
 def isbn_typecheck(string):
@@ -60,7 +60,7 @@ def main():
          help='generate checksum')
     parg('-x', '--convert', help='convert between 10- and 13-digit types')
     commands.add_argument('-u', '--to-url',
-                          choices=('amazon', 'google', 'isbndb', 'worldcat'),
+                          choices=sorted(URL_MAP.keys()),
                           help='generate URL')
     parg('-n', '--to-urn', help='generate RFC 3187 URN')
     parser.add_argument('isbn', type=isbn_typecheck, nargs='+',
