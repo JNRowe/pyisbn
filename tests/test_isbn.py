@@ -66,9 +66,9 @@ class TestIsbn(TestCase):
         expect(Isbn(isbn).validate()) == result
 
     @params(
-        ('us', 'http://amazon.com/dp/0071148167'),
-        ('uk', 'http://amazon.co.uk/dp/0071148167'),
-        ('de', 'http://amazon.de/dp/0071148167'),
+        ('us', 'http://www.amazon.com/s?search-alias=stripbooks&field-isbn=0071148167'),
+        ('uk', 'http://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
+        ('de', 'http://www.amazon.de/s?search-alias=stripbooks&field-isbn=0071148167'),
     )
     def test_to_url(self, country, result):
         expect(Isbn('0071148167').to_url(country=country)) == result

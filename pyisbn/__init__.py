@@ -160,7 +160,9 @@ class Isbn(object):
                 country = 'com'
             else:
                 raise CountryError(country)
-            return 'http://amazon.%s/dp/%s' % (country, self.isbn)
+            return ('http://www.amazon.%s/s'
+                    '?search-alias=stripbooks&field-isbn=%s'
+                    % (country, self.isbn))
         elif site == 'google':
             return 'http://books.google.com/books?vid=isbn:%s' % self.isbn
         elif site == 'isbndb':
