@@ -51,6 +51,14 @@ def test__isbn_cleanse_unicode_dash(isbn):
     expect(_isbn_cleanse(isbn)) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
+@params(
+    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
+    '978-0-385-08695-0',
+)
+def test__isbn_cleanse_reflect_type(isbn):
+    expect(type(_isbn_cleanse(isbn))) == type(isbn)
+
+
 def test__isbn_cleanse_invalid_type():
     with expect.raises(TypeError, "ISBN must be a string, received 2"):
         _isbn_cleanse(2)
