@@ -17,6 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import unicodedata
+
 from expecter import expect
 from nose2.tools import params
 
@@ -39,10 +41,11 @@ def test__isbn_cleanse_isbn(isbn):
     expect(_isbn_cleanse(isbn[:-1], False)) == isbn.replace('-', '')[:-1]
 
 
+# See tests.test_regressions.test_issue_7_unistr
 @params(
-    '978–1–84724–253–2',
-    '978—0—385—08695—0',
-    '978―0199564095',
+    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
+    unicodedata.lookup('EM DASH').join(['978', '0', '385', '08695', '0']),
+    unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
 )
 def test__isbn_cleanse_unicode_dash(isbn):
     expect(_isbn_cleanse(isbn)) == "".join(filter(lambda s: s.isdigit(), isbn))

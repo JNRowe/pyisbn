@@ -56,6 +56,22 @@ books in their collection.
 :license: %s
 """ % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
 
+import unicodedata
+
+from sys import version_info
+
+PY2 = version_info[0] == 2
+
+if PY2:
+    string_types = (str, unicode)
+else:
+    string_types = (str, )
+    unicode = str
+
+#: Dash types to accept, and scrub, in ISBN inputs
+DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
+                                          'HORIZONTAL BAR')]
+
 URL_MAP = {
     'amazon': (
         ('http://www.amazon.%(tld)s/s'
@@ -334,11 +350,12 @@ def _isbn_cleanse(isbn, checksum=True):
     :raise IsbnError: Incorrect SBN or ISBN formatting
 
     """
-    try:
-        for dash in ['-', '–', '—', '―']:
-            isbn = isbn.replace(dash, '')
-    except AttributeError:
+    if not isinstance(isbn, string_types):
         raise TypeError('ISBN must be a string, received %r' % isbn)
+
+    for dash in DASHES:
+        isbn = isbn.replace(dash, unicode())
+
     if not isbn[:-1].isdigit():
         raise IsbnError('non-digit parts')
     if checksum:
@@ -360,7 +377,7 @@ def _isbn_cleanse(isbn, checksum=True):
         if not len(isbn) in (9, 12):
             raise IsbnError('ISBN must be either 9 or 12 characters long '
                             'without checksum')
-    return isbn
+    return str(isbn)
 
 
 def calculate_checksum(isbn):
