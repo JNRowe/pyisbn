@@ -70,7 +70,7 @@ else:
 
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
-                                          'HORIZONTAL BAR')]
+                                          'HORIZONTAL BAR', 'MIDDLE DOT')]
 
 URL_MAP = {
     'amazon': (
