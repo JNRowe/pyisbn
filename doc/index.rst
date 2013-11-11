@@ -26,6 +26,7 @@ Contents
    api/index
    faq
    fun
+   alternatives
    release
 
 Indices and tables
