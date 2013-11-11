@@ -64,6 +64,35 @@ be made.
 When ``pyisbn`` 1.0 is released the API will be frozen, and any changes which
 aren't backwards compatible will force a major version bump.
 
+Contributors
+------------
+
+I'd like to thank the following people who have contributed to ``pyisbn``.
+
+Patches
+'''''''
+
+* Christopher Wells
+
+Bug reports
+'''''''''''
+
+* James Gaffney
+* hbc (bcho)
+* Wen Heping
+* Max Klein (notconfusing)
+* Matt Leighy
+* Randy Syring (rsyring)
+* Stephen Thorne
+
+Ideas
+'''''
+
+* Kevin Simmons
+
+If I've forgotten to include your name I wholeheartedly apologise.  Just drop me
+a mail_ and I'll update the list!
+
 Bugs
 ----
 
