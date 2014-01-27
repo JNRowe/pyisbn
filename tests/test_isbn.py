@@ -17,7 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from unittest import TestCase
+from unittest import (TestCase, skipIf)
+from sys import version_info
 
 from expecter import expect
 from nose2.tools import params
@@ -40,6 +41,21 @@ class TestIsbn(TestCase):
     )
     def test___str__(self, isbn):
         expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
+
+    @skipIf(version_info < (2, 6),
+            "format() not supported with this Python version")
+    @params(
+        ('9780521871723', '', 'ISBN 9780521871723'),
+        ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
+        ('3540009787', 'url',
+         'http://www.amazon.com/s?search-alias=stripbooks&field-isbn='
+         '3540009787'),
+        ('3540009787', 'url:amazon:uk',
+         'http://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn='
+         '3540009787'),
+    )
+    def test___format__(self, isbn, format_spec, result):
+        expect(format(Isbn(isbn), format_spec)) == result
 
     @params(
         ('978-052-187-1723', '3'),

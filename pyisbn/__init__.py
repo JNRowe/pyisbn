@@ -146,6 +146,33 @@ class Isbn(object):
         """
         return "ISBN %s" % self._isbn
 
+    def __format__(self, format_spec):
+        """Extended pretty printing for ISBN strings.
+
+        :param str format_spec: Coordinate formatting system to use
+        :rtype: ``str``
+        :return: Human readable string representation of ``Isbn`` object
+        :raise ValueError: Unknown value for ``format_spec``
+
+        """
+        text = []
+        if not format_spec:  # default format calls set format_spec to ''
+            return str(self)
+        elif format_spec == 'url':
+            return self.to_url()
+        elif format_spec.startswith('url:'):
+            parts = format_spec.split(':')[1:]
+            site = parts[0]
+            if len(parts) > 1:
+                country = parts[1]
+            else:
+                country = 'us'
+            return self.to_url(site, country)
+        elif format_spec == 'urn':
+            return self.to_urn()
+        else:
+            raise ValueError('Unknown format_spec %r' % format_spec)
+
     def calculate_checksum(self):
         """Calculate ISBN checksum.
 
