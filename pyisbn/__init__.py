@@ -149,7 +149,7 @@ class Isbn(object):
     def __format__(self, format_spec):
         """Extended pretty printing for ISBN strings.
 
-        :param str format_spec: Coordinate formatting system to use
+        :param str format_spec: Extended format to use
         :rtype: ``str``
         :return: Human readable string representation of ``Isbn`` object
         :raise ValueError: Unknown value for ``format_spec``
