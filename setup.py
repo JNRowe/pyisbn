@@ -46,7 +46,7 @@ setup(
     license=pyisbn.__license__,
     keywords='ISBN ISBN-10 ISBN-13 SBN',
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 6 - Mature',
         'Intended Audience :: Developers',
         'Intended Audience :: Other Audience',
         'License :: OSI Approved',

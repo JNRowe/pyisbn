@@ -6,6 +6,11 @@ User-visible changes
 
 .. contents::
 
+1.0.0 - 2014-01-31
+------------------
+
+* This package is, and should, only be receiving bug fixes at this point
+
 0.6.0 - 2011-05-13
 ------------------
 
