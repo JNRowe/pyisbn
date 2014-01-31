@@ -1,12 +1,13 @@
+include CONTRIBUTING.rst
 include COPYING
 include NEWS.rst
 include README.rst
+include .coveragerc
+include nose2.cfg
 
 recursive-include doc *.rst
 include doc/conf.py
-include doc/Makefile
-include doc/.templates/layout.html
-prune doc/.build
+include doc/wordlist.txt
 
 include extra/_pyisbn
 include extra/requirements-*.txt
