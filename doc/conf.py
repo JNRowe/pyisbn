@@ -20,7 +20,20 @@
 import os
 import sys
 
-from subprocess import (CalledProcessError, check_output)
+from subprocess import CalledProcessError
+try:
+    from subprocess import check_output
+except ImportError:
+    from subprocess import (PIPE, Popen)
+
+    def check_output(cmd):
+        process = Popen(cmd, stdout=PIPE)
+        out, _ = process.communicate()
+        ret = process.wait()
+        if ret:
+            raise CalledProcessError(ret, cmd[0])
+        return out
+
 
 root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.insert(0, root_dir)
