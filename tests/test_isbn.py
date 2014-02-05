@@ -17,8 +17,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from unittest import (TestCase, skipIf)
+from unittest import TestCase
 from sys import version_info
+
+if version_info > (2, 7):
+    from unittest import skipIf
+else:
+    from unittest2 import skipIf
 
 from expecter import expect
 from nose2.tools import params
