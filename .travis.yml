@@ -5,6 +5,12 @@ python:
   - 3.2
   - 3.3
 install:
-  - pip install --use-mirrors -r extra/requirements-test.txt
-  - pip install --use-mirrors .
+  # We don't want to support external fetches, but the 2.6 case is forcing it on
+  # us for argparse
+  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then
+      pip install --allow-external argparse -r extra/requirements-test.txt;
+    else
+      pip install -r extra/requirements-test.txt;
+    fi
+  - pip install .
 script: nose2 tests
