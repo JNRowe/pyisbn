@@ -10,6 +10,7 @@ include doc/conf.py
 include doc/wordlist.txt
 
 include extra/_pyisbn
+include extra/doap.rdf
 include extra/requirements-*.txt
 include extra/tool.py
 
