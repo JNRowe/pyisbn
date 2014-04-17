@@ -13,4 +13,6 @@ install:
       pip install -r extra/requirements-test.txt;
     fi
   - pip install .
-script: nose2 tests
+branches:
+  except:
+    - /^play\/.*$/
