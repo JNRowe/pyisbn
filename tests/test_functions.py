@@ -19,8 +19,6 @@
 
 import unicodedata
 
-from expecter import expect
-
 try:
     from unittest2 import TestCase
 except ImportError:
@@ -36,16 +34,17 @@ class TestFunctions(TestCase):
         for isbn in TEST_BOOKS.values():
             with self.subTest(isbn):
                 if isbn.startswith('0'):
-                    expect(_isbn_cleanse(isbn[1:])) == isbn.replace('-', '')
-                    expect(_isbn_cleanse(isbn[1:-1], False)) \
-                        == isbn.replace('-', '')[:-1]
+                    self.assertEqual(_isbn_cleanse(isbn[1:]),
+                                     isbn.replace('-', ''))
+                    self.assertEqual(_isbn_cleanse(isbn[1:-1], False),
+                                     isbn.replace('-', '')[:-1])
 
     def test__isbn_cleanse_isbn(self):
         for isbn in TEST_BOOKS.values():
             with self.subTest(isbn):
-                expect(_isbn_cleanse(isbn)) == isbn.replace('-', '')
-                expect(_isbn_cleanse(isbn[:-1], False)) \
-                    == isbn.replace('-', '')[:-1]
+                self.assertEqual(_isbn_cleanse(isbn), isbn.replace('-', ''))
+                self.assertEqual(_isbn_cleanse(isbn[:-1], False),
+                                 isbn.replace('-', '')[:-1])
 
     # See tests.test_regressions.test_issue_7_unistr
     def test__isbn_cleanse_unicode_dash(self):
@@ -58,8 +57,8 @@ class TestFunctions(TestCase):
                                                                '0199564095']),
                 ]:
             with self.subTest(isbn):
-                expect(_isbn_cleanse(isbn)) \
-                    == "".join(filter(lambda s: s.isdigit(), isbn))
+                self.assertEqual(_isbn_cleanse(isbn),
+                                 "".join(filter(lambda s: s.isdigit(), isbn)))
 
     def test__isbn_cleanse_reflect_type(self):
         for isbn in [
@@ -68,10 +67,11 @@ class TestFunctions(TestCase):
                     '978-0-385-08695-0',
                 ]:
             with self.subTest(isbn):
-                expect(type(_isbn_cleanse(isbn))) == type(isbn)
+                self.assertEqual(type(_isbn_cleanse(isbn)), type(isbn))
 
     def test__isbn_cleanse_invalid_type(self):
-        with expect.raises(TypeError, "ISBN must be a string, received 2"):
+        with self.assertRaises(TypeError,
+                               msg="ISBN must be a string, received 2"):
             _isbn_cleanse(2)
 
     def test__isbn_cleanse_invalid_length(self):
@@ -81,7 +81,7 @@ class TestFunctions(TestCase):
                         'without checksum'),
                 ]:
             with self.subTest([checksum, message]):
-                with expect.raises(IsbnError, message):
+                with self.assertRaises(IsbnError, msg=message):
                     _isbn_cleanse('0-123', checksum=checksum)
 
     def test__isbn_cleanse_invalid(self):
@@ -93,29 +93,29 @@ class TestFunctions(TestCase):
                     ('0x0000000', 'non-digit parts', False),
                 ]:
             with self.subTest([isbn, message, checksum]):
-                with expect.raises(IsbnError, message):
+                with self.assertRaises(IsbnError, msg=message):
                     _isbn_cleanse(isbn, checksum)
 
     def test_calculate_checksum(self):
         for isbn in TEST_BOOKS.values():
             with self.subTest(isbn):
-                expect(calculate_checksum(isbn[:-1])) == isbn[-1]
+                self.assertEqual(calculate_checksum(isbn[:-1]), isbn[-1])
 
     def test_convert(self):
         for isbn in TEST_BOOKS.values():
             with self.subTest(isbn):
-                expect(convert(convert(isbn))) == isbn.replace('-', '')
+                self.assertEqual(convert(convert(isbn)), isbn.replace('-', ''))
 
     def test_convert_invalid(self):
-        with expect.raises(IsbnError,
-                           'Only ISBN-13s with 978 Bookland code can be '
-                           'converted to ISBN-10.'):
+        with self.assertRaises(IsbnError,
+                               msg='Only ISBN-13s with 978 Bookland code can '
+                                   'be converted to ISBN-10.'):
             convert('0000000000000')
 
     def test_validate(self):
         for isbn in TEST_BOOKS.values():
             with self.subTest(isbn):
-                expect(validate(isbn)) == True
+                self.assertTrue(validate(isbn))
 
     def test_validate_invalid(self):
         for isbn in [
@@ -124,4 +124,4 @@ class TestFunctions(TestCase):
                     '3-456-7890-X',
                 ]:
             with self.subTest(isbn):
-                expect(validate(isbn)) == False
+                self.assertFalse(validate(isbn))

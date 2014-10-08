@@ -19,7 +19,6 @@
 
 import unicodedata
 
-from expecter import expect
 try:
     from unittest2 import TestCase
 except ImportError:
@@ -40,5 +39,5 @@ class TestRegressions(TestCase):
                                                                '0199564095']),
                 ]:
             with self.subTest(isbn):
-                expect(_isbn_cleanse(isbn)) \
-                    == "".join(filter(lambda s: s.isdigit(), isbn))
+                self.assertEqual(_isbn_cleanse(isbn),
+                                 "".join(filter(lambda s: s.isdigit(), isbn)))

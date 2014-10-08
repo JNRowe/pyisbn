@@ -17,7 +17,6 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from expecter import expect
 try:
     from unittest2 import TestCase
 except ImportError:
@@ -28,7 +27,7 @@ from pyisbn import Isbn13
 
 class TestIsbn13(TestCase):
     def test_calculate_checksum(self):
-        expect(Isbn13('978-052-187-1723').calculate_checksum()) == '3'
+        self.assertEqual(Isbn13('978-052-187-1723').calculate_checksum(), '3')
 
     def test_convert(self):
-        expect(Isbn13('9780071148160').convert()) == '0071148167'
+        self.assertEqual(Isbn13('9780071148160').convert(), '0071148167')

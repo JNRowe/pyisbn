@@ -1,4 +1,3 @@
-expecter>=0.2.2
 coverage>=4.4
 green>=2.11
 # Required through to 3.4 because of the .subTest() usage

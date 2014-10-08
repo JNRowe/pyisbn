@@ -34,7 +34,7 @@ class TestIsbn(TestCase):
                     '3540009787',
                 ]:
             with self.subTest(isbn):
-                expect(repr(Isbn(isbn))) == 'Isbn(%r)' % isbn
+                self.assertEqual(repr(Isbn(isbn)), 'Isbn(%r)' % isbn)
 
     def test___str__(self):
         for isbn in [
@@ -43,7 +43,7 @@ class TestIsbn(TestCase):
                     '3540009787',
                 ]:
             with self.subTest(isbn):
-                expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
+                self.assertEqual(str(Isbn(isbn)), 'ISBN %s' % isbn)
 
     @skipIf(version_info < (2, 6),
             "format() not supported with this Python version")
@@ -62,10 +62,11 @@ class TestIsbn(TestCase):
                      'field-isbn=3540009787'),
                 ]:
             with self.subTest([isbn, format_spec, result]):
-                expect(format(Isbn(isbn), format_spec)) == result
+                self.assertEqual(format(Isbn(isbn), format_spec), result)
 
     def test___format__invalid_format_spec(self):
-        with expect.raises(ValueError, "Unknown format_spec 'biscuit'"):
+        with self.assertRaises(ValueError,
+                               msg="Unknown format_spec 'biscuit'"):
             format(Isbn('0071148167'), 'biscuit')
 
     def test_calculate_checksum(self):
@@ -75,7 +76,7 @@ class TestIsbn(TestCase):
                     ('354000978', '7'),
                 ]:
             with self.subTest([isbn, result]):
-                expect(Isbn(isbn).calculate_checksum()) == result
+                self.assertEqual(Isbn(isbn).calculate_checksum(), result)
 
     def test_convert(self):
         for isbn, result in [
@@ -83,7 +84,7 @@ class TestIsbn(TestCase):
                     ('9780071148160', '0071148167'),
                 ]:
             with self.subTest([isbn, result]):
-                expect(Isbn(isbn).convert()) == result
+                self.assertEqual(Isbn(isbn).convert(), result)
 
     def test_validate(self):
         for isbn, result in [
@@ -93,7 +94,7 @@ class TestIsbn(TestCase):
                     ('354000978x', False),
                 ]:
             with self.subTest([isbn, result]):
-                expect(Isbn(isbn).validate()) == result
+                self.assertEqual(Isbn(isbn).validate(), result)
 
     def test_to_url(self):
         for country, result in [
@@ -105,11 +106,11 @@ class TestIsbn(TestCase):
                      '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
                 ]:
             with self.subTest([country, result]):
-                expect(Isbn('0071148167').to_url(country=country)) \
-                   == 'https://www.amazon' + result
+                self.assertEqual(Isbn('0071148167').to_url(country=country),
+                                 'https://www.amazon' + result)
 
     def test_to_url_invalid_country(self):
-        with expect.raises(CountryError, "zh"):
+        with self.assertRaisesRegex(CountryError, "zh"):
             Isbn('0071148167').to_url(country='zh')
 
     def test_to_url_site(self):
@@ -129,11 +130,11 @@ class TestIsbn(TestCase):
                     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
                 ]:
             with self.subTest([site, result]):
-                expect(Isbn('0071148167').to_url(site=site)) == result
+                self.assertEqual(Isbn('0071148167').to_url(site=site), result)
 
     def test_to_url_invalid_site(self):
-        with expect.raises(SiteError, "nosite"):
+        with self.assertRaisesRegex(SiteError, "nosite"):
             Isbn('0071148167').to_url(site='nosite')
 
     def test_to_urn(self):
-        expect(Isbn('0071148167').to_urn()) == 'URN:ISBN:0071148167'
+        self.assertEqual(Isbn('0071148167').to_urn(), 'URN:ISBN:0071148167')
