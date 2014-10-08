@@ -19,7 +19,6 @@
 
 from sys import version_info
 
-from expecter import expect
 from pytest import mark, raises
 
 from pyisbn import (CountryError, Isbn, SiteError)
@@ -30,7 +29,7 @@ from pyisbn import (CountryError, Isbn, SiteError)
     '3540009787',
 ])
 def test___repr__(isbn):
-    expect(repr(Isbn(isbn))) == 'Isbn(%r)' % isbn
+    assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn.replace('-', '')
 
 
 @mark.parametrize('isbn', [
@@ -39,7 +38,7 @@ def test___repr__(isbn):
     '3540009787',
 ])
 def test___str__(isbn):
-    expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
+    assert str(Isbn(isbn)) == 'ISBN %s' % isbn
 
 
 @mark.skipif(version_info < (2, 6),
@@ -58,12 +57,11 @@ def test___str__(isbn):
         '3540009787'),
 ])
 def test___format__(isbn, format_spec, result):
-    expect(format(Isbn(isbn), format_spec)) == result
+    assert format(Isbn(isbn), format_spec) == result
 
 
 def test___format__invalid_format_spec():
-    with expect.raises(ValueError,
-                       "Unknown format_spec 'biscuit'"):
+    with raises(ValueError, message="Unknown format_spec 'biscuit'"):
         format(Isbn('0071148167'), 'biscuit')
 
 
@@ -73,7 +71,7 @@ def test___format__invalid_format_spec():
     ('354000978', '7'),
 ])
 def test_calculate_checksum(isbn, result):
-    expect(Isbn(isbn).calculate_checksum()) == result
+    assert Isbn(isbn).calculate_checksum() == result
 
 
 @mark.parametrize('isbn,result', [
@@ -81,7 +79,7 @@ def test_calculate_checksum(isbn, result):
     ('9780071148160', '0071148167'),
 ])
 def test_convert(isbn, result):
-    expect(Isbn(isbn).convert()) == result
+    assert Isbn(isbn).convert() == result
 
 
 @mark.parametrize('isbn,result', [
@@ -91,7 +89,7 @@ def test_convert(isbn, result):
     ('354000978x', False),
 ])
 def test_validate(isbn, result):
-    expect(Isbn(isbn).validate()) == result
+    assert Isbn(isbn).validate() == result
 
 
 @mark.parametrize('country,result', [
@@ -100,12 +98,12 @@ def test_validate(isbn, result):
     ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
 ])
 def test_to_url(country, result):
-    expect(Isbn('0071148167').to_url(country=country)) \
+    assert Isbn('0071148167').to_url(country=country) \
         == 'https://www.amazon' + result
 
 
 def test_to_url_invalid_country():
-    with expect.raises(CountryError, "zh"):
+    with raises(CountryError, match="zh"):
         Isbn('0071148167').to_url(country='zh')
 
 
@@ -120,13 +118,13 @@ def test_to_url_invalid_country():
     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
 ])
 def test_to_url_site(site, result):
-    expect(Isbn('0071148167').to_url(site=site)) == result
+    assert Isbn('0071148167').to_url(site=site) == result
 
 
 def test_to_url_invalid_site():
-    with expect.raises(SiteError, "nosite"):
+    with raises(SiteError, match="nosite"):
         Isbn('0071148167').to_url(site='nosite')
 
 
 def test_to_urn():
-    expect(Isbn('0071148167').to_urn()) == 'URN:ISBN:0071148167'
+    assert Isbn('0071148167').to_urn() == 'URN:ISBN:0071148167'

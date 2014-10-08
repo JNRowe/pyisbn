@@ -17,14 +17,13 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from expecter import expect
 
 from pyisbn import Isbn13
 
 
 def test_calculate_checksum():
-    expect(Isbn13('978-052-187-1723').calculate_checksum()) == '3'
+    assert Isbn13('978-052-187-1723').calculate_checksum() == '3'
 
 
 def test_convert():
-    expect(Isbn13('9780071148160').convert()) == '0071148167'
+    assert Isbn13('9780071148160').convert() == '0071148167'

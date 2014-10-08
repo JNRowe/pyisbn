@@ -17,14 +17,13 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from expecter import expect
 from pytest import mark
 
 from pyisbn import Sbn
 
 
 def test___repr__():
-    expect(repr(Sbn('521871723'))) == "Sbn('521871723')"
+    assert repr(Sbn('521871723')) == "Sbn('521871723')"
 
 
 @mark.parametrize('sbn,result', [
@@ -32,8 +31,8 @@ def test___repr__():
     ('071148167', '7'),
 ])
 def test_calculate_checksum(sbn, result):
-    expect(Sbn(sbn).calculate_checksum()) == result
+    assert Sbn(sbn).calculate_checksum() == result
 
 
 def test_convert():
-    expect(Sbn('071148167').convert()) == '9780071148160'
+    assert Sbn('071148167').convert() == '9780071148160'
