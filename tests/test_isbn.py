@@ -19,37 +19,32 @@
 
 from sys import version_info
 
-try:
-    from unittest import skipIf
-except ImportError:
-    from unittest2 import skipIf
-
 from expecter import expect
-from nose2.tools import params
+from pytest import mark, raises
 
 from pyisbn import (CountryError, Isbn, SiteError)
 
 
-@params(
+@mark.parametrize('isbn', [
     '9780521871723',
     '3540009787',
-)
+])
 def test___repr__(isbn):
     expect(repr(Isbn(isbn))) == 'Isbn(%r)' % isbn
 
 
-@params(
+@mark.parametrize('isbn', [
     '9780521871723',
     '978-052-187-1723',
     '3540009787',
-)
+])
 def test___str__(isbn):
     expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
 
 
-@skipIf(version_info < (2, 6),
-        "format() not supported with this Python version")
-@params(
+@mark.skipif(version_info < (2, 6),
+             reason="format() not supported with this Python version")
+@mark.parametrize('isbn,format_spec,result', [
     ('9780521871723', '', 'ISBN 9780521871723'),
     ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
     ('3540009787', 'url',
@@ -61,7 +56,7 @@ def test___str__(isbn):
     ('3540009787', 'url:amazon',
         'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
-)
+])
 def test___format__(isbn, format_spec, result):
     expect(format(Isbn(isbn), format_spec)) == result
 
@@ -72,38 +67,38 @@ def test___format__invalid_format_spec():
         format(Isbn('0071148167'), 'biscuit')
 
 
-@params(
+@mark.parametrize('isbn,result', [
     ('978-052-187-1723', '3'),
     ('3540009787', '7'),
     ('354000978', '7'),
-)
+])
 def test_calculate_checksum(isbn, result):
     expect(Isbn(isbn).calculate_checksum()) == result
 
 
-@params(
+@mark.parametrize('isbn,result', [
     ('0071148167', '9780071148160'),
     ('9780071148160', '0071148167'),
-)
+])
 def test_convert(isbn, result):
     expect(Isbn(isbn).convert()) == result
 
 
-@params(
+@mark.parametrize('isbn,result', [
     ('978-052-187-1723', True),
     ('978-052-187-1720', False),
     ('3540009787', True),
     ('354000978x', False),
-)
+])
 def test_validate(isbn, result):
     expect(Isbn(isbn).validate()) == result
 
 
-@params(
+@mark.parametrize('country,result', [
     ('us', '.com/s?search-alias=stripbooks&field-isbn=0071148167'),
     ('uk', '.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
     ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
-)
+])
 def test_to_url(country, result):
     expect(Isbn('0071148167').to_url(country=country)) \
         == 'https://www.amazon' + result
@@ -114,7 +109,7 @@ def test_to_url_invalid_country():
         Isbn('0071148167').to_url(country='zh')
 
 
-@params(
+@mark.parametrize('site,result', [
     ('copac', 'http://copac.jisc.ac.uk/search?isn=0071148167'),
     ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
     ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
@@ -123,7 +118,7 @@ def test_to_url_invalid_country():
     ('whsmith',
      'https://www.whsmith.co.uk/search/go?w=0071148167&af=cat1:books'),
     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
-)
+])
 def test_to_url_site(site, result):
     expect(Isbn('0071148167').to_url(site=site)) == result
 

@@ -394,10 +394,10 @@ def _isbn_cleanse(isbn, checksum=True):
     if not isinstance(isbn, string_types):
         raise TypeError('ISBN must be a string, received %r' % isbn)
 
-    if PY2 and isinstance(isbn, str):
+    if PY2 and isinstance(isbn, str):  # pragma: Python 2
         isbn = unicode(isbn)
         uni_input = False
-    else:
+    else:  # pragma: Python 3
         uni_input = True
 
     for dash in DASHES:
@@ -424,11 +424,11 @@ def _isbn_cleanse(isbn, checksum=True):
         if not len(isbn) in (9, 12):
             raise IsbnError('ISBN must be either 9 or 12 characters long '
                             'without checksum')
-    if PY2 and not uni_input:
+    if PY2 and not uni_input:  # pragma: Python 2
         # Sadly, type ping-pong is required to maintain backwards compatibility
         # with previous pyisbn releases for Python 2 users.
         return str(isbn)
-    else:
+    else:  # pragma: Python 3
         return isbn
 
 

@@ -6,7 +6,6 @@ include CONTRIBUTING.rst
 include COPYING
 include NEWS.rst
 include README.rst
-include nose2.cfg
 
 recursive-include doc *.rst
 include doc/conf.py
