@@ -17,14 +17,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from unittest import TestCase
-
 from expecter import expect
 
 from pyisbn import Isbn10
 
 
-class TestIsbn10(TestCase):
+class TestIsbn10:
     def test_calculate_checksum(self):
         expect(Isbn10('3540009787').calculate_checksum()) == '7'
 

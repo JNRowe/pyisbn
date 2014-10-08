@@ -17,22 +17,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from unittest import TestCase
-
 from expecter import expect
-from nose2.tools import params
+from pytest import mark
 
 from pyisbn import Sbn
 
 
-class TestSbn(TestCase):
+class TestSbn:
     def test___repr__(self):
         expect(repr(Sbn('521871723'))) == "Sbn('521871723')"
 
-    @params(
+    @mark.parametrize('sbn, result', [
         ('07114816', '7'),
         ('071148167', '7'),
-    )
+    ])
     def test_calculate_checksum(self, sbn, result):
         expect(Sbn(sbn).calculate_checksum()) == result
 

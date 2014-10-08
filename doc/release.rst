@@ -12,9 +12,9 @@ Release HOWTO
 Test
 ----
 
-In the general case tests can be run via ``nose2``::
+In the general case tests can be run via pytest_::
 
-    $ nose2 -vv tests
+    $ py.test tests
 
 When preparing a release it is important to check that :mod:`pyisbn` works with
 all currently supported Python versions, and that the documentation is correct.
@@ -45,3 +45,5 @@ Fetch the uploaded tarballs, and check for errors.
 
 You should also perform test installations from PyPI, to check the experience
 :mod:`pyisbn` users will have.
+
+.. _pytest: http://pytest.org/

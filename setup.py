@@ -23,8 +23,21 @@ except ImportError:  # Python2.4
     from email.Utils import parseaddr  # NOQA
 
 from setuptools import setup
+from setuptools.command.test import test
 
 import pyisbn
+
+
+class PytestTest(test):
+    def finalize_options(self):
+        test.finalize_options(self)
+        self.test_args = ['tests/', ]
+        self.test_suite = True
+
+    def run_tests(self):
+        from sys import exit
+        from pytest import main
+        exit(main(self.test_args))
 
 
 author, author_email = parseaddr(pyisbn.__author__)
@@ -43,6 +56,8 @@ setup(
     maintainer_email=author_email,
     url="https://github.com/JNRowe/pyisbn/",
     packages=['pyisbn', ],
+    tests_require=['pytest'],
+    cmdclass={'test': PytestTest},
     license=pyisbn.__license__,
     keywords='ISBN ISBN-10 ISBN-13 SBN',
     classifiers=[

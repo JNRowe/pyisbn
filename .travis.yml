@@ -6,14 +6,10 @@ python:
   - 3.3
   - 3.4
 install:
-  # We don't want to support external fetches, but the 2.6 case is forcing it on
-  # us for argparse
-  - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then
-      pip install --allow-external argparse -r extra/requirements-test.txt;
-    else
-      pip install -r extra/requirements-test.txt;
-    fi
+  - pip install -r extra/requirements-test.txt
   - pip install .
+script:
+  - py.test tests
 branches:
   except:
     - /^play\/.*$/
