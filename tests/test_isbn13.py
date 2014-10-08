@@ -18,13 +18,17 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 from expecter import expect
+try:
+    from unittest2 import TestCase
+except ImportError:
+    from unittest import TestCase
 
 from pyisbn import Isbn13
 
 
-def test_calculate_checksum():
-    expect(Isbn13('978-052-187-1723').calculate_checksum()) == '3'
+class TestIsbn13(TestCase):
+    def test_calculate_checksum(self):
+        expect(Isbn13('978-052-187-1723').calculate_checksum()) == '3'
 
-
-def test_convert():
-    expect(Isbn13('9780071148160').convert()) == '0071148167'
+    def test_convert(self):
+        expect(Isbn13('9780071148160').convert()) == '0071148167'

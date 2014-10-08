@@ -12,9 +12,9 @@ Release HOWTO
 Test
 ----
 
-In the general case tests can be run via :pypi:`nose2`::
+In the general case tests can be run via :pypi:`green`::
 
-    $ nose2 tests
+    $ green tests
 
 When preparing a release it is important to check that :mod:`pyisbn` works with
 all currently supported Python versions, and that the documentation is correct.

@@ -20,17 +20,25 @@
 import unicodedata
 
 from expecter import expect
-from nose2.tools import params
+try:
+    from unittest2 import TestCase
+except ImportError:
+    from unittest import TestCase
 
 from pyisbn import _isbn_cleanse
 
 
-# The lookup hoop jumping here is to make it easier to generate native Unicode
-# types on the various supported Python versions.
-@params(
-    '978-1-84724-253-2',
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
-    unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
-)
-def test_issue_7_unistr(isbn):
-    expect(_isbn_cleanse(isbn)) == "".join(filter(lambda s: s.isdigit(), isbn))
+class TestRegressions(TestCase):
+    def test_issue_7_unistr(self):
+        # The lookup hoop jumping here is to make it easier to generate native
+        # Unicode types on the various supported Python versions.
+        for isbn in [
+                    '978-1-84724-253-2',
+                    unicodedata.lookup('EN DASH').join(['978', '1', '84724',
+                                                        '253', '2']),
+                    unicodedata.lookup('HORIZONTAL BAR').join(['978',
+                                                               '0199564095']),
+                ]:
+            with self.subTest(isbn):
+                expect(_isbn_cleanse(isbn)) \
+                    == "".join(filter(lambda s: s.isdigit(), isbn))
