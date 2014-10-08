@@ -19,8 +19,7 @@
 
 from sys import version_info
 
-from expecter import expect
-from pytest import mark
+from pytest import (mark, raises)
 
 from pyisbn import (CountryError, Isbn, SiteError)
 
@@ -31,7 +30,7 @@ class TestIsbn:
         '3540009787',
     ])
     def test___repr__(self, isbn):
-        expect(repr(Isbn(isbn))) == 'Isbn(%r)' % isbn
+        assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn
 
     @mark.parametrize('isbn', [
         '9780521871723',
@@ -39,7 +38,7 @@ class TestIsbn:
         '3540009787',
     ])
     def test___str__(self, isbn):
-        expect(str(Isbn(isbn))) == 'ISBN %s' % isbn
+        assert str(Isbn(isbn)) == 'ISBN %s' % isbn
 
     @mark.skipif(version_info < (2, 6),
                  reason="format() not supported with this Python version")
@@ -54,7 +53,7 @@ class TestIsbn:
          '3540009787'),
     ])
     def test___format__(self, isbn, format_spec, result):
-        expect(format(Isbn(isbn), format_spec)) == result
+        assert format(Isbn(isbn), format_spec) == result
 
     @mark.parametrize('isbn, result', [
         ('978-052-187-1723', '3'),
@@ -62,14 +61,14 @@ class TestIsbn:
         ('354000978', '7'),
     ])
     def test_calculate_checksum(self, isbn, result):
-        expect(Isbn(isbn).calculate_checksum()) == result
+        assert Isbn(isbn).calculate_checksum() == result
 
     @mark.parametrize('isbn, result', [
         ('0071148167', '9780071148160'),
         ('9780071148160', '0071148167'),
     ])
     def test_convert(self, isbn, result):
-        expect(Isbn(isbn).convert()) == result
+        assert Isbn(isbn).convert() == result
 
     @mark.parametrize('isbn, result', [
         ('978-052-187-1723', True),
@@ -78,7 +77,7 @@ class TestIsbn:
         ('354000978x', False),
     ])
     def test_validate(self, isbn, result):
-        expect(Isbn(isbn).validate()) == result
+        assert Isbn(isbn).validate() == result
 
     @mark.parametrize('country, result', [
         ('us', 'http://www.amazon.com/s?search-alias=stripbooks&field-isbn=0071148167'),
@@ -86,11 +85,12 @@ class TestIsbn:
         ('de', 'http://www.amazon.de/s?search-alias=stripbooks&field-isbn=0071148167'),
     ])
     def test_to_url(self, country, result):
-        expect(Isbn('0071148167').to_url(country=country)) == result
+        assert Isbn('0071148167').to_url(country=country) == result
 
     def test_to_url_invalid_country(self):
-        with expect.raises(CountryError, "zh"):
+        with raises(CountryError) as err:
             Isbn('0071148167').to_url(country='zh')
+        assert err.value.message == 'zh'
 
     @mark.parametrize('site, result', [
         ('copac', 'http://copac.ac.uk/search?isn=0071148167'),
@@ -103,11 +103,12 @@ class TestIsbn:
          'http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167'),
     ])
     def test_to_url_site(self, site, result):
-        expect(Isbn('0071148167').to_url(site=site)) == result
+        assert Isbn('0071148167').to_url(site=site) == result
 
     def test_to_url_invalid_site(self):
-        with expect.raises(SiteError, "nosite"):
+        with raises(SiteError) as err:
             Isbn('0071148167').to_url(site='nosite')
+        assert err.value.message == "nosite"
 
     def test_to_urn(self):
-        expect(Isbn('0071148167').to_urn()) == 'URN:ISBN:0071148167'
+        assert Isbn('0071148167').to_urn() == 'URN:ISBN:0071148167'

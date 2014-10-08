@@ -19,7 +19,6 @@
 
 import unicodedata
 
-from expecter import expect
 from pytest import mark
 
 from pyisbn import _isbn_cleanse
@@ -33,4 +32,4 @@ from pyisbn import _isbn_cleanse
     unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
 ])
 def test_issue_7_unistr(isbn):
-    expect(_isbn_cleanse(isbn)) == "".join(filter(lambda s: s.isdigit(), isbn))
+    assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
