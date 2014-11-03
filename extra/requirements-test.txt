@@ -1,3 +1,2 @@
-nose2>=0.4.1
-nose2_cov>=1.0a4
+nose2[coverage_plugin]>=0.5.0
 expecter>=0.2.2
