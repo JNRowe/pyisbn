@@ -79,7 +79,6 @@ except CalledProcessError:
 
 # Autodoc extension settings
 autoclass_content = "init"
-autodoc_default_flags = ['members', 'inherited-members']
 
 intersphinx_mapping = {
     'python': ('http://docs.python.org/', os.getenv('SPHINX_PYTHON_OBJECTS')),
