@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # coding=utf-8
 """setup.py - Setuptools tasks and config for pyisbn"""
-# Copyright © 2007-2013  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007-2016  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
