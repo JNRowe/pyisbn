@@ -1,6 +1,6 @@
 #
 # coding=utf-8
-"""pyisbn - A module for working with 10- and 13-digit ISBNs"""
+"""pyisbn - A module for working with 10- and 13-digit ISBNs."""
 # Copyright © 2007-2016  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -42,9 +42,9 @@ This module supports the calculation of ISBN checksums with
 All the ISBNs must be passed in as ``str`` types, even if it would seem
 reasonable to accept some ``int`` forms.  The reason behind this is English
 speaking countries use ``0`` for their group identifier, and Python would treat
-ISBNs beginning with ``0`` as octal representations producing incorrect
-results.  While it may be feasible to allow some cases as non-``str`` types the
-complexity in design and usage isn't worth the minimal benefit.
+ISBNs beginning with ``0`` as octal representations producing incorrect results.
+While it may be feasible to allow some cases as non-``str`` types the complexity
+in design and usage isn't worth the minimal benefit.
 
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
@@ -161,7 +161,6 @@ class Isbn(object):
             ValueError: Unknown value for ``format_spec``
 
         """
-        text = []
         if not format_spec:  # default format calls set format_spec to ''
             return str(self)
         elif format_spec == 'url':
@@ -237,7 +236,7 @@ class Isbn(object):
             raise SiteError(site)
         inject = {'isbn': self.isbn}
         if tlds:
-            if not country in tlds:
+            if country not in tlds:
                 raise CountryError(country)
             tld = tlds[country]
             if not tld:
