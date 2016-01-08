@@ -72,6 +72,7 @@ else:
 DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
                                           'HORIZONTAL BAR')]
 
+#: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP = {
     'amazon': (
         ('http://www.amazon.%(tld)s/s'
