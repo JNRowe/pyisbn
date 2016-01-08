@@ -2,7 +2,6 @@ include CONTRIBUTING.rst
 include COPYING
 include NEWS.rst
 include README.rst
-include .coveragerc
 include nose2.cfg
 
 recursive-include doc *.rst
