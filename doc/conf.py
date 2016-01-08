@@ -42,8 +42,8 @@ import pyisbn
 
 extensions = \
     ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
-                                       'ifconfig', 'intersphinx', 'todo',
-                                       'viewcode']] \
+                                       'ifconfig', 'intersphinx', 'napoleon',
+                                       'todo', 'viewcode']] \
     + ["sphinxcontrib.%s" % ext for ext in ['cheeseshop']]
 
 # Only activate spelling, if it is installed.  It is not required in the
@@ -90,3 +90,6 @@ intersphinx_mapping = {
 
 spelling_lang = 'en_GB'
 spelling_word_list_filename = 'wordlist.txt'
+
+# napoleon extension settings
+napoleon_numpy_docstring = False
