@@ -15,7 +15,7 @@
         verification and generation of checksums.  It also includes basic
         classes for representing ISBNs as objects.
     </description>
- 
+
     <homepage rdf:resource="https://github.com/JNRowe/pyisbn" />
     <download-page rdf:resource="https://pypi.python.org/pypi/pyisbn/" />
     <bug-database rdf:resource="https://github.com/JNRowe/pyisbn/issues" />
