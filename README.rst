@@ -2,7 +2,7 @@
 =============================================================
 
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
-   :target: http://travis-ci.org/JNRowe/pyisbn
+   :target: https://travis-ci.org/JNRowe/pyisbn
 
 .. image:: https://img.shields.io/coveralls/JNRowe/pyisbn/master.svg?style=plastic
    :target: https://coveralls.io/repos/JNRowe/pyisbn
@@ -109,5 +109,5 @@ reproduce the problem, or even better a patch!
 .. _GPL v3: http://www.gnu.org/licenses/
 .. _view the content online: http://pyisbn.rtfd.org/
 .. _Python: http://www.python.org/
-.. _issue: http://github.com/JNRowe/pyisbn/issues
+.. _issue: https://github.com/JNRowe/pyisbn/issues
 .. _mail: jnrowe@gmail.com

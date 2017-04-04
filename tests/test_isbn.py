@@ -53,13 +53,13 @@ def test___str__(isbn):
     ('9780521871723', '', 'ISBN 9780521871723'),
     ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
     ('3540009787', 'url',
-        'http://www.amazon.com/s?search-alias=stripbooks&field-isbn='
+        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
     ('3540009787', 'url:amazon:uk',
-        'http://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn='
+        'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
     ('3540009787', 'url:amazon',
-        'http://www.amazon.com/s?search-alias=stripbooks&field-isbn='
+        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
 )
 def test___format__(isbn, format_spec, result):
@@ -99,9 +99,9 @@ def test_validate(isbn, result):
 
 
 @params(
-    ('us', 'http://www.amazon.com/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('uk', 'http://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('de', 'http://www.amazon.de/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('us', 'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('uk', 'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('de', 'https://www.amazon.de/s?search-alias=stripbooks&field-isbn=0071148167'),
 )
 def test_to_url(country, result):
     expect(Isbn('0071148167').to_url(country=country)) == result
@@ -114,8 +114,8 @@ def test_to_url_invalid_country():
 
 @params(
     ('copac', 'http://copac.ac.uk/search?isn=0071148167'),
-    ('google', 'http://books.google.com/books?vid=isbn:0071148167'),
-    ('isbndb', 'http://isbndb.com/search/all?query=0071148167'),
+    ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
+    ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
     ('waterstones',
         'http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167'),
