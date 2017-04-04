@@ -39,7 +39,7 @@ Update PyPI
 
 Create and upload the new release tarballs to PyPI::
 
-    $ ./setup.py sdist --formats=bztar,gztar bdist_wheel register upload --sign
+    $ ./setup.py sdist bdist_wheel register upload --sign
 
 Fetch the uploaded tarballs, and check for errors.
 
