@@ -149,7 +149,7 @@ class Isbn(object):
         """
         return "ISBN %s" % self._isbn
 
-    def __format__(self, format_spec):
+    def __format__(self, format_spec=None):
         """Extended pretty printing for ISBN strings.
 
         Args:
