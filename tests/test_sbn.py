@@ -17,24 +17,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from unittest import TestCase
-
 from expecter import expect
 from nose2.tools import params
 
 from pyisbn import Sbn
 
 
-class TestSbn(TestCase):
-    def test___repr__(self):
-        expect(repr(Sbn('521871723'))) == "Sbn('521871723')"
+def test___repr__():
+    expect(repr(Sbn('521871723'))) == "Sbn('521871723')"
 
-    @params(
-        ('07114816', '7'),
-        ('071148167', '7'),
-    )
-    def test_calculate_checksum(self, sbn, result):
-        expect(Sbn(sbn).calculate_checksum()) == result
 
-    def test_convert(self):
-        expect(Sbn('071148167').convert()) == '9780071148160'
+@params(
+    ('07114816', '7'),
+    ('071148167', '7'),
+)
+def test_calculate_checksum(sbn, result):
+    expect(Sbn(sbn).calculate_checksum()) == result
+
+
+def test_convert():
+    expect(Sbn('071148167').convert()) == '9780071148160'
