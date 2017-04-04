@@ -58,10 +58,18 @@ def test___str__(isbn):
     ('3540009787', 'url:amazon:uk',
         'http://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
+    ('3540009787', 'url:amazon',
+        'http://www.amazon.com/s?search-alias=stripbooks&field-isbn='
+        '3540009787'),
 )
 def test___format__(isbn, format_spec, result):
     expect(format(Isbn(isbn), format_spec)) == result
 
+
+def test___format__invalid_format_spec():
+    with expect.raises(ValueError,
+                       "Unknown format_spec 'biscuit'"):
+        format(Isbn('0071148167'), 'biscuit')
 
 @params(
     ('978-052-187-1723', '3'),
