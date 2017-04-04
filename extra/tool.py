@@ -41,7 +41,7 @@ def partial_arg(f):
     def wrapper(*args, **kwargs):
         # Can't mix kwargs and supplied args in call for Python 2.5 compat
         kwargs.update({'dest': 'command', 'action': 'store_const'})
-        if not 'const' in kwargs:
+        if 'const' not in kwargs:
             kwargs['const'] = args[1][2:].replace('-', '_')
         return f(*args, **kwargs)
     return wrapper
