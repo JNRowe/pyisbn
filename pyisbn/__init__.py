@@ -75,7 +75,7 @@ DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP = {
     'amazon': (
-        ('http://www.amazon.%(tld)s/s'
+        ('https://www.amazon.%(tld)s/s'
          '?search-alias=stripbooks&field-isbn=%(isbn)s'),
         {
             'de': None,
@@ -85,8 +85,8 @@ URL_MAP = {
             'us': 'com',
         }),
     'copac': 'http://copac.ac.uk/search?isn=%(isbn)s',
-    'google': 'http://books.google.com/books?vid=isbn:%(isbn)s',
-    'isbndb': 'http://isbndb.com/search/all?query=%(isbn)s',
+    'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
+    'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
     'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
     'waterstones': ('http://www.waterstones.com/waterstonesweb/'
                     'advancedSearch.do?buttonClicked=2&isbn=%(isbn)s'),
@@ -520,7 +520,7 @@ def validate(isbn):
         incorrectly entered.  It should however be noted that it is massively
         more likely *you* have entered an invalid ISBN than the published ISBN
         is incorrectly produced.  An example of this probability in the real
-        world is that `Amazon <http://www.amazon.com/>`__ consider it so
+        world is that `Amazon <https://www.amazon.com/>`__ consider it so
         unlikely that they refuse to search for invalid published ISBNs.
 
     Args:

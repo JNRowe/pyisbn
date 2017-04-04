@@ -31,6 +31,6 @@ Format ISBN
    >>> book.to_urn()
    'URN:ISBN:9783540009788'
    >>> book.to_url()
-   'http://www.amazon.com/s?search-alias=stripbooks&field-isbn=9783540009788'
+   'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=9783540009788'
    >>> book.to_url('google')
-   'http://books.google.com/books?vid=isbn:9783540009788'
+   'https://books.google.com/books?vid=isbn:9783540009788'
