@@ -78,10 +78,11 @@ def test__isbn_cleanse_invalid_length(checksum, message):
     ('012345678-b', 'non-digit or X checksum'),
     ('012345678901b', 'non-digit checksum'),
     ('xxxxxxxxxxxx1', 'non-digit parts'),
+    ('0x0000000', 'non-digit parts', False),
 )
-def test__isbn_cleanse_invalid(isbn, message):
+def test__isbn_cleanse_invalid(isbn, message, checksum=True):
     with expect.raises(IsbnError, message):
-        _isbn_cleanse(isbn)
+        _isbn_cleanse(isbn, checksum)
 
 
 @params(*TEST_BOOKS.values())
