@@ -16,8 +16,11 @@ install:
       pip install -r extra/requirements-test.txt;
     fi
   - pip install .
+  - pip install coveralls
 script:
   - nose2 tests
+after_success:
+  - coveralls
 branches:
   except:
     - /^play\/.*$/

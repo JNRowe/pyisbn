@@ -4,6 +4,10 @@
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
    :target: http://travis-ci.org/JNRowe/pyisbn
 
+.. image:: https://img.shields.io/coveralls/JNRowe/pyisbn/master.svg?style=plastic
+   :target: https://coveralls.io/repos/JNRowe/pyisbn
+   :alt: Coverage state on master
+
 Introduction
 ------------
 
