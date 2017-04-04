@@ -420,9 +420,9 @@ def _isbn_cleanse(isbn, checksum=True):
     for dash in DASHES:
         isbn = isbn.replace(dash, unicode())
 
-    if not isbn[:-1].isdigit():
-        raise IsbnError('non-digit parts')
     if checksum:
+        if not isbn[:-1].isdigit():
+            raise IsbnError('non-digit parts')
         if len(isbn) == 9:
             isbn = "0" + isbn
         if len(isbn) == 10:
@@ -436,7 +436,7 @@ def _isbn_cleanse(isbn, checksum=True):
     else:
         if len(isbn) == 8:
             isbn = '0' + isbn
-        if not isbn[-1].isdigit():
+        if not isbn.isdigit():
             raise IsbnError('non-digit parts')
         if not len(isbn) in (9, 12):
             raise IsbnError('ISBN must be either 9 or 12 characters long '
