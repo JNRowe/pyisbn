@@ -71,6 +71,7 @@ def test___format__invalid_format_spec():
                        "Unknown format_spec 'biscuit'"):
         format(Isbn('0071148167'), 'biscuit')
 
+
 @params(
     ('978-052-187-1723', '3'),
     ('3540009787', '7'),
