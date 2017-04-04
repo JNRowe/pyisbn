@@ -62,9 +62,9 @@ from sys import version_info
 
 PY2 = version_info[0] == 2
 
-if PY2:
+if PY2:  # pragma: Python 2
     string_types = (str, unicode)
-else:
+else:  # pragma: Python 3
     string_types = (str, )
     unicode = str
 
