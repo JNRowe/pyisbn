@@ -117,9 +117,9 @@ def test_to_url_invalid_country():
     ('copac', 'http://copac.jisc.ac.uk/search?isn=0071148167'),
     ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
     ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
-    ('worldcat', 'http://worldcat.org/isbn/0071148167'),
     ('waterstones',
-        'http://www.waterstones.com/waterstonesweb/advancedSearch.do?buttonClicked=2&isbn=0071148167'),
+     'https://www.waterstones.com/books/search/term/0071148167'),
+    ('worldcat', 'http://worldcat.org/isbn/0071148167'),
     ('whsmith',
         'http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167'),
 )
