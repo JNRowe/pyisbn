@@ -42,9 +42,9 @@ This module supports the calculation of ISBN checksums with
 All the ISBNs must be passed in as ``str`` types, even if it would seem
 reasonable to accept some ``int`` forms.  The reason behind this is English
 speaking countries use ``0`` for their group identifier, and Python would treat
-ISBNs beginning with ``0`` as octal representations producing incorrect results.
-While it may be feasible to allow some cases as non-``str`` types the complexity
-in design and usage isn't worth the minimal benefit.
+ISBNs beginning with ``0`` as octal representations producing incorrect
+results.  While it may be feasible to allow some cases as non-``str`` types the
+complexity in design and usage isn't worth the minimal benefit.
 
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
@@ -399,7 +399,8 @@ def _isbn_cleanse(isbn, checksum=True):
         checksum (bool): ``True`` if ``isbn`` includes checksum character
 
     Returns:
-        ``str``: ISBN with hyphenation removed, including when called with a SBN
+        ``str``: ISBN with hyphenation removed, including when called with a
+            SBN
 
     Raises:
         TypeError: ``isbn`` is not a ``str`` type
