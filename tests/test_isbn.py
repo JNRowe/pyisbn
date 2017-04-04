@@ -119,9 +119,9 @@ def test_to_url_invalid_country():
     ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
     ('waterstones',
      'https://www.waterstones.com/books/search/term/0071148167'),
-    ('worldcat', 'http://worldcat.org/isbn/0071148167'),
     ('whsmith',
-        'http://www.whsmith.co.uk/CatalogAndSearch/SearchWithinCategory.aspx?as_ISBN=0071148167'),
+     'https://www.whsmith.co.uk/search/go?w=0071148167&af=cat1:books'),
+    ('worldcat', 'http://worldcat.org/isbn/0071148167'),
 )
 def test_to_url_site(site, result):
     expect(Isbn('0071148167').to_url(site=site)) == result

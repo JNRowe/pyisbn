@@ -88,9 +88,8 @@ URL_MAP = {
     'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
     'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
     'waterstones': 'https://www.waterstones.com/books/search/term/%(isbn)s',
+    'whsmith': 'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
     'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
-    'whsmith': ('http://www.whsmith.co.uk/CatalogAndSearch/'
-                'SearchWithinCategory.aspx?as_ISBN=%(isbn)s')
 }
 
 
