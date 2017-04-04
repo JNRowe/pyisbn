@@ -87,9 +87,8 @@ URL_MAP = {
     'copac': 'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
     'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
     'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
+    'waterstones': 'https://www.waterstones.com/books/search/term/%(isbn)s',
     'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
-    'waterstones': ('http://www.waterstones.com/waterstonesweb/'
-                    'advancedSearch.do?buttonClicked=2&isbn=%(isbn)s'),
     'whsmith': ('http://www.whsmith.co.uk/CatalogAndSearch/'
                 'SearchWithinCategory.aspx?as_ISBN=%(isbn)s')
 }
