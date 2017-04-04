@@ -1,0 +1,11 @@
+The requirements files in this directory are somewhat untested, as I have no
+systems with packages managed via ``pip``.
+
+While I go to some effort to run some automated installation tests with ``pip``,
+there may be problems that I'm not seeing through limited use.  If you find
+one/some please report them!
+
+The same holds true for direct installation via ``setup.py``, if you use it and
+spot a bug please report it!
+
+-- James
