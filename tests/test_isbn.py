@@ -114,7 +114,7 @@ def test_to_url_invalid_country():
 
 
 @params(
-    ('copac', 'http://copac.ac.uk/search?isn=0071148167'),
+    ('copac', 'http://copac.jisc.ac.uk/search?isn=0071148167'),
     ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
     ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
