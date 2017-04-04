@@ -30,8 +30,8 @@ __history__ = 'See git repository'
 
 try:
     from email.utils import parseaddr
-except ImportError:  # Python 2.4
-    from email.Utils import parseaddr  # NOQA
+except ImportError:  # pragma: no cover [Python 2.4]
+    from email.Utils import parseaddr
 
 __doc__ += """.
 
