@@ -84,7 +84,7 @@ URL_MAP = {
             'uk': 'co.uk',
             'us': 'com',
         }),
-    'copac': 'http://copac.ac.uk/search?isn=%(isbn)s',
+    'copac': 'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
     'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
     'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
     'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
