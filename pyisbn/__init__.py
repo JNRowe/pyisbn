@@ -70,7 +70,7 @@ else:  # pragma: Python 3
 
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
-                                          'HORIZONTAL BAR')]
+                                          'HORIZONTAL BAR', 'MIDDLE DOT')]
 
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP = {
@@ -406,6 +406,7 @@ def _isbn_cleanse(isbn, checksum=True):
         IsbnError: Incorrect SBN or ISBN formatting
 
     """
+
     if not isinstance(isbn, string_types):
         raise TypeError('ISBN must be a string, received %r' % isbn)
 
