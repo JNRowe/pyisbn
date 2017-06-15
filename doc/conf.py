@@ -44,7 +44,7 @@ extensions = \
     ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
                                        'extlinks', 'ifconfig', 'intersphinx',
                                        'napoleon', 'todo', 'viewcode']] \
-    + ["sphinxcontrib.%s" % ext for ext in []]
+    + ['sphinxcontrib.%s' % ext for ext in []]
 
 # Only activate spelling if it is installed.  It is not required in the
 # general case and we don't have the granularity to describe this in a clean
@@ -66,7 +66,7 @@ try:
 except NameError:
     copyright = pyisbn.__copyright__
 
-version = ".".join(map(str, pyisbn._version.tuple[:2]))
+version = '.'.join(map(str, pyisbn._version.tuple[:2]))
 release = pyisbn._version.dotted
 
 pygments_style = 'sphinx'

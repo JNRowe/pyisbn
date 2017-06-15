@@ -30,7 +30,7 @@ import pyisbn
 author, author_email = parseaddr(pyisbn.__author__)
 
 paras = pyisbn.__doc__.split('\n\n')
-long_description = "\n\n".join([paras[1], paras[3]])
+long_description = '\n\n'.join([paras[1], paras[3]])
 
 setup(
     name='pyisbn',
@@ -41,7 +41,7 @@ setup(
     author_email=author_email,
     maintainer=author,
     maintainer_email=author_email,
-    url="https://github.com/JNRowe/pyisbn/",
+    url='https://github.com/JNRowe/pyisbn/',
     packages=['pyisbn', ],
     license=pyisbn.__license__,
     keywords='ISBN ISBN-10 ISBN-13 SBN',

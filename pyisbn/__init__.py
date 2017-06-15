@@ -130,7 +130,7 @@ class Isbn(object):
             ``str``: Human readable string representation of ``Isbn`` object
 
         """
-        return "ISBN %s" % self._isbn
+        return 'ISBN %s' % self._isbn
 
     def __format__(self, format_spec=None):
         """Extended pretty printing for ISBN strings.
@@ -407,9 +407,9 @@ def _isbn_cleanse(isbn, checksum=True):
         if not isbn[:-1].isdigit():
             raise IsbnError('non-digit parts')
         if len(isbn) == 9:
-            isbn = "0" + isbn
+            isbn = '0' + isbn
         if len(isbn) == 10:
-            if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
+            if not (isbn[-1].isdigit() or isbn[-1] in 'Xx'):
                 raise IsbnError('non-digit or X checksum')
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
