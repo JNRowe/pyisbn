@@ -34,8 +34,8 @@ Update PyPI
 -----------
 
 ..
-  This is the section you're especially likely to get wrong at some point if you
-  try to handle all of this manually ;)
+  This is the section you're especially likely to get wrong at some point if
+  you try to handle all of this manually ;)
 
 Create and upload the new release tarballs to PyPI::
 
