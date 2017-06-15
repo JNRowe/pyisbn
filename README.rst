@@ -1,5 +1,5 @@
-``pyisbn`` - A module for working with 10- and 13-digit ISBNs
-=============================================================
+``pyisbn`` - A module for working with 10- and 13-digit |ISBNs|
+===============================================================
 
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
    :target: https://travis-ci.org/JNRowe/pyisbn
@@ -13,8 +13,8 @@ Introduction
 
 ``pyisbn`` is a `GPL v3`_ licensed module for working with various book
 identification numbers.  It includes functions for conversion, verification and
-generation of checksums.  It also includes basic classes for representing ISBNs
-as objects.
+generation of checksums.  It also includes basic classes for representing
+|ISBNs| as objects.
 
 See the ``doc`` directory for installation instructions and usage information,
 you can also `view the content online`_.
@@ -47,7 +47,7 @@ The simplest way to show how ``pyisbn`` works is by example, and here goes::
     >>> print("ISBN %s" % Permutation_City)
     ISBN 1-85798-218-5
 
-or to process ISBNs using the object pattern use::
+or using the object pattern use::
 
     >>> Permutation_City = pyisbn.Isbn10("1-85798-218-5")
     >>> Permutation_City.validate()
@@ -111,3 +111,7 @@ reproduce the problem, or even better a patch!
 .. _Python: http://www.python.org/
 .. _issue: https://github.com/JNRowe/pyisbn/issues
 .. _mail: jnrowe@gmail.com
+
+.. |ISBNs| raw:: html
+
+   <abbr title="International Standard Book Numbers">ISBN</abbr>s
