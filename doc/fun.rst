@@ -8,7 +8,7 @@ a difference of five are transposed.
 Using "The Statistical Mechanics of Financial Markets" as an example, we can see
 that 9783540009788 is the `given ISBN`_, and is valid.  However,
 9738540009788 with the third and fourth characters transposed is also valid, yet
-is incorrect[1]_ .
+is incorrect [1]_.
 
 I'll leave it as an exercise for the reader to figure out how often books with
 transposable :abbr:`ISBN (International Standard Book Number)`-13 occur in
