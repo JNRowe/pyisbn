@@ -81,8 +81,12 @@ except CalledProcessError:
 autoclass_content = 'init'
 autodoc_default_flags = ['members', ]
 
+# intersphinx extension settings
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/', os.getenv('SPHINX_PYTHON_OBJECTS')),
+    k: (v, os.getenv('SPHINX_%s_OBJECTS' % k.upper()))
+    for k, v in {
+        'python': 'http://docs.python.org/',
+    }.items()
 }
 
 # extlinks extension settings
@@ -91,6 +95,7 @@ extlinks = {
     'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
 }
 
+# spelling extension settings
 spelling_lang = 'en_GB'
 spelling_word_list_filename = 'wordlist.txt'
 
