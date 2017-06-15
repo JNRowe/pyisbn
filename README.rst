@@ -3,6 +3,7 @@
 
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
    :target: https://travis-ci.org/JNRowe/pyisbn
+   :alt: Test state on master
 
 .. image:: https://img.shields.io/coveralls/JNRowe/pyisbn/master.svg?style=plastic
    :target: https://coveralls.io/repos/JNRowe/pyisbn
