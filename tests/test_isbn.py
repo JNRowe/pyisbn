@@ -19,9 +19,9 @@
 
 from sys import version_info
 
-if version_info > (2, 7):
+try:
     from unittest import skipIf
-else:
+except ImportError:
     from unittest2 import skipIf
 
 from expecter import expect
@@ -100,12 +100,13 @@ def test_validate(isbn, result):
 
 
 @params(
-    ('us', 'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('uk', 'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('de', 'https://www.amazon.de/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('us', '.com/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('uk', '.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
 )
 def test_to_url(country, result):
-    expect(Isbn('0071148167').to_url(country=country)) == result
+    expect(Isbn('0071148167').to_url(country=country)) \
+        == 'https://www.amazon' + result
 
 
 def test_to_url_invalid_country():
