@@ -60,11 +60,8 @@ All independent functions and classes contain (hopefully) useful docstrings.
 API Stability
 -------------
 
-API stability isn't guaranteed across versions, although frivolous changes won't
-be made.
-
-When ``pyisbn`` 1.0 is released the API will be frozen, and any changes which
-aren't backwards compatible will force a major version bump.
+Now that ``pyisbn`` 1.0 has been released the API will is frozen, and any
+changes which aren't backwards compatible will force a major version bump.
 
 Contributors
 ------------
