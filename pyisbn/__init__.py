@@ -1,39 +1,6 @@
 #
 # coding=utf-8
-"""pyisbn - A module for working with 10- and 13-digit ISBNs."""
-# Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-from pyisbn import _version
-
-
-__version__ = _version.dotted
-__date__ = _version.date
-__author__ = 'James Rowe <jnrowe@gmail.com>'
-__copyright__ = 'Copyright © 2007-2017  James Rowe'
-__license__ = 'GNU General Public License Version 3'
-__credits__ = ''
-__history__ = 'See git repository'
-
-try:
-    from email.utils import parseaddr
-except ImportError:  # pragma: no cover [Python 2.4]
-    from email.Utils import parseaddr
-
-__doc__ += """.
+"""pyisbn - A module for working with 10- and 13-digit ISBNs.
 
 This module supports the calculation of ISBN checksums with
 ``calculate_checksum()``, the conversion between ISBN-10 and ISBN-13 with
@@ -48,13 +15,31 @@ complexity in design and usage isn't worth the minimal benefit.
 
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
+"""
+# Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
+#
+# This file is part of pyisbn.
+#
+# pyisbn is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# pyisbn is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-:version: %s
-:author: `%s <mailto:%s>`__
-:copyright: %s
-:status: Stable
-:license: %s
-""" % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
+from pyisbn import _version
+
+
+__version__ = _version.dotted
+__date__ = _version.date
+__author__ = 'James Rowe <jnrowe@gmail.com>'
+__copyright__ = 'Copyright © 2007-2017  James Rowe'
+__license__ = 'GNU General Public License Version 3'
 
 import unicodedata
 
@@ -145,7 +130,7 @@ class Isbn(object):
             ``str``: Human readable string representation of ``Isbn`` object
 
         """
-        return "ISBN %s" % self._isbn
+        return 'ISBN %s' % self._isbn
 
     def __format__(self, format_spec=None):
         """Extended pretty printing for ISBN strings.
@@ -422,9 +407,9 @@ def _isbn_cleanse(isbn, checksum=True):
         if not isbn[:-1].isdigit():
             raise IsbnError('non-digit parts')
         if len(isbn) == 9:
-            isbn = "0" + isbn
+            isbn = '0' + isbn
         if len(isbn) == 10:
-            if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
+            if not (isbn[-1].isdigit() or isbn[-1] in 'Xx'):
                 raise IsbnError('non-digit or X checksum')
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():

@@ -1,7 +1,7 @@
 Release HOWTO
 =============
 
-.. highlight:: sh
+.. highlight:: console
 
 ..
   Much of this stuff is automated locally, but I'm describing the process for
@@ -12,9 +12,9 @@ Release HOWTO
 Test
 ----
 
-In the general case tests can be run via ``nose2``::
+In the general case tests can be run via :pypi:`nose2`::
 
-    $ nose2 -vv tests
+    $ nose2 tests
 
 When preparing a release it is important to check that :mod:`pyisbn` works with
 all currently supported Python versions, and that the documentation is correct.
@@ -34,8 +34,8 @@ Update PyPI
 -----------
 
 ..
-  This is the section you're especially likely to get wrong at some point if you
-  try to handle all of this manually ;)
+  This is the section you're especially likely to get wrong at some point if
+  you try to handle all of this manually ;)
 
 Create and upload the new release tarballs to PyPI::
 

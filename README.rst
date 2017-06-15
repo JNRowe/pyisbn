@@ -1,8 +1,9 @@
-``pyisbn`` - A module for working with 10- and 13-digit ISBNs
-=============================================================
+``pyisbn`` - A module for working with 10- and 13-digit |ISBNs|
+===============================================================
 
 .. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
    :target: https://travis-ci.org/JNRowe/pyisbn
+   :alt: Test state on master
 
 .. image:: https://img.shields.io/coveralls/JNRowe/pyisbn/master.svg?style=plastic
    :target: https://coveralls.io/repos/JNRowe/pyisbn
@@ -13,8 +14,8 @@ Introduction
 
 ``pyisbn`` is a `GPL v3`_ licensed module for working with various book
 identification numbers.  It includes functions for conversion, verification and
-generation of checksums.  It also includes basic classes for representing ISBNs
-as objects.
+generation of checksums.  It also includes basic classes for representing
+|ISBNs| as objects.
 
 See the ``doc`` directory for installation instructions and usage information,
 you can also `view the content online`_.
@@ -44,10 +45,8 @@ The simplest way to show how ``pyisbn`` works is by example, and here goes::
     True
     >>> pyisbn.convert(Permutation_City)
     '9781857982183'
-    >>> print("ISBN %s" % Permutation_City)
-    ISBN 1-85798-218-5
 
-or to process ISBNs using the object pattern use::
+or using the object pattern use::
 
     >>> Permutation_City = pyisbn.Isbn10("1-85798-218-5")
     >>> Permutation_City.validate()
@@ -62,11 +61,8 @@ All independent functions and classes contain (hopefully) useful docstrings.
 API Stability
 -------------
 
-API stability isn't guaranteed across versions, although frivolous changes won't
-be made.
-
-When ``pyisbn`` 1.0 is released the API will be frozen, and any changes which
-aren't backwards compatible will force a major version bump.
+Now that ``pyisbn`` 1.0 has been released the API will is frozen, and any
+changes which aren't backwards compatible will force a major version bump.
 
 Contributors
 ------------
@@ -94,14 +90,14 @@ Ideas
 
 * Kevin Simmons
 
-If I've forgotten to include your name I wholeheartedly apologise.  Just drop me
-a mail_ and I'll update the list!
+If I've forgotten to include your name I wholeheartedly apologise.  Just drop
+me a mail_ and I'll update the list!
 
 Bugs
 ----
 
-If you find any problems, bugs or just have a question about this package either
-file an issue_ or drop me a mail_.
+If you find any problems, bugs or just have a question about this package
+either file an issue_ or drop me a mail_.
 
 If you've found a bug please attempt to include a minimal testcase so I can
 reproduce the problem, or even better a patch!
@@ -111,3 +107,7 @@ reproduce the problem, or even better a patch!
 .. _Python: http://www.python.org/
 .. _issue: https://github.com/JNRowe/pyisbn/issues
 .. _mail: jnrowe@gmail.com
+
+.. |ISBNs| raw:: html
+
+   <abbr title="International Standard Book Numbers">ISBN</abbr>s

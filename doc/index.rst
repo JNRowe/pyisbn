@@ -7,8 +7,8 @@
 
 :mod:`pyisbn` is a `GPL v3`_ licensed module for working with various book
 identification numbers.  It includes functions for conversion, verification and
-generation of checksums.  It also includes basic classes for representing ISBNs
-as objects.
+generation of checksums.  It also includes basic classes for representing
+:abbr:`ISBNs (International Standard Book Numbers)` as objects.
 
 :Git repository:  https://github.com/JNRowe/pyisbn/
 :Issue tracker:  https://github.com/JNRowe/pyisbn/issues/

@@ -2,7 +2,6 @@ Frequently Asked Questions
 --------------------------
 
 ..
-
    Sadly, these two questions come up often enough that I've felt the need to
    write a pre-emptive response here.  I hoping it will allow me to skip the
    awkwardness I feel when writing individual replies...

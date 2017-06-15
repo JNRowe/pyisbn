@@ -1,21 +1,21 @@
 #
 # coding=utf-8
-"""conf - Sphinx configuration information"""
-# Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
+"""conf - Sphinx configuration information."""
+# Copyright © 2011-2017  James Rowe <jnrowe@gmail.com>
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# This file is part of pyisbn.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# pyisbn is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# pyisbn is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 #
+# You should have received a copy of the GNU General Public License along with
+# pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 import sys
@@ -38,15 +38,15 @@ except ImportError:
 root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.insert(0, root_dir)
 
-import pyisbn
+import pyisbn  # NOQA
 
 extensions = \
     ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
-                                       'ifconfig', 'intersphinx', 'napoleon',
-                                       'todo', 'viewcode']] \
-    + ["sphinxcontrib.%s" % ext for ext in ['cheeseshop']]
+                                       'extlinks', 'ifconfig', 'intersphinx',
+                                       'napoleon', 'todo', 'viewcode']] \
+    + ['sphinxcontrib.%s' % ext for ext in []]
 
-# Only activate spelling, if it is installed.  It is not required in the
+# Only activate spelling if it is installed.  It is not required in the
 # general case and we don't have the granularity to describe this in a clean
 # way
 try:
@@ -66,7 +66,7 @@ try:
 except NameError:
     copyright = pyisbn.__copyright__
 
-version = ".".join(map(str, pyisbn._version.tuple[:2]))
+version = '.'.join(map(str, pyisbn._version.tuple[:2]))
 release = pyisbn._version.dotted
 
 pygments_style = 'sphinx'
@@ -78,12 +78,24 @@ except CalledProcessError:
     pass
 
 # Autodoc extension settings
-autoclass_content = "init"
+autoclass_content = 'init'
+autodoc_default_flags = ['members', ]
 
+# intersphinx extension settings
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/', os.getenv('SPHINX_PYTHON_OBJECTS')),
+    k: (v, os.getenv('SPHINX_%s_OBJECTS' % k.upper()))
+    for k, v in {
+        'python': 'http://docs.python.org/',
+    }.items()
 }
 
+# extlinks extension settings
+extlinks = {
+    'pypi': ('http://pypi.python.org/pypi/%s', ''),
+    'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
+}
+
+# spelling extension settings
 spelling_lang = 'en_GB'
 spelling_word_list_filename = 'wordlist.txt'
 
