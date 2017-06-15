@@ -42,9 +42,9 @@ import pyisbn
 
 extensions = \
     ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
-                                       'ifconfig', 'intersphinx', 'napoleon',
-                                       'todo', 'viewcode']] \
-    + ["sphinxcontrib.%s" % ext for ext in ['cheeseshop']]
+                                       'extlinks', 'ifconfig', 'intersphinx',
+                                       'napoleon', 'todo', 'viewcode']] \
+    + ["sphinxcontrib.%s" % ext for ext in []]
 
 # Only activate spelling, if it is installed.  It is not required in the
 # general case and we don't have the granularity to describe this in a clean
@@ -82,6 +82,12 @@ autoclass_content = "init"
 
 intersphinx_mapping = {
     'python': ('http://docs.python.org/', os.getenv('SPHINX_PYTHON_OBJECTS')),
+}
+
+# extlinks extension settings
+extlinks = {
+    'pypi': ('http://pypi.python.org/pypi/%s', ''),
+    'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
 }
 
 spelling_lang = 'en_GB'
