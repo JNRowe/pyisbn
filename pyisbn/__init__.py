@@ -1,6 +1,21 @@
 #
 # coding=utf-8
-"""pyisbn - A module for working with 10- and 13-digit ISBNs."""
+"""pyisbn - A module for working with 10- and 13-digit ISBNs.
+
+This module supports the calculation of ISBN checksums with
+``calculate_checksum()``, the conversion between ISBN-10 and ISBN-13 with
+``convert()`` and the validation of ISBNs with ``validate()``.
+
+All the ISBNs must be passed in as ``str`` types, even if it would seem
+reasonable to accept some ``int`` forms.  The reason behind this is English
+speaking countries use ``0`` for their group identifier, and Python would treat
+ISBNs beginning with ``0`` as octal representations producing incorrect
+results.  While it may be feasible to allow some cases as non-``str`` types the
+complexity in design and usage isn't worth the minimal benefit.
+
+The functions in this module also support 9-digit SBNs for people with older
+books in their collection.
+"""
 # Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -25,36 +40,6 @@ __date__ = _version.date
 __author__ = 'James Rowe <jnrowe@gmail.com>'
 __copyright__ = 'Copyright © 2007-2017  James Rowe'
 __license__ = 'GNU General Public License Version 3'
-__credits__ = ''
-__history__ = 'See git repository'
-
-try:
-    from email.utils import parseaddr
-except ImportError:  # pragma: no cover [Python 2.4]
-    from email.Utils import parseaddr
-
-__doc__ += """.
-
-This module supports the calculation of ISBN checksums with
-``calculate_checksum()``, the conversion between ISBN-10 and ISBN-13 with
-``convert()`` and the validation of ISBNs with ``validate()``.
-
-All the ISBNs must be passed in as ``str`` types, even if it would seem
-reasonable to accept some ``int`` forms.  The reason behind this is English
-speaking countries use ``0`` for their group identifier, and Python would treat
-ISBNs beginning with ``0`` as octal representations producing incorrect
-results.  While it may be feasible to allow some cases as non-``str`` types the
-complexity in design and usage isn't worth the minimal benefit.
-
-The functions in this module also support 9-digit SBNs for people with older
-books in their collection.
-
-:version: %s
-:author: `%s <mailto:%s>`__
-:copyright: %s
-:status: Stable
-:license: %s
-""" % ((__version__, ) + parseaddr(__author__) + (__copyright__, __license__))
 
 import unicodedata
 
