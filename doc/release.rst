@@ -1,7 +1,7 @@
 Release HOWTO
 =============
 
-.. highlight:: sh
+.. highlight:: console
 
 ..
   Much of this stuff is automated locally, but I'm describing the process for
