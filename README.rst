@@ -44,8 +44,6 @@ The simplest way to show how ``pyisbn`` works is by example, and here goes::
     True
     >>> pyisbn.convert(Permutation_City)
     '9781857982183'
-    >>> print("ISBN %s" % Permutation_City)
-    ISBN 1-85798-218-5
 
 or using the object pattern use::
 
