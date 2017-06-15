@@ -1,6 +1,6 @@
 #
 # coding=utf-8
-"""test_functions - Test function interface"""
+"""test_functions - Test function interface."""
 # Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify

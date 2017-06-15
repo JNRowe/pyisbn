@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # coding=utf-8
-"""tool - A simple pyisbn interface for the command line"""
+"""tool - A simple pyisbn interface for the command line."""
 # Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify

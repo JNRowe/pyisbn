@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # coding=utf-8
-"""setup.py - Setuptools tasks and config for pyisbn"""
+"""setup.py - Setuptools tasks and config for pyisbn."""
 # Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify

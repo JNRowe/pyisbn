@@ -1,6 +1,6 @@
 #
 # coding=utf-8
-"""test_isbn13 - Test Isbn13 class"""
+"""test_isbn13 - Test Isbn13 class."""
 # Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
