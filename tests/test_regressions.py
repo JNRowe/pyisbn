@@ -25,7 +25,7 @@ from nose2.tools import params
 from pyisbn import _isbn_cleanse
 
 
-# The lookup hoop jumping here is make it easier to generate native Unicode
+# The lookup hoop jumping here is to make it easier to generate native Unicode
 # types on the various supported Python versions.
 @params(
     '978-1-84724-253-2',
