@@ -21,10 +21,20 @@ from pytest import mark
 
 from pyisbn import Isbn10
 
-
-def test_calculate_checksum():
-    assert Isbn10('3540009787').calculate_checksum() == '7'
+from tests.test_data import TEST_BOOKS
 
 
-def test_convert():
-    assert Isbn10('0071148167').convert() == '9780071148160'
+@mark.parametrize('isbn',
+    [s for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 10] +
+    ['3540009787', ]
+)
+def test_calculate_checksum(isbn):
+    assert Isbn10(isbn).calculate_checksum() == isbn[-1]
+
+
+@mark.parametrize('isbn',
+    [s for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 10] +
+    ['0071148167', ]
+)
+def test_convert(isbn):
+    assert Isbn10(isbn).convert()[:-1] == '978' + isbn.replace('-', '')[:-1]

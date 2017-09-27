@@ -21,9 +21,15 @@ from pytest import mark
 
 from pyisbn import Sbn
 
+from tests.test_data import TEST_BOOKS
 
-def test___repr__():
-    assert repr(Sbn('521871723')) == "Sbn('521871723')"
+
+@mark.parametrize('sbn',
+    [s[1:] for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 10] +
+    ['521871723', ]
+)
+def test___repr__(sbn):
+    assert repr(Sbn(sbn)) == "Sbn('%s')" % sbn.replace('-', '')
 
 
 @mark.parametrize('sbn,result', [
@@ -34,5 +40,9 @@ def test_calculate_checksum(sbn, result):
     assert Sbn(sbn).calculate_checksum() == result
 
 
-def test_convert():
-    assert Sbn('071148167').convert() == '9780071148160'
+@mark.parametrize('sbn',
+    [s[1:] for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 10] +
+    ['071148167', ]
+)
+def test_convert(sbn):
+    assert Sbn(sbn).convert()[:-1] == '9780' + sbn.replace('-', '')[:-1]

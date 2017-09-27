@@ -17,13 +17,24 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
+from pytest import mark
 
 from pyisbn import Isbn13
 
-
-def test_calculate_checksum():
-    assert Isbn13('978-052-187-1723').calculate_checksum() == '3'
+from tests.test_data import TEST_BOOKS
 
 
-def test_convert():
-    assert Isbn13('9780071148160').convert() == '0071148167'
+@mark.parametrize('isbn',
+    [s for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 13] +
+    ['978-052-187-1723', ]
+)
+def test_calculate_checksum(isbn):
+    assert Isbn13(isbn).calculate_checksum() == isbn[-1]
+
+
+@mark.parametrize('isbn',
+    [s for s in TEST_BOOKS.values() if len(s.replace('-', '')) == 13] +
+    ['9780071148160', ]
+)
+def test_convert(isbn):
+    assert Isbn13(isbn).convert()[:-1] == isbn.replace('-', '')[3:-1]
