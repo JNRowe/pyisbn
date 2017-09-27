@@ -1,3 +1,5 @@
+include .editorconfig
+include .travis.yml
 include CONTRIBUTING.rst
 include COPYING
 include NEWS.rst
@@ -8,6 +10,7 @@ recursive-include doc *.rst
 include doc/conf.py
 include doc/wordlist.txt
 
+include extra/README.pip
 include extra/_pyisbn
 include extra/doap.rdf
 include extra/requirements-*.txt
