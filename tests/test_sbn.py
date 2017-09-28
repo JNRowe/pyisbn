@@ -21,13 +21,10 @@ from pytest import mark
 
 from pyisbn import Sbn
 
-from tests.data import TEST_ISBNS
+from tests.data import TEST_ISBN10S
 
 
-@mark.parametrize('sbn',
-    [s[1:] for s in TEST_ISBNS if len(s) == 10] +
-    ['521871723', ]
-)
+@mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['521871723', ])
 def test___repr__(sbn):
     assert repr(Sbn(sbn)) == "Sbn(%r)" % sbn
 
@@ -40,9 +37,6 @@ def test_calculate_checksum(sbn, result):
     assert Sbn(sbn).calculate_checksum() == result
 
 
-@mark.parametrize('sbn',
-    [s[1:] for s in TEST_ISBNS if len(s) == 10] +
-    ['071148167', ]
-)
+@mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['071148167', ])
 def test_convert(sbn):
     assert Sbn(sbn).convert()[:-1] == '9780' + sbn[:-1]

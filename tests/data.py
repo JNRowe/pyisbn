@@ -26,3 +26,7 @@ with open('tests/books.json') as f:
 
 #: ISBNs from sample book data for use in tests
 TEST_ISBNS = [s.replace('-', '') for s in TEST_BOOKS.values()]
+#: ISBN 10s from sample book data for use in tests
+TEST_ISBN10S = [s for s in TEST_ISBNS if len(s) == 10]
+#: ISBN 13s from sample book data for use in tests
+TEST_ISBN13S = [s for s in TEST_ISBNS if len(s) == 13]

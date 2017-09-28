@@ -21,20 +21,14 @@ from pytest import mark
 
 from pyisbn import Isbn10
 
-from tests.data import TEST_ISBNS
+from tests.data import TEST_ISBN10S
 
 
-@mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s) == 10] +
-    ['3540009787', ]
-)
+@mark.parametrize('isbn', TEST_ISBN10S + ['3540009787', ])
 def test_calculate_checksum(isbn):
     assert Isbn10(isbn).calculate_checksum() == isbn[-1]
 
 
-@mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s) == 10] +
-    ['0071148167', ]
-)
+@mark.parametrize('isbn', TEST_ISBN10S + ['0071148167', ])
 def test_convert(isbn):
     assert Isbn10(isbn).convert()[:-1] == '978' + isbn[:-1]

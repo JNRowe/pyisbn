@@ -21,20 +21,14 @@ from pytest import mark
 
 from pyisbn import Isbn13
 
-from tests.data import TEST_ISBNS
+from tests.data import TEST_ISBN13S
 
 
-@mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s) == 13] +
-    ['978-052-187-1723', ]
-)
+@mark.parametrize('isbn', TEST_ISBN13S + ['978-052-187-1723', ])
 def test_calculate_checksum(isbn):
     assert Isbn13(isbn).calculate_checksum() == isbn[-1]
 
 
-@mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s) == 13] +
-    ['9780071148160', ]
-)
+@mark.parametrize('isbn', TEST_ISBN13S + ['9780071148160', ])
 def test_convert(isbn):
     assert Isbn13(isbn).convert()[:-1] == isbn[3:-1]
