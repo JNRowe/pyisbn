@@ -30,7 +30,7 @@ from tests.data import TEST_ISBNS
     '3540009787',
 ])
 def test___repr__(isbn):
-    assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn.replace('-', '')
+    assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn
 
 
 @mark.parametrize('isbn', TEST_ISBNS + [

@@ -25,7 +25,7 @@ from tests.data import TEST_ISBNS
 
 
 @mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s.replace('-', '')) == 10] +
+    [s for s in TEST_ISBNS if len(s) == 10] +
     ['3540009787', ]
 )
 def test_calculate_checksum(isbn):
@@ -33,8 +33,8 @@ def test_calculate_checksum(isbn):
 
 
 @mark.parametrize('isbn',
-    [s for s in TEST_ISBNS if len(s.replace('-', '')) == 10] +
+    [s for s in TEST_ISBNS if len(s) == 10] +
     ['0071148167', ]
 )
 def test_convert(isbn):
-    assert Isbn10(isbn).convert()[:-1] == '978' + isbn.replace('-', '')[:-1]
+    assert Isbn10(isbn).convert()[:-1] == '978' + isbn[:-1]

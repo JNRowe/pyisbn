@@ -29,14 +29,14 @@ from tests.data import TEST_ISBNS
 @mark.parametrize('isbn', TEST_ISBNS)
 def test__isbn_cleanse_sbn(isbn):
     if isbn.startswith('0'):
-        assert _isbn_cleanse(isbn[1:]) == isbn.replace('-', '')
-        assert _isbn_cleanse(isbn[1:-1], False) == isbn.replace('-', '')[:-1]
+        assert _isbn_cleanse(isbn[1:]) == isbn
+        assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
 def test__isbn_cleanse_isbn(isbn):
-    assert _isbn_cleanse(isbn) == isbn.replace('-', '')
-    assert _isbn_cleanse(isbn[:-1], False) == isbn.replace('-', '')[:-1]
+    assert _isbn_cleanse(isbn) == isbn
+    assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
 
 
 # See tests.test_regressions.test_issue_7_unistr
@@ -95,7 +95,7 @@ def test_calculate_checksum(isbn):
 
 @mark.parametrize('isbn', TEST_ISBNS)
 def test_convert(isbn):
-    assert convert(convert(isbn)) == isbn.replace('-', '')
+    assert convert(convert(isbn)) == isbn
 
 
 def test_convert_invalid():

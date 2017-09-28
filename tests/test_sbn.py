@@ -25,11 +25,11 @@ from tests.data import TEST_ISBNS
 
 
 @mark.parametrize('sbn',
-    [s[1:] for s in TEST_ISBNS if len(s.replace('-', '')) == 10] +
+    [s[1:] for s in TEST_ISBNS if len(s) == 10] +
     ['521871723', ]
 )
 def test___repr__(sbn):
-    assert repr(Sbn(sbn)) == "Sbn(%r)" % sbn.replace('-', '')
+    assert repr(Sbn(sbn)) == "Sbn(%r)" % sbn
 
 
 @mark.parametrize('sbn,result', [
@@ -41,8 +41,8 @@ def test_calculate_checksum(sbn, result):
 
 
 @mark.parametrize('sbn',
-    [s[1:] for s in TEST_ISBNS if len(s.replace('-', '')) == 10] +
+    [s[1:] for s in TEST_ISBNS if len(s) == 10] +
     ['071148167', ]
 )
 def test_convert(sbn):
-    assert Sbn(sbn).convert()[:-1] == '9780' + sbn.replace('-', '')[:-1]
+    assert Sbn(sbn).convert()[:-1] == '9780' + sbn[:-1]

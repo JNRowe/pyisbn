@@ -25,4 +25,4 @@ with open('tests/books.json') as f:
     TEST_BOOKS = json.load(f)
 
 #: ISBNs from sample book data for use in tests
-TEST_ISBNS = list(TEST_BOOKS.values())  # Recast for Python 3 compatibility
+TEST_ISBNS = [s.replace('-', '') for s in TEST_BOOKS.values()]
