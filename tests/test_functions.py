@@ -23,17 +23,17 @@ from pytest import mark, raises
 
 from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
                     validate)
-from tests.test_data import TEST_BOOKS
+from tests.data import TEST_ISBNS
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values())
+@mark.parametrize('isbn', TEST_ISBNS)
 def test__isbn_cleanse_sbn(isbn):
     if isbn.startswith('0'):
         assert _isbn_cleanse(isbn[1:]) == isbn.replace('-', '')
         assert _isbn_cleanse(isbn[1:-1], False) == isbn.replace('-', '')[:-1]
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values())
+@mark.parametrize('isbn', TEST_ISBNS)
 def test__isbn_cleanse_isbn(isbn):
     assert _isbn_cleanse(isbn) == isbn.replace('-', '')
     assert _isbn_cleanse(isbn[:-1], False) == isbn.replace('-', '')[:-1]
@@ -88,12 +88,12 @@ def test__isbn_cleanse_invalid_no_checksum():
         _isbn_cleanse('0x0000000', False)
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values())
+@mark.parametrize('isbn', TEST_ISBNS)
 def test_calculate_checksum(isbn):
     assert calculate_checksum(isbn[:-1]) == isbn[-1]
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values())
+@mark.parametrize('isbn', TEST_ISBNS)
 def test_convert(isbn):
     assert convert(convert(isbn)) == isbn.replace('-', '')
 
@@ -104,7 +104,7 @@ def test_convert_invalid():
         convert('0000000000000')
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values())
+@mark.parametrize('isbn', TEST_ISBNS)
 def test_validate(isbn):
     assert validate(isbn)
 

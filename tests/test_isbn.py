@@ -22,10 +22,10 @@ from sys import version_info
 from pytest import mark, raises
 
 from pyisbn import (CountryError, Isbn, SiteError)
-from tests.test_data import TEST_BOOKS
+from tests.data import TEST_ISBNS
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values() + [
+@mark.parametrize('isbn', TEST_ISBNS + [
     '9780521871723',
     '3540009787',
 ])
@@ -33,7 +33,7 @@ def test___repr__(isbn):
     assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn.replace('-', '')
 
 
-@mark.parametrize('isbn', TEST_BOOKS.values() + [
+@mark.parametrize('isbn', TEST_ISBNS + [
     '9780521871723',
     '978-052-187-1723',
     '3540009787',
@@ -45,7 +45,7 @@ def test___str__(isbn):
 @mark.skipif(version_info < (2, 6),
              reason="format() not supported with this Python version")
 @mark.parametrize('isbn,format_spec,result',
-    [(s, '', 'ISBN %s' % s) for s in TEST_BOOKS.values()] + [
+    [(s, '', 'ISBN %s' % s) for s in TEST_ISBNS] + [
     ('9780521871723', '', 'ISBN 9780521871723'),
     ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
     ('3540009787', 'url',
@@ -67,7 +67,7 @@ def test___format__invalid_format_spec():
         format(Isbn('0071148167'), 'biscuit')
 
 
-@mark.parametrize('isbn,result', [(s, s[-1]) for s in TEST_BOOKS.values()] + [
+@mark.parametrize('isbn,result', [(s, s[-1]) for s in TEST_ISBNS] + [
     ('978-052-187-1723', '3'),
     ('3540009787', '7'),
     ('354000978', '7'),
@@ -84,7 +84,7 @@ def test_convert(isbn, result):
     assert Isbn(isbn).convert() == result
 
 
-@mark.parametrize('isbn,result', [(s, True) for s in TEST_BOOKS.values()] + [
+@mark.parametrize('isbn,result', [(s, True) for s in TEST_ISBNS] + [
     ('978-052-187-1723', True),
     ('978-052-187-1720', False),
     ('3540009787', True),
@@ -129,7 +129,7 @@ def test_to_url_invalid_site():
 
 
 @mark.parametrize('isbn,result',
-    [(s, 'URN:ISBN:%s' % s) for s in TEST_BOOKS.values()]
+    [(s, 'URN:ISBN:%s' % s) for s in TEST_ISBNS]
 )
 def test_to_urn(isbn, result):
     assert Isbn(isbn).to_urn() == result
