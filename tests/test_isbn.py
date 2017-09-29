@@ -19,6 +19,7 @@
 
 from sys import version_info
 
+# We need to favour unittest2 for .subtest() support
 try:
     from unittest2 import TestCase, skipIf
 except ImportError:

@@ -19,6 +19,7 @@
 
 import unicodedata
 
+# We need to favour unittest2 for .subtest() support
 try:
     from unittest2 import TestCase
 except ImportError:

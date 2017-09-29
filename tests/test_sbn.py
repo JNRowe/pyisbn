@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
+# We need to favour unittest2 for .subtest() support
 try:
     from unittest2 import TestCase
 except ImportError:
