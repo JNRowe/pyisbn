@@ -1,7 +1,7 @@
 #
 # coding=utf-8
-"""test_isbn13 - Test Isbn13 class."""
-# Copyright © 2012-2017  James Rowe <jnrowe@gmail.com>
+"""data - ISBNs for use in tests."""
+# Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
 #
 # This file is part of pyisbn.
 #
@@ -17,18 +17,16 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from pytest import mark
-
-from pyisbn import Isbn13
-
-from tests.data import TEST_ISBN13S
+import json
 
 
-@mark.parametrize('isbn', TEST_ISBN13S + ['978-052-187-1723', ])
-def test_calculate_checksum(isbn):
-    assert Isbn13(isbn).calculate_checksum() == isbn[-1]
+with open('tests/books.json') as f:
+    #: Sample book data for use in tests
+    TEST_BOOKS = json.load(f)
 
-
-@mark.parametrize('isbn', TEST_ISBN13S + ['9780071148160', ])
-def test_convert(isbn):
-    assert Isbn13(isbn).convert()[:-1] == isbn[3:-1]
+#: ISBNs from sample book data for use in tests
+TEST_ISBNS = [s.replace('-', '') for s in TEST_BOOKS.values()]
+#: ISBN 10s from sample book data for use in tests
+TEST_ISBN10S = [s for s in TEST_ISBNS if len(s) == 10]
+#: ISBN 13s from sample book data for use in tests
+TEST_ISBN13S = [s for s in TEST_ISBNS if len(s) == 13]
