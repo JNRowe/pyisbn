@@ -8,7 +8,6 @@ test/data
 *.py[co]
 .coverage
 .git_version
-.noseids
 
 ChangeLog
 MANIFEST
