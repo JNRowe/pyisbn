@@ -58,7 +58,7 @@ def test__isbn_cleanse_reflect_type(isbn):
 
 
 def test__isbn_cleanse_invalid_type():
-    with raises(TypeError, message="ISBN must be a string, received 2"):
+    with raises(TypeError, match="ISBN must be a string, received 2"):
         _isbn_cleanse(2)
 
 
@@ -67,7 +67,7 @@ def test__isbn_cleanse_invalid_type():
     (False, 'ISBN must be either 9 or 12 characters long without checksum'),
 ])
 def test__isbn_cleanse_invalid_length(checksum, message):
-    with raises(IsbnError, message=message):
+    with raises(IsbnError, match=message):
         _isbn_cleanse('0-123', checksum=checksum)
 
 
@@ -79,12 +79,12 @@ def test__isbn_cleanse_invalid_length(checksum, message):
     ('0x0000000', 'non-digit parts'),
 ])
 def test__isbn_cleanse_invalid(isbn, message):
-    with raises(IsbnError, message=message):
+    with raises(IsbnError, match=message):
         _isbn_cleanse(isbn)
 
 
 def test__isbn_cleanse_invalid_no_checksum():
-    with raises(IsbnError, message='non-digit parts'):
+    with raises(IsbnError, match='non-digit parts'):
         _isbn_cleanse('0x0000000', False)
 
 
@@ -99,8 +99,8 @@ def test_convert(isbn):
 
 
 def test_convert_invalid():
-    with raises(IsbnError, message='Only ISBN-13s with 978 Bookland code can '
-                                   'be converted to ISBN-10.'):
+    with raises(IsbnError, match='Only ISBN-13s with 978 Bookland code can be '
+                                 'converted to ISBN-10.'):
         convert('0000000000000')
 
 

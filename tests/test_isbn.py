@@ -63,7 +63,7 @@ def test___format__(isbn, format_spec, result):
 
 
 def test___format__invalid_format_spec():
-    with raises(ValueError, message="Unknown format_spec 'biscuit'"):
+    with raises(ValueError, match="Unknown format_spec 'biscuit'"):
         format(Isbn('0071148167'), 'biscuit')
 
 
