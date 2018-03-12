@@ -16,8 +16,8 @@ In the general case tests can be run via :pypi:`pytest`::
 
     $ pytest tests
 
-When preparing a release it is important to check that :mod:`pyisbn` works with
-all currently supported Python versions, and that the documentation is correct.
+When preparing a release it is important to check that |modref| works with all
+currently supported Python versions, and that the documentation is correct.
 
 Prepare release
 ---------------
@@ -37,11 +37,11 @@ Update PyPI
   This is the section you're especially likely to get wrong at some point if
   you try to handle all of this manually ;)
 
-Create and upload the new release tarballs to PyPI::
+Create and upload the new release tarballs to |PyPI|::
 
     $ ./setup.py sdist bdist_wheel register upload --sign
 
 Fetch the uploaded tarballs, and check for errors.
 
-You should also perform test installations from PyPI, to check the experience
-:mod:`pyisbn` users will have.
+You should also perform test installations from |PyPI|, to check the experience
+|modref| users will have.

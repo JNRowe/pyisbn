@@ -3,11 +3,10 @@
 Installation
 ------------
 
-You can install :mod:`pyisbn` either via :abbr:`PyPI (Python Package Index)` or
-from source.
+You can install |modref| either via |PyPI| or from source.
 
-Using :abbr:`PyPI (Python Package Index)`
-'''''''''''''''''''''''''''''''''''''''''
+Using |PyPI|
+''''''''''''
 
 To install using :pypi:`pip`::
 
@@ -28,4 +27,4 @@ steps::
     # python setup.py install  # to install in Python's site-packages
     $ python setup.py install --user  # to install for a single user
 
-:mod:`pyisbn` has no dependencies outside the standard library.
+|modref| has no dependencies outside the standard library.

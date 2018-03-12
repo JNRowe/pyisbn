@@ -69,6 +69,12 @@ except NameError:
 version = '.'.join(map(str, pyisbn._version.tuple[:2]))
 release = pyisbn._version.dotted
 
+rst_prolog = """
+.. |ISBN| replace:: :abbr:`ISBN (International Standard Book Number)`
+.. |PYPI| replace:: :abbr:`PyPI (Python Package Index)`
+.. |modref| replace:: :mod:`pyisbn`
+"""
+
 pygments_style = 'sphinx'
 try:
     html_last_updated_fmt = check_output(['git', 'log',
