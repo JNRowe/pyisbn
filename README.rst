@@ -13,10 +13,6 @@
    :target: https://pypi.python.org/pypi/pyisbn
    :alt: Current PyPI release
 
-.. image:: https://img.shields.io/pypi/JNRowe/pyisbn.svg?style=plastic
-   :target: https://pypi.python.org/pypi/pyisbn
-   :alt: Number of downloads from PyPI
-
 Introduction
 ------------
 
