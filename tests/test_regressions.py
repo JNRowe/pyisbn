@@ -30,7 +30,7 @@ from pyisbn import IsbnError, _isbn_cleanse
     '978–1–84724–253–2',
     '978―0199564095',
 ])
-def test_issue_7_unistr(isbn):
+def test_issue_7_unistr(isbn: str):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
 
 
@@ -38,6 +38,6 @@ def test_issue_7_unistr(isbn):
     '2901568582497',
     '5800034170763',
 ])
-def test_issue_16_bookland(isbn):
+def test_issue_16_bookland(isbn: str):
     with raises(IsbnError, match='Bookland'):
         _isbn_cleanse(isbn)

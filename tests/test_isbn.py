@@ -29,7 +29,7 @@ from tests.data import TEST_ISBNS
     '9780521871723',
     '3540009787',
 ])
-def test___repr__(isbn):
+def test___repr__(isbn: str):
     assert repr(Isbn(isbn)) == f'Isbn({isbn!r})'
 
 
@@ -38,7 +38,7 @@ def test___repr__(isbn):
     '978-052-187-1723',
     '3540009787',
 ])
-def test___str__(isbn):
+def test___str__(isbn: str):
     assert str(Isbn(isbn)) == f'ISBN {isbn}'
 
 
@@ -56,7 +56,7 @@ def test___str__(isbn):
         'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
         '3540009787'),
 ])
-def test___format__(isbn, format_spec, result):
+def test___format__(isbn: str, format_spec: str, result: str):
     assert format(Isbn(isbn), format_spec) == result
 
 
@@ -70,7 +70,7 @@ def test___format__invalid_format_spec():
     ('3540009787', '7'),
     ('354000978', '7'),
 ])
-def test_calculate_checksum(isbn, result):
+def test_calculate_checksum(isbn: str, result: str):
     assert Isbn(isbn).calculate_checksum() == result
 
 
@@ -78,7 +78,7 @@ def test_calculate_checksum(isbn, result):
     ('0071148167', '9780071148160'),
     ('9780071148160', '0071148167'),
 ])
-def test_convert(isbn, result):
+def test_convert(isbn: str, result: str):
     assert Isbn(isbn).convert() == result
 
 
@@ -88,7 +88,7 @@ def test_convert(isbn, result):
     ('3540009787', True),
     ('354000978x', False),
 ])
-def test_validate(isbn, result):
+def test_validate(isbn: str, result: bool):
     assert Isbn(isbn).validate() == result
 
 
@@ -97,7 +97,7 @@ def test_validate(isbn, result):
     ('uk', '.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
     ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
 ])
-def test_to_url(country, result):
+def test_to_url(country: str, result: str):
     assert Isbn('0071148167').to_url(country=country) \
         == 'https://www.amazon' + result
 
@@ -117,7 +117,7 @@ def test_to_url_invalid_country():
      'https://www.whsmith.co.uk/search/go?w=0071148167&af=cat1:books'),
     ('worldcat', 'http://worldcat.org/isbn/0071148167'),
 ])
-def test_to_url_site(site, result):
+def test_to_url_site(site: str, result: str):
     assert Isbn('0071148167').to_url(site=site) == result
 
 
@@ -129,5 +129,5 @@ def test_to_url_invalid_site():
 @mark.parametrize('isbn,result',
     [(s, f'URN:ISBN:{s}') for s in TEST_ISBNS]
 )
-def test_to_urn(isbn, result):
+def test_to_urn(isbn: str, result: str):
     assert Isbn(isbn).to_urn() == result

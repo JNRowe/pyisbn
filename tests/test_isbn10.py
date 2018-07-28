@@ -27,10 +27,10 @@ from tests.data import TEST_ISBN10S
 
 
 @mark.parametrize('isbn', TEST_ISBN10S + ['3540009787', ])
-def test_calculate_checksum(isbn):
+def test_calculate_checksum(isbn: str):
     assert Isbn10(isbn).calculate_checksum() == isbn[-1]
 
 
 @mark.parametrize('isbn', TEST_ISBN10S + ['0071148167', ])
-def test_convert(isbn):
+def test_convert(isbn: str):
     assert Isbn10(isbn).convert()[:-1] == '978' + isbn[:-1]

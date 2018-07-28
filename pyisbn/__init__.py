@@ -50,14 +50,17 @@ __copyright__ = 'Copyright © 2007-2017  James Rowe'
 __license__ = 'GNU General Public License Version 3'
 
 import unicodedata
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 
 #: Dash types to accept, and scrub, in ISBN inputs
-DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
-                                          'HORIZONTAL BAR')]
+DASHES: List[str] = [
+    unicodedata.lookup(s)
+    for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH', 'HORIZONTAL BAR')
+]
 
 #: Site to URL mappings, broken out for easier extending at runtime
-URL_MAP = {
+URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
     'amazon': (
         ('https://www.amazon.%(tld)s/s'
          '?search-alias=stripbooks&field-isbn=%(isbn)s'),
@@ -101,11 +104,11 @@ class Isbn:
 
     """Class for representing ISBN objects."""
 
-    def __init__(self, isbn):
+    def __init__(self, isbn: str) -> None:
         """Initialise a new ``Isbn`` object.
 
         Args:
-            isbn (str): ISBN string
+            isbn: ISBN string
 
         """
         super(Isbn, self).__init__()
@@ -115,33 +118,33 @@ class Isbn:
         else:
             self.isbn = _isbn_cleanse(isbn)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Self-documenting string representation.
 
 
         Returns:
-            ``str``: String to recreate ``Isbn`` object
+            String to recreate ``Isbn`` object
 
         """
         return f'{self.__class__.__name__}({self.isbn!r})'
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Pretty printed ISBN string.
 
         Returns:
-            ``str``: Human readable string representation of ``Isbn`` object
+            Human readable string representation of ``Isbn`` object
 
         """
         return f'ISBN {self._isbn}'
 
-    def __format__(self, format_spec=None):
+    def __format__(self, format_spec: Optional[str] = None) -> str:
         """Extended pretty printing for ISBN strings.
 
         Args:
-            format_spec (str): Extended format to use
+            format_spec: Extended format to use
 
         Returns:
-            ``str``: Human readable string representation of ``Isbn`` object
+            Human readable string representation of ``Isbn`` object
 
         Raises:
             ValueError: Unknown value for ``format_spec``
@@ -164,11 +167,11 @@ class Isbn:
         else:
             raise ValueError(f'Unknown format_spec {format_spec!r}')
 
-    def calculate_checksum(self):
+    def calculate_checksum(self) -> str:
         """Calculate ISBN checksum.
 
         Returns:
-            ``str``: ISBN checksum value
+            ISBN checksum value
 
         """
         if len(self.isbn) in (9, 12):
@@ -176,36 +179,37 @@ class Isbn:
         else:
             return calculate_checksum(self.isbn[:-1])
 
-    def convert(self, code='978'):
+    def convert(self, code: str = '978') -> str:
         """Convert ISBNs between ISBN-10 and ISBN-13.
 
         Args:
-            code (str): ISBN-13 prefix code
+            code: ISBN-13 prefix code
 
         Returns:
-            ``str``: Converted ISBN
+            Converted ISBN
 
         """
         return convert(self.isbn, code)
 
-    def validate(self):
+    def validate(self) -> bool:
         """Validate an ISBN value.
 
         Returns:
-            ``bool``: ``True`` if ISBN is valid
+            ``True`` if ISBN is valid
 
         """
         return validate(self.isbn)
 
-    def to_url(self, site='amazon', country='us'):
+    def to_url(self, site: str = 'amazon',
+               country: Optional[str] = 'us') -> str:
         """Generate a link to an online book site.
 
         Args:
-            site (str): Site to create link to
-            country (str): Country specific version of ``site``
+            site: Site to create link to
+            country: Country specific version of ``site``
 
         Returns:
-            ``str``: URL on ``site`` for book
+            URL on ``site`` for book
 
         Raises:
             SiteError: Unknown site value
@@ -230,14 +234,14 @@ class Isbn:
             inject['tld'] = tld
         return url % inject
 
-    def to_urn(self):
+    def to_urn(self) -> str:
         """Generate a RFC 3187 URN.
 
         :rfc:`3187` is the commonly accepted way to use ISBNs as uniform
         resource names.
 
         Returns:
-            ``str``: :rfc:`3187` compliant URN
+            :rfc:`3187` compliant URN
 
         """
         return f'URN:ISBN:{self._isbn}'
@@ -252,7 +256,7 @@ class Isbn10(Isbn):
 
     """
 
-    def __init__(self, isbn):
+    def __init__(self, isbn) -> None:
         """Initialise a new ``Isbn10`` object.
 
         Args:
@@ -261,23 +265,23 @@ class Isbn10(Isbn):
         """
         super(Isbn10, self).__init__(isbn)
 
-    def calculate_checksum(self):
+    def calculate_checksum(self) -> str:
         """Calculate ISBN-10 checksum.
 
         Returns:
-            ``str``: ISBN-10 checksum value
+            ISBN-10 checksum value
 
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code='978'):
+    def convert(self, code: str = '978') -> str:
         """Convert ISBN-10 to ISBN-13.
 
         Args:
-            code (str): ISBN-13 prefix code
+            code: ISBN-13 prefix code
 
         Returns:
-            ``str``: ISBN-13 string
+            ISBN-13 string
 
         """
         return convert(self.isbn, code)
@@ -292,42 +296,42 @@ class Sbn(Isbn10):
 
     """
 
-    def __init__(self, sbn):
+    def __init__(self, sbn: str) -> None:
         """Initialise a new ``Sbn`` object.
 
         Args:
-            sbn (str): SBN string
+            sbn: SBN string
 
         """
         isbn = '0' + sbn
         super(Sbn, self).__init__(isbn)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Self-documenting string representation.
 
         Returns:
-            ``str``: String to recreate ``Sbn`` object
+            String to recreate ``Sbn`` object
 
         """
         return f'{self.__class__.__name__}({self.isbn[1:]!r})'
 
-    def calculate_checksum(self):
+    def calculate_checksum(self) -> str:
         """Calculate SBN checksum.
 
         Returns:
-            ``str``: SBN checksum value
+            SBN checksum value
 
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code='978'):
+    def convert(self, code: str = '978') -> str:
         """Convert SBN to ISBN-13.
 
         Args:
-            code (str): ISBN-13 prefix code
+            code: ISBN-13 prefix code
 
         Returns:
-            ``str``: ISBN-13 string
+            ISBN-13 string
 
         """
         return super(Sbn, self).convert(code)
@@ -342,32 +346,32 @@ class Isbn13(Isbn):
 
     """
 
-    def __init__(self, isbn):
+    def __init__(self, isbn: str) -> None:
         """Initialise a new ``Isbn13`` object.
 
         Args:
-            isbn (str): ISBN-13 string
+            isbn: ISBN-13 string
 
         """
         super(Isbn13, self).__init__(isbn)
 
-    def calculate_checksum(self):
+    def calculate_checksum(self) -> str:
         """Calculate ISBN-13 checksum.
 
         Returns:
-            ``str``: ISBN-13 checksum value
+            ISBN-13 checksum value
 
         """
         return calculate_checksum(self.isbn[:12])
 
-    def convert(self, code=None):
+    def convert(self, code: Any = None) -> str:
         """Convert ISBN-13 to ISBN-10.
 
         Args:
             code: Ignored, only for compatibility with ``Isbn``
 
         Returns:
-            ``str``: ISBN-10 string
+            ISBN-10 string
 
         Raises:
             ValueError: When ISBN-13 isn't a Bookland "978" ISBN
@@ -376,16 +380,15 @@ class Isbn13(Isbn):
         return convert(self.isbn)
 
 
-def _isbn_cleanse(isbn, checksum=True):
+def _isbn_cleanse(isbn: str, checksum: bool = True) -> str:
     """Check ISBN is a string, and passes basic sanity checks.
 
     Args:
-        isbn (str): SBN, ISBN-10 or ISBN-13
-        checksum (bool): ``True`` if ``isbn`` includes checksum character
+        isbn: SBN, ISBN-10 or ISBN-13
+        checksum: ``True`` if ``isbn`` includes checksum character
 
     Returns:
-        ``str``: ISBN with hyphenation removed, including when called with a
-            SBN
+        ISBN with hyphenation removed, including when called with a SBN
 
     Raises:
         TypeError: ``isbn`` is not a ``str`` type
@@ -427,14 +430,14 @@ def _isbn_cleanse(isbn, checksum=True):
     return isbn
 
 
-def calculate_checksum(isbn):
+def calculate_checksum(isbn: str) -> str:
     """Calculate ISBN checksum.
 
     Args:
-        isbn (str): SBN, ISBN-10 or ISBN-13
+        isbn: SBN, ISBN-10 or ISBN-13
 
     Returns:
-        ``str``: Checksum for given ISBN or SBN
+        Checksum for given ISBN or SBN
 
     """
     isbn = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
@@ -452,7 +455,7 @@ def calculate_checksum(isbn):
     return str(check)
 
 
-def convert(isbn, code='978'):
+def convert(isbn: str, code: str = '978') -> str:
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
     Note:
@@ -461,11 +464,11 @@ def convert(isbn, code='978'):
         allows ISBNs without hyphenation.
 
     Args:
-        isbn (str): SBN, ISBN-10 or ISBN-13
-        code (str): EAN Bookland code
+        isbn: SBN, ISBN-10 or ISBN-13
+        code: EAN Bookland code
 
     Returns:
-        ``str``: Converted ISBN-10 or ISBN-13
+        Converted ISBN-10 or ISBN-13
 
     Raise:
         IsbnError: When ISBN-13 isn't convertible to an ISBN-10
@@ -483,7 +486,7 @@ def convert(isbn, code='978'):
                             'converted to ISBN-10.')
 
 
-def validate(isbn):
+def validate(isbn: str) -> bool:
     """Validate ISBNs.
 
     Warning:
@@ -496,10 +499,10 @@ def validate(isbn):
         unlikely that they refuse to search for invalid published ISBNs.
 
     Args:
-        isbn (str): SBN, ISBN-10 or ISBN-13
+        isbn: SBN, ISBN-10 or ISBN-13
 
     Returns:
-        ``bool``: ``True`` if ISBN is valid
+        ``True`` if ISBN is valid
 
     """
     isbn = _isbn_cleanse(isbn)
