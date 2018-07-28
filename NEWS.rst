@@ -6,6 +6,23 @@ User-visible changes
 
 .. contents::
 
+1.2.0 - 2018-07-28
+------------------
+
+.. note::
+
+   This is really just a maintenance release, but changes a few deep things in
+   the development process.  It also marks a *possible* fork point for dropping
+   Python 2 support.
+
+* ``pyisbn`` errors are now children of ``PyisbnError``
+* pytest_ is now required to run the tests
+* expecter_ is no longer required
+* 3.7 is now officially supported
+
+.. _pytest: http://pytest.org/
+.. _expecter: https://pypi.org/project/expecter/
+
 1.1.0 - 2017-04-04
 ------------------
 
