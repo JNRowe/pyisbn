@@ -223,7 +223,7 @@ class Isbn(object):
                 url = URL_MAP[site]
         except KeyError:
             raise SiteError(site)
-        inject = {'isbn': self.isbn}
+        inject = {'isbn': self._isbn}
         if tlds:
             if country not in tlds:
                 raise CountryError(country)
