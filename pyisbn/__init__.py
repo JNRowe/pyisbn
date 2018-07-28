@@ -442,7 +442,7 @@ def calculate_checksum(isbn: str) -> str:
     """
     isbn = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
     if len(isbn) == 9:
-        products = [x * y for x, y in zip(isbn, range(1, 10))]
+        products = [x * y for x, y in enumerate(isbn, 1)]
         check = sum(products) % 11
         if check == 10:
             check = 'X'
