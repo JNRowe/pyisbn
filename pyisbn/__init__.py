@@ -123,7 +123,7 @@ class Isbn:
             ``str``: String to recreate ``Isbn`` object
 
         """
-        return '%s(%r)' % (self.__class__.__name__, self.isbn)
+        return f'{self.__class__.__name__}({self.isbn!r})'
 
     def __str__(self):
         """Pretty printed ISBN string.
@@ -132,7 +132,7 @@ class Isbn:
             ``str``: Human readable string representation of ``Isbn`` object
 
         """
-        return 'ISBN %s' % self._isbn
+        return f'ISBN {self._isbn}'
 
     def __format__(self, format_spec=None):
         """Extended pretty printing for ISBN strings.
@@ -162,7 +162,7 @@ class Isbn:
         elif format_spec == 'urn':
             return self.to_urn()
         else:
-            raise ValueError('Unknown format_spec %r' % format_spec)
+            raise ValueError(f'Unknown format_spec {format_spec!r}')
 
     def calculate_checksum(self):
         """Calculate ISBN checksum.
@@ -240,7 +240,7 @@ class Isbn:
             ``str``: :rfc:`3187` compliant URN
 
         """
-        return 'URN:ISBN:%s' % self._isbn
+        return f'URN:ISBN:{self._isbn}'
 
 
 class Isbn10(Isbn):
@@ -309,7 +309,7 @@ class Sbn(Isbn10):
             ``str``: String to recreate ``Sbn`` object
 
         """
-        return '%s(%r)' % (self.__class__.__name__, self.isbn[1:])
+        return f'{self.__class__.__name__}({self.isbn[1:]!r})'
 
     def calculate_checksum(self):
         """Calculate SBN checksum.
@@ -394,7 +394,7 @@ def _isbn_cleanse(isbn, checksum=True):
 
     """
     if not isinstance(isbn, str):
-        raise TypeError('ISBN must be a string, received %r' % isbn)
+        raise TypeError(f'ISBN must be a string, received {isbn!r}')
 
     for dash in DASHES:
         isbn = isbn.replace(dash, '')

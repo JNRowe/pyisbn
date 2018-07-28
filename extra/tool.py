@@ -31,7 +31,7 @@ def isbn_typecheck(string):
             raise ValueError('Invalid checksum')
     except ValueError:
         ex = sys.exc_info()[1]
-        raise argparse.ArgumentTypeError('%s %r' % (ex.args[0], string))
+        raise argparse.ArgumentTypeError(f'{ex.args[0]} {string!r}')
     return isbn
 
 
@@ -49,7 +49,7 @@ def main():
         epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues'
     )
     parser.add_argument('--version', action='version',
-                        version='pyisbn %s' % _version.dotted)
+                        version=f'pyisbn {_version.dotted}')
     commands = parser.add_mutually_exclusive_group()
     parg = partial_arg(commands.add_argument)
     parg('-c', '--checksum', const='calculate_checksum',

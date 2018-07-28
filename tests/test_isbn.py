@@ -30,7 +30,7 @@ from tests.data import TEST_ISBNS
     '3540009787',
 ])
 def test___repr__(isbn):
-    assert repr(Isbn(isbn)) == 'Isbn(%r)' % isbn
+    assert repr(Isbn(isbn)) == f'Isbn({isbn!r})'
 
 
 @mark.parametrize('isbn', TEST_ISBNS + [
@@ -39,11 +39,11 @@ def test___repr__(isbn):
     '3540009787',
 ])
 def test___str__(isbn):
-    assert str(Isbn(isbn)) == 'ISBN %s' % isbn
+    assert str(Isbn(isbn)) == f'ISBN {isbn}'
 
 
 @mark.parametrize('isbn,format_spec,result',
-    [(s, '', 'ISBN %s' % s) for s in TEST_ISBNS] + [
+    [(s, '', f'ISBN {s}') for s in TEST_ISBNS] + [
     ('9780521871723', '', 'ISBN 9780521871723'),
     ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
     ('3540009787', 'url',
@@ -127,7 +127,7 @@ def test_to_url_invalid_site():
 
 
 @mark.parametrize('isbn,result',
-    [(s, 'URN:ISBN:%s' % s) for s in TEST_ISBNS]
+    [(s, f'URN:ISBN:{s}') for s in TEST_ISBNS]
 )
 def test_to_urn(isbn, result):
     assert Isbn(isbn).to_urn() == result
