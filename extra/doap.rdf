@@ -16,13 +16,13 @@
         classes for representing ISBNs as objects.
     </description>
 
-    <homepage rdf:resource="https://github.com/JNRowe/pyisbn" />
+    <homepage rdf:resource="https://github.com/JNRowe/pyisbn/" />
     <download-page rdf:resource="https://pypi.org/project/pyisbn/" />
-    <bug-database rdf:resource="https://github.com/JNRowe/pyisbn/issues" />
+    <bug-database rdf:resource="https://github.com/JNRowe/pyisbn/issues/" />
     <repository>
         <GitRepository>
             <location rdf:resource="git://github.com/JNRowe/pyisbn.git" />
-            <browse rdf:resource="https://github.com/JNRowe/pyisbn" />
+            <browse rdf:resource="https://github.com/JNRowe/pyisbn/" />
         </GitRepository>
     </repository>
     <created>2014-01-31</created>
@@ -33,7 +33,7 @@
         <foaf:Person>
             <foaf:name>James Rowe</foaf:name>
             <mbox rdf:resource="mailto:jnrowe@gmail.com" />
-            <rdfs:homepage rdf:resource="https://jnrowe.github.io" />
+            <rdfs:homepage rdf:resource="https://jnrowe.github.io/" />
         </foaf:Person>
     </maintainer>
 </Project>
