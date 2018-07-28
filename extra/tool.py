@@ -16,6 +16,8 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0+
 
 # You won't find this pretty… however it was quick to write and it's compatible
 # with 2.4-3.3
