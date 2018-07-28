@@ -3,23 +3,10 @@ language: python
 matrix:
     fast_finish: true
 python:
-  - 2.6
-  - 2.7
-  - 3.3
-  - 3.4
-  - 3.5
   - 3.6
   - 3.7
 sudo: required
 install:
-  # On the systems I care about PYTHON{2,3} are set, this just makes travis
-  # behave the same way
-  - if [[ ${TRAVIS_PYTHON_VERSION::1} == 3 ]]; then
-      export PYTHON3=true;
-    else
-      export PYTHON2=true;
-    fi
-  - pip install .
   - pip install -r extra/requirements-test.txt
   - pip install coveralls
 script:

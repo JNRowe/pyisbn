@@ -6,15 +6,20 @@ This module supports the calculation of ISBN checksums with
 ``calculate_checksum()``, the conversion between ISBN-10 and ISBN-13 with
 ``convert()`` and the validation of ISBNs with ``validate()``.
 
-All the ISBNs must be passed in as ``str`` types, even if it would seem
-reasonable to accept some ``int`` forms.  The reason behind this is English
-speaking countries use ``0`` for their group identifier, and Python would treat
-ISBNs beginning with ``0`` as octal representations producing incorrect
-results.  While it may be feasible to allow some cases as non-``str`` types the
-complexity in design and usage isn't worth the minimal benefit.
+.. note::
+
+    All the ISBNs must be passed in as ``str`` types, even if it would seem
+    reasonable to accept some ``int`` forms.  The reason behind this is English
+    speaking countries use ``0`` for their group identifier, and Python 3 would
+    treat this as a syntax error [#]_.  While it may be feasible to allow some
+    cases as non-``str`` types the complexity in design and usage isn't worth
+    the minimal benefit.
 
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
+
+.. [#] Previous Python releases would have assumed it was octal representation
+       of a number
 """
 # Copyright © 2007-2018  James Rowe <jnrowe@gmail.com>
 #                        notconfusing <isalix@gmail.com>
@@ -35,7 +40,7 @@ books in their collection.
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-from pyisbn import _version
+from . import _version
 
 
 __version__ = _version.dotted
@@ -46,15 +51,6 @@ __license__ = 'GNU General Public License Version 3'
 
 import unicodedata
 
-from sys import version_info
-
-PY2 = version_info[0] == 2
-
-if PY2:  # pragma: Python 2
-    string_types = (str, unicode)
-else:  # pragma: Python 3
-    string_types = (str, )
-    unicode = str
 
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES = [unicodedata.lookup(s) for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH',
@@ -101,11 +97,9 @@ class SiteError(PyisbnError):
     """Unknown site value."""
 
 
-class Isbn(object):
+class Isbn:
 
     """Class for representing ISBN objects."""
-
-    __slots__ = ('__weakref__', '_isbn', 'isbn')
 
     def __init__(self, isbn):
         """Initialise a new ``Isbn`` object.
@@ -399,17 +393,11 @@ def _isbn_cleanse(isbn, checksum=True):
         IsbnError: Incorrect SBN or ISBN formatting
 
     """
-    if not isinstance(isbn, string_types):
+    if not isinstance(isbn, str):
         raise TypeError('ISBN must be a string, received %r' % isbn)
 
-    if PY2 and isinstance(isbn, str):  # pragma: Python 2
-        isbn = unicode(isbn)
-        uni_input = False
-    else:  # pragma: Python 3
-        uni_input = True
-
     for dash in DASHES:
-        isbn = isbn.replace(dash, unicode())
+        isbn = isbn.replace(dash, '')
 
     if checksum:
         if not isbn[:-1].isdigit():
@@ -436,12 +424,7 @@ def _isbn_cleanse(isbn, checksum=True):
         if not len(isbn) in (9, 12):
             raise IsbnError('ISBN must be either 9 or 12 characters long '
                             'without checksum')
-    if PY2 and not uni_input:  # pragma: Python 2
-        # Sadly, type ping-pong is required to maintain backwards compatibility
-        # with previous pyisbn releases for Python 2 users.
-        return str(isbn)
-    else:  # pragma: Python 3
-        return isbn
+    return isbn
 
 
 def calculate_checksum(isbn):
@@ -461,14 +444,8 @@ def calculate_checksum(isbn):
         if check == 10:
             check = 'X'
     else:
-        # As soon as Python 2.4 support is dumped
-        # [(isbn[i] if i % 2 == 0 else isbn[i] * 3) for i in range(12)]
-        products = []
-        for i in range(12):
-            if i % 2 == 0:
-                products.append(isbn[i])
-            else:
-                products.append(isbn[i] * 3)
+        products = [(isbn[i] if i % 2 == 0 else isbn[i] * 3)
+                    for i in range(12)]
         check = 10 - sum(products) % 10
         if check == 10:
             check = 0

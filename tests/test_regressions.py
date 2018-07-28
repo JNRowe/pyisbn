@@ -19,19 +19,16 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-import unicodedata
-
 from pytest import mark, raises
 
 from pyisbn import IsbnError, _isbn_cleanse
 
-
-# The lookup hoop jumping here is to make it easier to generate native Unicode
-# types on the various supported Python versions.
+# NOTE: Depending on your typeface and editor you may notice that the following
+# +# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [
     '978-1-84724-253-2',
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
-    unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
+    '978–1–84724–253–2',
+    '978―0199564095',
 ])
 def test_issue_7_unistr(isbn):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))

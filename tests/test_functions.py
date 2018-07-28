@@ -19,8 +19,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-import unicodedata
-
 from pytest import mark, raises
 
 from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
@@ -42,17 +40,21 @@ def test__isbn_cleanse_isbn(isbn):
 
 
 # See tests.test_regressions.test_issue_7_unistr
+# NOTE: Depending on your typeface and editor you may notice that the following
+# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
-    unicodedata.lookup('EM DASH').join(['978', '0', '385', '08695', '0']),
-    unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
+    '978–1–84724–253–2',
+    '978—0—385—08695—0',
+    '978―0199564095',
 ])
 def test__isbn_cleanse_unicode_dash(isbn):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
 
 
+# NOTE: Depending on your typeface and editor you may notice that the following
+# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
+    '978–1–84724–253–2',
     '978-0-385-08695-0',
 ])
 def test__isbn_cleanse_reflect_type(isbn):

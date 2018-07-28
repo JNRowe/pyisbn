@@ -19,8 +19,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-from sys import version_info
-
 from pytest import mark, raises
 
 from pyisbn import (CountryError, Isbn, SiteError)
@@ -44,8 +42,6 @@ def test___str__(isbn):
     assert str(Isbn(isbn)) == 'ISBN %s' % isbn
 
 
-@mark.skipif(version_info < (2, 6),
-             reason='format() not supported with this Python version')
 @mark.parametrize('isbn,format_spec,result',
     [(s, '', 'ISBN %s' % s) for s in TEST_ISBNS] + [
     ('9780521871723', '', 'ISBN 9780521871723'),
