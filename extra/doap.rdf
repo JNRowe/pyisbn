@@ -17,7 +17,7 @@
     </description>
 
     <homepage rdf:resource="https://github.com/JNRowe/pyisbn" />
-    <download-page rdf:resource="https://pypi.python.org/pypi/pyisbn/" />
+    <download-page rdf:resource="https://pypi.org/project/pyisbn/" />
     <bug-database rdf:resource="https://github.com/JNRowe/pyisbn/issues" />
     <repository>
         <GitRepository>

@@ -14,4 +14,4 @@ please drop me a mail_.
 python-stdnum_ by Arthur de Jong is a package to validate identifiers in a huge
 range of formats, including ISBNs.
 
-.. _python-stdnum: https://pypi.python.org/pypi/python-stdnum/
+.. _python-stdnum: https://pypi.org/project/python-stdnum/
