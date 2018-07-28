@@ -21,7 +21,7 @@
     <bug-database rdf:resource="https://github.com/JNRowe/pyisbn/issues/" />
     <repository>
         <GitRepository>
-            <location rdf:resource="git://github.com/JNRowe/pyisbn.git" />
+            <location rdf:resource="https://github.com/JNRowe/pyisbn.git" />
             <browse rdf:resource="https://github.com/JNRowe/pyisbn/" />
         </GitRepository>
     </repository>
