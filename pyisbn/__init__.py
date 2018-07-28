@@ -16,7 +16,8 @@ complexity in design and usage isn't worth the minimal benefit.
 The functions in this module also support 9-digit SBNs for people with older
 books in their collection.
 """
-# Copyright © 2007-2017  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007-2018  James Rowe <jnrowe@gmail.com>
+#                        notconfusing <isalix@gmail.com>
 #
 # This file is part of pyisbn.
 #

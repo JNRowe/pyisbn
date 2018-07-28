@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # coding=utf-8
 """tool - A simple pyisbn interface for the command line."""
-# Copyright © 2013-2017  James Rowe <jnrowe@gmail.com>
+# Copyright © 2013-2018  James Rowe <jnrowe@gmail.com>
 #
 # This file is part of pyisbn.
 #

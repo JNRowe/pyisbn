@@ -1,7 +1,7 @@
 #
 # coding=utf-8
 """conf - Sphinx configuration information."""
-# Copyright © 2011-2017  James Rowe <jnrowe@gmail.com>
+# Copyright © 2011-2018  James Rowe <jnrowe@gmail.com>
 #
 # This file is part of pyisbn.
 #
