@@ -6,6 +6,16 @@ User-visible changes
 
 .. contents::
 
+1.1.0 - 2017-04-04
+------------------
+
+* 3.{4..6} are now officially supported
+* URL links now use HTTPs where possible
+* Sphinx_ 1.3 is now required to build documentation
+* nose2_ 0.5 with the coverage plugin is now required to run the tests
+
+.. _nose2: https://pypi.org/project/nose2/
+
 1.0.0 - 2014-01-31
 ------------------
 
