@@ -1,17 +1,7 @@
 ``pyisbn`` - A module for working with 10- and 13-digit |ISBNs|
 ===============================================================
 
-.. image:: https://secure.travis-ci.org/JNRowe/pyisbn.png?branch=master
-   :target: https://travis-ci.org/JNRowe/pyisbn
-   :alt: Test state on master
-
-.. image:: https://img.shields.io/coveralls/JNRowe/pyisbn/master.svg?style=plastic
-   :target: https://coveralls.io/repos/JNRowe/pyisbn
-   :alt: Coverage state on master
-
-.. image:: https://img.shields.io/pypi/v/pyisbn.svg?style=plastic
-   :target: https://pypi.python.org/pypi/pyisbn
-   :alt: Current PyPI release
+|status| |travis| |coveralls| |pypi| |pyvers| |readthedocs| |develop|
 
 Introduction
 ------------
@@ -111,6 +101,32 @@ reproduce the problem, or even better a patch!
 .. _Python: http://www.python.org/
 .. _issue: https://github.com/JNRowe/pyisbn/issues
 .. _mail: jnrowe@gmail.com
+
+.. |travis| image:: https://img.shields.io/travis/JNRowe/pyisbn.png
+   :target: https://travis-ci.org/JNRowe/pyisbn
+   :alt: Test state on master
+
+.. |develop| image:: https://img.shields.io/github/commits-since/JNRowe/pyisbn/latest.png
+   :target: https://github.com/JNRowe/pyisbn
+   :alt: Recent developments
+
+.. |pyvers| image:: https://img.shields.io/pypi/pyversions/pyisbn.png
+   :alt: Supported Python versions
+
+.. |status| image:: https://img.shields.io/pypi/status/pyisbn.png
+   :alt: Development status
+
+.. |coveralls| image:: https://img.shields.io/coveralls/github/JNRowe/pyisbn/master.png
+   :target: https://coveralls.io/repos/JNRowe/pyisbn
+   :alt: Coverage state on master
+
+.. |pypi| image:: https://img.shields.io/pypi/v/pyisbn.png
+   :target: https://pypi.org/project/pyisbn/
+   :alt: Current PyPI release
+
+.. |readthedocs| image:: https://img.shields.io/readthedocs/pyisbn/stable.png
+   :target: https://pyisbn.readthedocs.io/
+   :alt: Documentation
 
 .. |ISBNs| raw:: html
 
