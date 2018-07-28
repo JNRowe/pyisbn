@@ -78,17 +78,22 @@ URL_MAP = {
 }
 
 
-class CountryError(ValueError):
+class PyisbnError(ValueError):
+
+    """Base ``pyisbn`` error."""
+
+
+class CountryError(PyisbnError):
 
     """Unknown country value."""
 
 
-class IsbnError(ValueError):
+class IsbnError(PyisbnError):
 
     """Invalid ISBN string."""
 
 
-class SiteError(ValueError):
+class SiteError(PyisbnError):
 
     """Unknown site value."""
 
