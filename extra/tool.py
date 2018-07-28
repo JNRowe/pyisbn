@@ -73,6 +73,8 @@ def main():
             res = getattr(isbn, args.command)()
         elif args.to_url:
             res = isbn.to_url(args.to_url)
+        else:
+            res = str(isbn)
         print(res)
 
 
