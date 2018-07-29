@@ -28,7 +28,7 @@ from tests.data import TEST_ISBN10S
 
 @mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['521871723', ])
 def test___repr__(sbn):
-    assert repr(Sbn(sbn)) == "Sbn(%r)" % sbn
+    assert repr(Sbn(sbn)) == 'Sbn(%r)' % sbn
 
 
 @mark.parametrize('sbn,result', [

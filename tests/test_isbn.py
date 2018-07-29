@@ -45,7 +45,7 @@ def test___str__(isbn):
 
 
 @mark.skipif(version_info < (2, 6),
-             reason="format() not supported with this Python version")
+             reason='format() not supported with this Python version')
 @mark.parametrize('isbn,format_spec,result',
     [(s, '', 'ISBN %s' % s) for s in TEST_ISBNS] + [
     ('9780521871723', '', 'ISBN 9780521871723'),
@@ -107,7 +107,7 @@ def test_to_url(country, result):
 
 
 def test_to_url_invalid_country():
-    with raises(CountryError, match="zh"):
+    with raises(CountryError, match='zh'):
         Isbn('0071148167').to_url(country='zh')
 
 
@@ -126,7 +126,7 @@ def test_to_url_site(site, result):
 
 
 def test_to_url_invalid_site():
-    with raises(SiteError, match="nosite"):
+    with raises(SiteError, match='nosite'):
         Isbn('0071148167').to_url(site='nosite')
 
 

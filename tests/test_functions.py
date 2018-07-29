@@ -48,7 +48,7 @@ def test__isbn_cleanse_isbn(isbn):
     unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
 ])
 def test__isbn_cleanse_unicode_dash(isbn):
-    assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
+    assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
 
 
 @mark.parametrize('isbn', [
@@ -60,7 +60,7 @@ def test__isbn_cleanse_reflect_type(isbn):
 
 
 def test__isbn_cleanse_invalid_type():
-    with raises(TypeError, match="ISBN must be a string, received 2"):
+    with raises(TypeError, match='ISBN must be a string, received 2'):
         _isbn_cleanse(2)
 
 
