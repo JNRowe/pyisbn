@@ -21,9 +21,9 @@
 
 import unicodedata
 
-from pytest import mark
+from pytest import mark, raises
 
-from pyisbn import _isbn_cleanse
+from pyisbn import IsbnError, _isbn_cleanse
 
 
 # The lookup hoop jumping here is to make it easier to generate native Unicode
@@ -35,3 +35,12 @@ from pyisbn import _isbn_cleanse
 ])
 def test_issue_7_unistr(isbn):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
+
+
+@mark.parametrize('isbn', [
+    '2901568582497',
+    '5800034170763',
+])
+def test_issue_16_bookland(isbn):
+    with raises(IsbnError, match='Bookland'):
+        _isbn_cleanse(isbn)

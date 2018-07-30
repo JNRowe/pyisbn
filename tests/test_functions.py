@@ -85,9 +85,13 @@ def test__isbn_cleanse_invalid(isbn, message):
         _isbn_cleanse(isbn)
 
 
-def test__isbn_cleanse_invalid_no_checksum():
-    with raises(IsbnError, match='non-digit parts'):
-        _isbn_cleanse('0x0000000', False)
+@mark.parametrize('isbn,message', [
+    ('0x0000000', 'non-digit parts'),
+    ('580003417076', 'invalid Bookland region'),
+])
+def test__isbn_cleanse_invalid_no_checksum(isbn, message):
+    with raises(IsbnError, match=message):
+        _isbn_cleanse(isbn, False)
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
@@ -103,7 +107,7 @@ def test_convert(isbn):
 def test_convert_invalid():
     with raises(IsbnError, match='Only ISBN-13s with 978 Bookland code can be '
                                  'converted to ISBN-10.'):
-        convert('0000000000000')
+        convert('9790000000001')
 
 
 @mark.parametrize('isbn', TEST_ISBNS)

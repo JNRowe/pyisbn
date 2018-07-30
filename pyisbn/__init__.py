@@ -422,11 +422,15 @@ def _isbn_cleanse(isbn, checksum=True):
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
                 raise IsbnError('non-digit checksum')
+            if not isbn.startswith(('978', '979')):
+                raise IsbnError('invalid Bookland region')
         else:
             raise IsbnError('ISBN must be either 10 or 13 characters long')
     else:
         if len(isbn) == 8:
             isbn = '0' + isbn
+        elif len(isbn) == 12 and not isbn[:3].startswith(('978', '979')):
+            raise IsbnError('invalid Bookland region')
         if not isbn.isdigit():
             raise IsbnError('non-digit parts')
         if not len(isbn) in (9, 12):

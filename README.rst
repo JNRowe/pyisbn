@@ -76,6 +76,7 @@ Bug reports
 * Wen Heping
 * Max Klein (notconfusing)
 * Matt Leighy
+* Nathaniel M. Beaver (nbeaver)
 * Randy Syring (rsyring)
 * Stephen Thorne
 
