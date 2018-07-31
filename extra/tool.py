@@ -25,7 +25,7 @@
 import argparse
 import sys
 
-from pyisbn import (Isbn, URL_MAP, _version)
+from pyisbn import Isbn, URL_MAP, _version
 
 
 def isbn_typecheck(string):

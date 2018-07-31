@@ -5,7 +5,7 @@ Functions for handling ISBNs
 
 .. testsetup::
 
-    from pyisbn import (calculate_checksum, convert, validate)
+    from pyisbn import calculate_checksum, convert, validate
 
 .. autofunction:: calculate_checksum
 
