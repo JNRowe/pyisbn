@@ -1,13 +1,11 @@
-build/
-dist/
-doc/.build/
-pyisbn.egg-info/
-test/data
+/.pytest_cache/
+/build/
+/dist/
+/pyisbn.egg-info
+
+__pycache__/
 
 *.html
-*.py[co]
-.coverage
-.git_version
 
-ChangeLog
-MANIFEST
+/.coverage
+/MANIFEST
