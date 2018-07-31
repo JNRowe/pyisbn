@@ -51,8 +51,8 @@ def partial_arg(f):
 
 def main():
     parser = argparse.ArgumentParser(
-        description=__doc__.splitlines()[0].split('-', 1)[1],
-        epilog='Please report bugs to jnrowe@gmail.com'
+        description=__doc__.splitlines()[0].split(' - ', 1)[1],
+        epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues'
     )
     parser.add_argument('--version', action='version',
                         version='pyisbn %s' % _version.dotted)
