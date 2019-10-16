@@ -1,5 +1,4 @@
 #
-# coding=utf-8
 """conf - Sphinx configuration information."""
 # Copyright © 2011-2018  James Rowe <jnrowe@gmail.com>
 #
@@ -21,55 +20,44 @@
 
 import os
 import sys
+from contextlib import suppress
+from subprocess import CalledProcessError, PIPE, run
 
-from subprocess import CalledProcessError
-try:
-    from subprocess import check_output
-except ImportError:
-    from subprocess import (PIPE, Popen)
-
-    def check_output(cmd):
-        process = Popen(cmd, stdout=PIPE)
-        out, _ = process.communicate()
-        ret = process.wait()
-        if ret:
-            raise CalledProcessError(ret, cmd[0])
-        return out
-
-
-root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+root_dir = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, root_dir)
 
-import pyisbn  # NOQA
+import pyisbn  # NOQA: E402
+
+on_rtd = 'READTHEDOCS' in os.environ
+if not on_rtd:
+    import sphinx_rtd_theme
 
 extensions = \
-    ['sphinx.ext.%s' % ext for ext in ['autodoc', 'coverage', 'doctest',
-                                       'extlinks', 'ifconfig', 'intersphinx',
-                                       'napoleon', 'todo', 'viewcode']] \
-    + ['sphinxcontrib.%s' % ext for ext in []]
+    [f'sphinx.ext.{ext}' for ext in ['autodoc', 'coverage', 'doctest',
+                                     'extlinks', 'ifconfig', 'intersphinx',
+                                     'napoleon', 'todo', 'viewcode']] \
+    + [f'sphinxcontrib.{ext}' for ext in []] \
+    + []  # type: List[str]
 
-# Only activate spelling if it is installed.  It is not required in the
-# general case and we don't have the granularity to describe this in a clean
-# way
-try:
-    from sphinxcontrib import spelling  # NOQA
-except ImportError:
-    pass
-else:
-    extensions.append('sphinxcontrib.spelling')
+if not on_rtd:
+    # Only activate spelling if it is installed.  It is not required in the
+    # general case and we don’t have the granularity to describe this in a
+    # clean way
+    try:
+        from sphinxcontrib import spelling  # NOQA: F401
+    except ImportError:
+        pass
+    else:
+        extensions.append('sphinxcontrib.spelling')
 
-master_doc = 'index'
 source_suffix = '.rst'
 
 project = 'pyisbn'
-try:
-    unicode
-    copyright = pyisbn.__copyright__.decode('utf-8')
-except NameError:
-    copyright = pyisbn.__copyright__
+author = 'James Rowe'
+copyright = f'2007-2019  {author}'
 
-version = '.'.join(map(str, pyisbn._version.tuple[:2]))
 release = pyisbn._version.dotted
+version = release.rsplit('.', 1)[0]
 
 rst_prolog = """
 .. |ISBN| replace:: :abbr:`ISBN (International Standard Book Number)`
@@ -77,35 +65,59 @@ rst_prolog = """
 .. |modref| replace:: :mod:`pyisbn`
 """
 
+modindex_common_prefix = [
+    'pyisbn.',
+]
+
+# readthedocs.org handles this setup for their builds, but it is nice to see
+# approximately correct builds on the local system too
+if not on_rtd:
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path(), ]  \
+        # type: List[str]
+
 pygments_style = 'sphinx'
-try:
-    html_last_updated_fmt = check_output(['git', 'log',
-                                          "--pretty=format:'%ad [%h]'",
-                                          '--date=short', '-n1'])
-except CalledProcessError:
-    pass
+with suppress(CalledProcessError):
+    proc = run(
+        ['git', 'log', '--pretty=format:%ad [%h]', '--date=short', '-n1'],
+        stdout=PIPE)
+    html_last_updated_fmt = proc.stdout.decode()
+
+html_baseurl = 'https://pyisbn.readthedocs.io/'
+
+man_pages = [
+]  # type: Tuple[str, str, str, List[str], int]
 
 # Autodoc extension settings
 autoclass_content = 'init'
-autodoc_default_flags = ['members', ]
-
-# intersphinx extension settings
-intersphinx_mapping = {
-    k: (v, os.getenv('SPHINX_%s_OBJECTS' % k.upper()))
-    for k, v in {
-        'python': 'http://docs.python.org/',
-    }.items()
-}
+autodoc_default_options = {
+    'members': None,
+}  # type: Dict[str, Optional[str]]
 
 # extlinks extension settings
 extlinks = {
     'pypi': ('http://pypi.python.org/pypi/%s', ''),
     'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
-}
+}  # type: Dict[str, Tuple[str, str]]
+
+
+# intersphinx extension settings
+intersphinx_mapping = {
+    k: (v, os.getenv(f'SPHINX_{k.upper()}_OBJECTS'))
+    for k, v in {
+        'python': 'https://docs.python.org/3/',
+    }.items()
+}  # type: Dict[str, str]
 
 # spelling extension settings
+spelling_ignore_acronyms = False
 spelling_lang = 'en_GB'
 spelling_word_list_filename = 'wordlist.txt'
+spelling_ignore_python_builtins = False
+spelling_ignore_importable_modules = False
 
 # napoleon extension settings
 napoleon_numpy_docstring = False
+
+# todo extension settings
+todo_include_todos = True
