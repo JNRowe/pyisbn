@@ -16,63 +16,28 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
-
-try:
-    from email.utils import parseaddr
-except ImportError:  # Python2.4
-    from email.Utils import parseaddr  # NOQA
 
 from setuptools import setup
 
-import pyisbn
+
+def parse_requires(file):
+    deps = []
+    f = open('extra/%s' % file)
+    entries = [s.split('#')[0].strip() for s in f.readlines()]
+    f.close()
+    for dep in entries:
+        if not dep or dep.startswith('#'):
+            continue
+        elif dep.startswith('-r '):
+            deps.extend(parse_requires(dep.split()[1]))
+            continue
+        deps.append(dep)
+    return deps
 
 
-author, author_email = parseaddr(pyisbn.__author__)
+# Note: We can't use setuptool’s requirements support as it only a list value,
+# and doesn’t support pip’s inclusion mechanism
+tests_require = parse_requires('requirements-test.txt')
 
-paras = pyisbn.__doc__.split('\n\n')
-long_description = '\n\n'.join([paras[1], paras[3]])
-
-setup(
-    name='pyisbn',
-    version=pyisbn.__version__,
-    description=pyisbn.__doc__.splitlines()[0][:-1],
-    long_description=long_description,
-    author=author,
-    author_email=author_email,
-    maintainer=author,
-    maintainer_email=author_email,
-    url='https://github.com/JNRowe/pyisbn/',
-    packages=['pyisbn', ],
-    license=pyisbn.__license__,
-    keywords='ISBN ISBN-10 ISBN-13 SBN',
-    classifiers=[
-        'Development Status :: 6 - Mature',
-        'Intended Audience :: Developers',
-        'Intended Audience :: Other Audience',
-        'License :: OSI Approved',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.4',
-        'Programming Language :: Python :: 2.5',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.0',
-        'Programming Language :: Python :: 3.1',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: Other/Nonlisted Topic',
-        'Topic :: Software Development :: Libraries',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Text Processing',
-        'Topic :: Text Processing :: Indexing',
-    ],
-)
+if __name__ == '__main__':
+    setup(tests_require=tests_require)
