@@ -22,8 +22,9 @@ Validate ISBN
     >>> book.validate()
     True
     >>> invalid_book = Isbn('0123456654321')
-    >>> invalid_book.validate()
-    False
+    Traceback (most recent call last):
+      …
+    pyisbn.IsbnError: invalid Bookland region
 
 Format ISBN
 '''''''''''
