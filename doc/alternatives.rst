@@ -3,7 +3,7 @@ Alternatives
 
 Before diving in and spitting out this package I looked for alternatives, but
 back in 2006 there were none to be found.  There are, now, a few available and
-I'll list them here when people point them out.  If I have missed something
+I’ll list them here when people point them out.  If I have missed something
 please drop me a mail_.
 
 .. _mail: jnrowe@gmail.com

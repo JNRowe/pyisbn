@@ -4,7 +4,7 @@ Handling ISBNs
 ==============
 
 The :class:`Isbn` supports :abbr:`SBNs (Standard Book Numbering)`, |ISBN|-10
-and -13.  If you're handling multiple inputs it is easiest to use this class.
+and -13.  If you’re handling multiple inputs it is easiest to use this class.
 
 .. autoclass:: Isbn
 

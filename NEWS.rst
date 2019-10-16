@@ -62,7 +62,7 @@ User-visible changes
 
 * Fixed installs with easy_install
 * SBNs can now be represented with the ``SBN`` object
-* Python "egg" packages can now be built, if setuptools_ is installed
+* Python “egg” packages can now be built, if setuptools_ is installed
 
 .. _setuptools: http://peak.telecommunity.com/DevCenter/setuptools
 
