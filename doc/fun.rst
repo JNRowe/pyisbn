@@ -17,4 +17,4 @@ transposable |ISBN|-13 occur in a given library of *n* books.
 .. [1] This example was chosen to show that sometimes it is still possible to
        catch during data entry as 973 isn’t a valid prefix
 
-.. _given ISBN: http://books.google.no/books?vid=isbn:9783540009788&redir_esc=y
+.. _given ISBN: https://books.google.com/books?vid=isbn:9783540009788
