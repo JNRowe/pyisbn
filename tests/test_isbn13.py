@@ -19,18 +19,21 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-from pytest import mark
+from hypothesis import example, given
+from hypothesis.strategies import sampled_from
 
 from pyisbn import Isbn13
 
 from tests.data import TEST_ISBN13S
 
 
-@mark.parametrize('isbn', TEST_ISBN13S + ['978-052-187-1723', ])
+@example('978-052-187-1723')
+@given(sampled_from(TEST_ISBN13S))
 def test_calculate_checksum(isbn: str):
     assert Isbn13(isbn).calculate_checksum() == isbn[-1]
 
 
-@mark.parametrize('isbn', TEST_ISBN13S + ['9780071148160', ])
+@example('9780071148160')
+@given(sampled_from(TEST_ISBN13S))
 def test_convert(isbn: str):
     assert Isbn13(isbn).convert()[:-1] == isbn[3:-1]
