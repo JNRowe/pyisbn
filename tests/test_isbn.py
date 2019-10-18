@@ -19,44 +19,52 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
+from sys import version_info
+from typing import Tuple
+
+from hypothesis import example, given
+from hypothesis.strategies import sampled_from
 from pytest import mark, raises
 
 from pyisbn import (CountryError, Isbn, SiteError)
 from tests.data import TEST_ISBNS
 
 
-@mark.parametrize('isbn', TEST_ISBNS + [
-    '9780521871723',
-    '3540009787',
-])
+@example('9780521871723')
+@example('3540009787')
+@given(sampled_from(TEST_ISBNS))
 def test___repr__(isbn: str):
     assert repr(Isbn(isbn)) == f'Isbn({isbn!r})'
 
 
-@mark.parametrize('isbn', TEST_ISBNS + [
-    '9780521871723',
-    '978-052-187-1723',
-    '3540009787',
-])
+@example('9780521871723')
+@example('978-052-187-1723')
+@example('3540009787')
+@given(sampled_from(TEST_ISBNS))
 def test___str__(isbn: str):
     assert str(Isbn(isbn)) == f'ISBN {isbn}'
 
 
-@mark.parametrize('isbn,format_spec,result',
-    [(s, '', f'ISBN {s}') for s in TEST_ISBNS] + [
-    ('9780521871723', '', 'ISBN 9780521871723'),
-    ('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'),
-    ('3540009787', 'url',
-        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
-        '3540009787'),
-    ('3540009787', 'url:amazon:uk',
-        'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn='
-        '3540009787'),
-    ('3540009787', 'url:amazon',
-        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn='
-        '3540009787'),
-])
-def test___format__(isbn: str, format_spec: str, result: str):
+@mark.skipif(version_info < (2, 6),
+             reason='format() not supported with this Python version')
+@example(('9780521871723', '', 'ISBN 9780521871723'))
+@example(('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'))
+@example((
+    '3540009787',
+    'url',
+    'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787'))
+@example((
+    '3540009787',
+    'url:amazon:uk',
+    'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787'
+))
+@example((
+    '3540009787',
+    'url:amazon',
+    'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787'))
+@given(sampled_from([(s, '', f'ISBN {s}') for s in TEST_ISBNS]))
+def test___format__(data: Tuple[str, str, str]):
+    isbn, format_spec, result = data
     assert format(Isbn(isbn), format_spec) == result
 
 
@@ -65,12 +73,12 @@ def test___format__invalid_format_spec():
         format(Isbn('0071148167'), 'biscuit')
 
 
-@mark.parametrize('isbn,result', [(s, s[-1]) for s in TEST_ISBNS] + [
-    ('978-052-187-1723', '3'),
-    ('3540009787', '7'),
-    ('354000978', '7'),
-])
-def test_calculate_checksum(isbn: str, result: str):
+@example(('978-052-187-1723', '3'))
+@example(('3540009787', '7'))
+@example(('354000978', '7'))
+@given(sampled_from([(s, s[-1]) for s in TEST_ISBNS]))
+def test_calculate_checksum(data: Tuple[str, str]):
+    isbn, result = data
     assert Isbn(isbn).calculate_checksum() == result
 
 
@@ -82,13 +90,13 @@ def test_convert(isbn: str, result: str):
     assert Isbn(isbn).convert() == result
 
 
-@mark.parametrize('isbn,result', [(s, True) for s in TEST_ISBNS] + [
-    ('978-052-187-1723', True),
-    ('978-052-187-1720', False),
-    ('3540009787', True),
-    ('354000978x', False),
-])
-def test_validate(isbn: str, result: bool):
+@example(('978-052-187-1723', True))
+@example(('978-052-187-1720', False))
+@example(('3540009787', True))
+@example(('354000978x', False))
+@given(sampled_from([(s, True) for s in TEST_ISBNS]))
+def test_validate(data: Tuple[str, bool]):
+    isbn, result = data
     assert Isbn(isbn).validate() == result
 
 
@@ -126,8 +134,7 @@ def test_to_url_invalid_site():
         Isbn('0071148167').to_url(site='nosite')
 
 
-@mark.parametrize('isbn,result',
-    [(s, f'URN:ISBN:{s}') for s in TEST_ISBNS]
-)
-def test_to_urn(isbn: str, result: str):
+@given(sampled_from([(s, f'URN:ISBN:{s}') for s in TEST_ISBNS]))
+def test_to_urn(data: Tuple[str, str]):
+    isbn, result = data
     assert Isbn(isbn).to_urn() == result
