@@ -8,4 +8,5 @@ __pycache__/
 *.html
 
 /.coverage
+/.mutmut-cache
 /MANIFEST

@@ -6,6 +6,7 @@ flake8-copyright>=0.2
 flake8-comprehensions>=1.4
 flake8-import-order>=0.16
 flake8-string-format>=0.2
+mutmut>=1.4
 pep8-naming
 pep257
 pytest-html>=1.14
