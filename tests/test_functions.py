@@ -19,8 +19,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-import unicodedata
-
 from pytest import mark, raises
 
 from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
@@ -29,33 +27,37 @@ from tests.data import TEST_ISBNS
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
-def test__isbn_cleanse_sbn(isbn):
+def test__isbn_cleanse_sbn(isbn: str):
     if isbn.startswith('0'):
         assert _isbn_cleanse(isbn[1:]) == isbn
         assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
-def test__isbn_cleanse_isbn(isbn):
+def test__isbn_cleanse_isbn(isbn: str):
     assert _isbn_cleanse(isbn) == isbn
     assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
 
 
 # See tests.test_regressions.test_issue_7_unistr
+# NOTE: Depending on your typeface and editor you may notice that the following
+# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
-    unicodedata.lookup('EM DASH').join(['978', '0', '385', '08695', '0']),
-    unicodedata.lookup('HORIZONTAL BAR').join(['978', '0199564095']),
+    '978–1–84724–253–2',
+    '978—0—385—08695—0',
+    '978―0199564095',
 ])
-def test__isbn_cleanse_unicode_dash(isbn):
+def test__isbn_cleanse_unicode_dash(isbn: str):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
 
 
+# NOTE: Depending on your typeface and editor you may notice that the following
+# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [
-    unicodedata.lookup('EN DASH').join(['978', '1', '84724', '253', '2']),
+    '978–1–84724–253–2',
     '978-0-385-08695-0',
 ])
-def test__isbn_cleanse_reflect_type(isbn):
+def test__isbn_cleanse_reflect_type(isbn: str):
     assert type(_isbn_cleanse(isbn)) == type(isbn)
 
 
@@ -68,7 +70,7 @@ def test__isbn_cleanse_invalid_type():
     (True, 'ISBN must be either 10 or 13 characters long'),
     (False, 'ISBN must be either 9 or 12 characters long without checksum'),
 ])
-def test__isbn_cleanse_invalid_length(checksum, message):
+def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
     with raises(IsbnError, match=message):
         _isbn_cleanse('0-123', checksum=checksum)
 
@@ -80,7 +82,7 @@ def test__isbn_cleanse_invalid_length(checksum, message):
     ('xxxxxxxxxxxx1', 'non-digit parts'),
     ('0x0000000', 'non-digit parts'),
 ])
-def test__isbn_cleanse_invalid(isbn, message):
+def test__isbn_cleanse_invalid(isbn: str, message: str):
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn)
 
@@ -95,12 +97,12 @@ def test__isbn_cleanse_invalid_no_checksum(isbn, message):
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
-def test_calculate_checksum(isbn):
+def test_calculate_checksum(isbn: str):
     assert calculate_checksum(isbn[:-1]) == isbn[-1]
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
-def test_convert(isbn):
+def test_convert(isbn: str):
     assert convert(convert(isbn)) == isbn
 
 
@@ -111,7 +113,7 @@ def test_convert_invalid():
 
 
 @mark.parametrize('isbn', TEST_ISBNS)
-def test_validate(isbn):
+def test_validate(isbn: str):
     assert validate(isbn)
 
 
@@ -120,5 +122,5 @@ def test_validate(isbn):
     '2-345-6789-1',
     '3-456-7890-X',
 ])
-def test_validate_invalid(isbn):
+def test_validate_invalid(isbn: str):
     assert validate(isbn) is False

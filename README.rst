@@ -18,15 +18,15 @@ Requirements
 ------------
 
 ``pyisbn`` does not depend on any modules that aren’t included in Python_’s
-standard library, and as such should run with Python 2.4 or newer(including
-Python 3) [#]_.  If ``pyisbn`` doesn’t work with the version of Python you have
-installed, open an issue_ and I’ll endeavour to fix it.
+standard library, and as such should run with Python 3.6 or newer [#]_.  If
+``pyisbn`` doesn’t work with the version of Python you have installed, open an
+issue_ and I’ll endeavour to fix it.
 
 The module have been tested on many UNIX-like systems, including Linux and OS X,
 but it should work fine on other systems too.
 
-.. [#] The module may work with older Python versions, but it has only been
-       tested with v2.4 and above.
+.. [#] Versions v1.2 and earlier will run on older Python versions, right back
+       to 2.4.
 
 Example
 -------

@@ -27,18 +27,18 @@ from tests.data import TEST_ISBN10S
 
 
 @mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['521871723', ])
-def test___repr__(sbn):
-    assert repr(Sbn(sbn)) == 'Sbn(%r)' % sbn
+def test___repr__(sbn: str):
+    assert repr(Sbn(sbn)) == f'Sbn({sbn!r})'
 
 
 @mark.parametrize('sbn,result', [
     ('07114816', '7'),
     ('071148167', '7'),
 ])
-def test_calculate_checksum(sbn, result):
+def test_calculate_checksum(sbn: str, result: str):
     assert Sbn(sbn).calculate_checksum() == result
 
 
 @mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['071148167', ])
-def test_convert(sbn):
+def test_convert(sbn: str):
     assert Sbn(sbn).convert()[:-1] == '9780' + sbn[:-1]

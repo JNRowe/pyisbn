@@ -1,5 +1,4 @@
-#! /usr/bin/env python
-# coding=utf-8
+#! /usr/bin/env python3
 """tool - A simple pyisbn interface for the command line."""
 # Copyright © 2013-2018  James Rowe <jnrowe@gmail.com>
 #
@@ -19,9 +18,6 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
-# You won't find this pretty… however it was quick to write and it's compatible
-# with 2.4-3.3
-
 import argparse
 import sys
 
@@ -35,17 +31,15 @@ def isbn_typecheck(string):
             raise ValueError('Invalid checksum')
     except ValueError:
         ex = sys.exc_info()[1]
-        raise argparse.ArgumentTypeError('%s %r' % (ex.args[0], string))
+        raise argparse.ArgumentTypeError(f'{ex.args[0]} {string!r}')
     return isbn
 
 
 def partial_arg(f):
     def wrapper(*args, **kwargs):
-        # Can't mix kwargs and supplied args in call for Python 2.5 compat
-        kwargs.update({'dest': 'command', 'action': 'store_const'})
         if 'const' not in kwargs:
             kwargs['const'] = args[1][2:].replace('-', '_')
-        return f(*args, **kwargs)
+        return f(*args, dest='command', action='store_const', **kwargs)
     return wrapper
 
 
@@ -55,7 +49,7 @@ def main():
         epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues'
     )
     parser.add_argument('--version', action='version',
-                        version='pyisbn %s' % _version.dotted)
+                        version=f'pyisbn {_version.dotted}')
     commands = parser.add_mutually_exclusive_group()
     parg = partial_arg(commands.add_argument)
     parg('-c', '--checksum', const='calculate_checksum',

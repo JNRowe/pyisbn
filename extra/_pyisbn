@@ -1,5 +1,4 @@
 #compdef pyisbn pyisbn.py
-# coding=utf-8
 # pyisbn - ZSH completion support for pyisbn
 # Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
 #

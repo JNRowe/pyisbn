@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-# coding=utf-8
 """setup.py - Setuptools tasks and config for pyisbn."""
 # Copyright © 2007-2019  James Rowe <jnrowe@gmail.com>
 #
