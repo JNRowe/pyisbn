@@ -1,6 +1,6 @@
 #
 """conf - Sphinx configuration information."""
-# Copyright © 2011-2018  James Rowe <jnrowe@gmail.com>
+# Copyright © 2011-2019  James Rowe <jnrowe@gmail.com>
 #
 # This file is part of pyisbn.
 #

@@ -1,7 +1,7 @@
 #
 # coding=utf-8
 """test_sbn - Test Sbn class."""
-# Copyright © 2012-2017  James Rowe <jnrowe@gmail.com>
+# Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
 #
 # This file is part of pyisbn.
 #
