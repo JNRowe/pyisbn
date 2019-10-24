@@ -1,5 +1,5 @@
-``pyisbn`` - A module for working with 10- and 13-digit |ISBNs|
-===============================================================
+``pyisbn`` - A module for working with 10- and 13-digit ISBNs
+=============================================================
 
 |status| |travis| |coveralls| |pypi| |pyvers| |readthedocs| |develop|
 
@@ -8,8 +8,8 @@ Introduction
 
 ``pyisbn`` is a `GPL v3`_ licensed module for working with various book
 identification numbers.  It includes functions for conversion, verification and
-generation of checksums.  It also includes basic classes for representing
-|ISBNs| as objects.
+generation of checksums.  It also includes basic classes for representing ISBNs
+as objects.
 
 See the ``doc`` directory for installation instructions and usage information,
 you can also `view the content online`_.
@@ -128,7 +128,3 @@ reproduce the problem, or even better a patch!
 .. |readthedocs| image:: https://img.shields.io/readthedocs/pyisbn/stable.png
    :target: https://pyisbn.readthedocs.io/
    :alt: Documentation
-
-.. |ISBNs| raw:: html
-
-   <abbr title="International Standard Book Numbers">ISBN</abbr>s
