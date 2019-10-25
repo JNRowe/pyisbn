@@ -19,6 +19,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
+from hypothesis import given
+from hypothesis.strategies import sampled_from
 from pytest import mark, raises
 
 from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
@@ -26,14 +28,14 @@ from pyisbn import (IsbnError, _isbn_cleanse, calculate_checksum, convert,
 from tests.data import TEST_ISBNS
 
 
-@mark.parametrize('isbn', TEST_ISBNS)
+@given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_sbn(isbn: str):
     if isbn.startswith('0'):
         assert _isbn_cleanse(isbn[1:]) == isbn
         assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
 
 
-@mark.parametrize('isbn', TEST_ISBNS)
+@given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
     assert _isbn_cleanse(isbn) == isbn
     assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
@@ -96,12 +98,12 @@ def test__isbn_cleanse_invalid_no_checksum(isbn, message):
         _isbn_cleanse(isbn, False)
 
 
-@mark.parametrize('isbn', TEST_ISBNS)
+@given(sampled_from(TEST_ISBNS))
 def test_calculate_checksum(isbn: str):
     assert calculate_checksum(isbn[:-1]) == isbn[-1]
 
 
-@mark.parametrize('isbn', TEST_ISBNS)
+@given(sampled_from(TEST_ISBNS))
 def test_convert(isbn: str):
     assert convert(convert(isbn)) == isbn
 
@@ -112,7 +114,7 @@ def test_convert_invalid():
         convert('9790000000001')
 
 
-@mark.parametrize('isbn', TEST_ISBNS)
+@given(sampled_from(TEST_ISBNS))
 def test_validate(isbn: str):
     assert validate(isbn)
 

@@ -19,14 +19,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
+from hypothesis import example, given
+from hypothesis.strategies import sampled_from
 from pytest import mark
 
 from pyisbn import Sbn
 
-from tests.data import TEST_ISBN10S
+from tests.data import TEST_SBNS
 
 
-@mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['521871723', ])
+@example('521871723')
+@given(sampled_from(TEST_SBNS))
 def test___repr__(sbn: str):
     assert repr(Sbn(sbn)) == f'Sbn({sbn!r})'
 
@@ -39,6 +42,7 @@ def test_calculate_checksum(sbn: str, result: str):
     assert Sbn(sbn).calculate_checksum() == result
 
 
-@mark.parametrize('sbn', [s[1:] for s in TEST_ISBN10S] + ['071148167', ])
+@example('071148167')
+@given(sampled_from(TEST_SBNS))
 def test_convert(sbn: str):
     assert Sbn(sbn).convert()[:-1] == '9780' + sbn[:-1]
