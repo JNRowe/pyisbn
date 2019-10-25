@@ -109,8 +109,9 @@ def test_convert(isbn: str):
 
 
 def test_convert_invalid():
-    with raises(IsbnError, match='Only ISBN-13s with 978 Bookland code can be '
-                                 'converted to ISBN-10.'):
+    with raises(IsbnError,
+                match='Only ISBN-13s with 978 Bookland code can be '
+                'converted to ISBN-10.'):
         convert('9790000000001')
 
 

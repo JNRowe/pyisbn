@@ -85,8 +85,7 @@ with suppress(CalledProcessError):
 
 html_baseurl = 'https://pyisbn.readthedocs.io/'
 
-man_pages = [
-]  # type: Tuple[str, str, str, List[str], int]
+man_pages = []  # type: Tuple[str, str, str, List[str], int]
 
 # Autodoc extension settings
 autoclass_content = 'init'
@@ -99,7 +98,6 @@ extlinks = {
     'pypi': ('http://pypi.python.org/pypi/%s', ''),
     'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
 }  # type: Dict[str, Tuple[str, str]]
-
 
 # intersphinx extension settings
 intersphinx_mapping = {

@@ -23,6 +23,7 @@ from pytest import mark, raises
 
 from pyisbn import IsbnError, _isbn_cleanse
 
+
 # NOTE: Depending on your typeface and editor you may notice that the following
 # +# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize('isbn', [

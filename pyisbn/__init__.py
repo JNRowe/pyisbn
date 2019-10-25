@@ -42,7 +42,6 @@ books in their collection.
 
 from . import _version
 
-
 __version__ = _version.dotted
 __date__ = _version.date
 __author__ = 'James Rowe <jnrowe@gmail.com>'
@@ -52,7 +51,6 @@ __license__ = 'GNU General Public License Version 3'
 import unicodedata
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES: List[str] = [
     unicodedata.lookup(s)
@@ -61,49 +59,47 @@ DASHES: List[str] = [
 
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
-    'amazon': (
-        ('https://www.amazon.%(tld)s/s'
-         '?search-alias=stripbooks&field-isbn=%(isbn)s'),
-        {
-            'de': None,
-            'fr': None,
-            'jp': None,
-            'uk': 'co.uk',
-            'us': 'com',
-        }),
-    'copac': 'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
-    'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
-    'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
-    'waterstones': 'https://www.waterstones.com/books/search/term/%(isbn)s',
-    'whsmith': 'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
-    'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
+    'amazon': (('https://www.amazon.%(tld)s/s'
+                '?search-alias=stripbooks&field-isbn=%(isbn)s'), {
+                    'de': None,
+                    'fr': None,
+                    'jp': None,
+                    'uk': 'co.uk',
+                    'us': 'com',
+                }),
+    'copac':
+    'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
+    'google':
+    'https://books.google.com/books?vid=isbn:%(isbn)s',
+    'isbndb':
+    'https://isbndb.com/search/all?query=%(isbn)s',
+    'waterstones':
+    'https://www.waterstones.com/books/search/term/%(isbn)s',
+    'whsmith':
+    'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
+    'worldcat':
+    'http://worldcat.org/isbn/%(isbn)s',
 }
 
 
 class PyisbnError(ValueError):
-
     """Base ``pyisbn`` error."""
 
 
 class CountryError(PyisbnError):
-
     """Unknown country value."""
 
 
 class IsbnError(PyisbnError):
-
     """Invalid ISBN string."""
 
 
 class SiteError(PyisbnError):
-
     """Unknown site value."""
 
 
 class Isbn:
-
     """Class for representing ISBN objects."""
-
     def __init__(self, isbn: str) -> None:
         """Initialise a new ``Isbn`` object.
 
@@ -248,14 +244,12 @@ class Isbn:
 
 
 class Isbn10(Isbn):
-
     """Class for representing ISBN-10 objects.
 
     See also:
         ``Isbn``
 
     """
-
     def __init__(self, isbn) -> None:
         """Initialise a new ``Isbn10`` object.
 
@@ -288,14 +282,12 @@ class Isbn10(Isbn):
 
 
 class Sbn(Isbn10):
-
     """Class for representing SBN objects.
 
     See also:
         ``Isbn10``
 
     """
-
     def __init__(self, sbn: str) -> None:
         """Initialise a new ``Sbn`` object.
 
@@ -338,14 +330,12 @@ class Sbn(Isbn10):
 
 
 class Isbn13(Isbn):
-
     """Class for representing ISBN-13 objects.
 
     See also:
         ``Isbn``
 
     """
-
     def __init__(self, isbn: str) -> None:
         """Initialise a new ``Isbn13`` object.
 

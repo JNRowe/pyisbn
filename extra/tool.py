@@ -40,26 +40,32 @@ def partial_arg(f):
         if 'const' not in kwargs:
             kwargs['const'] = args[1][2:].replace('-', '_')
         return f(*args, dest='command', action='store_const', **kwargs)
+
     return wrapper
 
 
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__.splitlines()[0].split(' - ', 1)[1],
-        epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues'
-    )
-    parser.add_argument('--version', action='version',
+        epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues')
+    parser.add_argument('--version',
+                        action='version',
                         version=f'pyisbn {_version.dotted}')
     commands = parser.add_mutually_exclusive_group()
     parg = partial_arg(commands.add_argument)
-    parg('-c', '--checksum', const='calculate_checksum',
+    parg('-c',
+         '--checksum',
+         const='calculate_checksum',
          help='generate checksum')
     parg('-x', '--convert', help='convert between 10- and 13-digit types')
-    commands.add_argument('-u', '--to-url',
+    commands.add_argument('-u',
+                          '--to-url',
                           choices=sorted(URL_MAP.keys()),
                           help='generate URL')
     parg('-n', '--to-urn', help='generate RFC 3187 URN')
-    parser.add_argument('isbn', type=isbn_typecheck, nargs='+',
+    parser.add_argument('isbn',
+                        type=isbn_typecheck,
+                        nargs='+',
                         help='ISBNs to operate on')
 
     args = parser.parse_args()

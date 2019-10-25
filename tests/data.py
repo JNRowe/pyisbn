@@ -22,7 +22,6 @@
 import json
 from typing import Dict, List
 
-
 with open('tests/books.json') as f:
     #: Sample book data for use in tests
     TEST_BOOKS: Dict[str, str] = json.load(f)
