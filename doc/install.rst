@@ -11,7 +11,7 @@ Using |PyPI|
 To install using :pypi:`pip`::
 
     $ pip3 install pyisbn  # to install in Python’s site-packages
-    $ pip3 install --install-option="--user" pyisbn  # to install for a single user
+    $ pip3 install --user pyisbn  # to install for a single user
 
 From source
 '''''''''''
