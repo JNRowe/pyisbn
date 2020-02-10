@@ -1,16 +1,16 @@
 dist: xenial
 language: python
-matrix:
-    fast_finish: true
 python:
-  - 3.6
-  - 3.7
+  - "3.6"
+  - "3.7"
+  - "3.8"
 sudo: required
+
 install:
   - pip install -r extra/requirements-test.txt
   - pip install coveralls
 script:
-  - pytest tests
+  - pytest -v tests
 after_success:
   - coveralls
 branches:
