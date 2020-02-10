@@ -3,6 +3,16 @@ User-visible changes
 
 .. contents::
 
+1.3.0 - 2020-02-10
+------------------
+
+* Python 2 support is dropped, pin dependencies to <1.2 if you require it
+* Python 3.8 is now officially supported
+* Type hints have been added
+* hypothesis_ is now required to run tests
+
+.. _hypothesis: https://github.com/HypothesisWorks/hypothesis
+
 1.2.0 - 2018-07-28
 ------------------
 
