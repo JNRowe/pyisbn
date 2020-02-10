@@ -1,5 +1,4 @@
 #
-# coding=utf-8
 """test_sbn - Test Sbn class."""
 # Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
 #

@@ -1,5 +1,4 @@
 #
-# coding=utf-8
 """pyisbn - A module for working with 10- and 13-digit ISBNs.
 
 This module supports the calculation of ISBN checksums with

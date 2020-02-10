@@ -1,5 +1,4 @@
 #
-# coding=utf-8
 """data - ISBNs for use in tests."""
 # Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
 #

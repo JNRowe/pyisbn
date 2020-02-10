@@ -1,5 +1,4 @@
 #
-# coding=utf-8
 """test_functions - Test function interface."""
 # Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
 #
