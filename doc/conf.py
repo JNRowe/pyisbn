@@ -22,6 +22,7 @@ import os
 import sys
 from contextlib import suppress
 from subprocess import CalledProcessError, PIPE, run
+from typing import Dict, List, Optional, Tuple
 
 root_dir = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, root_dir)
@@ -32,12 +33,12 @@ on_rtd = 'READTHEDOCS' in os.environ
 if not on_rtd:
     import sphinx_rtd_theme
 
-extensions = \
+extensions: List[str] = \
     [f'sphinx.ext.{ext}' for ext in ['autodoc', 'coverage', 'doctest',
                                      'extlinks', 'ifconfig', 'intersphinx',
                                      'napoleon', 'todo', 'viewcode']] \
     + [f'sphinxcontrib.{ext}' for ext in []] \
-    + []  # type: List[str]
+    + []
 
 if not on_rtd:
     # Only activate spelling if it is installed.  It is not required in the
@@ -73,8 +74,7 @@ modindex_common_prefix = [
 # approximately correct builds on the local system too
 if not on_rtd:
     html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path(), ]  \
-        # type: List[str]
+    html_theme_path: List[str] = [sphinx_rtd_theme.get_html_theme_path(), ]
 
 pygments_style = 'sphinx'
 with suppress(CalledProcessError):
@@ -85,27 +85,27 @@ with suppress(CalledProcessError):
 
 html_baseurl = 'https://pyisbn.readthedocs.io/'
 
-man_pages = []  # type: Tuple[str, str, str, List[str], int]
+man_pages: Tuple[str, str, str, List, str, int] = []
 
 # Autodoc extension settings
 autoclass_content = 'init'
-autodoc_default_options = {
+autodoc_default_options: Dict[str, Optional[str]] = {
     'members': None,
-}  # type: Dict[str, Optional[str]]
+}
 
 # extlinks extension settings
-extlinks = {
+extlinks: Dict[str, Tuple[str, str]] = {
     'pypi': ('http://pypi.python.org/pypi/%s', ''),
     'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
-}  # type: Dict[str, Tuple[str, str]]
+}
 
 # intersphinx extension settings
-intersphinx_mapping = {
+intersphinx_mapping: Dict[str, str] = {
     k: (v, os.getenv(f'SPHINX_{k.upper()}_OBJECTS'))
     for k, v in {
         'python': 'https://docs.python.org/3/',
     }.items()
-}  # type: Dict[str, str]
+}
 
 # spelling extension settings
 spelling_ignore_acronyms = False
