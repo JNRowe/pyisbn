@@ -39,3 +39,11 @@ the classes.
    :maxdepth: 2
 
    utils
+
+Internal support features
+-------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   support
