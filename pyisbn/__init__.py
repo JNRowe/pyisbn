@@ -50,6 +50,14 @@ __license__ = 'GNU General Public License Version 3'
 import unicodedata
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+#: ISBN string type
+TIsbn = str
+TIsbn10 = TIsbn
+TIsbn13 = TIsbn
+
+#: SBN string type
+TSbn = str
+
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES: List[str] = [
     unicodedata.lookup(s)
@@ -99,7 +107,7 @@ class SiteError(PyisbnError):
 
 class Isbn:
     """Class for representing ISBN objects."""
-    def __init__(self, isbn: str) -> None:
+    def __init__(self, isbn: TIsbn) -> None:
         """Initialise a new ``Isbn`` object.
 
         Args:
@@ -249,7 +257,7 @@ class Isbn10(Isbn):
         ``Isbn``
 
     """
-    def __init__(self, isbn) -> None:
+    def __init__(self, isbn: TIsbn) -> None:
         """Initialise a new ``Isbn10`` object.
 
         Args:
@@ -287,7 +295,7 @@ class Sbn(Isbn10):
         ``Isbn10``
 
     """
-    def __init__(self, sbn: str) -> None:
+    def __init__(self, sbn: TSbn) -> None:
         """Initialise a new ``Sbn`` object.
 
         Args:
@@ -335,7 +343,7 @@ class Isbn13(Isbn):
         ``Isbn``
 
     """
-    def __init__(self, isbn: str) -> None:
+    def __init__(self, isbn: TIsbn13) -> None:
         """Initialise a new ``Isbn13`` object.
 
         Args:
@@ -369,7 +377,7 @@ class Isbn13(Isbn):
         return convert(self.isbn)
 
 
-def _isbn_cleanse(isbn: str, checksum: bool = True) -> str:
+def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:
     """Check ISBN is a string, and passes basic sanity checks.
 
     Args:
@@ -419,7 +427,7 @@ def _isbn_cleanse(isbn: str, checksum: bool = True) -> str:
     return isbn
 
 
-def calculate_checksum(isbn: str) -> str:
+def calculate_checksum(isbn: TIsbn) -> str:
     """Calculate ISBN checksum.
 
     Args:
@@ -444,7 +452,7 @@ def calculate_checksum(isbn: str) -> str:
     return str(check)
 
 
-def convert(isbn: str, code: str = '978') -> str:
+def convert(isbn: TIsbn, code: str = '978') -> str:
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
     Note:
@@ -475,7 +483,7 @@ def convert(isbn: str, code: str = '978') -> str:
                             'converted to ISBN-10.')
 
 
-def validate(isbn: str) -> bool:
+def validate(isbn: TIsbn) -> bool:
     """Validate ISBNs.
 
     Warning:

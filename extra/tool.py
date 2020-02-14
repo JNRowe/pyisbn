@@ -21,10 +21,10 @@
 import argparse
 import sys
 
-from pyisbn import Isbn, URL_MAP, _version
+from pyisbn import Isbn, TIsbn, URL_MAP, _version
 
 
-def isbn_typecheck(string):
+def isbn_typecheck(string: TIsbn) -> Isbn:
     try:
         isbn = Isbn(string)
         if not isbn.validate():
