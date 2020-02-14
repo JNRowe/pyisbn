@@ -38,7 +38,7 @@ extensions: List[str] = \
                                      'extlinks', 'ifconfig', 'intersphinx',
                                      'napoleon', 'todo', 'viewcode']] \
     + [f'sphinxcontrib.{ext}' for ext in []] \
-    + []
+    + ['sphinx_autodoc_typehints', ]
 
 if not on_rtd:
     # Only activate spelling if it is installed.  It is not required in the
