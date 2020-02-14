@@ -14,3 +14,11 @@ Types
 .. autodata:: TIsbn10
 .. autodata:: TIsbn13
 .. autodata:: TSbn
+
+.. spelling::
+
+    SBN
+    getdefaultencoding
+    repr
+    str
+    sys

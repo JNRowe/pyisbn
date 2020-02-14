@@ -18,3 +18,7 @@ transposable |ISBN|-13 occur in a given library of *n* books.
        catch during data entry as 973 isn’t a valid prefix
 
 .. _given ISBN: https://books.google.com/books?vid=isbn:9783540009788
+
+.. spelling::
+
+    isn
