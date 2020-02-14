@@ -437,14 +437,14 @@ def calculate_checksum(isbn: TIsbn) -> str:
         Checksum for given ISBN or SBN
 
     """
-    isbn = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
-    if len(isbn) == 9:
-        products = [x * y for x, y in enumerate(isbn, 1)]
+    digits = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
+    if len(digits) == 9:
+        products = [x * y for x, y in enumerate(digits, 1)]
         check = sum(products) % 11
         if check == 10:
             check = 'X'
     else:
-        products = [(isbn[i] if i % 2 == 0 else isbn[i] * 3)
+        products = [(digits[i] if i % 2 == 0 else digits[i] * 3)
                     for i in range(12)]
         check = 10 - sum(products) % 10
         if check == 10:
