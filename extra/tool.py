@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 """tool - A simple pyisbn interface for the command line."""
-# Copyright © 2013-2018  James Rowe <jnrowe@gmail.com>
+# Copyright © 2013-2020  James Rowe <jnrowe@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # This file is part of pyisbn.
 #
@@ -15,8 +17,6 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 import argparse
 from typing import Callable

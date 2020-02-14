@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 """setup.py - Setuptools tasks and config for pyisbn."""
-# Copyright © 2007-2019  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007-2020  James Rowe <jnrowe@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # This file is part of pyisbn.
 #
@@ -15,8 +17,6 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 from typing import List
 

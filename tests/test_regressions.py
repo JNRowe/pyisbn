@@ -1,6 +1,8 @@
 #
 """test_regressions - Test for regressions."""
-# Copyright © 2012-2018  James Rowe <jnrowe@gmail.com>
+# Copyright © 2012-2020  James Rowe <jnrowe@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # This file is part of pyisbn.
 #
@@ -15,8 +17,6 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 from pytest import mark, raises
 

@@ -2,6 +2,8 @@
 """test_meta - Tests for project maintenance."""
 # Copyright © 2012-2019  James Rowe <jnrowe@gmail.com>
 #
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 # This file is part of pyisbn.
 #
 # pyisbn is free software: you can redistribute it and/or modify it under the
@@ -15,8 +17,6 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 import json
 import os

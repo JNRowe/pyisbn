@@ -1,6 +1,8 @@
 #
 """conf - Sphinx configuration information."""
-# Copyright © 2011-2019  James Rowe <jnrowe@gmail.com>
+# Copyright © 2011-2020  James Rowe <jnrowe@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # This file is part of pyisbn.
 #
@@ -15,8 +17,6 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 import os
 import sys
@@ -55,7 +55,7 @@ source_suffix = '.rst'
 
 project = 'pyisbn'
 author = 'James Rowe'
-copyright = f'2007-2019  {author}'
+copyright = f'2007-2020  {author}'
 
 release = pyisbn._version.dotted
 version = release.rsplit('.', 1)[0]

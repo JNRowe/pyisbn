@@ -20,8 +20,10 @@ books in their collection.
 .. [#] Previous Python releases would have assumed it was octal representation
        of a number
 """
-# Copyright © 2007-2018  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007-2020  James Rowe <jnrowe@gmail.com>
 #                        notconfusing <isalix@gmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # This file is part of pyisbn.
 #
@@ -36,8 +38,6 @@ books in their collection.
 #
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
-#
-# SPDX-License-Identifier: GPL-3.0+
 
 from . import _version
 
