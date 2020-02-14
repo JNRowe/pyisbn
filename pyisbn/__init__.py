@@ -444,8 +444,7 @@ def calculate_checksum(isbn: TIsbn) -> str:
         if check == 10:
             check = 'X'
     else:
-        products = [(digits[i] if i % 2 == 0 else digits[i] * 3)
-                    for i in range(12)]
+        products = [(x if n % 2 == 0 else x * 3) for n, x in enumerate(digits)]
         check = 10 - sum(products) % 10
         if check == 10:
             check = 0
