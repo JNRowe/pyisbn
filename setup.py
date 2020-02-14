@@ -18,14 +18,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0+
 
+from typing import List
+
 from setuptools import setup
 
 
-def parse_requires(file):
+def parse_requires(file: str) -> List[str]:
     deps = []
-    f = open('extra/%s' % file)
-    entries = [s.split('#')[0].strip() for s in f.readlines()]
-    f.close()
+    with open(f'extra/{file}') as f:
+        entries = [s.split('#')[0].strip() for s in f.readlines()]
     for dep in entries:
         if not dep or dep.startswith('#'):
             continue

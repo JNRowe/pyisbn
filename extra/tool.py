@@ -19,7 +19,7 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
-import sys
+from typing import Callable
 
 from pyisbn import Isbn, TIsbn, URL_MAP, _version
 
@@ -35,8 +35,8 @@ def isbn_typecheck(string: TIsbn) -> Isbn:
     return isbn
 
 
-def partial_arg(f):
-    def wrapper(*args, **kwargs):
+def partial_arg(f: Callable) -> Callable:
+    def wrapper(*args: str, **kwargs: str):
         if 'const' not in kwargs:
             kwargs['const'] = args[1][2:].replace('-', '_')
         return f(*args, dest='command', action='store_const', **kwargs)
@@ -44,7 +44,7 @@ def partial_arg(f):
     return wrapper
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description=__doc__.splitlines()[0].split(' - ', 1)[1],
         epilog='Please report bugs at https://github.com/JNRowe/pyisbn/issues')
