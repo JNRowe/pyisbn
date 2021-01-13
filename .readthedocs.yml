@@ -1,12 +1,9 @@
+version: 2
 build:
-  image: latest
-
-formats:
-  - epub
-
+    image: latest
 python:
-  pip_install: true
-  version: 3
-
-requirements_file:
-  extra/requirements-doc.txt
+    version: 3
+    install:
+      - requirements: extra/requirements-doc.txt
+sphinx:
+  fail_on_warning: true
