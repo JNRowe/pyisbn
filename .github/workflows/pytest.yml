@@ -1,0 +1,28 @@
+name: Test with pytest
+
+on: ['pull_request', 'push']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.6', '3.7', '3.8', 'pypy-3.7']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configure Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install test dependencies
+      run: |
+        python3 -m pip install -r extra/requirements-test.txt
+    - name: Run tests
+      run: |
+        pytest tests
+    - name: Update Coveralls
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python3 -m pip install coveralls
+        coveralls
