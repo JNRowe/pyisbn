@@ -25,7 +25,7 @@ from hypothesis import example, given
 from hypothesis.strategies import sampled_from
 from pytest import mark, raises
 
-from pyisbn import (CountryError, Isbn, SiteError)
+from pyisbn import CountryError, Isbn, SiteError
 from tests.data import TEST_ISBNS
 
 
@@ -44,20 +44,33 @@ def test___str__(isbn: str):
     assert str(Isbn(isbn)) == f'ISBN {isbn}'
 
 
-@mark.skipif(version_info < (2, 6),
-             reason='format() not supported with this Python version')
+@mark.skipif(
+    version_info < (2, 6),
+    reason='format() not supported with this Python version',
+)
 @example(('9780521871723', '', 'ISBN 9780521871723'))
 @example(('978-052-187-1723', 'urn', 'URN:ISBN:978-052-187-1723'))
 @example(
-    ('3540009787', 'url',
-     'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787'))
-@example((
-    '3540009787', 'url:amazon:uk',
-    'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787')
-         )
+    (
+        '3540009787',
+        'url',
+        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787',
+    )
+)
 @example(
-    ('3540009787', 'url:amazon',
-     'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787'))
+    (
+        '3540009787',
+        'url:amazon:uk',
+        'https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787',
+    )
+)
+@example(
+    (
+        '3540009787',
+        'url:amazon',
+        'https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787',
+    )
+)
 @given(sampled_from([(s, '', f'ISBN {s}') for s in TEST_ISBNS]))
 def test___format__(data: Tuple[str, str, str]):
     isbn, format_spec, result = data
@@ -78,10 +91,13 @@ def test_calculate_checksum(data: Tuple[str, str]):
     assert Isbn(isbn).calculate_checksum() == result
 
 
-@mark.parametrize('isbn,result', [
-    ('0071148167', '9780071148160'),
-    ('9780071148160', '0071148167'),
-])
+@mark.parametrize(
+    'isbn,result',
+    [
+        ('0071148167', '9780071148160'),
+        ('9780071148160', '0071148167'),
+    ],
+)
 def test_convert(isbn: str, result: str):
     assert Isbn(isbn).convert() == result
 
@@ -96,14 +112,19 @@ def test_validate(data: Tuple[str, bool]):
     assert Isbn(isbn).validate() == result
 
 
-@mark.parametrize('country,result', [
-    ('us', '.com/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('uk', '.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
-    ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
-])
+@mark.parametrize(
+    'country,result',
+    [
+        ('us', '.com/s?search-alias=stripbooks&field-isbn=0071148167'),
+        ('uk', '.co.uk/s?search-alias=stripbooks&field-isbn=0071148167'),
+        ('de', '.de/s?search-alias=stripbooks&field-isbn=0071148167'),
+    ],
+)
 def test_to_url(country: str, result: str):
-    assert Isbn('0071148167').to_url(country=country) \
+    assert (
+        Isbn('0071148167').to_url(country=country)
         == 'https://www.amazon' + result
+    )
 
 
 def test_to_url_invalid_country():
@@ -111,16 +132,23 @@ def test_to_url_invalid_country():
         Isbn('0071148167').to_url(country='zh')
 
 
-@mark.parametrize('site,result', [
-    ('copac', 'http://copac.jisc.ac.uk/search?isn=0071148167'),
-    ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
-    ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
-    ('waterstones',
-     'https://www.waterstones.com/books/search/term/0071148167'),
-    ('whsmith',
-     'https://www.whsmith.co.uk/search/go?w=0071148167&af=cat1:books'),
-    ('worldcat', 'http://worldcat.org/isbn/0071148167'),
-])
+@mark.parametrize(
+    'site,result',
+    [
+        ('copac', 'http://copac.jisc.ac.uk/search?isn=0071148167'),
+        ('google', 'https://books.google.com/books?vid=isbn:0071148167'),
+        ('isbndb', 'https://isbndb.com/search/all?query=0071148167'),
+        (
+            'waterstones',
+            'https://www.waterstones.com/books/search/term/0071148167',
+        ),
+        (
+            'whsmith',
+            'https://www.whsmith.co.uk/search/go?w=0071148167&af=cat1:books',
+        ),
+        ('worldcat', 'http://worldcat.org/isbn/0071148167'),
+    ],
+)
 def test_to_url_site(site: str, result: str):
     assert Isbn('0071148167').to_url(site=site) == result
 

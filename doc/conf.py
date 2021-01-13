@@ -33,12 +33,26 @@ on_rtd = 'READTHEDOCS' in os.environ
 if not on_rtd:
     import sphinx_rtd_theme
 
-extensions: List[str] = \
-    [f'sphinx.ext.{ext}' for ext in ['autodoc', 'coverage', 'doctest',
-                                     'extlinks', 'ifconfig', 'intersphinx',
-                                     'napoleon', 'todo', 'viewcode']] \
-    + [f'sphinxcontrib.{ext}' for ext in []] \
-    + ['sphinx_autodoc_typehints', ]
+extensions: List[str] = (
+    [
+        f'sphinx.ext.{ext}'
+        for ext in [
+            'autodoc',
+            'coverage',
+            'doctest',
+            'extlinks',
+            'ifconfig',
+            'intersphinx',
+            'napoleon',
+            'todo',
+            'viewcode',
+        ]
+    ]
+    + [f'sphinxcontrib.{ext}' for ext in []]
+    + [
+        'sphinx_autodoc_typehints',
+    ]
+)
 
 if not on_rtd:
     # Only activate spelling if it is installed.  It is not required in the
@@ -74,13 +88,16 @@ modindex_common_prefix = [
 # approximately correct builds on the local system too
 if not on_rtd:
     html_theme = 'sphinx_rtd_theme'
-    html_theme_path: List[str] = [sphinx_rtd_theme.get_html_theme_path(), ]
+    html_theme_path: List[str] = [
+        sphinx_rtd_theme.get_html_theme_path(),
+    ]
 
 pygments_style = 'sphinx'
 with suppress(CalledProcessError):
     proc = run(
         ['git', 'log', '--pretty=format:%ad [%h]', '--date=short', '-n1'],
-        stdout=PIPE)
+        stdout=PIPE,
+    )
     html_last_updated_fmt = proc.stdout.decode()
 
 html_baseurl = 'https://pyisbn.readthedocs.io/'

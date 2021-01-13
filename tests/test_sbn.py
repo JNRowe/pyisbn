@@ -33,10 +33,13 @@ def test___repr__(sbn: str):
     assert repr(Sbn(sbn)) == f'Sbn({sbn!r})'
 
 
-@mark.parametrize('sbn,result', [
-    ('07114816', '7'),
-    ('071148167', '7'),
-])
+@mark.parametrize(
+    'sbn,result',
+    [
+        ('07114816', '7'),
+        ('071148167', '7'),
+    ],
+)
 def test_calculate_checksum(sbn: str, result: str):
     assert Sbn(sbn).calculate_checksum() == result
 

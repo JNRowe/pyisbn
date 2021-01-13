@@ -66,26 +66,25 @@ DASHES: List[str] = [
 
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
-    'amazon': (('https://www.amazon.%(tld)s/s'
-                '?search-alias=stripbooks&field-isbn=%(isbn)s'), {
-                    'de': None,
-                    'fr': None,
-                    'jp': None,
-                    'uk': 'co.uk',
-                    'us': 'com',
-                }),
-    'copac':
-    'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
-    'google':
-    'https://books.google.com/books?vid=isbn:%(isbn)s',
-    'isbndb':
-    'https://isbndb.com/search/all?query=%(isbn)s',
-    'waterstones':
-    'https://www.waterstones.com/books/search/term/%(isbn)s',
-    'whsmith':
-    'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
-    'worldcat':
-    'http://worldcat.org/isbn/%(isbn)s',
+    'amazon': (
+        (
+            'https://www.amazon.%(tld)s/s'
+            '?search-alias=stripbooks&field-isbn=%(isbn)s'
+        ),
+        {
+            'de': None,
+            'fr': None,
+            'jp': None,
+            'uk': 'co.uk',
+            'us': 'com',
+        },
+    ),
+    'copac': 'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
+    'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
+    'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
+    'waterstones': 'https://www.waterstones.com/books/search/term/%(isbn)s',
+    'whsmith': 'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
+    'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
 }
 
 
@@ -107,6 +106,7 @@ class SiteError(PyisbnError):
 
 class Isbn:
     """Class for representing ISBN objects."""
+
     def __init__(self, isbn: TIsbn) -> None:
         """Initialise a new ``Isbn`` object.
 
@@ -203,8 +203,9 @@ class Isbn:
         """
         return validate(self.isbn)
 
-    def to_url(self, site: str = 'amazon',
-               country: Optional[str] = 'us') -> str:
+    def to_url(
+        self, site: str = 'amazon', country: Optional[str] = 'us'
+    ) -> str:
         """Generate a link to an online book site.
 
         Args:
@@ -257,6 +258,7 @@ class Isbn10(Isbn):
         ``Isbn``
 
     """
+
     def __init__(self, isbn: TIsbn) -> None:
         """Initialise a new ``Isbn10`` object.
 
@@ -295,6 +297,7 @@ class Sbn(Isbn10):
         ``Isbn10``
 
     """
+
     def __init__(self, sbn: TSbn) -> None:
         """Initialise a new ``Sbn`` object.
 
@@ -343,6 +346,7 @@ class Isbn13(Isbn):
         ``Isbn``
 
     """
+
     def __init__(self, isbn: TIsbn13) -> None:
         """Initialise a new ``Isbn13`` object.
 
@@ -422,8 +426,10 @@ def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:
         if not isbn.isdigit():
             raise IsbnError('non-digit parts')
         if not len(isbn) in (9, 12):
-            raise IsbnError('ISBN must be either 9 or 12 characters long '
-                            'without checksum')
+            raise IsbnError(
+                'ISBN must be either 9 or 12 characters long '
+                'without checksum'
+            )
     return isbn
 
 
@@ -478,8 +484,10 @@ def convert(isbn: TIsbn, code: str = '978') -> str:
         if isbn.startswith('978'):
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
-            raise IsbnError('Only ISBN-13s with 978 Bookland code can be '
-                            'converted to ISBN-10.')
+            raise IsbnError(
+                'Only ISBN-13s with 978 Bookland code can be '
+                'converted to ISBN-10.'
+            )
 
 
 def validate(isbn: TIsbn) -> bool:

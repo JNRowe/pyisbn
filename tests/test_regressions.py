@@ -25,19 +25,25 @@ from pyisbn import IsbnError, _isbn_cleanse
 
 # NOTE: Depending on your typeface and editor you may notice that the following
 # +# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
-@mark.parametrize('isbn', [
-    '978-1-84724-253-2',
-    '978–1–84724–253–2',
-    '978―0199564095',
-])
+@mark.parametrize(
+    'isbn',
+    [
+        '978-1-84724-253-2',
+        '978–1–84724–253–2',
+        '978―0199564095',
+    ],
+)
 def test_issue_7_unistr(isbn: str):
     assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
 
 
-@mark.parametrize('isbn', [
-    '2901568582497',
-    '5800034170763',
-])
+@mark.parametrize(
+    'isbn',
+    [
+        '2901568582497',
+        '5800034170763',
+    ],
+)
 def test_issue_16_bookland(isbn: str):
     with raises(IsbnError, match='Bookland'):
         _isbn_cleanse(isbn)
