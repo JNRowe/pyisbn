@@ -24,7 +24,7 @@ import os
 from pytest import mark
 
 
-@mark.skipif('TRAVIS_PYTHON_VERSION' in os.environ,
+@mark.skipif('GITHUB_WORKFLOW' in os.environ,
              reason='Maintainer test for use in git hooks')
 def test_formatting():
     with open('tests/books.json') as fp:
