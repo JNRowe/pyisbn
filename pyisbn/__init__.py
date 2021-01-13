@@ -44,7 +44,7 @@ from . import _version
 __version__ = _version.dotted
 __date__ = _version.date
 __author__ = 'James Rowe <jnrowe@gmail.com>'
-__copyright__ = 'Copyright © 2007-2017  James Rowe'
+__copyright__ = 'Copyright © 2007-2020  James Rowe'
 __license__ = 'GNU General Public License Version 3'
 
 import unicodedata
