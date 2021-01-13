@@ -113,9 +113,9 @@ reproduce the problem, or even better a patch!
 .. |status| image:: https://img.shields.io/pypi/status/pyisbn.png
    :alt: Development status
 
-.. |coveralls| image:: https://img.shields.io/coveralls/github/JNRowe/pyisbn/master.png
+.. |coveralls| image:: https://img.shields.io/coveralls/github/JNRowe/pyisbn/main.png
    :target: https://coveralls.io/repos/JNRowe/pyisbn
-   :alt: Coverage state on master
+   :alt: Coverage state on main
 
 .. |pypi| image:: https://img.shields.io/pypi/v/pyisbn.png
    :target: https://pypi.org/project/pyisbn/
@@ -126,4 +126,4 @@ reproduce the problem, or even better a patch!
    :alt: Documentation
 
 .. |actions| image:: https://img.shields.io/github/workflow/status/JNRowe/pyisbn/Test%20with%20pytest
-   :alt: Test state on master
+   :alt: Test state on main
