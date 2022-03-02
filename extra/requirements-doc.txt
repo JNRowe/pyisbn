@@ -1,4 +1,4 @@
 sphinx>=4.3
 sphinx-autodoc-typehints>=1.10
 sphinx_rtd_theme>=1.0
-sphinxcontrib-spelling>=4.2.1
+sphinxcontrib-spelling>=7.2
