@@ -22,7 +22,6 @@ from hypothesis import example, given
 from hypothesis.strategies import sampled_from
 
 from pyisbn import Isbn13
-
 from tests.data import TEST_ISBN13S
 
 
