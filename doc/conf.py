@@ -55,6 +55,10 @@ extensions: List[str] = (
 )
 
 if not on_rtd:
+    # Showing document build durations is only valuable when writing, so we’ll
+    # only enable it locally
+    extensions.append('sphinx.ext.duration')
+
     # Only activate spelling if it is installed.  It is not required in the
     # general case and we don’t have the granularity to describe this in a
     # clean way
@@ -65,7 +69,9 @@ if not on_rtd:
     else:
         extensions.append('sphinxcontrib.spelling')
 
-source_suffix = '.rst'
+needs_sphinx = '4.3'
+
+nitpicky = True
 
 project = 'pyisbn'
 author = 'James Rowe'
@@ -73,6 +79,8 @@ copyright = f'2007-2020  {author}'
 
 release = pyisbn._version.dotted
 version = release.rsplit('.', 1)[0]
+
+trim_footnote_reference_space = True
 
 rst_prolog = """
 .. |ISBN| replace:: :abbr:`ISBN (International Standard Book Number)`
@@ -92,7 +100,6 @@ if not on_rtd:
         sphinx_rtd_theme.get_html_theme_path(),
     ]
 
-pygments_style = 'sphinx'
 with suppress(CalledProcessError):
     proc = run(
         ['git', 'log', '--pretty=format:%ad [%h]', '--date=short', '-n1'],
