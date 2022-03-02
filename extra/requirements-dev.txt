@@ -8,5 +8,5 @@ flake8-import-order>=0.18
 flake8-string-format>=0.3
 mutmut>=1.6
 pep8-naming>=0.11
-pep257
+pep257>=0.7
 pytest-html>=1.14
