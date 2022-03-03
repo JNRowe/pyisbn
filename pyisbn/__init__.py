@@ -124,7 +124,6 @@ class Isbn:
     def __repr__(self) -> str:
         """Self-documenting string representation.
 
-
         Returns:
             String to recreate ``Isbn`` object
 
