@@ -1,6 +1,6 @@
 #
 """test_sbn - Test Sbn class."""
-# Copyright © 2012-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2012-2022  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

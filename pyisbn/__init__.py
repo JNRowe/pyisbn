@@ -20,7 +20,7 @@ books in their collection.
 .. [#] Previous Python releases would have assumed it was octal representation
        of a number
 """
-# Copyright © 2007-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
 #                        notconfusing <isalix@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
@@ -44,7 +44,7 @@ from . import _version
 __version__ = _version.dotted
 __date__ = _version.date
 __author__ = 'James Rowe <jnrowe@gmail.com>'
-__copyright__ = 'Copyright © 2007-2020  James Rowe'
+__copyright__ = 'Copyright © 2007-2022  James Rowe'
 __license__ = 'GNU General Public License Version 3'
 
 import unicodedata  # NOQA: I100

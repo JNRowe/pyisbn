@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """tool - A simple pyisbn interface for the command line."""
-# Copyright © 2013-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2013-2021  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

@@ -1,6 +1,6 @@
 #
 """conf - Sphinx configuration information."""
-# Copyright © 2011-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2011-2022  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
@@ -75,7 +75,7 @@ nitpicky = True
 
 project = 'pyisbn'
 author = 'James Rowe'
-copyright = f'2007-2020  {author}'
+copyright = f'2007-2022  {author}'
 
 release = pyisbn._version.dotted
 version = release.rsplit('.', 1)[0]

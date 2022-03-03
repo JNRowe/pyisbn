@@ -1,6 +1,6 @@
 #
 """test_functions - Test function interface."""
-# Copyright © 2012-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
