@@ -47,7 +47,7 @@ __author__ = 'James Rowe <jnrowe@gmail.com>'
 __copyright__ = 'Copyright © 2007-2020  James Rowe'
 __license__ = 'GNU General Public License Version 3'
 
-import unicodedata
+import unicodedata  # NOQA: I100
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 #: ISBN string type

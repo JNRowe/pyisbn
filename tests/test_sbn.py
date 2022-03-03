@@ -23,7 +23,6 @@ from hypothesis.strategies import sampled_from
 from pytest import mark
 
 from pyisbn import Sbn
-
 from tests.data import TEST_SBNS
 
 
