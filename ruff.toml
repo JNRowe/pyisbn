@@ -1,4 +1,4 @@
-target-version = "py36"
+target-version = "py38"
 
 exclude = [
     ".git",
