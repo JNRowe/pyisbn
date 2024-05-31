@@ -25,13 +25,13 @@ from pyisbn import Isbn10
 from tests.data import TEST_ISBN10S
 
 
-@example('3540009787')
+@example("3540009787")
 @given(sampled_from(TEST_ISBN10S))
 def test_calculate_checksum(isbn: str):
     assert Isbn10(isbn).calculate_checksum() == isbn[-1]
 
 
-@example('3540009787')
+@example("3540009787")
 @given(sampled_from(TEST_ISBN10S))
 def test_convert(isbn: str):
-    assert Isbn10(isbn).convert()[:-1] == '978' + isbn[:-1]
+    assert Isbn10(isbn).convert()[:-1] == "978" + isbn[:-1]

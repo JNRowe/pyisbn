@@ -43,9 +43,9 @@ from . import _version
 
 __version__ = _version.dotted
 __date__ = _version.date
-__author__ = 'James Rowe <jnrowe@gmail.com>'
-__copyright__ = 'Copyright © 2007-2022  James Rowe'
-__license__ = 'GNU General Public License Version 3'
+__author__ = "James Rowe <jnrowe@gmail.com>"
+__copyright__ = "Copyright © 2007-2022  James Rowe"
+__license__ = "GNU General Public License Version 3"
 
 import unicodedata  # NOQA: I100
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -61,27 +61,27 @@ TSbn = str
 #: Dash types to accept, and scrub, in ISBN inputs
 DASHES: List[str] = [
     unicodedata.lookup(s)
-    for s in ('HYPHEN-MINUS', 'EN DASH', 'EM DASH', 'HORIZONTAL BAR')
+    for s in ("HYPHEN-MINUS", "EN DASH", "EM DASH", "HORIZONTAL BAR")
 ]
 
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
-    'amazon': (
-        'https://www.amazon.%(tld)s/s?search-alias=stripbooks&field-isbn=%(isbn)s',
+    "amazon": (
+        "https://www.amazon.%(tld)s/s?search-alias=stripbooks&field-isbn=%(isbn)s",
         {
-            'de': None,
-            'fr': None,
-            'jp': None,
-            'uk': 'co.uk',
-            'us': 'com',
+            "de": None,
+            "fr": None,
+            "jp": None,
+            "uk": "co.uk",
+            "us": "com",
         },
     ),
-    'copac': 'http://copac.jisc.ac.uk/search?isn=%(isbn)s',
-    'google': 'https://books.google.com/books?vid=isbn:%(isbn)s',
-    'isbndb': 'https://isbndb.com/search/all?query=%(isbn)s',
-    'waterstones': 'https://www.waterstones.com/books/search/term/%(isbn)s',
-    'whsmith': 'https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books',
-    'worldcat': 'http://worldcat.org/isbn/%(isbn)s',
+    "copac": "http://copac.jisc.ac.uk/search?isn=%(isbn)s",
+    "google": "https://books.google.com/books?vid=isbn:%(isbn)s",
+    "isbndb": "https://isbndb.com/search/all?query=%(isbn)s",
+    "waterstones": "https://www.waterstones.com/books/search/term/%(isbn)s",
+    "whsmith": "https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books",
+    "worldcat": "http://worldcat.org/isbn/%(isbn)s",
 }
 
 
@@ -125,7 +125,7 @@ class Isbn:
             String to recreate ``Isbn`` object
 
         """
-        return f'{self.__class__.__name__}({self.isbn!r})'
+        return f"{self.__class__.__name__}({self.isbn!r})"
 
     def __str__(self) -> str:
         """Pretty printed ISBN string.
@@ -134,7 +134,7 @@ class Isbn:
             Human readable string representation of ``Isbn`` object
 
         """
-        return f'ISBN {self._isbn}'
+        return f"ISBN {self._isbn}"
 
     def __format__(self, format_spec: Optional[str] = None) -> str:
         """Extended pretty printing for ISBN strings.
@@ -151,20 +151,20 @@ class Isbn:
         """
         if not format_spec:  # default format calls set format_spec to ''
             return str(self)
-        elif format_spec == 'url':
+        elif format_spec == "url":
             return self.to_url()
-        elif format_spec.startswith('url:'):
-            parts = format_spec.split(':')[1:]
+        elif format_spec.startswith("url:"):
+            parts = format_spec.split(":")[1:]
             site = parts[0]
             if len(parts) > 1:
                 country = parts[1]
             else:
-                country = 'us'
+                country = "us"
             return self.to_url(site, country)
-        elif format_spec == 'urn':
+        elif format_spec == "urn":
             return self.to_urn()
         else:
-            raise ValueError(f'Unknown format_spec {format_spec!r}')
+            raise ValueError(f"Unknown format_spec {format_spec!r}")
 
     def calculate_checksum(self) -> str:
         """Calculate ISBN checksum.
@@ -178,7 +178,7 @@ class Isbn:
         else:
             return calculate_checksum(self.isbn[:-1])
 
-    def convert(self, code: str = '978') -> str:
+    def convert(self, code: str = "978") -> str:
         """Convert ISBNs between ISBN-10 and ISBN-13.
 
         Args:
@@ -199,7 +199,7 @@ class Isbn:
         """
         return validate(self.isbn)
 
-    def to_url(self, site: str = 'amazon', country: Optional[str] = 'us') -> str:
+    def to_url(self, site: str = "amazon", country: Optional[str] = "us") -> str:
         """Generate a link to an online book site.
 
         Args:
@@ -222,14 +222,14 @@ class Isbn:
                 url = URL_MAP[site]
         except KeyError:
             raise SiteError(site) from KeyError
-        inject = {'isbn': self._isbn}
+        inject = {"isbn": self._isbn}
         if tlds:
             if country not in tlds:
                 raise CountryError(country)
             tld = tlds[country]
             if not tld:
                 tld = country
-            inject['tld'] = tld
+            inject["tld"] = tld
         return url % inject
 
     def to_urn(self) -> str:
@@ -242,7 +242,7 @@ class Isbn:
             :rfc:`3187` compliant URN
 
         """
-        return f'URN:ISBN:{self._isbn}'
+        return f"URN:ISBN:{self._isbn}"
 
 
 class Isbn10(Isbn):
@@ -271,7 +271,7 @@ class Isbn10(Isbn):
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code: str = '978') -> str:
+    def convert(self, code: str = "978") -> str:
         """Convert ISBN-10 to ISBN-13.
 
         Args:
@@ -299,7 +299,7 @@ class Sbn(Isbn10):
             sbn: SBN string
 
         """
-        isbn = '0' + sbn
+        isbn = "0" + sbn
         super(Sbn, self).__init__(isbn)
 
     def __repr__(self) -> str:
@@ -309,7 +309,7 @@ class Sbn(Isbn10):
             String to recreate ``Sbn`` object
 
         """
-        return f'{self.__class__.__name__}({self.isbn[1:]!r})'
+        return f"{self.__class__.__name__}({self.isbn[1:]!r})"
 
     def calculate_checksum(self) -> str:
         """Calculate SBN checksum.
@@ -320,7 +320,7 @@ class Sbn(Isbn10):
         """
         return calculate_checksum(self.isbn[:9])
 
-    def convert(self, code: str = '978') -> str:
+    def convert(self, code: str = "978") -> str:
         """Convert SBN to ISBN-13.
 
         Args:
@@ -392,36 +392,36 @@ def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:
 
     """
     if not isinstance(isbn, str):
-        raise TypeError(f'ISBN must be a string, received {isbn!r}')
+        raise TypeError(f"ISBN must be a string, received {isbn!r}")
 
     for dash in DASHES:
-        isbn = isbn.replace(dash, '')
+        isbn = isbn.replace(dash, "")
 
     if checksum:
         if not isbn[:-1].isdigit():
-            raise IsbnError('non-digit parts')
+            raise IsbnError("non-digit parts")
         if len(isbn) == 9:
-            isbn = '0' + isbn
+            isbn = "0" + isbn
         if len(isbn) == 10:
-            if not (isbn[-1].isdigit() or isbn[-1] in 'Xx'):
-                raise IsbnError('non-digit or X checksum')
+            if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
+                raise IsbnError("non-digit or X checksum")
         elif len(isbn) == 13:
             if not isbn[-1].isdigit():
-                raise IsbnError('non-digit checksum')
-            if not isbn.startswith(('978', '979')):
-                raise IsbnError('invalid Bookland region')
+                raise IsbnError("non-digit checksum")
+            if not isbn.startswith(("978", "979")):
+                raise IsbnError("invalid Bookland region")
         else:
-            raise IsbnError('ISBN must be either 10 or 13 characters long')
+            raise IsbnError("ISBN must be either 10 or 13 characters long")
     else:
         if len(isbn) == 8:
-            isbn = '0' + isbn
-        elif len(isbn) == 12 and not isbn[:3].startswith(('978', '979')):
-            raise IsbnError('invalid Bookland region')
+            isbn = "0" + isbn
+        elif len(isbn) == 12 and not isbn[:3].startswith(("978", "979")):
+            raise IsbnError("invalid Bookland region")
         if not isbn.isdigit():
-            raise IsbnError('non-digit parts')
+            raise IsbnError("non-digit parts")
         if not len(isbn) in (9, 12):
             raise IsbnError(
-                'ISBN must be either 9 or 12 characters long without checksum'
+                "ISBN must be either 9 or 12 characters long without checksum"
             )
     return isbn
 
@@ -441,7 +441,7 @@ def calculate_checksum(isbn: TIsbn) -> str:
         products = [x * y for x, y in enumerate(digits, 1)]
         check = sum(products) % 11
         if check == 10:
-            check = 'X'
+            check = "X"
     else:
         products = [(x if n % 2 == 0 else x * 3) for n, x in enumerate(digits)]
         check = 10 - sum(products) % 10
@@ -450,7 +450,7 @@ def calculate_checksum(isbn: TIsbn) -> str:
     return str(check)
 
 
-def convert(isbn: TIsbn, code: str = '978') -> str:
+def convert(isbn: TIsbn, code: str = "978") -> str:
     """Convert ISBNs between ISBN-10 and ISBN-13.
 
     Note:
@@ -474,11 +474,11 @@ def convert(isbn: TIsbn, code: str = '978') -> str:
         isbn = code + isbn[:-1]
         return isbn + calculate_checksum(isbn)
     else:
-        if isbn.startswith('978'):
+        if isbn.startswith("978"):
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
             raise IsbnError(
-                'Only ISBN-13s with 978 Bookland code can be converted to ISBN-10.'
+                "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
             )
 
 
