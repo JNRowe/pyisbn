@@ -67,10 +67,7 @@ DASHES: List[str] = [
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
     'amazon': (
-        (
-            'https://www.amazon.%(tld)s/s'
-            '?search-alias=stripbooks&field-isbn=%(isbn)s'
-        ),
+        'https://www.amazon.%(tld)s/s?search-alias=stripbooks&field-isbn=%(isbn)s',
         {
             'de': None,
             'fr': None,
@@ -202,9 +199,7 @@ class Isbn:
         """
         return validate(self.isbn)
 
-    def to_url(
-        self, site: str = 'amazon', country: Optional[str] = 'us'
-    ) -> str:
+    def to_url(self, site: str = 'amazon', country: Optional[str] = 'us') -> str:
         """Generate a link to an online book site.
 
         Args:
@@ -426,8 +421,7 @@ def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:
             raise IsbnError('non-digit parts')
         if not len(isbn) in (9, 12):
             raise IsbnError(
-                'ISBN must be either 9 or 12 characters long '
-                'without checksum'
+                'ISBN must be either 9 or 12 characters long without checksum'
             )
     return isbn
 
@@ -484,8 +478,7 @@ def convert(isbn: TIsbn, code: str = '978') -> str:
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
             raise IsbnError(
-                'Only ISBN-13s with 978 Bookland code can be '
-                'converted to ISBN-10.'
+                'Only ISBN-13s with 978 Bookland code can be converted to ISBN-10.'
             )
 
 
