@@ -21,15 +21,15 @@
 import json
 from typing import Dict, List
 
-with open('tests/books.json') as f:
+with open("tests/books.json") as f:
     #: Sample book data for use in tests
     TEST_BOOKS: Dict[str, str] = json.load(f)
 
 #: ISBNs from sample book data for use in tests
-TEST_ISBNS: List[str] = [s.replace('-', '') for s in TEST_BOOKS.values()]
+TEST_ISBNS: List[str] = [s.replace("-", "") for s in TEST_BOOKS.values()]
 #: ISBN 10s from sample book data for use in tests
 TEST_ISBN10S: List[str] = [s for s in TEST_ISBNS if len(s) == 10]
 #: ISBN 13s from sample book data for use in tests
 TEST_ISBN13S: List[str] = [s for s in TEST_ISBNS if len(s) == 13]
 #: SBNs from sample book data for use in tests
-TEST_SBNS: List[str] = [s[1:] for s in TEST_ISBN10S if s.startswith('0')]
+TEST_SBNS: List[str] = [s[1:] for s in TEST_ISBN10S if s.startswith("0")]
