@@ -32,5 +32,5 @@ def test_formatting():
     with open('tests/books.json') as fp:
         data = fp.read()
     content = json.loads(data)
-    dumped = json.dumps(content, indent=4) + "\n"
+    dumped = json.dumps(content, indent=4) + '\n'
     assert data == dumped
