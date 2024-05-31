@@ -11,9 +11,6 @@ exclude = [
 [format]
 docstring-code-format = true
 
-# FIXME: This should be dropped, but it is the style in-place today
-quote-style = "single"
-
 [lint]
 extend-select = [
   "B",    # flake8-bugbear
