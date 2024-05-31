@@ -6,6 +6,7 @@ include .travis.yml
 include COPYING
 include NEWS.rst
 include README.rst
+include ruff.toml
 
 recursive-include doc *.rst
 include doc/conf.py
