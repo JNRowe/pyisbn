@@ -125,5 +125,5 @@ reproduce the problem, or even better a patch!
    :target: https://pyisbn.readthedocs.io/
    :alt: Documentation
 
-.. |actions| image:: https://img.shields.io/github/workflow/status/JNRowe/pyisbn/Test%20with%20pytest
+.. |actions| image:: https://img.shields.io/github/actions/workflow/status/JNRowe/pyisbn/pytest.yml?branch=main
    :alt: Test state on main
