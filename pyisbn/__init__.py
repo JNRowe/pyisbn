@@ -253,8 +253,8 @@ class Isbn:
 class Isbn10(Isbn):
     """Class for representing ISBN-10 objects.
 
-    See also:
-        ``Isbn``
+    See Also:
+        :class:`Isbn`
 
     """
 
@@ -292,8 +292,8 @@ class Isbn10(Isbn):
 class Sbn(Isbn10):
     """Class for representing SBN objects.
 
-    See also:
-        ``Isbn10``
+    See Also:
+        :class:`Isbn10`
 
     """
 
@@ -341,8 +341,8 @@ class Sbn(Isbn10):
 class Isbn13(Isbn):
     """Class for representing ISBN-13 objects.
 
-    See also:
-        ``Isbn``
+    See Also:
+        :class:`Isbn`
 
     """
 

@@ -112,7 +112,7 @@ html_baseurl = 'https://pyisbn.readthedocs.io/'
 man_pages: Tuple[str, str, str, List, str, int] = []
 
 # Autodoc extension settings
-autoclass_content = 'init'
+autoclass_content = 'both'
 autodoc_default_options: Dict[str, Optional[str]] = {
     'members': None,
 }
