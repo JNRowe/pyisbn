@@ -419,7 +419,7 @@ def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:  # NoQA: C901
             raise IsbnError("invalid Bookland region")
         if not isbn.isdigit():
             raise IsbnError("non-digit parts")
-        if not len(isbn) in (9, 12):
+        if len(isbn) not in (9, 12):
             raise IsbnError(
                 "ISBN must be either 9 or 12 characters long without checksum"
             )
