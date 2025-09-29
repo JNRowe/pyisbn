@@ -119,7 +119,7 @@ autodoc_default_options: Dict[str, Optional[str]] = {
 
 # extlinks extension settings
 extlinks: Dict[str, Tuple[str, str]] = {
-    'pypi': ('http://pypi.python.org/pypi/%s', ''),
+    'pypi': ('http://pypi.python.org/pypi/%s', '%s'),
     'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
 }
 
