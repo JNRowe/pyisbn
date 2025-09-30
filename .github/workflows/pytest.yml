@@ -8,6 +8,11 @@ on:
     - tests/*.py
     - tests/books.json
 
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,18 +30,9 @@ jobs:
         python3 -m pip install -r extra/requirements-test.txt
     - name: Run tests
       run: |
-        pytest tests
-    - name: Coveralls
-      uses: AndreMiras/coveralls-python-action@develop
-      with:
-        parallel: true
-        flag-name: Unit Test
+        pytest --cov-report xml:coverage.xml tests
 
-  coveralls_finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
+    - name: Post coverage comment
+      uses: py-cov-action/python-coverage-comment-action@v3
       with:
-        parallel-finished: true
+        GITHUB_TOKEN: ${{ github.token }}
