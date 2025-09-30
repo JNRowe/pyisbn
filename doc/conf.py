@@ -22,7 +22,6 @@ import os
 import sys
 from contextlib import suppress
 from subprocess import CalledProcessError, PIPE, run
-from typing import Dict, List, Optional, Tuple
 
 root_dir = os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0, root_dir)
@@ -33,7 +32,7 @@ on_rtd = "READTHEDOCS" in os.environ
 if not on_rtd:
     import sphinx_rtd_theme
 
-extensions: List[str] = (
+extensions: list[str] = (
     [
         f"sphinx.ext.{ext}"
         for ext in [
@@ -96,7 +95,7 @@ modindex_common_prefix = [
 # approximately correct builds on the local system too
 if not on_rtd:
     html_theme = "sphinx_rtd_theme"
-    html_theme_path: List[str] = [
+    html_theme_path: list[str] = [
         sphinx_rtd_theme.get_html_theme_path(),
     ]
 
@@ -109,22 +108,20 @@ with suppress(CalledProcessError):
 
 html_baseurl = "https://pyisbn.readthedocs.io/"
 
-man_pages: Tuple[str, str, str, List, str, int] = []
-
 # Autodoc extension settings
 autoclass_content = "both"
-autodoc_default_options: Dict[str, Optional[str]] = {
+autodoc_default_options: dict[str, str | None] = {
     "members": None,
 }
 
 # extlinks extension settings
-extlinks: Dict[str, Tuple[str, str]] = {
+extlinks: dict[str, tuple[str, str]] = {
     "pypi": ("http://pypi.python.org/pypi/%s", "%s"),
     "issue": ("https://github.com/JNRowe/jnrbase/issues/%s", "GitHub #"),
 }
 
 # intersphinx extension settings
-intersphinx_mapping: Dict[str, str] = {
+intersphinx_mapping: dict[str, str] = {
     k: (v, os.getenv(f"SPHINX_{k.upper()}_OBJECTS"))
     for k, v in {
         "python": "https://docs.python.org/3/",
