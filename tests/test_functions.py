@@ -80,7 +80,7 @@ def test__isbn_cleanse_reflect_type(isbn: str):
 def test__isbn_cleanse_invalid_type():
     """Test cleansing an invalid type."""
     with raises(TypeError, match="ISBN must be a string, received 2"):
-        _isbn_cleanse(2)
+        _isbn_cleanse(2)  # ty: ignore[invalid-argument-type]
 
 
 @mark.parametrize(

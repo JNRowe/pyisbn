@@ -19,7 +19,7 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-from typing import Callable
+from typing import Callable, cast
 
 from pyisbn import Isbn, TIsbn, URL_MAP, _version
 
@@ -63,7 +63,7 @@ def partial_arg(f: Callable) -> Callable:
 def main() -> None:
     """Parse arguments and run the tool."""
     parser = argparse.ArgumentParser(
-        description=__doc__.splitlines()[0].split(" - ", 1)[1],
+        description=cast(str, __doc__).splitlines()[0].split(" - ", 1)[1],
         epilog="Please report bugs at https://github.com/JNRowe/pyisbn/issues",
     )
     parser.add_argument(
