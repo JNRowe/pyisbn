@@ -199,7 +199,9 @@ class Isbn:
         """
         return validate(self.isbn)
 
-    def to_url(self, site: str = "amazon", country: Optional[str] = "us") -> str:
+    def to_url(
+        self, site: str = "amazon", country: Optional[str] = "us"
+    ) -> str:
         """Generate a link to an online book site.
 
         Args:
@@ -478,7 +480,8 @@ def convert(isbn: TIsbn, code: str = "978") -> str:
             return isbn[3:-1] + calculate_checksum(isbn[3:-1])
         else:
             raise IsbnError(
-                "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
+                "Only ISBN-13s with 978 Bookland code can be converted to "
+                "ISBN-10."
             )
 
 
