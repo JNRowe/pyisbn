@@ -19,9 +19,5 @@ Can we buy a licence to embed this within a closed source product?
 
 I’m sorry, but no.
 
-This isn’t an issue of money, so there is no need to make each other feel
+This isn't an issue of money, so there is no need to make each other feel
 uncomfortable with a bidding discussion.
-
-.. spelling::
-
-    isn

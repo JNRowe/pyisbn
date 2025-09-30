@@ -22,6 +22,6 @@ Functions for handling ISBNs
     >>> validate('9783540009788')
     True
 
-.. spelling::
+.. spelling:word-list::
 
-    SBN
+   EAN
