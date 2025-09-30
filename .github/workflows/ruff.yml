@@ -18,5 +18,5 @@ jobs:
         with:
           src: >-
             doc/conf.py
-            pyisbn/
+            src/pyisbn/
             tests/

@@ -1,4 +1,0 @@
--r requirements-test.txt
-ruff>=0.4
-mutmut>=1.6
-pytest-html>=2.0
