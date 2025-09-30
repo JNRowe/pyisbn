@@ -74,7 +74,7 @@ def test__isbn_cleanse_unicode_dash(isbn: str):
 )
 def test__isbn_cleanse_reflect_type(isbn: str):
     """Test that the cleansed ISBN has the same type as the original."""
-    assert type(_isbn_cleanse(isbn)) == type(isbn)
+    assert type(_isbn_cleanse(isbn)) is type(isbn)
 
 
 def test__isbn_cleanse_invalid_type():
