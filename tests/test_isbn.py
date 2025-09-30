@@ -129,7 +129,10 @@ def test_validate(data: Tuple[str, bool]):
 )
 def test_to_url(country: str, result: str):
     """Test converting an ISBN to a URL."""
-    assert Isbn("0071148167").to_url(country=country) == "https://www.amazon" + result
+    assert (
+        Isbn("0071148167").to_url(country=country)
+        == "https://www.amazon" + result
+    )
 
 
 def test_to_url_invalid_country():
