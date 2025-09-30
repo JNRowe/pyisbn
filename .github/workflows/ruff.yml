@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
-    - uses: chartboost/ruff-action@v1
+    - uses: astral-sh/ruff-action@v3
       with:
-        changed-files: 'true'
+        src: >-
+          doc/conf.py
+          pyisbn/
+          tests/
