@@ -3,7 +3,7 @@ build-backend = "uv_build"
 requires = ["uv_build>=0.9.2,<0.10.0"]
 
 [dependency-groups]
-dev = ["mutmut>=1.6", "pytest-html>=2.0", "ruff>=0.14,<=0.15"]
+dev = ["mutmut>=3.3,<=4.0", "pytest-html>=2.0", "ruff>=0.14,<=0.15"]
 doc = [
     "sphinx-autodoc-typehints>=1.10",
     "sphinx>=4.3",
@@ -67,6 +67,8 @@ relative_files = true
 source_pkgs = ["pyisbn"]
 
 [tool.mutmut]
+do_not_mutate = ["src/pyisbn/_version.py"]
+pytest_add_cli_args = ["--cov-fail-under=0", "--randomly-seed=0"]
 # Forcibly set pytest command, as the default behaves badly if you’re using
 # environment isolation
 runner = "pytest -x"
