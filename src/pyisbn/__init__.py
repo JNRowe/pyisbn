@@ -114,7 +114,6 @@ class Isbn:
             isbn: ISBN string
 
         """
-        super(Isbn, self).__init__()
         self._isbn = isbn
         if len(isbn) in (9, 12):
             self.isbn = _isbn_cleanse(isbn, False)
@@ -265,7 +264,7 @@ class Isbn10(Isbn):
             isbn (str): ISBN-10 string
 
         """
-        super(Isbn10, self).__init__(isbn)
+        super().__init__(isbn)
 
     def calculate_checksum(self) -> str:
         """Calculate ISBN-10 checksum.
@@ -305,7 +304,7 @@ class Sbn(Isbn10):
 
         """
         isbn = "0" + sbn
-        super(Sbn, self).__init__(isbn)
+        super().__init__(isbn)
 
     def __repr__(self) -> str:
         """Self-documenting string representation.
@@ -335,7 +334,7 @@ class Sbn(Isbn10):
             ISBN-13 string
 
         """
-        return super(Sbn, self).convert(code)
+        return super().convert(code)
 
 
 class Isbn13(Isbn):
@@ -353,7 +352,7 @@ class Isbn13(Isbn):
             isbn: ISBN-13 string
 
         """
-        super(Isbn13, self).__init__(isbn)
+        super().__init__(isbn)
 
     def calculate_checksum(self) -> str:
         """Calculate ISBN-13 checksum.
