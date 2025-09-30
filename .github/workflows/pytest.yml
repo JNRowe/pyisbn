@@ -3,10 +3,10 @@ name: Test with pytest
 on:
   push:
     paths:
-    - .github/workflows/pytest.yml
-    - pyisbn/*.py
-    - tests/*.py
-    - tests/books.json
+      - .github/workflows/pytest.yml
+      - pyisbn/*.py
+      - tests/*.py
+      - tests/books.json
 
 permissions:
   contents: write
@@ -18,21 +18,24 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
-    - uses: actions/checkout@v5
-    - name: Configure Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install test dependencies
-      run: |
-        python3 -m pip install -r extra/requirements-test.txt
-    - name: Run tests
-      run: |
-        pytest --cov-report xml:coverage.xml tests
+      - uses: actions/checkout@v5
 
-    - name: Post coverage comment
-      uses: py-cov-action/python-coverage-comment-action@v3
-      with:
-        GITHUB_TOKEN: ${{ github.token }}
+      - name: Configure Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install test dependencies
+        run: |
+          python3 -m pip install -r extra/requirements-test.txt
+
+      - name: Run tests
+        run: |
+          pytest --cov-report xml:coverage.xml tests
+
+      - name: Post coverage comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
