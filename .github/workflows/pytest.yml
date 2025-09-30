@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - .github/workflows/pytest.yml
-      - pyisbn/*.py
+      - src/*/*.py
       - tests/*.py
       - tests/books.json
 
@@ -17,14 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Configure Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
+          activate-environment: true
+          enable-cache: true
           python-version: ${{ matrix.python-version }}
+          version-file: "pyproject.toml"
 
-      - name: Install test dependencies
+      - name: Install package and dependencies
         run: |
-          python3 -m pip install -r extra/requirements-test.txt
+          uv sync --group test --no-dev
 
       - name: Run tests
         run: |

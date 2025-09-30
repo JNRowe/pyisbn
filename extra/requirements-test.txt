@@ -1,4 +1,0 @@
-hypothesis>=6.0
-pytest>=6.2
-pytest-cov>=2.12
-pytest-randomly>=3.8
