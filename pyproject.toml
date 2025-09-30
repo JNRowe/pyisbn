@@ -8,7 +8,7 @@ doc = [
     "sphinx-autodoc-typehints>=1.10",
     "sphinx>=4.3",
     "sphinx_rtd_theme>=1.0",
-    "sphinxcontrib-spelling>=7.2",
+    "sphinxcontrib-spelling>=8.0",
 ]
 test = [
     "hypothesis>=6.0",
