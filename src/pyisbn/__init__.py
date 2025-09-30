@@ -70,7 +70,7 @@ _UrlMapValue: TypeAlias = str | tuple[str, _UrlMapTlds]
 #: Site to URL mappings, broken out for easier extending at runtime
 URL_MAP: dict[str, _UrlMapValue] = {
     "amazon": (
-        "https://www.amazon.%(tld)s/s?search-alias=stripbooks&field-isbn=%(isbn)s",
+        "https://www.amazon.{tld}/s?search-alias=stripbooks&field-isbn={isbn}",
         {
             "de": None,
             "fr": None,
@@ -79,12 +79,12 @@ URL_MAP: dict[str, _UrlMapValue] = {
             "us": "com",
         },
     ),
-    "copac": "http://copac.jisc.ac.uk/search?isn=%(isbn)s",
-    "google": "https://books.google.com/books?vid=isbn:%(isbn)s",
-    "isbndb": "https://isbndb.com/search/all?query=%(isbn)s",
-    "waterstones": "https://www.waterstones.com/books/search/term/%(isbn)s",
-    "whsmith": "https://www.whsmith.co.uk/search/go?w=%(isbn)s&af=cat1:books",
-    "worldcat": "http://worldcat.org/isbn/%(isbn)s",
+    "copac": "http://copac.jisc.ac.uk/search?isn={isbn}",
+    "google": "https://books.google.com/books?vid=isbn:{isbn}",
+    "isbndb": "https://isbndb.com/search/all?query={isbn}",
+    "waterstones": "https://www.waterstones.com/books/search/term/{isbn}",
+    "whsmith": "https://www.whsmith.co.uk/search/go?w={isbn}&af=cat1:books",
+    "worldcat": "http://worldcat.org/isbn/{isbn}",
 }
 
 
@@ -218,13 +218,15 @@ class Isbn:
 
         """
         try:
-            try:
-                url, tlds = URL_MAP[site]
-            except ValueError:
-                tlds = None
-                url = URL_MAP[site]
+            value = URL_MAP[site]
         except KeyError:
             raise SiteError(site) from KeyError
+
+        if isinstance(value, tuple):
+            url, tlds = value
+        else:
+            url, tlds = value, None
+
         inject = {"isbn": self._isbn}
         if tlds:
             if country not in tlds:
@@ -233,7 +235,7 @@ class Isbn:
             if not tld:
                 tld = country
             inject["tld"] = tld
-        return url % inject
+        return url.format_map(inject)
 
     def to_urn(self) -> str:
         """Generate a RFC 3187 URN.
