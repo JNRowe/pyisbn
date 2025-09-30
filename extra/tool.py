@@ -38,7 +38,7 @@ def isbn_typecheck(string: TIsbn) -> Isbn:
         if not isbn.validate():
             raise ValueError("Invalid checksum")
     except ValueError as e:
-        raise argparse.ArgumentTypeError(f"{e} {string!r}")
+        raise argparse.ArgumentTypeError(f"{e} {string!r}") from None
     return isbn
 
 
