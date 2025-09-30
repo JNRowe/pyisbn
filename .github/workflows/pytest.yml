@@ -1,6 +1,12 @@
 name: Test with pytest
 
-on: ['pull_request', 'push']
+on:
+  push:
+    paths:
+    - .github/workflows/pytest.yml
+    - pyisbn/*.py
+    - tests/*.py
+    - tests/books.json
 
 jobs:
   test:

@@ -1,6 +1,12 @@
 name: Test with ruff
 
-on: ['pull_request', 'push']
+on:
+  push:
+    paths:
+    - .github/workflows/ruff.yml
+    - doc/conf.py
+    - pyisbn/*.py
+    - tests/*.py
 
 jobs:
   ruff:
