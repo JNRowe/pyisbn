@@ -151,22 +151,20 @@ class Isbn:
             ValueError: Unknown value for ``format_spec``
 
         """
-        if not format_spec:  # default format calls set format_spec to ''
-            return str(self)
-        elif format_spec == "url":
-            return self.to_url()
-        elif format_spec.startswith("url:"):
-            parts = format_spec.split(":")[1:]
-            site = parts[0]
-            if len(parts) > 1:
-                country = parts[1]
-            else:
-                country = "us"
-            return self.to_url(site, country)
-        elif format_spec == "urn":
-            return self.to_urn()
-        else:
-            raise ValueError(f"Unknown format_spec {format_spec!r}")
+        match format_spec:
+            case None | "":
+                return str(self)
+            case "url":
+                return self.to_url()
+            case "urn":
+                return self.to_urn()
+            case s if s.startswith("url:"):
+                parts = s.split(":")
+                site = parts[1]
+                country = parts[2] if len(parts) > 2 else "us"
+                return self.to_url(site, country)
+            case _:
+                raise ValueError(f"Unknown format_spec {format_spec!r}")
 
     def calculate_checksum(self) -> str:
         """Calculate ISBN checksum.
