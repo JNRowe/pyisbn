@@ -48,24 +48,27 @@ __copyright__ = "Copyright © 2007-2022  James Rowe"
 __license__ = "GNU General Public License Version 3"
 
 import unicodedata  # NOQA: I100
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import NewType, TypeAlias
 
 #: ISBN string type
-TIsbn = str
-TIsbn10 = TIsbn
-TIsbn13 = TIsbn
+TIsbn = NewType("TIsbn", str)
+TIsbn10 = NewType("TIsbn10", TIsbn)
+TIsbn13 = NewType("TIsbn13", TIsbn)
 
 #: SBN string type
-TSbn = str
+TSbn = NewType("TSbn", str)
 
 #: Dash types to accept, and scrub, in ISBN inputs
-DASHES: List[str] = [
+DASHES: list[str] = [
     unicodedata.lookup(s)
     for s in ("HYPHEN-MINUS", "EN DASH", "EM DASH", "HORIZONTAL BAR")
 ]
 
+_UrlMapTlds: TypeAlias = dict[str, str | None]
+_UrlMapValue: TypeAlias = str | tuple[str, _UrlMapTlds]
+
 #: Site to URL mappings, broken out for easier extending at runtime
-URL_MAP: Dict[str, Union[str, Tuple[str, Dict[str, Optional[str]]]]] = {
+URL_MAP: dict[str, _UrlMapValue] = {
     "amazon": (
         "https://www.amazon.%(tld)s/s?search-alias=stripbooks&field-isbn=%(isbn)s",
         {
@@ -136,7 +139,7 @@ class Isbn:
         """
         return f"ISBN {self._isbn}"
 
-    def __format__(self, format_spec: Optional[str] = None) -> str:
+    def __format__(self, format_spec: str | None = None) -> str:
         """Extended pretty printing for ISBN strings.
 
         Args:
@@ -199,9 +202,7 @@ class Isbn:
         """
         return validate(self.isbn)
 
-    def to_url(
-        self, site: str = "amazon", country: Optional[str] = "us"
-    ) -> str:
+    def to_url(self, site: str = "amazon", country: str | None = "us") -> str:
         """Generate a link to an online book site.
 
         Args:
@@ -361,11 +362,11 @@ class Isbn13(Isbn):
         """
         return calculate_checksum(self.isbn[:12])
 
-    def convert(self, code: Any = None) -> str:
+    def convert(self, _code: str = "978") -> str:
         """Convert ISBN-13 to ISBN-10.
 
         Args:
-            code: Ignored, only for compatibility with ``Isbn``
+            _code: Ignored, only for compatibility with ``Isbn``
 
         Returns:
             ISBN-10 string
