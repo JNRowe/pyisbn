@@ -29,6 +29,7 @@ from tests.data import TEST_SBNS
 @example("521871723")
 @given(sampled_from(TEST_SBNS))
 def test___repr__(sbn: str):
+    """Test the repr of the Sbn object."""
     assert repr(Sbn(sbn)) == f"Sbn({sbn!r})"
 
 
@@ -40,10 +41,12 @@ def test___repr__(sbn: str):
     ],
 )
 def test_calculate_checksum(sbn: str, result: str):
+    """Test calculating the checksum of an SBN."""
     assert Sbn(sbn).calculate_checksum() == result
 
 
 @example("071148167")
 @given(sampled_from(TEST_SBNS))
 def test_convert(sbn: str):
+    """Test converting an SBN."""
     assert Sbn(sbn).convert()[:-1] == "9780" + sbn[:-1]

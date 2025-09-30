@@ -25,6 +25,14 @@ from pyisbn import Isbn, TIsbn, URL_MAP, _version
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:
+    """Check if string is a valid ISBN.
+
+    Args:
+        string: The string to check.
+
+    Returns:
+        The Isbn object.
+    """
     try:
         isbn = Isbn(string)
         if not isbn.validate():
@@ -35,6 +43,15 @@ def isbn_typecheck(string: TIsbn) -> Isbn:
 
 
 def partial_arg(f: Callable) -> Callable:
+    """Create a partial argument for argparse.
+
+    Args:
+        f: The function to wrap.
+
+    Returns:
+        The wrapped function.
+    """
+
     def wrapper(*args: str, **kwargs: str):
         if "const" not in kwargs:
             kwargs["const"] = args[1][2:].replace("-", "_")
@@ -44,6 +61,7 @@ def partial_arg(f: Callable) -> Callable:
 
 
 def main() -> None:
+    """Parse arguments and run the tool."""
     parser = argparse.ArgumentParser(
         description=__doc__.splitlines()[0].split(" - ", 1)[1],
         epilog="Please report bugs at https://github.com/JNRowe/pyisbn/issues",

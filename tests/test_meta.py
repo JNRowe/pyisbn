@@ -29,6 +29,7 @@ from pytest import mark
     reason="Maintainer test for use in git hooks",
 )
 def test_formatting():
+    """Test the formatting of the books.json file."""
     with open("tests/books.json") as fp:
         data = fp.read()
     content = json.loads(data)

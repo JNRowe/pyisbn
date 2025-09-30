@@ -33,6 +33,7 @@ from tests.data import TEST_ISBNS
 @example("3540009787")
 @given(sampled_from(TEST_ISBNS))
 def test___repr__(isbn: str):
+    """Test the repr of the Isbn object."""
     assert repr(Isbn(isbn)) == f"Isbn({isbn!r})"
 
 
@@ -41,6 +42,7 @@ def test___repr__(isbn: str):
 @example("3540009787")
 @given(sampled_from(TEST_ISBNS))
 def test___str__(isbn: str):
+    """Test the str of the Isbn object."""
     assert str(Isbn(isbn)) == f"ISBN {isbn}"
 
 
@@ -73,11 +75,13 @@ def test___str__(isbn: str):
 )
 @given(sampled_from([(s, "", f"ISBN {s}") for s in TEST_ISBNS]))
 def test___format__(data: Tuple[str, str, str]):
+    """Test the format of the Isbn object."""
     isbn, format_spec, result = data
     assert format(Isbn(isbn), format_spec) == result
 
 
 def test___format__invalid_format_spec():
+    """Test the format of the Isbn object with an invalid format spec."""
     with raises(ValueError, match="Unknown format_spec 'biscuit'"):
         format(Isbn("0071148167"), "biscuit")
 
@@ -87,6 +91,7 @@ def test___format__invalid_format_spec():
 @example(("354000978", "7"))
 @given(sampled_from([(s, s[-1]) for s in TEST_ISBNS]))
 def test_calculate_checksum(data: Tuple[str, str]):
+    """Test calculating the checksum of an ISBN."""
     isbn, result = data
     assert Isbn(isbn).calculate_checksum() == result
 
@@ -99,6 +104,7 @@ def test_calculate_checksum(data: Tuple[str, str]):
     ],
 )
 def test_convert(isbn: str, result: str):
+    """Test converting an ISBN."""
     assert Isbn(isbn).convert() == result
 
 
@@ -108,6 +114,7 @@ def test_convert(isbn: str, result: str):
 @example(("354000978x", False))
 @given(sampled_from([(s, True) for s in TEST_ISBNS]))
 def test_validate(data: Tuple[str, bool]):
+    """Test validating an ISBN."""
     isbn, result = data
     assert Isbn(isbn).validate() == result
 
@@ -121,10 +128,12 @@ def test_validate(data: Tuple[str, bool]):
     ],
 )
 def test_to_url(country: str, result: str):
+    """Test converting an ISBN to a URL."""
     assert Isbn("0071148167").to_url(country=country) == "https://www.amazon" + result
 
 
 def test_to_url_invalid_country():
+    """Test converting an ISBN to a URL with an invalid country."""
     with raises(CountryError, match="zh"):
         Isbn("0071148167").to_url(country="zh")
 
@@ -147,15 +156,18 @@ def test_to_url_invalid_country():
     ],
 )
 def test_to_url_site(site: str, result: str):
+    """Test converting an ISBN to a URL for a specific site."""
     assert Isbn("0071148167").to_url(site=site) == result
 
 
 def test_to_url_invalid_site():
+    """Test converting an ISBN to a URL with an invalid site."""
     with raises(SiteError, match="nosite"):
         Isbn("0071148167").to_url(site="nosite")
 
 
 @given(sampled_from([(s, f"URN:ISBN:{s}") for s in TEST_ISBNS]))
 def test_to_urn(data: Tuple[str, str]):
+    """Test converting an ISBN to a URN."""
     isbn, result = data
     assert Isbn(isbn).to_urn() == result

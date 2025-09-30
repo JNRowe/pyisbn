@@ -24,6 +24,14 @@ from setuptools import setup
 
 
 def parse_requires(file: str) -> List[str]:
+    """Parse a requirements file.
+
+    Args:
+        file: The requirements file to parse.
+
+    Returns:
+        A list of requirements.
+    """
     deps = []
     with open(f"extra/{file}") as f:
         entries = [s.split("#")[0].strip() for s in f.readlines()]

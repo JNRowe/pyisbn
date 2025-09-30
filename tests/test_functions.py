@@ -34,6 +34,7 @@ from tests.data import TEST_ISBNS
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_sbn(isbn: str):
+    """Test cleansing SBNs."""
     if isbn.startswith("0"):
         assert _isbn_cleanse(isbn[1:]) == isbn
         assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
@@ -41,6 +42,7 @@ def test__isbn_cleanse_sbn(isbn: str):
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
+    """Test cleansing ISBNs."""
     assert _isbn_cleanse(isbn) == isbn
     assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
 
@@ -57,6 +59,7 @@ def test__isbn_cleanse_isbn(isbn: str):
     ],
 )
 def test__isbn_cleanse_unicode_dash(isbn: str):
+    """Test cleansing ISBNs with unicode dashes."""
     assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
@@ -70,10 +73,12 @@ def test__isbn_cleanse_unicode_dash(isbn: str):
     ],
 )
 def test__isbn_cleanse_reflect_type(isbn: str):
+    """Test that the cleansed ISBN has the same type as the original."""
     assert type(_isbn_cleanse(isbn)) == type(isbn)
 
 
 def test__isbn_cleanse_invalid_type():
+    """Test cleansing an invalid type."""
     with raises(TypeError, match="ISBN must be a string, received 2"):
         _isbn_cleanse(2)
 
@@ -89,6 +94,7 @@ def test__isbn_cleanse_invalid_type():
     ],
 )
 def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
+    """Test cleansing an invalid length."""
     with raises(IsbnError, match=message):
         _isbn_cleanse("0-123", checksum=checksum)
 
@@ -104,6 +110,7 @@ def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
     ],
 )
 def test__isbn_cleanse_invalid(isbn: str, message: str):
+    """Test cleansing an invalid ISBN."""
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn)
 
@@ -116,21 +123,25 @@ def test__isbn_cleanse_invalid(isbn: str, message: str):
     ],
 )
 def test__isbn_cleanse_invalid_no_checksum(isbn, message):
+    """Test cleansing an invalid ISBN without checksum."""
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn, False)
 
 
 @given(sampled_from(TEST_ISBNS))
 def test_calculate_checksum(isbn: str):
+    """Test calculating the checksum."""
     assert calculate_checksum(isbn[:-1]) == isbn[-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test_convert(isbn: str):
+    """Test converting an ISBN."""
     assert convert(convert(isbn)) == isbn
 
 
 def test_convert_invalid():
+    """Test converting an invalid ISBN."""
     with raises(
         IsbnError,
         match="Only ISBN-13s with 978 Bookland code can be converted to ISBN-10.",
@@ -140,6 +151,7 @@ def test_convert_invalid():
 
 @given(sampled_from(TEST_ISBNS))
 def test_validate(isbn: str):
+    """Test validating an ISBN."""
     assert validate(isbn)
 
 
@@ -152,4 +164,5 @@ def test_validate(isbn: str):
     ],
 )
 def test_validate_invalid(isbn: str):
+    """Test validating an invalid ISBN."""
     assert validate(isbn) is False

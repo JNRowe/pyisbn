@@ -34,6 +34,7 @@ from pyisbn import IsbnError, _isbn_cleanse
     ],
 )
 def test_issue_7_unistr(isbn: str):
+    """Test for issue #7 (unicode dashes)."""
     assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
@@ -45,5 +46,6 @@ def test_issue_7_unistr(isbn: str):
     ],
 )
 def test_issue_16_bookland(isbn: str):
+    """Test for issue #16 (Bookland ISBNs)."""
     with raises(IsbnError, match="Bookland"):
         _isbn_cleanse(isbn)
