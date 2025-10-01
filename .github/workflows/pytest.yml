@@ -10,7 +10,6 @@ on:
 
 permissions:
   contents: write
-  checks: write
   pull-requests: write
 
 jobs:
@@ -35,7 +34,12 @@ jobs:
         run: |
           pytest --cov-report xml:coverage.xml tests
 
-      - name: Post coverage comment
+      - name: Coverage comment
+        id: coverage_comment
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Store Pull Request comment to be posted
+        uses: actions/upload-artifact@v4
+        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
