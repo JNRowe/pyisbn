@@ -2,11 +2,11 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/JNRowe/pyisbn/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name      |    Stmts |     Miss |   Branch |   BrPart |       Cover |   Missing |
-|---------- | -------: | -------: | -------: | -------: | ----------: | --------: |
-| **TOTAL** |  **154** |    **0** |   **58** |    **0** | **100.00%** |           |
-
-2 files skipped due to complete coverage.
+| Name                       |    Stmts |     Miss |   Branch |   BrPart |       Cover |   Missing |
+|--------------------------- | -------: | -------: | -------: | -------: | ----------: | --------: |
+| src/pyisbn/\_\_init\_\_.py |      147 |        0 |       58 |        0 |     100.00% |           |
+| src/pyisbn/\_version.py    |        7 |        0 |        0 |        0 |     100.00% |           |
+|                  **TOTAL** |  **154** |    **0** |   **58** |    **0** | **100.00%** |           |
 
 
 ## Setup coverage badge
