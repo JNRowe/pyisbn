@@ -373,7 +373,7 @@ class Isbn13(Isbn):
         Raises:
             ValueError: When ISBN-13 isn't a Bookland "978" ISBN
 
-        """
+        """  # NoQA: DOC502
         return convert(self.isbn)
 
 
@@ -467,7 +467,7 @@ def convert(isbn: TIsbn, code: str = "978") -> str:
     Returns:
         Converted ISBN-10 or ISBN-13
 
-    Raise:
+    Raises:
         IsbnError: When ISBN-13 isn't convertible to an ISBN-10
 
     """

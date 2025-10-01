@@ -109,6 +109,7 @@ extend-select = [
     "C90", # mccabe
     "CPY", # flake8-copyright
     "D",   # pydocstyle
+    "DOC", # pydoclint
     "E",   # pycodestyle
     "N",   # pep8-naming
     "W",   # pycodestyle
