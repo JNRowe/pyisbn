@@ -124,6 +124,7 @@ extend-select = [
     "PTH",    # flake8-use-pathlib
     "RET",    # flake8-return
     "RUF",    # Ruff-specific rules
+    "S",      # flake8-bandit
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]
@@ -137,7 +138,7 @@ notice-rgx = "Copyright © 20\\d{2}(-20\\d{2})? {2}"
 suppress-dummy-args = true
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["ANN201"] # Tests don't require return types
+"tests/*" = ["ANN201", "S101"] # Tests don't require return types
 
 [tool.ruff.lint.mccabe]
 max-complexity = 6

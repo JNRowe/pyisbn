@@ -21,7 +21,7 @@ import os
 import pathlib
 import sys
 from contextlib import suppress
-from subprocess import CalledProcessError, PIPE, run
+from subprocess import CalledProcessError, PIPE, run  # NoQA: S404
 
 root_dir = pathlib.Path(__file__).parent.parent
 sys.path.insert(0, root_dir.as_posix())
@@ -96,7 +96,7 @@ if not on_rtd:
 
 with suppress(CalledProcessError):
     proc = run(
-        ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],
+        ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],  # NoQA: S607
         check=False,
         stdout=PIPE,
     )
