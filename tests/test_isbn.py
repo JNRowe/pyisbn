@@ -51,27 +51,21 @@ def test___str__(isbn: str):
 )
 @example(("9780521871723", "", "ISBN 9780521871723"))
 @example(("978-052-187-1723", "urn", "URN:ISBN:978-052-187-1723"))
-@example(
-    (
-        "3540009787",
-        "url",
-        "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
-@example(
-    (
-        "3540009787",
-        "url:amazon:uk",
-        "https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
-@example(
-    (
-        "3540009787",
-        "url:amazon",
-        "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
+@example((
+    "3540009787",
+    "url",
+    "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
+))
+@example((
+    "3540009787",
+    "url:amazon:uk",
+    "https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787",
+))
+@example((
+    "3540009787",
+    "url:amazon",
+    "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
+))
 @given(sampled_from([(s, "", f"ISBN {s}") for s in TEST_ISBNS]))
 def test___format__(data: tuple[str, str, str]):
     """Test the format of the Isbn object."""

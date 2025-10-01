@@ -90,12 +90,13 @@ testpaths = ["tests/"]
 xfail_strict = true
 
 [tool.ruff]
-exclude = [".git/", "build/", "dist/", "maybe/"]
+exclude = [".git/", "build/", "dist/", "maybe/", "src/pyisbn/_version.py"]
 line-length = 80
 target-version = "py311"
 
 [tool.ruff.format]
 docstring-code-format = true
+preview = true
 
 [tool.ruff.lint]
 extend-select = [
@@ -109,6 +110,7 @@ extend-select = [
     "W",   # pycodestyle
     "YTT", # flake8-2020
 ]
+preview = true
 
 [tool.ruff.lint.flake8-copyright]
 min-file-size = 1
