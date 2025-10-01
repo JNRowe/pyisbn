@@ -1,0 +1,45 @@
+name: Check spelling with Sphinx
+
+on:
+  push:
+    paths:
+      - .github/workflows/spelling.yml
+      - doc/*.rst
+      - src/*/*.py
+
+permissions: read-all
+
+jobs:
+  sphinx:
+    name: Run Sphinx spelling build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          activate-environment: true
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+          version-file: "pyproject.toml"
+
+      - name: Install dependencies
+        run: |
+          # We don't need man-db updates for throwaway installs
+          echo "set man-db/auto-update false" | sudo debconf-communicate
+          sudo dpkg-reconfigure man-db
+          # We're not using postgresql, so we don't need to run triggers pulled
+          # in by unused dependencies
+          sudo sed -i '2iexit(0);' /usr/sbin/pg_updatedicts
+          sudo eatmydata apt-get install enchant-2 hunspell-en-gb
+          uv sync --group doc
+
+      - name: Run Sphinx spelling build
+        # Use --quiet as in this job we only need spelling results, not generic
+        # Sphinx output that would be seen in HTML jobs.
+        run: sphinx-build --quiet -b spelling . _build/spelling
+        working-directory: ./doc
