@@ -104,6 +104,7 @@ extend-select = [
     "ANN", # flake8-annotations
     "ARG", # flake8-unused-arguments
     "B",   # flake8-bugbear
+    "BLE", # flake8-blind-except
     "C4",  # flake8-comprehensions
     "C90", # mccabe
     "CPY", # flake8-copyright
