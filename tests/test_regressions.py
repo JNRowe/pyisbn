@@ -17,14 +17,14 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from pytest import mark, raises
+import pytest
 
 from pyisbn import IsbnError, _isbn_cleanse  # NoQA: PLC2701
 
 
 # NOTE: Depending on your typeface and editor you may notice that the following
 # +# dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
-@mark.parametrize(
+@pytest.mark.parametrize(
     "isbn",
     [
         "978-1-84724-253-2",
@@ -37,7 +37,7 @@ def test_issue_7_unistr(isbn: str):
     assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
-@mark.parametrize(
+@pytest.mark.parametrize(
     "isbn",
     [
         "2901568582497",
@@ -46,5 +46,5 @@ def test_issue_7_unistr(isbn: str):
 )
 def test_issue_16_bookland(isbn: str):
     """Test for issue #16 (Bookland ISBNs)."""
-    with raises(IsbnError, match="Bookland"):
+    with pytest.raises(IsbnError, match="Bookland"):
         _isbn_cleanse(isbn)

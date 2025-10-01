@@ -120,6 +120,7 @@ extend-select = [
     "N",      # pep8-naming
     "PERF",   # Perflint
     "PL",     # Pylint
+    "PT",     # flake8-pytest-style
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]

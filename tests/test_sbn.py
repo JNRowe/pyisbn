@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
+import pytest
 from hypothesis import example, given
 from hypothesis.strategies import sampled_from
-from pytest import mark
 
 from pyisbn import Sbn
 from tests.data import TEST_SBNS
@@ -32,8 +32,8 @@ def test___repr__(sbn: str):
     assert repr(Sbn(sbn)) == f"Sbn({sbn!r})"
 
 
-@mark.parametrize(
-    "sbn,result",
+@pytest.mark.parametrize(
+    ("sbn", "result"),
     [
         ("07114816", "7"),
         ("071148167", "7"),
