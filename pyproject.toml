@@ -126,8 +126,12 @@ extend-select = [
     "RUF",    # Ruff-specific rules
     "S",      # flake8-bandit
     "SIM",    # flake8-simplify
+    "TC",     # flake8-type-checking
     "W",      # pycodestyle
     "YTT",    # flake8-2020
+]
+ignore = [
+    "TC006", # Allow unquoted cast() types where possible
 ]
 preview = true
 
