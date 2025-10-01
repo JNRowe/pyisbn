@@ -72,7 +72,7 @@ nitpicky = True
 
 project = "pyisbn"
 author = "James Rowe"
-copyright = f"2007-2022  {author}"
+copyright = f"2007-2022  {author}"  # NoQA: A001
 
 release = pyisbn._version.dotted
 version = release.rsplit(".", 1)[0]
