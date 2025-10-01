@@ -19,7 +19,8 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-from typing import Callable, cast
+from typing import cast
+from collections.abc import Callable
 
 from pyisbn import Isbn, TIsbn, URL_MAP, _version  # NoQA: PLC2701
 
