@@ -110,6 +110,7 @@ extend-select = [
     "CPY", # flake8-copyright
     "D",   # pydocstyle
     "DOC", # pydoclint
+    "DTZ", # flake8-datetimez
     "E",   # pycodestyle
     "N",   # pep8-naming
     "W",   # pycodestyle
