@@ -20,6 +20,7 @@
 
 import json
 import os
+import pathlib
 
 from pytest import mark
 
@@ -30,8 +31,7 @@ from pytest import mark
 )
 def test_formatting():
     """Test the formatting of the books.json file."""
-    with open("tests/books.json") as fp:
-        data = fp.read()
+    data = pathlib.Path("tests/books.json").read_text()
     content = json.loads(data)
     dumped = json.dumps(content, indent=4) + "\n"
     assert data == dumped

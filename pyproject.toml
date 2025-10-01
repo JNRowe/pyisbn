@@ -116,6 +116,7 @@ extend-select = [
     "EXE",    # flake8-executable
     "FBT",    # flake8-boolean-trap
     "FIX",    # flake8-fixme
+    "FURB",   # refurb
     "N",      # pep8-naming
     "W",      # pycodestyle
     "YTT",    # flake8-2020
