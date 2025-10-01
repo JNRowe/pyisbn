@@ -116,7 +116,7 @@ class Isbn:
         """
         self._isbn = isbn
         if len(isbn) in (9, 12):
-            self.isbn = _isbn_cleanse(isbn, False)
+            self.isbn = _isbn_cleanse(isbn, checksum=False)
         else:
             self.isbn = _isbn_cleanse(isbn)
 
@@ -377,7 +377,7 @@ class Isbn13(Isbn):
         return convert(self.isbn)
 
 
-def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:  # NoQA: C901
+def _isbn_cleanse(isbn: TIsbn, *, checksum: bool = True) -> str:  # NoQA: C901
     """Check ISBN is a string, and passes basic sanity checks.
 
     Args:
