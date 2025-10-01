@@ -18,12 +18,13 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import pathlib
 import sys
 from contextlib import suppress
 from subprocess import CalledProcessError, PIPE, run
 
-root_dir = os.path.dirname(os.path.dirname(__file__))
-sys.path.insert(0, root_dir)
+root_dir = pathlib.Path(__file__).parent.parent
+sys.path.insert(0, root_dir.as_posix())
 
 import pyisbn  # NOQA: E402
 
