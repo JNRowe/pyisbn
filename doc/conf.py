@@ -103,19 +103,19 @@ with suppress(CalledProcessError):
 
 html_baseurl = "https://pyisbn.readthedocs.io/"
 
-# Autodoc extension settings
+# Extension - autodoc
 autoclass_content = "both"
 autodoc_default_options: dict[str, str | None] = {
     "members": None,
 }
 
-# extlinks extension settings
+# Extension - extlinks
 extlinks: dict[str, tuple[str, str]] = {
     "pypi": ("http://pypi.python.org/pypi/%s", "%s"),
     "issue": ("https://github.com/JNRowe/jnrbase/issues/%s", "GitHub #"),
 }
 
-# intersphinx extension settings
+# Extension - intersphinx
 intersphinx_mapping: dict[str, str] = {
     k: (v, os.getenv(f"SPHINX_{k.upper()}_OBJECTS"))
     for k, v in {
@@ -123,15 +123,15 @@ intersphinx_mapping: dict[str, str] = {
     }.items()
 }
 
-# spelling extension settings
+# Extension - spelling
 spelling_ignore_acronyms = False
 spelling_lang = "en_GB"
 spelling_word_list_filename = "wordlist.txt"
 spelling_ignore_python_builtins = False
 spelling_ignore_importable_modules = False
 
-# napoleon extension settings
+# Extension - napoleon
 napoleon_numpy_docstring = False
 
-# todo extension settings
+# Extension - todo
 todo_include_todos = True

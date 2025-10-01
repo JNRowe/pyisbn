@@ -115,6 +115,7 @@ extend-select = [
     "ERA001", # eradicate
     "EXE",    # flake8-executable
     "FBT",    # flake8-boolean-trap
+    "FIX",    # flake8-fixme
     "N",      # pep8-naming
     "W",      # pycodestyle
     "YTT",    # flake8-2020
