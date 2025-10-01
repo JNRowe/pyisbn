@@ -90,7 +90,7 @@ testpaths = ["tests/"]
 xfail_strict = true
 
 [tool.ruff]
-exclude = [".git", "build", "dist", "maybe"]
+exclude = [".git/", "build/", "dist/", "maybe/"]
 line-length = 80
 target-version = "py311"
 
