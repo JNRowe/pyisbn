@@ -28,7 +28,7 @@ from pyisbn import IsbnError, _isbn_cleanse  # NoQA: PLC2701
     "isbn",
     [
         "978-1-84724-253-2",
-        "978–1–84724–253–2",
+        "978–1–84724–253–2",  # NoQA: RUF001
         "978―0199564095",
     ],
 )
