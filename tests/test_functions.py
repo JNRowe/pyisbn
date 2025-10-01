@@ -122,7 +122,7 @@ def test__isbn_cleanse_invalid(isbn: str, message: str):
         ("580003417076", "invalid Bookland region"),
     ],
 )
-def test__isbn_cleanse_invalid_no_checksum(isbn, message):
+def test__isbn_cleanse_invalid_no_checksum(isbn: str, message: str):
     """Test cleansing an invalid ISBN without checksum."""
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn, False)
