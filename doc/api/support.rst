@@ -15,10 +15,7 @@ Types
 .. autodata:: TIsbn13
 .. autodata:: TSbn
 
-.. spelling::
+.. spelling:word-list::
 
-    SBN
-    getdefaultencoding
-    repr
-    str
-    sys
+   subtype
+   tp
