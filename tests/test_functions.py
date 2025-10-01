@@ -1,4 +1,3 @@
-#
 """test_functions - Test function interface."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
@@ -24,7 +23,7 @@ from pytest import mark, raises
 
 from pyisbn import (
     IsbnError,
-    _isbn_cleanse,
+    _isbn_cleanse,  # NoQA: PLC2701
     calculate_checksum,
     convert,
     validate,

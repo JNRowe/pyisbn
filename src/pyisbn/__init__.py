@@ -1,4 +1,3 @@
-#
 """pyisbn - A module for working with 10- and 13-digit ISBNs.
 
 This module supports the calculation of ISBN checksums with
@@ -161,7 +160,10 @@ class Isbn:
             case s if s.startswith("url:"):
                 parts = s.split(":")
                 site = parts[1]
-                country = parts[2] if len(parts) > 2 else "us"
+                try:
+                    country = parts[2]
+                except IndexError:
+                    country = "us"
                 return self.to_url(site, country)
             case _:
                 raise ValueError(f"Unknown format_spec {format_spec!r}")
@@ -377,7 +379,7 @@ class Isbn13(Isbn):
         return convert(self.isbn)
 
 
-def _isbn_cleanse(isbn: TIsbn, *, checksum: bool = True) -> str:  # NoQA: C901
+def _isbn_cleanse(isbn: TIsbn, *, checksum: bool = True) -> str:  # NoQA: C901, PLR0912
     """Check ISBN is a string, and passes basic sanity checks.
 
     Args:

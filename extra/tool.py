@@ -21,7 +21,7 @@
 import argparse
 from typing import Callable, cast
 
-from pyisbn import Isbn, TIsbn, URL_MAP, _version
+from pyisbn import Isbn, TIsbn, URL_MAP, _version  # NoQA: PLC2701
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:

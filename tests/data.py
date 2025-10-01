@@ -1,4 +1,3 @@
-#
 """data - ISBNs for use in tests."""
 # Copyright © 2012-2020  James Rowe <jnrowe@gmail.com>
 #
@@ -22,14 +21,22 @@ import json
 import pathlib
 
 
-_DATA = pathlib.Path("tests/books.json").read_text()
+_DATA = pathlib.Path("tests/books.json").read_text(encoding="utf-8")
 TEST_BOOKS: dict[str, str] = json.loads(_DATA)
 
 #: ISBNs from sample book data for use in tests
 TEST_ISBNS: list[str] = [s.replace("-", "") for s in TEST_BOOKS.values()]
 #: ISBN 10s from sample book data for use in tests
-TEST_ISBN10S: list[str] = [s for s in TEST_ISBNS if len(s) == 10]
+TEST_ISBN10S: list[str] = [
+    s
+    for s in TEST_ISBNS
+    if len(s) == 10  # NoQA: PLR2004
+]
 #: ISBN 13s from sample book data for use in tests
-TEST_ISBN13S: list[str] = [s for s in TEST_ISBNS if len(s) == 13]
+TEST_ISBN13S: list[str] = [
+    s
+    for s in TEST_ISBNS
+    if len(s) == 13  # NoQA: PLR2004
+]
 #: SBNs from sample book data for use in tests
 TEST_SBNS: list[str] = [s[1:] for s in TEST_ISBN10S if s.startswith("0")]
