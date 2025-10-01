@@ -183,8 +183,7 @@ class Isbn:
             _constants.ISBN13_LENGTH_NO_CHECKSUM,
         }:
             return calculate_checksum(self.isbn)
-        else:
-            return calculate_checksum(self.isbn[:-1])
+        return calculate_checksum(self.isbn[:-1])
 
     def convert(self, code: str = "978") -> str:
         """Convert ISBNs between ISBN-10 and ISBN-13.
@@ -500,14 +499,13 @@ def convert(isbn: TIsbn, code: str = "978") -> str:
     if len(isbn) == _constants.ISBN10_LENGTH:
         isbn = code + isbn[:-1]
         return isbn + calculate_checksum(isbn)
-    elif isbn.startswith(_constants.BOOKLAND_PREFIXES[0]):
+    if isbn.startswith(_constants.BOOKLAND_PREFIXES[0]):
         return isbn[
             _constants.BOOKLAND_PREFIX_LENGTH : -1
         ] + calculate_checksum(isbn[_constants.BOOKLAND_PREFIX_LENGTH : -1])
-    else:
-        raise IsbnError(
-            "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
-        )
+    raise IsbnError(
+        "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
+    )
 
 
 def validate(isbn: TIsbn) -> bool:

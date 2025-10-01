@@ -122,6 +122,7 @@ extend-select = [
     "PL",     # Pylint
     "PT",     # flake8-pytest-style
     "PTH",    # flake8-use-pathlib
+    "RET",    # flake8-return
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]
