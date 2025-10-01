@@ -21,10 +21,10 @@ import json
 import os
 import pathlib
 
-from pytest import mark
+import pytest
 
 
-@mark.skipif(
+@pytest.mark.skipif(
     "GITHUB_WORKFLOW" in os.environ,
     reason="Maintainer test for use in git hooks",
 )
