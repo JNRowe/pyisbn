@@ -34,13 +34,15 @@ from tests.data import TEST_ISBNS
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_sbn(isbn: str):
-    if isbn.startswith('0'):
+    """Test cleansing SBNs."""
+    if isbn.startswith("0"):
         assert _isbn_cleanse(isbn[1:]) == isbn
         assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
+    """Test cleansing ISBNs."""
     assert _isbn_cleanse(isbn) == isbn
     assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
 
@@ -49,108 +51,118 @@ def test__isbn_cleanse_isbn(isbn: str):
 # NOTE: Depending on your typeface and editor you may notice that the following
 # dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize(
-    'isbn',
+    "isbn",
     [
-        '978–1–84724–253–2',
-        '978—0—385—08695—0',
-        '978―0199564095',
+        "978–1–84724–253–2",
+        "978—0—385—08695—0",
+        "978―0199564095",
     ],
 )
 def test__isbn_cleanse_unicode_dash(isbn: str):
-    assert _isbn_cleanse(isbn) == ''.join(filter(lambda s: s.isdigit(), isbn))
+    """Test cleansing ISBNs with unicode dashes."""
+    assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
 # NOTE: Depending on your typeface and editor you may notice that the following
 # dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
 @mark.parametrize(
-    'isbn',
+    "isbn",
     [
-        '978–1–84724–253–2',
-        '978-0-385-08695-0',
+        "978–1–84724–253–2",
+        "978-0-385-08695-0",
     ],
 )
 def test__isbn_cleanse_reflect_type(isbn: str):
-    assert type(_isbn_cleanse(isbn)) == type(isbn)
+    """Test that the cleansed ISBN has the same type as the original."""
+    assert type(_isbn_cleanse(isbn)) is type(isbn)
 
 
 def test__isbn_cleanse_invalid_type():
-    with raises(TypeError, match='ISBN must be a string, received 2'):
-        _isbn_cleanse(2)
+    """Test cleansing an invalid type."""
+    with raises(TypeError, match="ISBN must be a string, received 2"):
+        _isbn_cleanse(2)  # ty: ignore[invalid-argument-type]
 
 
 @mark.parametrize(
-    'checksum,message',
+    "checksum,message",
     [
-        (True, 'ISBN must be either 10 or 13 characters long'),
+        (True, "ISBN must be either 10 or 13 characters long"),
         (
             False,
-            'ISBN must be either 9 or 12 characters long without checksum',
+            "ISBN must be either 9 or 12 characters long without checksum",
         ),
     ],
 )
 def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
+    """Test cleansing an invalid length."""
     with raises(IsbnError, match=message):
-        _isbn_cleanse('0-123', checksum=checksum)
+        _isbn_cleanse("0-123", checksum=checksum)
 
 
 @mark.parametrize(
-    'isbn,message',
+    "isbn,message",
     [
-        ('0-x4343', 'non-digit parts'),
-        ('012345678-b', 'non-digit or X checksum'),
-        ('012345678901b', 'non-digit checksum'),
-        ('xxxxxxxxxxxx1', 'non-digit parts'),
-        ('0x0000000', 'non-digit parts'),
+        ("0-x4343", "non-digit parts"),
+        ("012345678-b", "non-digit or X checksum"),
+        ("012345678901b", "non-digit checksum"),
+        ("xxxxxxxxxxxx1", "non-digit parts"),
+        ("0x0000000", "non-digit parts"),
     ],
 )
 def test__isbn_cleanse_invalid(isbn: str, message: str):
+    """Test cleansing an invalid ISBN."""
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn)
 
 
 @mark.parametrize(
-    'isbn,message',
+    "isbn,message",
     [
-        ('0x0000000', 'non-digit parts'),
-        ('580003417076', 'invalid Bookland region'),
+        ("0x0000000", "non-digit parts"),
+        ("580003417076", "invalid Bookland region"),
     ],
 )
 def test__isbn_cleanse_invalid_no_checksum(isbn, message):
+    """Test cleansing an invalid ISBN without checksum."""
     with raises(IsbnError, match=message):
         _isbn_cleanse(isbn, False)
 
 
 @given(sampled_from(TEST_ISBNS))
 def test_calculate_checksum(isbn: str):
+    """Test calculating the checksum."""
     assert calculate_checksum(isbn[:-1]) == isbn[-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test_convert(isbn: str):
+    """Test converting an ISBN."""
     assert convert(convert(isbn)) == isbn
 
 
 def test_convert_invalid():
+    """Test converting an invalid ISBN."""
     with raises(
         IsbnError,
-        match='Only ISBN-13s with 978 Bookland code can be '
-        'converted to ISBN-10.',
+        match="Only ISBN-13s with 978 Bookland code can be converted to ISBN-10.",
     ):
-        convert('9790000000001')
+        convert("9790000000001")
 
 
 @given(sampled_from(TEST_ISBNS))
 def test_validate(isbn: str):
+    """Test validating an ISBN."""
     assert validate(isbn)
 
 
 @mark.parametrize(
-    'isbn',
+    "isbn",
     [
-        '1-234-56789-0',
-        '2-345-6789-1',
-        '3-456-7890-X',
+        "1-234-56789-0",
+        "2-345-6789-1",
+        "3-456-7890-X",
     ],
 )
 def test_validate_invalid(isbn: str):
+    """Test validating an invalid ISBN."""
     assert validate(isbn) is False

@@ -24,13 +24,21 @@ from setuptools import setup
 
 
 def parse_requires(file: str) -> List[str]:
+    """Parse a requirements file.
+
+    Args:
+        file: The requirements file to parse.
+
+    Returns:
+        A list of requirements.
+    """
     deps = []
-    with open(f'extra/{file}') as f:
-        entries = [s.split('#')[0].strip() for s in f.readlines()]
+    with open(f"extra/{file}") as f:
+        entries = [s.split("#")[0].strip() for s in f.readlines()]
     for dep in entries:
-        if not dep or dep.startswith('#'):
+        if not dep or dep.startswith("#"):
             continue
-        elif dep.startswith('-r '):
+        elif dep.startswith("-r "):
             deps.extend(parse_requires(dep.split()[1]))
             continue
         deps.append(dep)
@@ -39,7 +47,7 @@ def parse_requires(file: str) -> List[str]:
 
 # Note: We can't use setuptool’s requirements support as it only a list value,
 # and doesn’t support pip’s inclusion mechanism
-tests_require = parse_requires('requirements-test.txt')
+tests_require = parse_requires("requirements-test.txt")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     setup(tests_require=tests_require)

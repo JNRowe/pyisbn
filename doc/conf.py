@@ -29,35 +29,35 @@ sys.path.insert(0, root_dir)
 
 import pyisbn  # NOQA: E402
 
-on_rtd = 'READTHEDOCS' in os.environ
+on_rtd = "READTHEDOCS" in os.environ
 if not on_rtd:
     import sphinx_rtd_theme
 
 extensions: List[str] = (
     [
-        f'sphinx.ext.{ext}'
+        f"sphinx.ext.{ext}"
         for ext in [
-            'autodoc',
-            'coverage',
-            'doctest',
-            'extlinks',
-            'ifconfig',
-            'intersphinx',
-            'napoleon',
-            'todo',
-            'viewcode',
+            "autodoc",
+            "coverage",
+            "doctest",
+            "extlinks",
+            "ifconfig",
+            "intersphinx",
+            "napoleon",
+            "todo",
+            "viewcode",
         ]
     ]
-    + [f'sphinxcontrib.{ext}' for ext in []]
+    + [f"sphinxcontrib.{ext}" for ext in []]
     + [
-        'sphinx_autodoc_typehints',
+        "sphinx_autodoc_typehints",
     ]
 )
 
 if not on_rtd:
     # Showing document build durations is only valuable when writing, so we’ll
     # only enable it locally
-    extensions.append('sphinx.ext.duration')
+    extensions.append("sphinx.ext.duration")
 
     # Only activate spelling if it is installed.  It is not required in the
     # general case and we don’t have the granularity to describe this in a
@@ -67,18 +67,18 @@ if not on_rtd:
     except ImportError:
         pass
     else:
-        extensions.append('sphinxcontrib.spelling')
+        extensions.append("sphinxcontrib.spelling")
 
-needs_sphinx = '4.3'
+needs_sphinx = "4.3"
 
 nitpicky = True
 
-project = 'pyisbn'
-author = 'James Rowe'
-copyright = f'2007-2022  {author}'
+project = "pyisbn"
+author = "James Rowe"
+copyright = f"2007-2022  {author}"
 
 release = pyisbn._version.dotted
-version = release.rsplit('.', 1)[0]
+version = release.rsplit(".", 1)[0]
 
 trim_footnote_reference_space = True
 
@@ -89,52 +89,52 @@ rst_prolog = """
 """
 
 modindex_common_prefix = [
-    'pyisbn.',
+    "pyisbn.",
 ]
 
 # readthedocs.org handles this setup for their builds, but it is nice to see
 # approximately correct builds on the local system too
 if not on_rtd:
-    html_theme = 'sphinx_rtd_theme'
+    html_theme = "sphinx_rtd_theme"
     html_theme_path: List[str] = [
         sphinx_rtd_theme.get_html_theme_path(),
     ]
 
 with suppress(CalledProcessError):
     proc = run(
-        ['git', 'log', '--pretty=format:%ad [%h]', '--date=short', '-n1'],
+        ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],
         stdout=PIPE,
     )
     html_last_updated_fmt = proc.stdout.decode()
 
-html_baseurl = 'https://pyisbn.readthedocs.io/'
+html_baseurl = "https://pyisbn.readthedocs.io/"
 
 man_pages: Tuple[str, str, str, List, str, int] = []
 
 # Autodoc extension settings
-autoclass_content = 'both'
+autoclass_content = "both"
 autodoc_default_options: Dict[str, Optional[str]] = {
-    'members': None,
+    "members": None,
 }
 
 # extlinks extension settings
 extlinks: Dict[str, Tuple[str, str]] = {
-    'pypi': ('http://pypi.python.org/pypi/%s', '%s'),
-    'issue': ('https://github.com/JNRowe/jnrbase/issues/%s', 'GitHub #'),
+    "pypi": ("http://pypi.python.org/pypi/%s", "%s"),
+    "issue": ("https://github.com/JNRowe/jnrbase/issues/%s", "GitHub #"),
 }
 
 # intersphinx extension settings
 intersphinx_mapping: Dict[str, str] = {
-    k: (v, os.getenv(f'SPHINX_{k.upper()}_OBJECTS'))
+    k: (v, os.getenv(f"SPHINX_{k.upper()}_OBJECTS"))
     for k, v in {
-        'python': 'https://docs.python.org/3/',
+        "python": "https://docs.python.org/3/",
     }.items()
 }
 
 # spelling extension settings
 spelling_ignore_acronyms = False
-spelling_lang = 'en_GB'
-spelling_word_list_filename = 'wordlist.txt'
+spelling_lang = "en_GB"
+spelling_word_list_filename = "wordlist.txt"
 spelling_ignore_python_builtins = False
 spelling_ignore_importable_modules = False
 

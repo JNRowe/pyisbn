@@ -25,11 +25,12 @@ from pytest import mark
 
 
 @mark.skipif(
-    'GITHUB_WORKFLOW' in os.environ,
-    reason='Maintainer test for use in git hooks',
+    "GITHUB_WORKFLOW" in os.environ,
+    reason="Maintainer test for use in git hooks",
 )
 def test_formatting():
-    with open('tests/books.json') as fp:
+    """Test the formatting of the books.json file."""
+    with open("tests/books.json") as fp:
         data = fp.read()
     content = json.loads(data)
     dumped = json.dumps(content, indent=4) + "\n"
