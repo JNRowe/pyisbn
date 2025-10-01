@@ -125,6 +125,7 @@ extend-select = [
     "RET",    # flake8-return
     "RUF",    # Ruff-specific rules
     "S",      # flake8-bandit
+    "SIM",    # flake8-simplify
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]
