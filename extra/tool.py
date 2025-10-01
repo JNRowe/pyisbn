@@ -52,7 +52,7 @@ def partial_arg(f: Callable) -> Callable:
         The wrapped function.
     """
 
-    def wrapper(*args: str, **kwargs: str):
+    def wrapper(*args: str, **kwargs: str) -> argparse.Action:
         if "const" not in kwargs:
             kwargs["const"] = args[1][2:].replace("-", "_")
         return f(*args, dest="command", action="store_const", **kwargs)
