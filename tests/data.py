@@ -19,10 +19,11 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+import pathlib
 
-with open("tests/books.json") as f:
-    #: Sample book data for use in tests
-    TEST_BOOKS: dict[str, str] = json.load(f)
+
+_DATA = pathlib.Path("tests/books.json").read_text()
+TEST_BOOKS: dict[str, str] = json.loads(_DATA)
 
 #: ISBNs from sample book data for use in tests
 TEST_ISBNS: list[str] = [s.replace("-", "") for s in TEST_BOOKS.values()]
