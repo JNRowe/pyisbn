@@ -127,6 +127,7 @@ extend-select = [
     "S",      # flake8-bandit
     "SIM",    # flake8-simplify
     "TC",     # flake8-type-checking
+    "TID",    # flake8-tidy-imports
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]
