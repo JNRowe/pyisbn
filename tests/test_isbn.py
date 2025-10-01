@@ -19,7 +19,6 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 from sys import version_info
-from typing import Tuple
 
 from hypothesis import example, given
 from hypothesis.strategies import sampled_from
@@ -74,7 +73,7 @@ def test___str__(isbn: str):
     )
 )
 @given(sampled_from([(s, "", f"ISBN {s}") for s in TEST_ISBNS]))
-def test___format__(data: Tuple[str, str, str]):
+def test___format__(data: tuple[str, str, str]):
     """Test the format of the Isbn object."""
     isbn, format_spec, result = data
     assert format(Isbn(isbn), format_spec) == result
@@ -90,7 +89,7 @@ def test___format__invalid_format_spec():
 @example(("3540009787", "7"))
 @example(("354000978", "7"))
 @given(sampled_from([(s, s[-1]) for s in TEST_ISBNS]))
-def test_calculate_checksum(data: Tuple[str, str]):
+def test_calculate_checksum(data: tuple[str, str]):
     """Test calculating the checksum of an ISBN."""
     isbn, result = data
     assert Isbn(isbn).calculate_checksum() == result
@@ -113,7 +112,7 @@ def test_convert(isbn: str, result: str):
 @example(("3540009787", True))
 @example(("354000978x", False))
 @given(sampled_from([(s, True) for s in TEST_ISBNS]))
-def test_validate(data: Tuple[str, bool]):
+def test_validate(data: tuple[str, bool]):
     """Test validating an ISBN."""
     isbn, result = data
     assert Isbn(isbn).validate() == result
@@ -129,7 +128,10 @@ def test_validate(data: Tuple[str, bool]):
 )
 def test_to_url(country: str, result: str):
     """Test converting an ISBN to a URL."""
-    assert Isbn("0071148167").to_url(country=country) == "https://www.amazon" + result
+    assert (
+        Isbn("0071148167").to_url(country=country)
+        == "https://www.amazon" + result
+    )
 
 
 def test_to_url_invalid_country():
@@ -167,7 +169,7 @@ def test_to_url_invalid_site():
 
 
 @given(sampled_from([(s, f"URN:ISBN:{s}") for s in TEST_ISBNS]))
-def test_to_urn(data: Tuple[str, str]):
+def test_to_urn(data: tuple[str, str]):
     """Test converting an ISBN to a URN."""
     isbn, result = data
     assert Isbn(isbn).to_urn() == result
