@@ -35,3 +35,7 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. spelling:word-list::
+
+   checksums
