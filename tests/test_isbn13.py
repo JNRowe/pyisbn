@@ -1,4 +1,3 @@
-#
 """test_isbn13 - Test Isbn13 class."""
 # Copyright © 2012-2022  James Rowe <jnrowe@gmail.com>
 #

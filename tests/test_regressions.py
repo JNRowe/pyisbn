@@ -1,4 +1,3 @@
-#
 """test_regressions - Test for regressions."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
@@ -20,7 +19,7 @@
 
 from pytest import mark, raises
 
-from pyisbn import IsbnError, _isbn_cleanse
+from pyisbn import IsbnError, _isbn_cleanse  # NoQA: PLC2701
 
 
 # NOTE: Depending on your typeface and editor you may notice that the following

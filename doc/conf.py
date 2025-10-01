@@ -1,4 +1,3 @@
-#
 """conf - Sphinx configuration information."""
 # Copyright © 2011-2022  James Rowe <jnrowe@gmail.com>
 #
@@ -97,6 +96,7 @@ if not on_rtd:
 with suppress(CalledProcessError):
     proc = run(
         ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],
+        check=False,
         stdout=PIPE,
     )
     html_last_updated_fmt = proc.stdout.decode()
