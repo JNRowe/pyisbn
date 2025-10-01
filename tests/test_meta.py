@@ -1,4 +1,3 @@
-#
 """test_meta - Tests for project maintenance."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
@@ -31,7 +30,7 @@ from pytest import mark
 )
 def test_formatting():
     """Test the formatting of the books.json file."""
-    data = pathlib.Path("tests/books.json").read_text()
+    data = pathlib.Path("tests/books.json").read_text(encoding="utf-8")
     content = json.loads(data)
     dumped = json.dumps(content, indent=4) + "\n"
     assert data == dumped

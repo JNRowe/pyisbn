@@ -1,4 +1,3 @@
-#
 """test_sbn - Test Sbn class."""
 # Copyright © 2012-2022  James Rowe <jnrowe@gmail.com>
 #
