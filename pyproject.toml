@@ -118,6 +118,7 @@ extend-select = [
     "FIX",    # flake8-fixme
     "FURB",   # refurb
     "N",      # pep8-naming
+    "PERF",   # Perflint
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]
