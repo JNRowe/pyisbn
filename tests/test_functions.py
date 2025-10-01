@@ -37,14 +37,14 @@ def test__isbn_cleanse_sbn(isbn: str):
     """Test cleansing SBNs."""
     if isbn.startswith("0"):
         assert _isbn_cleanse(isbn[1:]) == isbn
-        assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
+        assert _isbn_cleanse(isbn[1:-1], checksum=False) == isbn[:-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
     """Test cleansing ISBNs."""
     assert _isbn_cleanse(isbn) == isbn
-    assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
+    assert _isbn_cleanse(isbn[:-1], checksum=False) == isbn[:-1]
 
 
 # See tests.test_regressions.test_issue_7_unistr
@@ -93,7 +93,10 @@ def test__isbn_cleanse_invalid_type():
         ),
     ],
 )
-def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
+def test__isbn_cleanse_invalid_length(
+    checksum: bool,  # NoQA: FBT001
+    message: str,
+):
     """Test cleansing an invalid length."""
     with raises(IsbnError, match=message):
         _isbn_cleanse("0-123", checksum=checksum)
@@ -125,7 +128,7 @@ def test__isbn_cleanse_invalid(isbn: str, message: str):
 def test__isbn_cleanse_invalid_no_checksum(isbn: str, message: str):
     """Test cleansing an invalid ISBN without checksum."""
     with raises(IsbnError, match=message):
-        _isbn_cleanse(isbn, False)
+        _isbn_cleanse(isbn, checksum=False)
 
 
 @given(sampled_from(TEST_ISBNS))
