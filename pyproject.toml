@@ -123,6 +123,7 @@ extend-select = [
     "PT",     # flake8-pytest-style
     "PTH",    # flake8-use-pathlib
     "RET",    # flake8-return
+    "RUF",    # Ruff-specific rules
     "W",      # pycodestyle
     "YTT",    # flake8-2020
 ]

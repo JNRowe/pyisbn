@@ -52,12 +52,12 @@ extensions: list[str] = (
 )
 
 if not on_rtd:
-    # Showing document build durations is only valuable when writing, so we’ll
+    # Showing document build durations is only valuable when writing, so we'll
     # only enable it locally
     extensions.append("sphinx.ext.duration")
 
     # Only activate spelling if it is installed.  It is not required in the
-    # general case and we don’t have the granularity to describe this in a
+    # general case and we don't have the granularity to describe this in a
     # clean way
     try:
         from sphinxcontrib import spelling  # NOQA: F401

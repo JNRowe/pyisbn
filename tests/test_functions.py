@@ -52,7 +52,7 @@ def test__isbn_cleanse_isbn(isbn: str):
 @pytest.mark.parametrize(
     "isbn",
     [
-        "978–1–84724–253–2",
+        "978–1–84724–253–2",  # NoQA: RUF001
         "978—0—385—08695—0",
         "978―0199564095",
     ],
@@ -67,7 +67,7 @@ def test__isbn_cleanse_unicode_dash(isbn: str):
 @pytest.mark.parametrize(
     "isbn",
     [
-        "978–1–84724–253–2",
+        "978–1–84724–253–2",  # NoQA: RUF001
         "978-0-385-08695-0",
     ],
 )
@@ -146,9 +146,7 @@ def test_convert_invalid():
     """Test converting an invalid ISBN."""
     with pytest.raises(
         IsbnError,
-        match=(
-            "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
-        ),
+        match="Only ISBN-13s with 978 Bookland code can be converted",
     ):
         convert("9790000000001")
 
