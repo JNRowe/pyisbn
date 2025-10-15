@@ -1,4 +1,3 @@
-#
 """test_isbn - Test Isbn class."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
@@ -20,9 +19,9 @@
 
 from sys import version_info
 
+import pytest
 from hypothesis import example, given
 from hypothesis.strategies import sampled_from
-from pytest import mark, raises
 
 from pyisbn import CountryError, Isbn, SiteError
 from tests.data import TEST_ISBNS
@@ -45,33 +44,27 @@ def test___str__(isbn: str):
     assert str(Isbn(isbn)) == f"ISBN {isbn}"
 
 
-@mark.skipif(
+@pytest.mark.skipif(
     version_info < (2, 6),
     reason="format() not supported with this Python version",
 )
 @example(("9780521871723", "", "ISBN 9780521871723"))
 @example(("978-052-187-1723", "urn", "URN:ISBN:978-052-187-1723"))
-@example(
-    (
-        "3540009787",
-        "url",
-        "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
-@example(
-    (
-        "3540009787",
-        "url:amazon:uk",
-        "https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
-@example(
-    (
-        "3540009787",
-        "url:amazon",
-        "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
-    )
-)
+@example((
+    "3540009787",
+    "url",
+    "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
+))
+@example((
+    "3540009787",
+    "url:amazon:uk",
+    "https://www.amazon.co.uk/s?search-alias=stripbooks&field-isbn=3540009787",
+))
+@example((
+    "3540009787",
+    "url:amazon",
+    "https://www.amazon.com/s?search-alias=stripbooks&field-isbn=3540009787",
+))
 @given(sampled_from([(s, "", f"ISBN {s}") for s in TEST_ISBNS]))
 def test___format__(data: tuple[str, str, str]):
     """Test the format of the Isbn object."""
@@ -81,7 +74,7 @@ def test___format__(data: tuple[str, str, str]):
 
 def test___format__invalid_format_spec():
     """Test the format of the Isbn object with an invalid format spec."""
-    with raises(ValueError, match="Unknown format_spec 'biscuit'"):
+    with pytest.raises(ValueError, match="Unknown format_spec 'biscuit'"):
         format(Isbn("0071148167"), "biscuit")
 
 
@@ -95,8 +88,8 @@ def test_calculate_checksum(data: tuple[str, str]):
     assert Isbn(isbn).calculate_checksum() == result
 
 
-@mark.parametrize(
-    "isbn,result",
+@pytest.mark.parametrize(
+    ("isbn", "result"),
     [
         ("0071148167", "9780071148160"),
         ("9780071148160", "0071148167"),
@@ -118,8 +111,8 @@ def test_validate(data: tuple[str, bool]):
     assert Isbn(isbn).validate() == result
 
 
-@mark.parametrize(
-    "country,result",
+@pytest.mark.parametrize(
+    ("country", "result"),
     [
         ("us", ".com/s?search-alias=stripbooks&field-isbn=0071148167"),
         ("uk", ".co.uk/s?search-alias=stripbooks&field-isbn=0071148167"),
@@ -136,12 +129,12 @@ def test_to_url(country: str, result: str):
 
 def test_to_url_invalid_country():
     """Test converting an ISBN to a URL with an invalid country."""
-    with raises(CountryError, match="zh"):
+    with pytest.raises(CountryError, match="zh"):
         Isbn("0071148167").to_url(country="zh")
 
 
-@mark.parametrize(
-    "site,result",
+@pytest.mark.parametrize(
+    ("site", "result"),
     [
         ("copac", "http://copac.jisc.ac.uk/search?isn=0071148167"),
         ("google", "https://books.google.com/books?vid=isbn:0071148167"),
@@ -164,7 +157,7 @@ def test_to_url_site(site: str, result: str):
 
 def test_to_url_invalid_site():
     """Test converting an ISBN to a URL with an invalid site."""
-    with raises(SiteError, match="nosite"):
+    with pytest.raises(SiteError, match="nosite"):
         Isbn("0071148167").to_url(site="nosite")
 
 

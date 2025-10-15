@@ -15,6 +15,11 @@ Types
 .. autodata:: TIsbn13
 .. autodata:: TSbn
 
+Constants
+---------
+
+.. automodule:: pyisbn._constants
+
 .. spelling:word-list::
 
    subtype
