@@ -36,7 +36,7 @@ jobs:
           COVERAGE_FILE: ".coverage.${{ matrix.python-version }}"
 
       - name: Store coverage file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: coverage-${{ matrix.python-version }}
           path: .coverage.${{ matrix.python-version }}
@@ -65,5 +65,5 @@ jobs:
           MERGE_COVERAGE_FILES: true
 
       - name: Store PR comment
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
