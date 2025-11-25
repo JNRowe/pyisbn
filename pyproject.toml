@@ -12,7 +12,7 @@ doc = [
 ]
 test = [
     "hypothesis>=6.140,<=7.0",
-    "pytest-cov>=2.12",
+    "pytest-cov>=7.0,<=8.0",
     "pytest-randomly>=3.8",
     "pytest>=6.2",
 ]
