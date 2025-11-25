@@ -11,7 +11,7 @@ doc = [
     "sphinxcontrib-spelling>=8.0,<9.0",
 ]
 test = [
-    "hypothesis>=6.0",
+    "hypothesis>=6.140,<=7.0",
     "pytest-cov>=2.12",
     "pytest-randomly>=3.8",
     "pytest>=6.2",
