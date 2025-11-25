@@ -8,6 +8,8 @@ on:
       - src/*/*.py
       - tests/*.py
 
+permissions: {}
+
 jobs:
   ruff:
     runs-on: ubuntu-latest
