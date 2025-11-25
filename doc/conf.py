@@ -29,8 +29,6 @@ sys.path.insert(0, root_dir)
 import pyisbn  # NOQA: E402
 
 on_rtd = "READTHEDOCS" in os.environ
-if not on_rtd:
-    import sphinx_rtd_theme
 
 extensions: list[str] = (
     [
@@ -95,9 +93,6 @@ modindex_common_prefix = [
 # approximately correct builds on the local system too
 if not on_rtd:
     html_theme = "sphinx_rtd_theme"
-    html_theme_path: list[str] = [
-        sphinx_rtd_theme.get_html_theme_path(),
-    ]
 
 with suppress(CalledProcessError):
     proc = run(
