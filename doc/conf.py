@@ -1,4 +1,3 @@
-#
 """conf - Sphinx configuration information."""
 # Copyright © 2011-2022  James Rowe <jnrowe@gmail.com>
 #
@@ -19,12 +18,13 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import pathlib
 import sys
 from contextlib import suppress
-from subprocess import CalledProcessError, PIPE, run
+from subprocess import CalledProcessError, PIPE, run  # NoQA: S404
 
-root_dir = os.path.dirname(os.path.dirname(__file__))
-sys.path.insert(0, root_dir)
+root_dir = pathlib.Path(__file__).parent.parent
+sys.path.insert(0, root_dir.as_posix())
 
 import pyisbn  # NOQA: E402
 
@@ -52,12 +52,12 @@ extensions: list[str] = (
 )
 
 if not on_rtd:
-    # Showing document build durations is only valuable when writing, so we’ll
+    # Showing document build durations is only valuable when writing, so we'll
     # only enable it locally
     extensions.append("sphinx.ext.duration")
 
     # Only activate spelling if it is installed.  It is not required in the
-    # general case and we don’t have the granularity to describe this in a
+    # general case and we don't have the granularity to describe this in a
     # clean way
     try:
         from sphinxcontrib import spelling  # NOQA: F401
@@ -72,7 +72,7 @@ nitpicky = True
 
 project = "pyisbn"
 author = "James Rowe"
-copyright = f"2007-2022  {author}"
+copyright = f"2007-2022  {author}"  # NoQA: A001
 
 release = pyisbn._version.dotted
 version = release.rsplit(".", 1)[0]
@@ -96,26 +96,27 @@ if not on_rtd:
 
 with suppress(CalledProcessError):
     proc = run(
-        ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],
+        ["git", "log", "--pretty=format:%ad [%h]", "--date=short", "-n1"],  # NoQA: S607
+        check=False,
         stdout=PIPE,
     )
     html_last_updated_fmt = proc.stdout.decode()
 
 html_baseurl = "https://pyisbn.readthedocs.io/"
 
-# Autodoc extension settings
+# Extension - autodoc
 autoclass_content = "both"
 autodoc_default_options: dict[str, str | None] = {
     "members": None,
 }
 
-# extlinks extension settings
+# Extension - extlinks
 extlinks: dict[str, tuple[str, str]] = {
     "pypi": ("http://pypi.python.org/pypi/%s", "%s"),
     "issue": ("https://github.com/JNRowe/jnrbase/issues/%s", "GitHub #"),
 }
 
-# intersphinx extension settings
+# Extension - intersphinx
 intersphinx_mapping: dict[str, str] = {
     k: (v, os.getenv(f"SPHINX_{k.upper()}_OBJECTS"))
     for k, v in {
@@ -123,15 +124,15 @@ intersphinx_mapping: dict[str, str] = {
     }.items()
 }
 
-# spelling extension settings
+# Extension - spelling
 spelling_ignore_acronyms = False
 spelling_lang = "en_GB"
 spelling_word_list_filename = "wordlist.txt"
 spelling_ignore_python_builtins = False
 spelling_ignore_importable_modules = False
 
-# napoleon extension settings
+# Extension - napoleon
 napoleon_numpy_docstring = False
 
-# todo extension settings
+# Extension - todo
 todo_include_todos = True

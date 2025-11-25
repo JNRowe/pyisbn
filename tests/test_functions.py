@@ -1,4 +1,3 @@
-#
 """test_functions - Test function interface."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
@@ -18,13 +17,13 @@
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
+import pytest
 from hypothesis import given
 from hypothesis.strategies import sampled_from
-from pytest import mark, raises
 
 from pyisbn import (
     IsbnError,
-    _isbn_cleanse,
+    _isbn_cleanse,  # NoQA: PLC2701
     calculate_checksum,
     convert,
     validate,
@@ -37,23 +36,23 @@ def test__isbn_cleanse_sbn(isbn: str):
     """Test cleansing SBNs."""
     if isbn.startswith("0"):
         assert _isbn_cleanse(isbn[1:]) == isbn
-        assert _isbn_cleanse(isbn[1:-1], False) == isbn[:-1]
+        assert _isbn_cleanse(isbn[1:-1], checksum=False) == isbn[:-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
     """Test cleansing ISBNs."""
     assert _isbn_cleanse(isbn) == isbn
-    assert _isbn_cleanse(isbn[:-1], False) == isbn[:-1]
+    assert _isbn_cleanse(isbn[:-1], checksum=False) == isbn[:-1]
 
 
 # See tests.test_regressions.test_issue_7_unistr
 # NOTE: Depending on your typeface and editor you may notice that the following
 # dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
-@mark.parametrize(
+@pytest.mark.parametrize(
     "isbn",
     [
-        "978–1–84724–253–2",
+        "978–1–84724–253–2",  # NoQA: RUF001
         "978—0—385—08695—0",
         "978―0199564095",
     ],
@@ -65,10 +64,10 @@ def test__isbn_cleanse_unicode_dash(isbn: str):
 
 # NOTE: Depending on your typeface and editor you may notice that the following
 # dashes are not HYPHEN-MINUS.  They're not, and this is on purpose
-@mark.parametrize(
+@pytest.mark.parametrize(
     "isbn",
     [
-        "978–1–84724–253–2",
+        "978–1–84724–253–2",  # NoQA: RUF001
         "978-0-385-08695-0",
     ],
 )
@@ -79,12 +78,12 @@ def test__isbn_cleanse_reflect_type(isbn: str):
 
 def test__isbn_cleanse_invalid_type():
     """Test cleansing an invalid type."""
-    with raises(TypeError, match="ISBN must be a string, received 2"):
+    with pytest.raises(TypeError, match="ISBN must be a string, received 2"):
         _isbn_cleanse(2)  # ty: ignore[invalid-argument-type]
 
 
-@mark.parametrize(
-    "checksum,message",
+@pytest.mark.parametrize(
+    ("checksum", "message"),
     [
         (True, "ISBN must be either 10 or 13 characters long"),
         (
@@ -93,14 +92,17 @@ def test__isbn_cleanse_invalid_type():
         ),
     ],
 )
-def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
+def test__isbn_cleanse_invalid_length(
+    checksum: bool,  # NoQA: FBT001
+    message: str,
+):
     """Test cleansing an invalid length."""
-    with raises(IsbnError, match=message):
+    with pytest.raises(IsbnError, match=message):
         _isbn_cleanse("0-123", checksum=checksum)
 
 
-@mark.parametrize(
-    "isbn,message",
+@pytest.mark.parametrize(
+    ("isbn", "message"),
     [
         ("0-x4343", "non-digit parts"),
         ("012345678-b", "non-digit or X checksum"),
@@ -111,21 +113,21 @@ def test__isbn_cleanse_invalid_length(checksum: bool, message: str):
 )
 def test__isbn_cleanse_invalid(isbn: str, message: str):
     """Test cleansing an invalid ISBN."""
-    with raises(IsbnError, match=message):
+    with pytest.raises(IsbnError, match=message):
         _isbn_cleanse(isbn)
 
 
-@mark.parametrize(
-    "isbn,message",
+@pytest.mark.parametrize(
+    ("isbn", "message"),
     [
         ("0x0000000", "non-digit parts"),
         ("580003417076", "invalid Bookland region"),
     ],
 )
-def test__isbn_cleanse_invalid_no_checksum(isbn, message):
+def test__isbn_cleanse_invalid_no_checksum(isbn: str, message: str):
     """Test cleansing an invalid ISBN without checksum."""
-    with raises(IsbnError, match=message):
-        _isbn_cleanse(isbn, False)
+    with pytest.raises(IsbnError, match=message):
+        _isbn_cleanse(isbn, checksum=False)
 
 
 @given(sampled_from(TEST_ISBNS))
@@ -142,11 +144,9 @@ def test_convert(isbn: str):
 
 def test_convert_invalid():
     """Test converting an invalid ISBN."""
-    with raises(
+    with pytest.raises(
         IsbnError,
-        match=(
-            "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
-        ),
+        match="Only ISBN-13s with 978 Bookland code can be converted",
     ):
         convert("9790000000001")
 
@@ -157,7 +157,7 @@ def test_validate(isbn: str):
     assert validate(isbn)
 
 
-@mark.parametrize(
+@pytest.mark.parametrize(
     "isbn",
     [
         "1-234-56789-0",

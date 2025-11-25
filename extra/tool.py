@@ -19,9 +19,10 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-from typing import Callable, cast
+from typing import cast
+from collections.abc import Callable
 
-from pyisbn import Isbn, TIsbn, URL_MAP, _version
+from pyisbn import Isbn, TIsbn, URL_MAP, _version  # NoQA: PLC2701
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:
@@ -32,11 +33,14 @@ def isbn_typecheck(string: TIsbn) -> Isbn:
 
     Returns:
         The Isbn object.
+
+    Raises:
+        argparse.ArgumentTypeError: Invalid ISBN value
     """
     try:
         isbn = Isbn(string)
         if not isbn.validate():
-            raise ValueError("Invalid checksum")
+            raise argparse.ArgumentTypeError("Invalid checksum")
     except ValueError as e:
         raise argparse.ArgumentTypeError(f"{e} {string!r}") from None
     return isbn
@@ -52,7 +56,7 @@ def partial_arg(f: Callable) -> Callable:
         The wrapped function.
     """
 
-    def wrapper(*args: str, **kwargs: str):
+    def wrapper(*args: str, **kwargs: str) -> argparse.Action:
         if "const" not in kwargs:
             kwargs["const"] = args[1][2:].replace("-", "_")
         return f(*args, dest="command", action="store_const", **kwargs)

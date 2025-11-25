@@ -1,4 +1,3 @@
-#
 """pyisbn - A module for working with 10- and 13-digit ISBNs.
 
 This module supports the calculation of ISBN checksums with
@@ -39,7 +38,7 @@ books in their collection.
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import _version
+from . import _constants, _version
 
 __version__ = _version.dotted
 __date__ = _version.date
@@ -47,7 +46,7 @@ __author__ = "James Rowe <jnrowe@gmail.com>"
 __copyright__ = "Copyright © 2007-2022  James Rowe"
 __license__ = "GNU General Public License Version 3"
 
-import unicodedata  # NOQA: I100
+import unicodedata
 from typing import NewType, TypeAlias
 
 #: ISBN string type
@@ -115,8 +114,11 @@ class Isbn:
 
         """
         self._isbn = isbn
-        if len(isbn) in (9, 12):
-            self.isbn = _isbn_cleanse(isbn, False)
+        if len(isbn) in {
+            _constants.SBN_LENGTH,
+            _constants.ISBN13_LENGTH_NO_CHECKSUM,
+        }:
+            self.isbn = _isbn_cleanse(isbn, checksum=False)
         else:
             self.isbn = _isbn_cleanse(isbn)
 
@@ -161,7 +163,10 @@ class Isbn:
             case s if s.startswith("url:"):
                 parts = s.split(":")
                 site = parts[1]
-                country = parts[2] if len(parts) > 2 else "us"
+                try:
+                    country = parts[2]
+                except IndexError:
+                    country = "us"
                 return self.to_url(site, country)
             case _:
                 raise ValueError(f"Unknown format_spec {format_spec!r}")
@@ -173,10 +178,12 @@ class Isbn:
             ISBN checksum value
 
         """
-        if len(self.isbn) in (9, 12):
+        if len(self.isbn) in {
+            _constants.SBN_LENGTH,
+            _constants.ISBN13_LENGTH_NO_CHECKSUM,
+        }:
             return calculate_checksum(self.isbn)
-        else:
-            return calculate_checksum(self.isbn[:-1])
+        return calculate_checksum(self.isbn[:-1])
 
     def convert(self, code: str = "978") -> str:
         """Convert ISBNs between ISBN-10 and ISBN-13.
@@ -271,7 +278,9 @@ class Isbn10(Isbn):
             ISBN-10 checksum value
 
         """
-        return calculate_checksum(self.isbn[:9])
+        return calculate_checksum(
+            self.isbn[: _constants.ISBN10_LENGTH_NO_CHECKSUM]
+        )
 
     def convert(self, code: str = "978") -> str:
         """Convert ISBN-10 to ISBN-13.
@@ -320,7 +329,9 @@ class Sbn(Isbn10):
             SBN checksum value
 
         """
-        return calculate_checksum(self.isbn[:9])
+        return calculate_checksum(
+            self.isbn[: _constants.ISBN10_LENGTH_NO_CHECKSUM]
+        )
 
     def convert(self, code: str = "978") -> str:
         """Convert SBN to ISBN-13.
@@ -359,7 +370,9 @@ class Isbn13(Isbn):
             ISBN-13 checksum value
 
         """
-        return calculate_checksum(self.isbn[:12])
+        return calculate_checksum(
+            self.isbn[: _constants.ISBN13_LENGTH_NO_CHECKSUM]
+        )
 
     def convert(self, _code: str = "978") -> str:
         """Convert ISBN-13 to ISBN-10.
@@ -373,11 +386,11 @@ class Isbn13(Isbn):
         Raises:
             ValueError: When ISBN-13 isn't a Bookland "978" ISBN
 
-        """
+        """  # NoQA: DOC502
         return convert(self.isbn)
 
 
-def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:  # NoQA: C901
+def _isbn_cleanse(isbn: TIsbn, *, checksum: bool = True) -> str:  # NoQA: C901, PLR0912
     """Check ISBN is a string, and passes basic sanity checks.
 
     Args:
@@ -402,26 +415,31 @@ def _isbn_cleanse(isbn: TIsbn, checksum: bool = True) -> str:  # NoQA: C901
     if checksum:
         if not isbn[:-1].isdigit():
             raise IsbnError("non-digit parts")
-        if len(isbn) == 9:
+        if len(isbn) == _constants.SBN_LENGTH:
             isbn = "0" + isbn
-        if len(isbn) == 10:
+        if len(isbn) == _constants.ISBN10_LENGTH:
             if not (isbn[-1].isdigit() or isbn[-1] in "Xx"):
                 raise IsbnError("non-digit or X checksum")
-        elif len(isbn) == 13:
+        elif len(isbn) == _constants.ISBN13_LENGTH:
             if not isbn[-1].isdigit():
                 raise IsbnError("non-digit checksum")
-            if not isbn.startswith(("978", "979")):
+            if not isbn.startswith(_constants.BOOKLAND_PREFIXES):
                 raise IsbnError("invalid Bookland region")
         else:
             raise IsbnError("ISBN must be either 10 or 13 characters long")
     else:
-        if len(isbn) == 8:
+        if len(isbn) == _constants.SBN_LENGTH_NO_CHECKSUM:
             isbn = "0" + isbn
-        elif len(isbn) == 12 and not isbn[:3].startswith(("978", "979")):
+        elif len(isbn) == _constants.ISBN13_LENGTH_NO_CHECKSUM and not isbn[
+            :3
+        ].startswith(_constants.BOOKLAND_PREFIXES):
             raise IsbnError("invalid Bookland region")
         if not isbn.isdigit():
             raise IsbnError("non-digit parts")
-        if len(isbn) not in (9, 12):
+        if len(isbn) not in {
+            _constants.ISBN10_LENGTH_NO_CHECKSUM,
+            _constants.ISBN13_LENGTH_NO_CHECKSUM,
+        }:
             raise IsbnError(
                 "ISBN must be either 9 or 12 characters long without checksum"
             )
@@ -439,16 +457,22 @@ def calculate_checksum(isbn: TIsbn) -> str:
 
     """
     digits = [int(i) for i in _isbn_cleanse(isbn, checksum=False)]
-    if len(digits) == 9:
+    if len(digits) == _constants.ISBN10_LENGTH_NO_CHECKSUM:
         products = [x * y for x, y in enumerate(digits, 1)]
-        check = sum(products) % 11
-        if check == 10:
+        check = sum(products) % _constants.ISBN10_CHECKSUM_MODULUS
+        if check == _constants.ISBN10_CHECKSUM_X:
             check = "X"
     else:
-        products = [(x if n % 2 == 0 else x * 3) for n, x in enumerate(digits)]
-        check = 10 - sum(products) % 10
-        if check == 10:
-            check = 0
+        products = [
+            (x if n % 2 == 0 else x * _constants.ISBN13_ODD_MULTIPLIER)
+            for n, x in enumerate(digits)
+        ]
+        check = (
+            _constants.ISBN13_CHECKSUM_SUBTRACT
+            - sum(products) % _constants.ISBN13_CHECKSUM_MODULUS
+        )
+        if check == _constants.ISBN13_CHECKSUM_MODULUS:
+            check = _constants.ISBN13_CHECKSUM_TEN_REPLACEMENT
     return str(check)
 
 
@@ -467,22 +491,21 @@ def convert(isbn: TIsbn, code: str = "978") -> str:
     Returns:
         Converted ISBN-10 or ISBN-13
 
-    Raise:
+    Raises:
         IsbnError: When ISBN-13 isn't convertible to an ISBN-10
 
     """
     isbn = _isbn_cleanse(isbn)
-    if len(isbn) == 10:
+    if len(isbn) == _constants.ISBN10_LENGTH:
         isbn = code + isbn[:-1]
         return isbn + calculate_checksum(isbn)
-    else:
-        if isbn.startswith("978"):
-            return isbn[3:-1] + calculate_checksum(isbn[3:-1])
-        else:
-            raise IsbnError(
-                "Only ISBN-13s with 978 Bookland code can be converted to "
-                "ISBN-10."
-            )
+    if isbn.startswith(_constants.BOOKLAND_PREFIXES[0]):
+        return isbn[
+            _constants.BOOKLAND_PREFIX_LENGTH : -1
+        ] + calculate_checksum(isbn[_constants.BOOKLAND_PREFIX_LENGTH : -1])
+    raise IsbnError(
+        "Only ISBN-13s with 978 Bookland code can be converted to ISBN-10."
+    )
 
 
 def validate(isbn: TIsbn) -> bool:
