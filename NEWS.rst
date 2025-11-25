@@ -3,6 +3,21 @@ User-visible changes
 
 .. contents::
 
+1.4.0 - 2026-01-30
+------------------
+
+* *Large scale refactoring*.  Speak up, and accept my apology in advance, if
+  I’ve broken something
+* Adopt Contributor Covenant Code of Conduct
+* We now use uv_build_ as the packaging backend
+* Python 3.11 to 3.14 are now officially supported
+* Pypy is no longer supported, but if you require it open an issue_
+* sphinx-autodoc-typehints_ is now required to build docs
+
+.. _uv_build: https://docs.astral.sh/uv/concepts/build-backend/
+.. _issue: https://github.com/JNRowe/pyisbn/issues
+.. _sphinx-autodoc-typehints: https://pypi.org/project/sphinx-autodoc-typehints/
+
 1.3.0 - 2020-02-10
 ------------------
 
