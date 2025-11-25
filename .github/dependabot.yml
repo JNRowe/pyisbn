@@ -27,6 +27,8 @@ updates:
           - "pytest"
       runtime:
         dependency-type: "production"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -36,3 +38,5 @@ updates:
       - "github-actions"
     commit-message:
       prefix: "ci"
+    cooldown:
+      default-days: 7
