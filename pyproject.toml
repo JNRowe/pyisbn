@@ -14,7 +14,7 @@ test = [
     "hypothesis>=6.140,<=7.0",
     "pytest-cov>=7.0,<=8.0",
     "pytest-randomly>=4.0,<=5.0",
-    "pytest>=8.4,<=9.0",
+    "pytest>=9.0,<=10.0",
 ]
 
 [project]
@@ -73,7 +73,7 @@ pytest_add_cli_args = ["--cov-fail-under=0", "--randomly-seed=0"]
 # environment isolation
 runner = "pytest -x"
 
-[tool.pytest.ini_options]
+[tool.pytest]
 addopts = [
     "--cov",
     "--cov-append",
@@ -82,12 +82,10 @@ addopts = [
     "--import-mode=importlib",
     "--no-cov-on-fail",
     "--pythonwarnings=error",
-    "--strict-config",
-    "--strict-markers",
 ]
-minversion = "8.4"
+minversion = "9.0"
+strict = true
 testpaths = ["tests/"]
-xfail_strict = true
 
 [tool.ruff]
 exclude = [".git/", "build/", "dist/", "maybe/", "src/pyisbn/_version.py"]
