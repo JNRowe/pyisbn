@@ -73,7 +73,7 @@ pytest_add_cli_args = ["--cov-fail-under=0", "--randomly-seed=0"]
 # environment isolation
 runner = "pytest -x"
 
-[tool.pytest.ini_options]
+[tool.pytest]
 addopts = [
     "--cov",
     "--cov-append",
