@@ -6,6 +6,7 @@ on:
       - .github/workflows/spelling.yml
       - doc/*.rst
       - src/*/*.py
+      - pyproject.toml
 
 permissions: read-all
 
