@@ -1,32 +1,12 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/"
     schedule:
       interval: "weekly"
     target-branch: "main"
     labels:
       - "dependencies"
-    groups:
-      dev:
-        patterns:
-          - "mutmut"
-          - "pytest-html"
-          - "ruff"
-      doc:
-        patterns:
-          - "sphinx-autodoc-typehints"
-          - "sphinx"
-          - "sphinx_rtd_theme"
-          - "sphinxcontrib-spelling"
-      test:
-        patterns:
-          - "hypothesis"
-          - "pytest-cov"
-          - "pytest-randomly"
-          - "pytest"
-      runtime:
-        dependency-type: "production"
     cooldown:
       default-days: 7
   - package-ecosystem: "github-actions"
