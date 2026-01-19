@@ -1,10 +1,10 @@
-# This is pyisbn version 1.3.1 (2020-02-14)
+# This is pyisbn version 1.4.0 (2025-11-25)
 # pylint: skip-file
 
-dotted = "1.3.1"
-libtool = "13:21"
-hex = 0x010301
-date = "2020-02-14"
-tuple = (1, 3, 1)
-dict = {"major": 1, "minor": 3, "micro": 1}
-web = "pyisbn/1.3.1"
+dotted = '1.4.0'
+libtool = '14:20'
+hex = 0x010400
+date = '2025-11-25'
+tuple = (1, 4, 0)
+dict = {'major': 1, 'minor': 4, 'micro': 0}
+web = 'pyisbn/1.4.0'
