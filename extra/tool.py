@@ -19,10 +19,11 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+from importlib.metadata import version
 from typing import cast
 from collections.abc import Callable
 
-from pyisbn import Isbn, TIsbn, URL_MAP, _version  # NoQA: PLC2701
+from pyisbn import Isbn, TIsbn, URL_MAP  # NoQA: PLC2701
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:
@@ -71,7 +72,7 @@ def main() -> None:
         epilog="Please report bugs at https://github.com/JNRowe/pyisbn/issues",
     )
     parser.add_argument(
-        "--version", action="version", version=f"pyisbn {_version.dotted}"
+        "--version", action="version", version=f"pyisbn {version('pyisbn')}"
     )
     commands = parser.add_mutually_exclusive_group()
     parg = partial_arg(commands.add_argument)

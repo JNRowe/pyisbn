@@ -21,9 +21,6 @@ This module supports the calculation and validation of ISBN checksums.
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import _version
-
-__version__ = _version.dotted
 __author__ = "James Rowe <jnrowe@gmail.com>"
 
 
