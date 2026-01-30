@@ -131,8 +131,7 @@ extend-select = [
     "YTT",    # flake8-2020
 ]
 ignore = [
-    "RUF067", # Allow code in __init__.py [for now]
-    "TC006",  # Allow unquoted cast() types where possible
+    "TC006", # Allow unquoted cast() types where possible
 ]
 preview = true
 

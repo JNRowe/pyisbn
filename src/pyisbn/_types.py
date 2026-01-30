@@ -1,9 +1,5 @@
-"""pyisbn - A module for working with 10- and 13-digit ISBNs.
-
-This module supports the calculation and validation of ISBN checksums.
-"""
+"""Type definitions."""
 # Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
-#                        notconfusing <isalix@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
@@ -21,26 +17,16 @@ This module supports the calculation and validation of ISBN checksums.
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import _version
+from typing import NewType, TypeAlias
 
-__version__ = _version.dotted
-__author__ = "James Rowe <jnrowe@gmail.com>"
+#: ISBN string type
+TIsbn = NewType("TIsbn", str)
+TIsbn10 = NewType("TIsbn10", TIsbn)
+TIsbn13 = NewType("TIsbn13", TIsbn)
+
+#: SBN string type
+TSbn = NewType("TSbn", str)
 
 
-from ._exceptions import CountryError, IsbnError, SiteError
-from .func import calculate_checksum, convert, validate
-from .models import Isbn, Isbn10, Isbn13, Sbn
-
-
-__all__ = [
-    "CountryError",
-    "Isbn",
-    "Isbn10",
-    "Isbn13",
-    "IsbnError",
-    "Sbn",
-    "SiteError",
-    "calculate_checksum",
-    "convert",
-    "validate",
-]
+_UrlMapTlds: TypeAlias = dict[str, str | None]
+_UrlMapValue: TypeAlias = str | tuple[str, _UrlMapTlds]

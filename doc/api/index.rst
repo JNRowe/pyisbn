@@ -38,7 +38,7 @@ the classes.
 .. toctree::
    :maxdepth: 2
 
-   utils
+   func
 
 Internal support features
 -------------------------
@@ -46,4 +46,6 @@ Internal support features
 .. toctree::
    :maxdepth: 2
 
-   support
+   _constants
+   _types
+   _utils

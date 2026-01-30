@@ -19,7 +19,8 @@
 
 import pytest
 
-from pyisbn import IsbnError, _isbn_cleanse  # NoQA: PLC2701
+from pyisbn import IsbnError
+from pyisbn._utils import isbn_cleanse  # NoQA: PLC2701
 
 
 # NOTE: Depending on your typeface and editor you may notice that the following
@@ -34,7 +35,7 @@ from pyisbn import IsbnError, _isbn_cleanse  # NoQA: PLC2701
 )
 def test_issue_7_unistr(isbn: str):
     """Test for issue #7 (unicode dashes)."""
-    assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
+    assert isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
 @pytest.mark.parametrize(
@@ -47,4 +48,4 @@ def test_issue_7_unistr(isbn: str):
 def test_issue_16_bookland(isbn: str):
     """Test for issue #16 (Bookland ISBNs)."""
     with pytest.raises(IsbnError, match="Bookland"):
-        _isbn_cleanse(isbn)
+        isbn_cleanse(isbn)

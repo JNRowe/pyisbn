@@ -1,4 +1,4 @@
-"""test_functions - Test function interface."""
+"""test_functions - Test internal functions."""
 # Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
@@ -21,13 +21,8 @@ import pytest
 from hypothesis import given
 from hypothesis.strategies import sampled_from
 
-from pyisbn import (
-    IsbnError,
-    _isbn_cleanse,  # NoQA: PLC2701
-    calculate_checksum,
-    convert,
-    validate,
-)
+from pyisbn import IsbnError
+from pyisbn._utils import isbn_cleanse  # NoQA: PLC2701
 from tests.data import TEST_ISBNS
 
 
@@ -35,15 +30,15 @@ from tests.data import TEST_ISBNS
 def test__isbn_cleanse_sbn(isbn: str):
     """Test cleansing SBNs."""
     if isbn.startswith("0"):
-        assert _isbn_cleanse(isbn[1:]) == isbn
-        assert _isbn_cleanse(isbn[1:-1], checksum=False) == isbn[:-1]
+        assert isbn_cleanse(isbn[1:]) == isbn
+        assert isbn_cleanse(isbn[1:-1], checksum=False) == isbn[:-1]
 
 
 @given(sampled_from(TEST_ISBNS))
 def test__isbn_cleanse_isbn(isbn: str):
     """Test cleansing ISBNs."""
-    assert _isbn_cleanse(isbn) == isbn
-    assert _isbn_cleanse(isbn[:-1], checksum=False) == isbn[:-1]
+    assert isbn_cleanse(isbn) == isbn
+    assert isbn_cleanse(isbn[:-1], checksum=False) == isbn[:-1]
 
 
 # See tests.test_regressions.test_issue_7_unistr
@@ -59,7 +54,7 @@ def test__isbn_cleanse_isbn(isbn: str):
 )
 def test__isbn_cleanse_unicode_dash(isbn: str):
     """Test cleansing ISBNs with unicode dashes."""
-    assert _isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
+    assert isbn_cleanse(isbn) == "".join(filter(lambda s: s.isdigit(), isbn))
 
 
 # NOTE: Depending on your typeface and editor you may notice that the following
@@ -73,13 +68,13 @@ def test__isbn_cleanse_unicode_dash(isbn: str):
 )
 def test__isbn_cleanse_reflect_type(isbn: str):
     """Test that the cleansed ISBN has the same type as the original."""
-    assert type(_isbn_cleanse(isbn)) is type(isbn)
+    assert type(isbn_cleanse(isbn)) is type(isbn)
 
 
 def test__isbn_cleanse_invalid_type():
     """Test cleansing an invalid type."""
     with pytest.raises(TypeError, match="ISBN must be a string, received 2"):
-        _isbn_cleanse(2)  # ty: ignore[invalid-argument-type]
+        isbn_cleanse(2)  # ty: ignore[invalid-argument-type]
 
 
 @pytest.mark.parametrize(
@@ -98,7 +93,7 @@ def test__isbn_cleanse_invalid_length(
 ):
     """Test cleansing an invalid length."""
     with pytest.raises(IsbnError, match=message):
-        _isbn_cleanse("0-123", checksum=checksum)
+        isbn_cleanse("0-123", checksum=checksum)
 
 
 @pytest.mark.parametrize(
@@ -114,7 +109,7 @@ def test__isbn_cleanse_invalid_length(
 def test__isbn_cleanse_invalid(isbn: str, message: str):
     """Test cleansing an invalid ISBN."""
     with pytest.raises(IsbnError, match=message):
-        _isbn_cleanse(isbn)
+        isbn_cleanse(isbn)
 
 
 @pytest.mark.parametrize(
@@ -127,44 +122,4 @@ def test__isbn_cleanse_invalid(isbn: str, message: str):
 def test__isbn_cleanse_invalid_no_checksum(isbn: str, message: str):
     """Test cleansing an invalid ISBN without checksum."""
     with pytest.raises(IsbnError, match=message):
-        _isbn_cleanse(isbn, checksum=False)
-
-
-@given(sampled_from(TEST_ISBNS))
-def test_calculate_checksum(isbn: str):
-    """Test calculating the checksum."""
-    assert calculate_checksum(isbn[:-1]) == isbn[-1]
-
-
-@given(sampled_from(TEST_ISBNS))
-def test_convert(isbn: str):
-    """Test converting an ISBN."""
-    assert convert(convert(isbn)) == isbn
-
-
-def test_convert_invalid():
-    """Test converting an invalid ISBN."""
-    with pytest.raises(
-        IsbnError,
-        match="Only ISBN-13s with 978 Bookland code can be converted",
-    ):
-        convert("9790000000001")
-
-
-@given(sampled_from(TEST_ISBNS))
-def test_validate(isbn: str):
-    """Test validating an ISBN."""
-    assert validate(isbn)
-
-
-@pytest.mark.parametrize(
-    "isbn",
-    [
-        "1-234-56789-0",
-        "2-345-6789-1",
-        "3-456-7890-X",
-    ],
-)
-def test_validate_invalid(isbn: str):
-    """Test validating an invalid ISBN."""
-    assert validate(isbn) is False
+        isbn_cleanse(isbn, checksum=False)

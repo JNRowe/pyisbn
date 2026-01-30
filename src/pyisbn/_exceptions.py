@@ -1,9 +1,5 @@
-"""pyisbn - A module for working with 10- and 13-digit ISBNs.
-
-This module supports the calculation and validation of ISBN checksums.
-"""
+"""Exception hierarchy for ``pyisbn``."""
 # Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
-#                        notconfusing <isalix@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
@@ -21,26 +17,18 @@ This module supports the calculation and validation of ISBN checksums.
 # You should have received a copy of the GNU General Public License along with
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import _version
 
-__version__ = _version.dotted
-__author__ = "James Rowe <jnrowe@gmail.com>"
-
-
-from ._exceptions import CountryError, IsbnError, SiteError
-from .func import calculate_checksum, convert, validate
-from .models import Isbn, Isbn10, Isbn13, Sbn
+class PyisbnError(ValueError):
+    """Base ``pyisbn`` error."""
 
 
-__all__ = [
-    "CountryError",
-    "Isbn",
-    "Isbn10",
-    "Isbn13",
-    "IsbnError",
-    "Sbn",
-    "SiteError",
-    "calculate_checksum",
-    "convert",
-    "validate",
-]
+class CountryError(PyisbnError):
+    """Unknown country value."""
+
+
+class IsbnError(PyisbnError):
+    """Invalid ISBN string."""
+
+
+class SiteError(PyisbnError):
+    """Unknown site value."""
