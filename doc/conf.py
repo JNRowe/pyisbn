@@ -21,12 +21,11 @@ import os
 import pathlib
 import sys
 from contextlib import suppress
+from importlib.metadata import version
 from subprocess import CalledProcessError, PIPE, run  # NoQA: S404
 
 root_dir = pathlib.Path(__file__).parent.parent
 sys.path.insert(0, root_dir.as_posix())
-
-import pyisbn  # NOQA: E402
 
 on_rtd = "READTHEDOCS" in os.environ
 
@@ -74,7 +73,7 @@ project = "pyisbn"
 author = "James Rowe"
 copyright = f"2007-2022  {author}"  # NoQA: A001
 
-release = pyisbn._version.dotted
+release = version("pyisbn")
 version = release.rsplit(".", 1)[0]
 
 trim_footnote_reference_space = True
