@@ -1,5 +1,5 @@
 """Internal constants."""
-# Copyright © 2025  James Rowe <jnrowe@gmail.com>
+# Copyright © 2025-2026  James Rowe <jnrowe@gmail.com>
 #
 # This file was authored, in part, by Gemini.  As per the Google Terms of
 # Service, the user retains ownership of the generated content. For more

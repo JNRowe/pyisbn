@@ -1,5 +1,5 @@
 """conf - Sphinx configuration information."""
-# Copyright © 2011-2022  James Rowe <jnrowe@gmail.com>
+# Copyright © 2011-2026  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

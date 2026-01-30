@@ -1,5 +1,5 @@
 """Exception hierarchy for ``pyisbn``."""
-# Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
+# Copyright © 2026-2026  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

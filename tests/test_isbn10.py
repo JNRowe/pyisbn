@@ -1,5 +1,5 @@
 """test_isbn10 - Test Isbn10 class."""
-# Copyright © 2012-2022  James Rowe <jnrowe@gmail.com>
+# Copyright © 2012-2025  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

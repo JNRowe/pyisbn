@@ -1,5 +1,5 @@
 """test_meta - Tests for project maintenance."""
-# Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
+# Copyright © 2019-2025  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

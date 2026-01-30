@@ -1,5 +1,5 @@
 """data - ISBNs for use in tests."""
-# Copyright © 2012-2020  James Rowe <jnrowe@gmail.com>
+# Copyright © 2017-2025  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

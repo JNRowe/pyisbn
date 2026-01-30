@@ -2,8 +2,7 @@
 
 This module supports the calculation and validation of ISBN checksums.
 """
-# Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
-#                        notconfusing <isalix@gmail.com>
+# Copyright © 2025-2026  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

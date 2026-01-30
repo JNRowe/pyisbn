@@ -1,5 +1,5 @@
 """test_regressions - Test for regressions."""
-# Copyright © 2012-2021  James Rowe <jnrowe@gmail.com>
+# Copyright © 2013-2026  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #

@@ -19,7 +19,7 @@ books in their collection.
 .. [#] Previous Python releases would have assumed it was octal representation
        of a number
 """
-# Copyright © 2007-2022  James Rowe <jnrowe@gmail.com>
+# Copyright © 2026-2026  James Rowe <jnrowe@gmail.com>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
