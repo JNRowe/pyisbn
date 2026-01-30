@@ -4,10 +4,14 @@
 
 | Name                       |    Stmts |     Miss |   Branch |   BrPart |       Cover |   Missing |
 |--------------------------- | -------: | -------: | -------: | -------: | ----------: | --------: |
-| src/pyisbn/\_\_init\_\_.py |      150 |        0 |       58 |        0 |     100.00% |           |
-| src/pyisbn/\_constants.py  |       14 |        0 |        0 |        0 |     100.00% |           |
-| src/pyisbn/\_version.py    |        7 |        0 |        0 |        0 |     100.00% |           |
-| **TOTAL**                  |  **171** |    **0** |   **58** |    **0** | **100.00%** |           |
+| src/pyisbn/\_\_init\_\_.py |        5 |        0 |        0 |        0 |     100.00% |           |
+| src/pyisbn/\_constants.py  |       18 |        0 |        0 |        0 |     100.00% |           |
+| src/pyisbn/\_exceptions.py |        4 |        0 |        0 |        0 |     100.00% |           |
+| src/pyisbn/\_types.py      |        7 |        0 |        0 |        0 |     100.00% |           |
+| src/pyisbn/\_utils.py      |       31 |        0 |       28 |        0 |     100.00% |           |
+| src/pyisbn/func.py         |       27 |        0 |       10 |        0 |     100.00% |           |
+| src/pyisbn/models.py       |       84 |        0 |       20 |        0 |     100.00% |           |
+| **TOTAL**                  |  **176** |    **0** |   **58** |    **0** | **100.00%** |           |
 
 
 ## Setup coverage badge
