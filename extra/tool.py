@@ -52,20 +52,34 @@ def isbn_typecheck(string: TIsbn) -> Isbn:
     return isbn
 
 
-def partial_arg(f: Callable) -> Callable:
-    """Create a partial argument for argparse.
+def build_command_argument(
+    add_argument_func: Callable[..., argparse.Action],
+) -> Callable[..., argparse.Action]:
+    """Create a wrapper for argparse's add_argument to add command arguments.
+
+    This wrapper automatically sets 'dest' to 'command', 'action' to
+    'store_const', and computes 'const' from the long option if it's not
+    provided (e.g., '--to-urn' becomes 'to_urn').
 
     Args:
-        f: The function to wrap.
+        add_argument_func: The `add_argument` method of an argparse group.
 
     Returns:
-        The wrapped function.
+        A function that adds a command argument to the parser.
     """
 
     def wrapper(*args: str, **kwargs: str) -> argparse.Action:
+        """Add a command argument to the parser.
+
+        Returns:
+            argparse argument handler with our defaults applied.
+        """
         if "const" not in kwargs:
+            # e.g. '--to-urn' -> 'to_urn'
             kwargs["const"] = args[1][2:].replace("-", "_")
-        return f(*args, dest="command", action="store_const", **kwargs)
+        return add_argument_func(
+            *args, dest="command", action="store_const", **kwargs
+        )
 
     return wrapper
 
@@ -82,18 +96,20 @@ def main() -> None:
         version=f"pyisbn {DISTRIBUTION['Version']}",
     )
     commands = parser.add_mutually_exclusive_group()
-    parg = partial_arg(commands.add_argument)
-    parg(
+    add_command = build_command_argument(commands.add_argument)
+    add_command(
         "-c",
         "--checksum",
         const="calculate_checksum",
         help="generate checksum",
     )
-    parg("-x", "--convert", help="convert between 10- and 13-digit types")
+    add_command(
+        "-x", "--convert", help="convert between 10- and 13-digit types"
+    )
     commands.add_argument(
         "-u", "--to-url", choices=sorted(URL_MAP.keys()), help="generate URL"
     )
-    parg("-n", "--to-urn", help="generate RFC 3187 URN")
+    add_command("-n", "--to-urn", help="generate RFC 3187 URN")
     parser.add_argument(
         "isbn", type=isbn_typecheck, nargs="+", help="ISBNs to operate on"
     )
