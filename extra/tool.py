@@ -23,7 +23,9 @@ from importlib.metadata import version
 from typing import cast
 from collections.abc import Callable
 
-from pyisbn import Isbn, TIsbn, URL_MAP  # NoQA: PLC2701
+from pyisbn import Isbn
+from pyisbn._constants import URL_MAP  # NoQA: PLC2701
+from pyisbn._types import TIsbn
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:
