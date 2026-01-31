@@ -19,13 +19,16 @@
 # pyisbn.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-from importlib.metadata import version
+from importlib.metadata import metadata
 from typing import cast
 from collections.abc import Callable
 
 from pyisbn import Isbn
 from pyisbn._constants import URL_MAP  # NoQA: PLC2701
 from pyisbn._types import TIsbn
+
+DISTRIBUTION = metadata("pyisbn")
+PROJECT_URLS = dict(s.split(", ") for s in DISTRIBUTION.get_all("Project-URL"))
 
 
 def isbn_typecheck(string: TIsbn) -> Isbn:
@@ -71,10 +74,12 @@ def main() -> None:
     """Parse arguments and run the tool."""
     parser = argparse.ArgumentParser(
         description=cast(str, __doc__).splitlines()[0].split(" - ", 1)[1],
-        epilog="Please report bugs at https://github.com/JNRowe/pyisbn/issues",
+        epilog=f"Please report bugs at {PROJECT_URLS['Issue tracker']}",
     )
     parser.add_argument(
-        "--version", action="version", version=f"pyisbn {version('pyisbn')}"
+        "--version",
+        action="version",
+        version=f"pyisbn {DISTRIBUTION['Version']}",
     )
     commands = parser.add_mutually_exclusive_group()
     parg = partial_arg(commands.add_argument)
