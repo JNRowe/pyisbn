@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/ruff.yml
       - doc/conf.py
+      - extra/tool.py
       - src/*/*.py
       - tests/*.py
       - pyproject.toml
@@ -23,5 +24,6 @@ jobs:
         with:
           src: >-
             doc/conf.py
+            extra/tool.py
             src/pyisbn/
             tests/
