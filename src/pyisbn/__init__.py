@@ -27,7 +27,6 @@ from ._exceptions import CountryError, IsbnError, SiteError
 from .func import calculate_checksum, convert, validate
 from .models import Isbn, Isbn10, Isbn13, Sbn
 
-
 __all__ = [
     "CountryError",
     "Isbn",

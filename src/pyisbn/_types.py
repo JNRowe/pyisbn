@@ -29,4 +29,4 @@ TSbn = NewType("TSbn", str)
 
 
 _UrlMapTlds: TypeAlias = dict[str, str | None]
-_UrlMapValue: TypeAlias = str | tuple[str, _UrlMapTlds]
+_UrlMapValue: TypeAlias = str | tuple[str, _UrlMapTlds]  # NoQA: PYI047
