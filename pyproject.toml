@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "uv_build"
-requires = ["uv_build>=0.9.0,<0.11.0"]
+requires = ["uv_build>=0.9.0,<0.12.0"]
 
 [dependency-groups]
 dev = ["mutmut>=3.3,<=4.0", "pytest-html>=4.1,<=5.0", "ruff>=0.15,<=0.16"]
