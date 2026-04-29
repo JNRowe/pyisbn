@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -24,7 +24,6 @@ jobs:
           cache-dependency-glob: "pyproject.toml"
           enable-cache: true
           python-version: ${{ matrix.python-version }}
-          version: 0.6.12
       - name: Install package and dependencies
         run: |
           uv sync --group doc

@@ -1,7 +1,7 @@
 ``pyisbn`` - A module for working with 10- and 13-digit ISBNs
 =============================================================
 
-|status| |actions| |pypi| |pyvers| |readthedocs| |develop|
+|status| |actions| |pypi| |pyvers| |develop|
 
 Introduction
 ------------
@@ -98,7 +98,7 @@ If you’ve found a bug please attempt to include a minimal testcase so I can
 reproduce the problem, or even better a patch!
 
 .. _GPL v3: http://www.gnu.org/licenses/
-.. _view the content online: http://pyisbn.rtfd.org/
+.. _view the content online: https://jnrowe.github.io/pyisbn/
 .. _Python: http://www.python.org/
 .. _issue: https://github.com/JNRowe/pyisbn/issues
 .. _mail: jnrowe@gmail.com
@@ -116,10 +116,6 @@ reproduce the problem, or even better a patch!
 .. |pypi| image:: https://img.shields.io/pypi/v/pyisbn.png
    :target: https://pypi.org/project/pyisbn/
    :alt: Current PyPI release
-
-.. |readthedocs| image:: https://img.shields.io/readthedocs/pyisbn/stable.png
-   :target: https://pyisbn.readthedocs.io/
-   :alt: Documentation
 
 .. |actions| image:: https://img.shields.io/github/actions/workflow/status/JNRowe/pyisbn/pytest.yml?branch=main
    :alt: Test state on main

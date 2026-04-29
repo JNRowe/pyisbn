@@ -48,7 +48,7 @@ classifiers = [
 [project.urls]
 "Changelog" = "https://github.com/JNRowe/pyisbn/blob/main/NEWS.rst"
 "Contributors" = "https://github.com/JNRowe/pyisbn/contributors/"
-"Documentation" = "https://pyisbn.readthedocs.io/"
+"Documentation" = "https://jnrowe.github.io/pyisbn/"
 "Git repository" = "https://github.com/JNRowe/pyisbn/"
 "Issue tracker" = "https://github.com/JNRowe/pyisbn/issues/"
 "Source code" = "https://github.com/JNRowe/pyisbn"
