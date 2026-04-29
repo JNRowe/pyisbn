@@ -4,6 +4,9 @@ build:
 python:
   version: 3
   install:
-    - requirements: extra/requirements-doc.txt
+    - method: uv
+      command: sync
+      groups:
+        - doc
 sphinx:
   fail_on_warning: true
