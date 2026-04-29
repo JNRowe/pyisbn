@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyisbn._exceptions &mdash; pyisbn 1.4.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://pyisbn.readthedocs.io/_modules/pyisbn/_exceptions.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a68a9277"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyisbn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fun.html">Fun and games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release.html">Release HOWTO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyisbn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyisbn._exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyisbn._exceptions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Exception hierarchy for ``pyisbn``.&quot;&quot;&quot;</span>
+<span class="c1"># Copyright © 2026-2026  James Rowe &lt;jnrowe@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of pyisbn.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is free software: you can redistribute it and/or modify it under the</span>
+<span class="c1"># terms of the GNU General Public License as published by the Free Software</span>
+<span class="c1"># Foundation, either version 3 of the License, or (at your option) any later</span>
+<span class="c1"># version.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<span class="c1"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
+<span class="c1"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along with</span>
+<span class="c1"># pyisbn.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PyisbnError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base ``pyisbn`` error.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="CountryError">
+<a class="viewcode-back" href="../../api/index.html#pyisbn.CountryError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CountryError</span><span class="p">(</span><span class="n">PyisbnError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unknown country value.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="IsbnError">
+<a class="viewcode-back" href="../../api/index.html#pyisbn.IsbnError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IsbnError</span><span class="p">(</span><span class="n">PyisbnError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalid ISBN string.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SiteError">
+<a class="viewcode-back" href="../../api/index.html#pyisbn.SiteError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SiteError</span><span class="p">(</span><span class="n">PyisbnError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unknown site value.&quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022  James Rowe.
+      <span class="lastupdated">Last updated on 2026-04-29 [2c52e34].
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

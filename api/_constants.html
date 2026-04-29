@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal constants &mdash; pyisbn 1.4.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://pyisbn.readthedocs.io/api/_constants.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=a68a9277"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Type definitions" href="_types.html" />
+    <link rel="prev" title="Functions for handling ISBNs" href="func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            pyisbn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#class-based-access">Class based access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#function-based-access">Function based access</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#internal-support-features">Internal support features</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Internal constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.BOOKLAND_PREFIXES"><code class="docutils literal notranslate"><span class="pre">BOOKLAND_PREFIXES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.BOOKLAND_PREFIX_LENGTH"><code class="docutils literal notranslate"><span class="pre">BOOKLAND_PREFIX_LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.DASHES"><code class="docutils literal notranslate"><span class="pre">DASHES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN10_CHECKSUM_MODULUS"><code class="docutils literal notranslate"><span class="pre">ISBN10_CHECKSUM_MODULUS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN10_CHECKSUM_X"><code class="docutils literal notranslate"><span class="pre">ISBN10_CHECKSUM_X</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN10_LENGTH"><code class="docutils literal notranslate"><span class="pre">ISBN10_LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN10_LENGTH_NO_CHECKSUM"><code class="docutils literal notranslate"><span class="pre">ISBN10_LENGTH_NO_CHECKSUM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_CHECKSUM_MODULUS"><code class="docutils literal notranslate"><span class="pre">ISBN13_CHECKSUM_MODULUS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_CHECKSUM_SUBTRACT"><code class="docutils literal notranslate"><span class="pre">ISBN13_CHECKSUM_SUBTRACT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_CHECKSUM_TEN_REPLACEMENT"><code class="docutils literal notranslate"><span class="pre">ISBN13_CHECKSUM_TEN_REPLACEMENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_LENGTH"><code class="docutils literal notranslate"><span class="pre">ISBN13_LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_LENGTH_NO_CHECKSUM"><code class="docutils literal notranslate"><span class="pre">ISBN13_LENGTH_NO_CHECKSUM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.ISBN13_ODD_MULTIPLIER"><code class="docutils literal notranslate"><span class="pre">ISBN13_ODD_MULTIPLIER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.SBN_LENGTH"><code class="docutils literal notranslate"><span class="pre">SBN_LENGTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.SBN_LENGTH_NO_CHECKSUM"><code class="docutils literal notranslate"><span class="pre">SBN_LENGTH_NO_CHECKSUM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyisbn._constants.URL_MAP"><code class="docutils literal notranslate"><span class="pre">URL_MAP</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_types.html">Type definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_utils.html">Internal utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun.html">Fun and games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release HOWTO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyisbn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API documentation</a></li>
+      <li class="breadcrumb-item active">Internal constants</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/_constants.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyisbn._constants">
+<span id="internal-constants"></span><h1>Internal constants<a class="headerlink" href="#module-pyisbn._constants" title="Link to this heading"></a></h1>
+<p>Internal constants.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.BOOKLAND_PREFIXES">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">BOOKLAND_PREFIXES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('978',</span> <span class="pre">'979')</span></span><a class="headerlink" href="#pyisbn._constants.BOOKLAND_PREFIXES" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 ‘Bookland’ prefixes.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.BOOKLAND_PREFIX_LENGTH">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">BOOKLAND_PREFIX_LENGTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#pyisbn._constants.BOOKLAND_PREFIX_LENGTH" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 ‘Bookland’ prefix length.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.DASHES">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">DASHES</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['-',</span> <span class="pre">'–',</span> <span class="pre">'—',</span> <span class="pre">'―']</span></span><a class="headerlink" href="#pyisbn._constants.DASHES" title="Link to this definition"></a></dt>
+<dd><p>Dash types to accept, and scrub, in ISBN inputs</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN10_CHECKSUM_MODULUS">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN10_CHECKSUM_MODULUS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></span><a class="headerlink" href="#pyisbn._constants.ISBN10_CHECKSUM_MODULUS" title="Link to this definition"></a></dt>
+<dd><p>ISBN-10 checksum modulus.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN10_CHECKSUM_X">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN10_CHECKSUM_X</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#pyisbn._constants.ISBN10_CHECKSUM_X" title="Link to this definition"></a></dt>
+<dd><p>ISBN-10 checksum value for ‘X’.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN10_LENGTH">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN10_LENGTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#pyisbn._constants.ISBN10_LENGTH" title="Link to this definition"></a></dt>
+<dd><p>ISBN-10 length.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN10_LENGTH_NO_CHECKSUM">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN10_LENGTH_NO_CHECKSUM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></span><a class="headerlink" href="#pyisbn._constants.ISBN10_LENGTH_NO_CHECKSUM" title="Link to this definition"></a></dt>
+<dd><p>ISBN-10 length without checksum.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_CHECKSUM_MODULUS">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_CHECKSUM_MODULUS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_CHECKSUM_MODULUS" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 checksum modulus.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_CHECKSUM_SUBTRACT">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_CHECKSUM_SUBTRACT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_CHECKSUM_SUBTRACT" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 checksum subtraction value.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_CHECKSUM_TEN_REPLACEMENT">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_CHECKSUM_TEN_REPLACEMENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_CHECKSUM_TEN_REPLACEMENT" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 checksum replacement for a value of ten.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_LENGTH">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_LENGTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_LENGTH" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 length.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_LENGTH_NO_CHECKSUM">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_LENGTH_NO_CHECKSUM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_LENGTH_NO_CHECKSUM" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 length without checksum.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.ISBN13_ODD_MULTIPLIER">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">ISBN13_ODD_MULTIPLIER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#pyisbn._constants.ISBN13_ODD_MULTIPLIER" title="Link to this definition"></a></dt>
+<dd><p>ISBN-13 checksum multiplier for odd-positioned digits.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.SBN_LENGTH">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">SBN_LENGTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></span><a class="headerlink" href="#pyisbn._constants.SBN_LENGTH" title="Link to this definition"></a></dt>
+<dd><p>SBN length.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.SBN_LENGTH_NO_CHECKSUM">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">SBN_LENGTH_NO_CHECKSUM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#pyisbn._constants.SBN_LENGTH_NO_CHECKSUM" title="Link to this definition"></a></dt>
+<dd><p>SBN length without checksum.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyisbn._constants.URL_MAP">
+<span class="sig-prename descclassname"><span class="pre">pyisbn._constants.</span></span><span class="sig-name descname"><span class="pre">URL_MAP</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amazon':</span> <span class="pre">('https://www.amazon.{tld}/s?search-alias=stripbooks&amp;field-isbn={isbn}',</span> <span class="pre">{'de':</span> <span class="pre">None,</span> <span class="pre">'fr':</span> <span class="pre">None,</span> <span class="pre">'jp':</span> <span class="pre">None,</span> <span class="pre">'uk':</span> <span class="pre">'co.uk',</span> <span class="pre">'us':</span> <span class="pre">'com'}),</span> <span class="pre">'copac':</span> <span class="pre">'http://copac.jisc.ac.uk/search?isn={isbn}',</span> <span class="pre">'google':</span> <span class="pre">'https://books.google.com/books?vid=isbn:{isbn}',</span> <span class="pre">'isbndb':</span> <span class="pre">'https://isbndb.com/search/all?query={isbn}',</span> <span class="pre">'waterstones':</span> <span class="pre">'https://www.waterstones.com/books/search/term/{isbn}',</span> <span class="pre">'whsmith':</span> <span class="pre">'https://www.whsmith.co.uk/search/go?w={isbn}&amp;af=cat1:books',</span> <span class="pre">'worldcat':</span> <span class="pre">'http://worldcat.org/isbn/{isbn}'}</span></span><a class="headerlink" href="#pyisbn._constants.URL_MAP" title="Link to this definition"></a></dt>
+<dd><p>Site to URL mappings, broken out for easier extending at runtime</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="func.html" class="btn btn-neutral float-left" title="Functions for handling ISBNs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_types.html" class="btn btn-neutral float-right" title="Type definitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022  James Rowe.
+      <span class="lastupdated">Last updated on 2026-04-29 [2c52e34].
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

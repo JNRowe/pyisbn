@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyisbn._utils &mdash; pyisbn 1.4.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://pyisbn.readthedocs.io/_modules/pyisbn/_utils.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a68a9277"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyisbn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fun.html">Fun and games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release.html">Release HOWTO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyisbn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyisbn._utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyisbn._utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Internal utilities for ``pyisbn``.&quot;&quot;&quot;</span>
+<span class="c1"># Copyright © 2026-2026  James Rowe &lt;jnrowe@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of pyisbn.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is free software: you can redistribute it and/or modify it under the</span>
+<span class="c1"># terms of the GNU General Public License as published by the Free Software</span>
+<span class="c1"># Foundation, either version 3 of the License, or (at your option) any later</span>
+<span class="c1"># version.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<span class="c1"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
+<span class="c1"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along with</span>
+<span class="c1"># pyisbn.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsbnError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TIsbn</span>
+
+
+<div class="viewcode-block" id="isbn_cleanse">
+<a class="viewcode-back" href="../../api/_utils.html#pyisbn._utils.isbn_cleanse">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">isbn_cleanse</span><span class="p">(</span><span class="n">isbn</span><span class="p">:</span> <span class="n">TIsbn</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">checksum</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># NoQA: C901, PLR0912</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check ISBN is a string, and passes basic sanity checks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        isbn: SBN, ISBN-10 or ISBN-13</span>
+<span class="sd">        checksum: ``True`` if ``isbn`` includes checksum character</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ISBN with hyphenation removed, including when called with a SBN</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: ``isbn`` is not a ``str`` type</span>
+<span class="sd">        IsbnError: Incorrect length for ``isbn``</span>
+<span class="sd">        IsbnError: Incorrect SBN or ISBN formatting</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISBN must be a string, received </span><span class="si">{</span><span class="n">isbn</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">dash</span> <span class="ow">in</span> <span class="n">_constants</span><span class="o">.</span><span class="n">DASHES</span><span class="p">:</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dash</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">checksum</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isbn</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;non-digit parts&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="o">==</span> <span class="n">_constants</span><span class="o">.</span><span class="n">SBN_LENGTH</span><span class="p">:</span>
+            <span class="n">isbn</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">isbn</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="o">==</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN10_LENGTH</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">isbn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">or</span> <span class="n">isbn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot;Xx&quot;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;non-digit or X checksum&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="o">==</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isbn</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;non-digit checksum&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isbn</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_constants</span><span class="o">.</span><span class="n">BOOKLAND_PREFIXES</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;invalid Bookland region&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;ISBN must be either 10 or 13 characters long&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="o">==</span> <span class="n">_constants</span><span class="o">.</span><span class="n">SBN_LENGTH_NO_CHECKSUM</span><span class="p">:</span>
+            <span class="n">isbn</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">isbn</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="o">==</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH_NO_CHECKSUM</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbn</span><span class="p">[</span>
+            <span class="p">:</span><span class="mi">3</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_constants</span><span class="o">.</span><span class="n">BOOKLAND_PREFIXES</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;invalid Bookland region&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isbn</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span><span class="s2">&quot;non-digit parts&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN10_LENGTH_NO_CHECKSUM</span><span class="p">,</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH_NO_CHECKSUM</span><span class="p">,</span>
+        <span class="p">}:</span>
+            <span class="k">raise</span> <span class="n">IsbnError</span><span class="p">(</span>
+                <span class="s2">&quot;ISBN must be either 9 or 12 characters long without checksum&quot;</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">isbn</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022  James Rowe.
+      <span class="lastupdated">Last updated on 2026-04-29 [2c52e34].
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

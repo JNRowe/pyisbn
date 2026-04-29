@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyisbn.models &mdash; pyisbn 1.4.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+    <link rel="canonical" href="https://pyisbn.readthedocs.io/_modules/pyisbn/models.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a68a9277"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pyisbn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fun.html">Fun and games</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release.html">Release HOWTO</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyisbn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyisbn.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyisbn.models</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Model interface to ``pyisbn``.</span>
+
+<span class="sd">This module supports the calculation and validation of ISBN checksums with</span>
+<span class="sd">various classes.</span>
+
+<span class="sd">.. note::</span>
+
+<span class="sd">    All the ISBNs must be passed in as ``str`` types, even if it would seem</span>
+<span class="sd">    reasonable to accept some ``int`` forms.  The reason behind this is English</span>
+<span class="sd">    speaking countries use ``0`` for their group identifier, and Python 3 would</span>
+<span class="sd">    treat this as a syntax error [#]_.  While it may be feasible to allow some</span>
+<span class="sd">    cases as non-``str`` types the complexity in design and usage isn&#39;t worth</span>
+<span class="sd">    the minimal benefit.</span>
+
+<span class="sd">There is support for SBNs in this module also to people with older books in</span>
+<span class="sd">their collection.</span>
+
+<span class="sd">.. [#] Previous Python releases would have assumed it was octal representation</span>
+<span class="sd">       of a number</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Copyright © 2026-2026  James Rowe &lt;jnrowe@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of pyisbn.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is free software: you can redistribute it and/or modify it under the</span>
+<span class="c1"># terms of the GNU General Public License as published by the Free Software</span>
+<span class="c1"># Foundation, either version 3 of the License, or (at your option) any later</span>
+<span class="c1"># version.</span>
+<span class="c1">#</span>
+<span class="c1"># pyisbn is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<span class="c1"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
+<span class="c1"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along with</span>
+<span class="c1"># pyisbn.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryError</span><span class="p">,</span> <span class="n">SiteError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TIsbn</span><span class="p">,</span> <span class="n">TIsbn13</span><span class="p">,</span> <span class="n">TSbn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">isbn_cleanse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.func</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_checksum</span><span class="p">,</span> <span class="n">convert</span><span class="p">,</span> <span class="n">validate</span>
+
+
+<div class="viewcode-block" id="Isbn">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isbn</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for representing ISBN objects.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">:</span> <span class="n">TIsbn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise a new ``Isbn`` object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            isbn: ISBN string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_isbn</span> <span class="o">=</span> <span class="n">isbn</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">SBN_LENGTH</span><span class="p">,</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH_NO_CHECKSUM</span><span class="p">,</span>
+        <span class="p">}:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn_cleanse</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">checksum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn_cleanse</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Self-documenting string representation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            String to recreate ``Isbn`` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pretty printed ISBN string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Human readable string representation of ``Isbn`` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ISBN </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_isbn</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extended pretty printing for ISBN strings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            format_spec: Extended format to use</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Human readable string representation of ``Isbn`` object</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: Unknown value for ``format_spec``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">match</span> <span class="n">format_spec</span><span class="p">:</span>
+            <span class="k">case</span> <span class="kc">None</span> <span class="o">|</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_url</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;urn&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_urn</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">s</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;url:&quot;</span><span class="p">):</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">site</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">country</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="n">country</span> <span class="o">=</span> <span class="s2">&quot;us&quot;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_url</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">country</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown format_spec </span><span class="si">{</span><span class="n">format_spec</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Isbn.calculate_checksum">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn.calculate_checksum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ISBN checksum.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN checksum value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">SBN_LENGTH</span><span class="p">,</span>
+            <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH_NO_CHECKSUM</span><span class="p">,</span>
+        <span class="p">}:</span>
+            <span class="k">return</span> <span class="n">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Isbn.convert">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn.convert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;978&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ISBNs between ISBN-10 and ISBN-13.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code: ISBN-13 prefix code</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Converted ISBN</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Isbn.validate">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn.validate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate an ISBN value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ``True`` if ISBN is valid</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Isbn.to_url">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn.to_url">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;amazon&quot;</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;us&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a link to an online book site.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            site: Site to create link to</span>
+<span class="sd">            country: Country specific version of ``site``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            URL on ``site`` for book</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            SiteError: Unknown site value</span>
+<span class="sd">            CountryError: Unknown country value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">_constants</span><span class="o">.</span><span class="n">URL_MAP</span><span class="p">[</span><span class="n">site</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SiteError</span><span class="p">(</span><span class="n">site</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">KeyError</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">url</span><span class="p">,</span> <span class="n">tlds</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="p">,</span> <span class="n">tlds</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="n">inject</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;isbn&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isbn</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">tlds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">country</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tlds</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CountryError</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+            <span class="n">tld</span> <span class="o">=</span> <span class="n">tlds</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tld</span><span class="p">:</span>
+                <span class="n">tld</span> <span class="o">=</span> <span class="n">country</span>
+            <span class="n">inject</span><span class="p">[</span><span class="s2">&quot;tld&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tld</span>
+        <span class="k">return</span> <span class="n">url</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="n">inject</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Isbn.to_urn">
+<a class="viewcode-back" href="../../api/isbn.html#pyisbn.Isbn.to_urn">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_urn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a RFC 3187 URN.</span>
+
+<span class="sd">        :rfc:`3187` is the commonly accepted way to use ISBNs as uniform</span>
+<span class="sd">        resource names.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :rfc:`3187` compliant URN</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;URN:ISBN:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_isbn</span><span class="si">}</span><span class="s2">&quot;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Isbn10">
+<a class="viewcode-back" href="../../api/isbn10.html#pyisbn.Isbn10">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isbn10</span><span class="p">(</span><span class="n">Isbn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for representing ISBN-10 objects.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :class:`Isbn`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">:</span> <span class="n">TIsbn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise a new ``Isbn10`` object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            isbn (str): ISBN-10 string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Isbn10.calculate_checksum">
+<a class="viewcode-back" href="../../api/isbn10.html#pyisbn.Isbn10.calculate_checksum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ISBN-10 checksum.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN-10 checksum value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">calculate_checksum</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">[:</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN10_LENGTH_NO_CHECKSUM</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Isbn10.convert">
+<a class="viewcode-back" href="../../api/isbn10.html#pyisbn.Isbn10.convert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;978&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ISBN-10 to ISBN-13.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code: ISBN-13 prefix code</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN-13 string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Sbn">
+<a class="viewcode-back" href="../../api/sbn.html#pyisbn.Sbn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Sbn</span><span class="p">(</span><span class="n">Isbn10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for representing SBN objects.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :class:`Isbn10`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sbn</span><span class="p">:</span> <span class="n">TSbn</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise a new ``Sbn`` object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sbn: SBN string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="n">sbn</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Self-documenting string representation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            String to recreate ``Sbn`` object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Sbn.calculate_checksum">
+<a class="viewcode-back" href="../../api/sbn.html#pyisbn.Sbn.calculate_checksum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate SBN checksum.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            SBN checksum value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">calculate_checksum</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">[:</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN10_LENGTH_NO_CHECKSUM</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sbn.convert">
+<a class="viewcode-back" href="../../api/sbn.html#pyisbn.Sbn.convert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;978&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert SBN to ISBN-13.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code: ISBN-13 prefix code</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN-13 string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Isbn13">
+<a class="viewcode-back" href="../../api/isbn13.html#pyisbn.Isbn13">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Isbn13</span><span class="p">(</span><span class="n">Isbn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for representing ISBN-13 objects.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :class:`Isbn`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">:</span> <span class="n">TIsbn13</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise a new ``Isbn13`` object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            isbn: ISBN-13 string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Isbn13.calculate_checksum">
+<a class="viewcode-back" href="../../api/isbn13.html#pyisbn.Isbn13.calculate_checksum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate ISBN-13 checksum.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN-13 checksum value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">calculate_checksum</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">[:</span> <span class="n">_constants</span><span class="o">.</span><span class="n">ISBN13_LENGTH_NO_CHECKSUM</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Isbn13.convert">
+<a class="viewcode-back" href="../../api/isbn13.html#pyisbn.Isbn13.convert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;978&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ISBN-13 to ISBN-10.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            _code: Ignored, only for compatibility with ``Isbn``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ISBN-10 string</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: When ISBN-13 isn&#39;t a Bookland &quot;978&quot; ISBN</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># NoQA: DOC502</span>
+        <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isbn</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2007-2022  James Rowe.
+      <span class="lastupdated">Last updated on 2026-04-29 [2c52e34].
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
