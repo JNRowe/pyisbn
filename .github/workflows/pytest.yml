@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Install uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
         with:
           activate-environment: true
           enable-cache: true
@@ -66,7 +66,7 @@ jobs:
 
       - name: Coverage comment
         id: coverage_comment
-        uses: py-cov-action/python-coverage-comment-action@63f52f4fbbffada6e8dee8ec432de7e01df9ba79 # v3.41
+        uses: py-cov-action/python-coverage-comment-action@5d8df5979747514c914e1c5a12335a7cf9a2745f # v4.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_COVERAGE_FILES: true
