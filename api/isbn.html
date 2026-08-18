@@ -200,10 +200,10 @@ resource names.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="validate-isbn">
 <h3>Validate ISBN<a class="headerlink" href="#validate-isbn" title="Link to this heading"></a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="n">Isbn</span><span class="p">(</span><span class="s1">&#39;9783540009788&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="n">Isbn</span><span class="p">(</span><span class="s1">'9783540009788'</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">book</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">invalid_book</span> <span class="o">=</span> <span class="n">Isbn</span><span class="p">(</span><span class="s1">&#39;0123456654321&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">invalid_book</span> <span class="o">=</span> <span class="n">Isbn</span><span class="p">(</span><span class="s1">'0123456654321'</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="gr">  …</span>
 <span class="gr">pyisbn.IsbnError</span>: <span class="n">invalid Bookland region</span>
@@ -213,11 +213,11 @@ resource names.</p>
 <section id="format-isbn">
 <h3>Format ISBN<a class="headerlink" href="#format-isbn" title="Link to this heading"></a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span><span class="o">.</span><span class="n">to_urn</span><span class="p">()</span>
-<span class="go">&#39;URN:ISBN:9783540009788&#39;</span>
+<span class="go">'URN:ISBN:9783540009788'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">book</span><span class="o">.</span><span class="n">to_url</span><span class="p">()</span>
-<span class="go">&#39;https://www.amazon.com/s?search-alias=stripbooks&amp;field-isbn=9783540009788&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">book</span><span class="o">.</span><span class="n">to_url</span><span class="p">(</span><span class="s1">&#39;google&#39;</span><span class="p">)</span>
-<span class="go">&#39;https://books.google.com/books?vid=isbn:9783540009788&#39;</span>
+<span class="go">'https://www.amazon.com/s?search-alias=stripbooks&amp;field-isbn=9783540009788'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">book</span><span class="o">.</span><span class="n">to_url</span><span class="p">(</span><span class="s1">'google'</span><span class="p">)</span>
+<span class="go">'https://books.google.com/books?vid=isbn:9783540009788'</span>
 </pre></div>
 </div>
 </section>
@@ -236,7 +236,7 @@ resource names.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2007-2022  James Rowe.
-      <span class="lastupdated">Last updated on 2026-07-30 [0c1d68e].
+      <span class="lastupdated">Last updated on 2026-08-18 [f6d2b0b].
       </span></p>
   </div>
 

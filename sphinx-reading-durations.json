@@ -1,17 +1,17 @@
 {
     "alternatives": 0.015,
-    "api/_constants": 0.034,
+    "api/_constants": 0.032,
     "api/_types": 0.096,
-    "api/_utils": 0.055,
+    "api/_utils": 0.048,
     "api/func": 0.024,
     "api/index": 0.015,
-    "api/isbn": 0.039,
-    "api/isbn10": 0.016,
-    "api/isbn13": 0.018,
+    "api/isbn": 0.038,
+    "api/isbn10": 0.017,
+    "api/isbn13": 0.017,
     "api/sbn": 0.017,
     "faq": 0.003,
     "fun": 0.005,
-    "index": 0.007,
+    "index": 0.008,
     "install": 0.004,
-    "release": 0.006
+    "release": 0.005
 }
